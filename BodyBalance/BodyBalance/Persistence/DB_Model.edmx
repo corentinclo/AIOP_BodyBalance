@@ -1,0 +1,1611 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="10.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ACCESSORY">
+          <Key>
+            <PropertyRef Name="ACCESSORY_ID" />
+          </Key>
+          <Property Name="ACCESSORY_ID" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="ACCESSORY_NAME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="ACCESSORY_QUANTITY" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ACTIVITY">
+          <Key>
+            <PropertyRef Name="ACTIVITY_ID" />
+          </Key>
+          <Property Name="ACTIVITY_ID" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="ACTIVITY_NAME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="ACTIVITY_SHORTDESC" Type="varchar2" MaxLength="20" />
+          <Property Name="ACTIVITY_MANAGER" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="ACTIVITY_LONGDESC" Type="varchar2" MaxLength="80" />
+        </EntityType>
+        <EntityType Name="ADMIN">
+          <Key>
+            <PropertyRef Name="ADMIN_ID" />
+          </Key>
+          <Property Name="ADMIN_ID" Type="varchar2" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS.PISA.BIN$9D4cFr4odCDgRAADuhzxdw==$0' ; en outre, aucune clé primaire valide n'a pu être déduite. Cette table/vue a été exclue. Pour utiliser l'entité, vous devez passer en revue votre schéma, ajouter les clés appropriées et supprimer le commentaire associé.
+        <EntityType Name="BIN$9D4cFr4odCDgRAADuhzxdw==$0">
+          <Property Name="COL1" Type="number" Precision="38" Scale="0" />
+          <Property Name="COL2" Type="number" Precision="38" Scale="0" />
+        </EntityType>-->
+        <!--Erreurs détectées durant la génération :
+avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS.PISA.BIN$BU5uVYPRP7vgVAADuhzxdw==$0' ; en outre, aucune clé primaire valide n'a pu être déduite. Cette table/vue a été exclue. Pour utiliser l'entité, vous devez passer en revue votre schéma, ajouter les clés appropriées et supprimer le commentaire associé.
+        <EntityType Name="BIN$BU5uVYPRP7vgVAADuhzxdw==$0">
+          <Property Name="RUE" Type="varchar2" MaxLength="50" />
+          <Property Name="VILLE" Type="varchar2" MaxLength="25" />
+          <Property Name="CODE_POSTAL" Type="number" Precision="38" Scale="0" />
+        </EntityType>-->
+        <!--Erreurs détectées durant la génération :
+avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS.PISA.BIN$Bx2BpE8ebLzgVAADuhzxdw==$0' ; en outre, aucune clé primaire valide n'a pu être déduite. Cette table/vue a été exclue. Pour utiliser l'entité, vous devez passer en revue votre schéma, ajouter les clés appropriées et supprimer le commentaire associé.
+        <EntityType Name="BIN$Bx2BpE8ebLzgVAADuhzxdw==$0">
+          <Property Name="INTITULE" Type="varchar2" MaxLength="25" />
+          <Property Name="DEPARTEMENT" Type="varchar2" MaxLength="25" />
+          <Property Name="ÉCOLE" Type="varchar2" MaxLength="25" />
+        </EntityType>-->
+        <!--Erreurs détectées durant la génération :
+avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS.PISA.BIN$D6/pY/v9U2XgVAADuhzxdw==$0' ; en outre, aucune clé primaire valide n'a pu être déduite. Cette table/vue a été exclue. Pour utiliser l'entité, vous devez passer en revue votre schéma, ajouter les clés appropriées et supprimer le commentaire associé.
+        <EntityType Name="BIN$D6/pY/v9U2XgVAADuhzxdw==$0">
+          <Property Name="RUE" Type="varchar2" MaxLength="50" />
+          <Property Name="VILLE" Type="varchar2" MaxLength="25" />
+          <Property Name="CODE_POSTAL" Type="number" Precision="38" Scale="0" />
+        </EntityType>-->
+        <!--Erreurs détectées durant la génération :
+avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS.PISA.BIN$D6/pY/w/U2XgVAADuhzxdw==$0' ; en outre, aucune clé primaire valide n'a pu être déduite. Cette table/vue a été exclue. Pour utiliser l'entité, vous devez passer en revue votre schéma, ajouter les clés appropriées et supprimer le commentaire associé.
+        <EntityType Name="BIN$D6/pY/w/U2XgVAADuhzxdw==$0">
+          <Property Name="NUM_AB" Type="number" Precision="6" Scale="0" />
+          <Property Name="NUM_EX" Type="number" Precision="4" Scale="0" />
+          <Property Name="D_EMPRUNT" Type="date" />
+          <Property Name="D_RETOUR" Type="date" />
+          <Property Name="D_RET_REEL" Type="date" />
+          <Property Name="NB_RELANCE" Type="number" Precision="1" Scale="0" />
+        </EntityType>-->
+        <!--Erreurs détectées durant la génération :
+avertissement 6005: Le type de données 'tliste_prenoms' n'est actuellement pas pris en charge pour la version Entity Framework cible ; la colonne 'PRENOMS' de la table 'LUCAS.PISA.BIN$D6/pY/w1U2XgVAADuhzxdw==$0' a été exclue.
+avertissement 6005: Le type de données 'nt_adresse' n'est actuellement pas pris en charge pour la version Entity Framework cible ; la colonne 'ADRESSE' de la table 'LUCAS.PISA.BIN$D6/pY/w1U2XgVAADuhzxdw==$0' a été exclue.
+avertissement 6005: Le type de données 'tliste_telephone' n'est actuellement pas pris en charge pour la version Entity Framework cible ; la colonne 'TELEPHONE' de la table 'LUCAS.PISA.BIN$D6/pY/w1U2XgVAADuhzxdw==$0' a été exclue.
+avertissement 6005: Le type de données 'nt_diplome' n'est actuellement pas pris en charge pour la version Entity Framework cible ; la colonne 'DIPLOMES' de la table 'LUCAS.PISA.BIN$D6/pY/w1U2XgVAADuhzxdw==$0' a été exclue.
+avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS.PISA.BIN$D6/pY/w1U2XgVAADuhzxdw==$0' ; en outre, aucune clé primaire valide n'a pu être déduite. Cette table/vue a été exclue. Pour utiliser l'entité, vous devez passer en revue votre schéma, ajouter les clés appropriées et supprimer le commentaire associé.
+        <EntityType Name="BIN$D6/pY/w1U2XgVAADuhzxdw==$0">
+          <Property Name="NUM_ETUDIANT" Type="number" Precision="38" Scale="0" />
+          <Property Name="NOM" Type="varchar2" MaxLength="25" />
+          <Property Name="DATE_NAISS" Type="date" />
+        </EntityType>-->
+        <!--Erreurs détectées durant la génération :
+avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS.PISA.BIN$D6/pY/wIU2XgVAADuhzxdw==$0' ; en outre, aucune clé primaire valide n'a pu être déduite. Cette table/vue a été exclue. Pour utiliser l'entité, vous devez passer en revue votre schéma, ajouter les clés appropriées et supprimer le commentaire associé.
+        <EntityType Name="BIN$D6/pY/wIU2XgVAADuhzxdw==$0">
+          <Property Name="BORNE_INF" Type="number" Precision="6" Scale="0" />
+          <Property Name="BORNE_SUP" Type="number" Precision="6" Scale="0" />
+          <Property Name="COEFF" Type="number" Precision="6" Scale="1" />
+        </EntityType>-->
+        <!--Erreurs détectées durant la génération :
+avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS.PISA.BIN$D6/pY/wsU2XgVAADuhzxdw==$0' ; en outre, aucune clé primaire valide n'a pu être déduite. Cette table/vue a été exclue. Pour utiliser l'entité, vous devez passer en revue votre schéma, ajouter les clés appropriées et supprimer le commentaire associé.
+        <EntityType Name="BIN$D6/pY/wsU2XgVAADuhzxdw==$0">
+          <Property Name="INTITULE" Type="varchar2" MaxLength="25" />
+          <Property Name="DEPARTEMENT" Type="varchar2" MaxLength="25" />
+          <Property Name="ÉCOLE" Type="varchar2" MaxLength="25" />
+        </EntityType>-->
+        <EntityType Name="CATEGORY">
+          <Key>
+            <PropertyRef Name="CAT_ID" />
+          </Key>
+          <Property Name="CAT_ID" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="CAT_NAME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="CAT_DESCR" Type="varchar2" MaxLength="300" />
+          <Property Name="CAT_VALIDATIONDATE" Type="date" />
+          <Property Name="CAT_PARENT" Type="varchar2" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="CONTAINSACCESSORY">
+          <Key>
+            <PropertyRef Name="ROOM_ID" />
+            <PropertyRef Name="ACCESSORY_ID" />
+          </Key>
+          <Property Name="ROOM_ID" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="ACCESSORY_ID" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="CONTAINS_QUANTITY" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="CONTRIBUTOR">
+          <Key>
+            <PropertyRef Name="CONTRIBUTOR_ID" />
+          </Key>
+          <Property Name="CONTRIBUTOR_ID" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="CONTRIBUTOR_SHORTDESC" Type="varchar2" MaxLength="25" />
+          <Property Name="CONTRIBUTOR_LONGDESC" Type="varchar2" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="EVENT">
+          <Key>
+            <PropertyRef Name="EVENT_ID" />
+          </Key>
+          <Property Name="EVENT_ID" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="EVENT_DURATION" Type="float" Precision="126" Scale="0" Nullable="false" />
+          <Property Name="EVENT_NAME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="EVENT_PRICE" Type="float" Precision="126" Scale="0" Nullable="false" />
+          <Property Name="EVENT_MAXNBR" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="EVENT_ACTIVITY" Type="varchar2" MaxLength="20" />
+          <Property Name="EVENT_ROOM" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="EVENT_CONTRIBUTOR" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="EVENT_MANAGER" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="EVENT_TYPE" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="EVENT_DATE" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EVENTTYPE">
+          <Key>
+            <PropertyRef Name="EVENTTYPE_ID" />
+          </Key>
+          <Property Name="EVENTTYPE_ID" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="EVENTTYPE_NAME" Type="varchar2" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HASINBASKET">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="PRODUCT_ID" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="QUANTITY" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ISREGISTERED">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+            <PropertyRef Name="EVENT_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="EVENT_ID" Type="varchar2" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MANAGER">
+          <Key>
+            <PropertyRef Name="MANAGER_ID" />
+          </Key>
+          <Property Name="MANAGER_ID" Type="varchar2" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MEMBER">
+          <Key>
+            <PropertyRef Name="MEMBER_ID" />
+          </Key>
+          <Property Name="MEMBER_ID" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="MEMBER_PAYFEEDATE" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NOTIFICATION">
+          <Key>
+            <PropertyRef Name="NOTIF_ID" />
+          </Key>
+          <Property Name="NOTIF_ID" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="NOTIF_MESSAGE" Type="varchar2" MaxLength="255" />
+          <Property Name="NOTIF_DATE" Type="date" />
+          <Property Name="NOTIF_USERID" Type="varchar2" MaxLength="20" />
+          <Property Name="NOTIF_NAME" Type="varchar2" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="PRICE">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+            <PropertyRef Name="DATE_PRICE" />
+          </Key>
+          <Property Name="PRODUCT_ID" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="DATE_PRICE" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="PRODUCT_PRICE" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRODUCT">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="PRODUCT_ID" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="PRODUCT_NAME" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="PRODUCT_DESCRIPTION" Type="varchar2" MaxLength="300" />
+          <Property Name="PRODUCT_AVAILABLEQUANTITY" Type="number" Precision="6" Scale="0" Nullable="false" />
+          <Property Name="PRODUCT_MEMBERREDUCTION" Type="number" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="PRODUCT_CAT" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="PRODUCT_USERID" Type="varchar2" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PUNCTUAL_EVENT">
+          <Key>
+            <PropertyRef Name="PE_ID" />
+          </Key>
+          <Property Name="PE_ID" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="PE_DATE" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PURCHASE">
+          <Key>
+            <PropertyRef Name="PURCHASE_ID" />
+          </Key>
+          <Property Name="PURCHASE_ID" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="PURCHASE_USERID" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="PURCHASE_DATE" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="PURCHASE_SHIPDATE" Type="varchar2" MaxLength="20" />
+          <Property Name="PURCHASE_TOTALPRICE" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PURCHASECONTAINS">
+          <Key>
+            <PropertyRef Name="PURCHASE_ID" />
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="PURCHASE_ID" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="PRODUCT_ID" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="PRODUCTQUANTITY" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="VALIDATIONDATE" Type="varchar2" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="REPETITIVE_EVENT">
+          <Key>
+            <PropertyRef Name="RE_ID" />
+            <PropertyRef Name="RE_DATE" />
+          </Key>
+          <Property Name="RE_ID" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="RE_DATE" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ROOM">
+          <Key>
+            <PropertyRef Name="ROOM_ID" />
+          </Key>
+          <Property Name="ROOM_NAME" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="ROOM_SUPERFICY" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ROOM_MAXNBR" Type="number" Precision="38" Scale="0" />
+          <Property Name="ROOM_ID" Type="varchar2" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USER1">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="USER_PASSWORD" Type="varchar2" MaxLength="256" Nullable="false" />
+          <Property Name="USER_LASTNAME" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="USER_FIRSTNAME" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="USER_ADR1" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="USER_ADR2" Type="varchar2" MaxLength="50" />
+          <Property Name="USER_PC" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="USER_TOWN" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="USER_PHONE" Type="varchar2" MaxLength="50" />
+          <Property Name="USER_MAIL" Type="varchar2" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="ACTIVITY_FK">
+          <End Role="MANAGER" Type="Self.MANAGER" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ACTIVITY" Type="Self.ACTIVITY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MANAGER">
+              <PropertyRef Name="MANAGER_ID" />
+            </Principal>
+            <Dependent Role="ACTIVITY">
+              <PropertyRef Name="ACTIVITY_MANAGER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ADMIN_FK">
+          <End Role="USER1" Type="Self.USER1" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ADMIN" Type="Self.ADMIN" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="USER1">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="ADMIN">
+              <PropertyRef Name="ADMIN_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CONTAINSACC_ACCESSORY_FK2">
+          <End Role="ACCESSORY" Type="Self.ACCESSORY" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CONTAINSACCESSORY" Type="Self.CONTAINSACCESSORY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCESSORY">
+              <PropertyRef Name="ACCESSORY_ID" />
+            </Principal>
+            <Dependent Role="CONTAINSACCESSORY">
+              <PropertyRef Name="ACCESSORY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CONTAINSACCESSORY_ROOM_FK1">
+          <End Role="ROOM" Type="Self.ROOM" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CONTAINSACCESSORY" Type="Self.CONTAINSACCESSORY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROOM">
+              <PropertyRef Name="ROOM_ID" />
+            </Principal>
+            <Dependent Role="CONTAINSACCESSORY">
+              <PropertyRef Name="ROOM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CONTRIBUTOR_FK">
+          <End Role="USER1" Type="Self.USER1" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CONTRIBUTOR" Type="Self.CONTRIBUTOR" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="USER1">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="CONTRIBUTOR">
+              <PropertyRef Name="CONTRIBUTOR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EVENT_ACTIVITY_FK">
+          <End Role="ACTIVITY" Type="Self.ACTIVITY" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EVENT" Type="Self.EVENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACTIVITY">
+              <PropertyRef Name="ACTIVITY_ID" />
+            </Principal>
+            <Dependent Role="EVENT">
+              <PropertyRef Name="EVENT_ACTIVITY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EVENT_CONTRIBUTOR_FK">
+          <End Role="CONTRIBUTOR" Type="Self.CONTRIBUTOR" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EVENT" Type="Self.EVENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONTRIBUTOR">
+              <PropertyRef Name="CONTRIBUTOR_ID" />
+            </Principal>
+            <Dependent Role="EVENT">
+              <PropertyRef Name="EVENT_CONTRIBUTOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EVENT_MANAGER_FK">
+          <End Role="MANAGER" Type="Self.MANAGER" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EVENT" Type="Self.EVENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MANAGER">
+              <PropertyRef Name="MANAGER_ID" />
+            </Principal>
+            <Dependent Role="EVENT">
+              <PropertyRef Name="EVENT_MANAGER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EVENT_TYPE_FK">
+          <End Role="EVENTTYPE" Type="Self.EVENTTYPE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EVENT" Type="Self.EVENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVENTTYPE">
+              <PropertyRef Name="EVENTTYPE_ID" />
+            </Principal>
+            <Dependent Role="EVENT">
+              <PropertyRef Name="EVENT_TYPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HASINBASKET_PRODUCT_FK1">
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HASINBASKET" Type="Self.HASINBASKET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="HASINBASKET">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HASINBASKET_USER1_FK1">
+          <End Role="USER1" Type="Self.USER1" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HASINBASKET" Type="Self.HASINBASKET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER1">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="HASINBASKET">
+              <PropertyRef Name="USER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ISREGISTERED_EVENT_FK1">
+          <End Role="EVENT" Type="Self.EVENT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ISREGISTERED" Type="Self.ISREGISTERED" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVENT">
+              <PropertyRef Name="EVENT_ID" />
+            </Principal>
+            <Dependent Role="ISREGISTERED">
+              <PropertyRef Name="EVENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ISREGISTERED_USER1_FK1">
+          <End Role="USER1" Type="Self.USER1" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ISREGISTERED" Type="Self.ISREGISTERED" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER1">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="ISREGISTERED">
+              <PropertyRef Name="USER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MANAGER_FK">
+          <End Role="USER1" Type="Self.USER1" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MANAGER" Type="Self.MANAGER" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="USER1">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="MANAGER">
+              <PropertyRef Name="MANAGER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MEMBER_FK">
+          <End Role="USER1" Type="Self.USER1" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MEMBER" Type="Self.MEMBER" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="USER1">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="MEMBER">
+              <PropertyRef Name="MEMBER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="NOTIFICATION_USER1_FK1">
+          <End Role="USER1" Type="Self.USER1" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NOTIFICATION" Type="Self.NOTIFICATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER1">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="NOTIFICATION">
+              <PropertyRef Name="NOTIF_USERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PE_EVENT_FK">
+          <End Role="EVENT" Type="Self.EVENT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PUNCTUAL_EVENT" Type="Self.PUNCTUAL_EVENT" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EVENT">
+              <PropertyRef Name="EVENT_ID" />
+            </Principal>
+            <Dependent Role="PUNCTUAL_EVENT">
+              <PropertyRef Name="PE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PRODUCT_FK1">
+          <End Role="USER1" Type="Self.USER1" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER1">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="PRODUCT">
+              <PropertyRef Name="PRODUCT_USERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PRODUCT_FK2">
+          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORY">
+              <PropertyRef Name="CAT_ID" />
+            </Principal>
+            <Dependent Role="PRODUCT">
+              <PropertyRef Name="PRODUCT_CAT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PURCHASE_USER1_FK1">
+          <End Role="USER1" Type="Self.USER1" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PURCHASE" Type="Self.PURCHASE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER1">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="PURCHASE">
+              <PropertyRef Name="PURCHASE_USERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PURCHASECONTAINS_PRODUCT_FK1">
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PURCHASECONTAINS" Type="Self.PURCHASECONTAINS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="PURCHASECONTAINS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PURCHASECONTAINS_PURCHASE_FK1">
+          <End Role="PURCHASE" Type="Self.PURCHASE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PURCHASECONTAINS" Type="Self.PURCHASECONTAINS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PURCHASE">
+              <PropertyRef Name="PURCHASE_ID" />
+            </Principal>
+            <Dependent Role="PURCHASECONTAINS">
+              <PropertyRef Name="PURCHASE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RE_EVENT_FK">
+          <End Role="EVENT" Type="Self.EVENT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="REPETITIVE_EVENT" Type="Self.REPETITIVE_EVENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVENT">
+              <PropertyRef Name="EVENT_ID" />
+            </Principal>
+            <Dependent Role="REPETITIVE_EVENT">
+              <PropertyRef Name="RE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="ACCESSORY" EntityType="Self.ACCESSORY" Schema="LUCAS.PISA" store:Type="Tables" />
+          <EntitySet Name="ACTIVITY" EntityType="Self.ACTIVITY" Schema="LUCAS.PISA" store:Type="Tables" />
+          <EntitySet Name="ADMIN" EntityType="Self.ADMIN" Schema="LUCAS.PISA" store:Type="Tables" />
+          <EntitySet Name="CATEGORY" EntityType="Self.CATEGORY" Schema="LUCAS.PISA" store:Type="Tables" />
+          <EntitySet Name="CONTAINSACCESSORY" EntityType="Self.CONTAINSACCESSORY" Schema="LUCAS.PISA" store:Type="Tables" />
+          <EntitySet Name="CONTRIBUTOR" EntityType="Self.CONTRIBUTOR" Schema="LUCAS.PISA" store:Type="Tables" />
+          <EntitySet Name="EVENT" EntityType="Self.EVENT" Schema="LUCAS.PISA" store:Type="Tables" />
+          <EntitySet Name="EVENTTYPE" EntityType="Self.EVENTTYPE" Schema="LUCAS.PISA" store:Type="Tables" />
+          <EntitySet Name="HASINBASKET" EntityType="Self.HASINBASKET" Schema="LUCAS.PISA" store:Type="Tables" />
+          <EntitySet Name="ISREGISTERED" EntityType="Self.ISREGISTERED" Schema="LUCAS.PISA" store:Type="Tables" />
+          <EntitySet Name="MANAGER" EntityType="Self.MANAGER" Schema="LUCAS.PISA" store:Type="Tables" />
+          <EntitySet Name="MEMBER" EntityType="Self.MEMBER" Schema="LUCAS.PISA" store:Type="Tables" />
+          <EntitySet Name="NOTIFICATION" EntityType="Self.NOTIFICATION" Schema="LUCAS.PISA" store:Type="Tables" />
+          <EntitySet Name="PRICE" EntityType="Self.PRICE" Schema="LUCAS.PISA" store:Type="Tables" />
+          <EntitySet Name="PRODUCT" EntityType="Self.PRODUCT" Schema="LUCAS.PISA" store:Type="Tables" />
+          <EntitySet Name="PUNCTUAL_EVENT" EntityType="Self.PUNCTUAL_EVENT" Schema="LUCAS.PISA" store:Type="Tables" />
+          <EntitySet Name="PURCHASE" EntityType="Self.PURCHASE" Schema="LUCAS.PISA" store:Type="Tables" />
+          <EntitySet Name="PURCHASECONTAINS" EntityType="Self.PURCHASECONTAINS" Schema="LUCAS.PISA" store:Type="Tables" />
+          <EntitySet Name="REPETITIVE_EVENT" EntityType="Self.REPETITIVE_EVENT" Schema="LUCAS.PISA" store:Type="Tables" />
+          <EntitySet Name="ROOM" EntityType="Self.ROOM" Schema="LUCAS.PISA" store:Type="Tables" />
+          <EntitySet Name="USER1" EntityType="Self.USER1" Schema="LUCAS.PISA" store:Type="Tables" />
+          <AssociationSet Name="ACTIVITY_FK" Association="Self.ACTIVITY_FK">
+            <End Role="MANAGER" EntitySet="MANAGER" />
+            <End Role="ACTIVITY" EntitySet="ACTIVITY" />
+          </AssociationSet>
+          <AssociationSet Name="ADMIN_FK" Association="Self.ADMIN_FK">
+            <End Role="USER1" EntitySet="USER1" />
+            <End Role="ADMIN" EntitySet="ADMIN" />
+          </AssociationSet>
+          <AssociationSet Name="CONTAINSACC_ACCESSORY_FK2" Association="Self.CONTAINSACC_ACCESSORY_FK2">
+            <End Role="ACCESSORY" EntitySet="ACCESSORY" />
+            <End Role="CONTAINSACCESSORY" EntitySet="CONTAINSACCESSORY" />
+          </AssociationSet>
+          <AssociationSet Name="CONTAINSACCESSORY_ROOM_FK1" Association="Self.CONTAINSACCESSORY_ROOM_FK1">
+            <End Role="ROOM" EntitySet="ROOM" />
+            <End Role="CONTAINSACCESSORY" EntitySet="CONTAINSACCESSORY" />
+          </AssociationSet>
+          <AssociationSet Name="CONTRIBUTOR_FK" Association="Self.CONTRIBUTOR_FK">
+            <End Role="USER1" EntitySet="USER1" />
+            <End Role="CONTRIBUTOR" EntitySet="CONTRIBUTOR" />
+          </AssociationSet>
+          <AssociationSet Name="EVENT_ACTIVITY_FK" Association="Self.EVENT_ACTIVITY_FK">
+            <End Role="ACTIVITY" EntitySet="ACTIVITY" />
+            <End Role="EVENT" EntitySet="EVENT" />
+          </AssociationSet>
+          <AssociationSet Name="EVENT_CONTRIBUTOR_FK" Association="Self.EVENT_CONTRIBUTOR_FK">
+            <End Role="CONTRIBUTOR" EntitySet="CONTRIBUTOR" />
+            <End Role="EVENT" EntitySet="EVENT" />
+          </AssociationSet>
+          <AssociationSet Name="EVENT_MANAGER_FK" Association="Self.EVENT_MANAGER_FK">
+            <End Role="MANAGER" EntitySet="MANAGER" />
+            <End Role="EVENT" EntitySet="EVENT" />
+          </AssociationSet>
+          <AssociationSet Name="EVENT_TYPE_FK" Association="Self.EVENT_TYPE_FK">
+            <End Role="EVENTTYPE" EntitySet="EVENTTYPE" />
+            <End Role="EVENT" EntitySet="EVENT" />
+          </AssociationSet>
+          <AssociationSet Name="HASINBASKET_PRODUCT_FK1" Association="Self.HASINBASKET_PRODUCT_FK1">
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+            <End Role="HASINBASKET" EntitySet="HASINBASKET" />
+          </AssociationSet>
+          <AssociationSet Name="HASINBASKET_USER1_FK1" Association="Self.HASINBASKET_USER1_FK1">
+            <End Role="USER1" EntitySet="USER1" />
+            <End Role="HASINBASKET" EntitySet="HASINBASKET" />
+          </AssociationSet>
+          <AssociationSet Name="ISREGISTERED_EVENT_FK1" Association="Self.ISREGISTERED_EVENT_FK1">
+            <End Role="EVENT" EntitySet="EVENT" />
+            <End Role="ISREGISTERED" EntitySet="ISREGISTERED" />
+          </AssociationSet>
+          <AssociationSet Name="ISREGISTERED_USER1_FK1" Association="Self.ISREGISTERED_USER1_FK1">
+            <End Role="USER1" EntitySet="USER1" />
+            <End Role="ISREGISTERED" EntitySet="ISREGISTERED" />
+          </AssociationSet>
+          <AssociationSet Name="MANAGER_FK" Association="Self.MANAGER_FK">
+            <End Role="USER1" EntitySet="USER1" />
+            <End Role="MANAGER" EntitySet="MANAGER" />
+          </AssociationSet>
+          <AssociationSet Name="MEMBER_FK" Association="Self.MEMBER_FK">
+            <End Role="USER1" EntitySet="USER1" />
+            <End Role="MEMBER" EntitySet="MEMBER" />
+          </AssociationSet>
+          <AssociationSet Name="NOTIFICATION_USER1_FK1" Association="Self.NOTIFICATION_USER1_FK1">
+            <End Role="USER1" EntitySet="USER1" />
+            <End Role="NOTIFICATION" EntitySet="NOTIFICATION" />
+          </AssociationSet>
+          <AssociationSet Name="PE_EVENT_FK" Association="Self.PE_EVENT_FK">
+            <End Role="EVENT" EntitySet="EVENT" />
+            <End Role="PUNCTUAL_EVENT" EntitySet="PUNCTUAL_EVENT" />
+          </AssociationSet>
+          <AssociationSet Name="PRODUCT_FK1" Association="Self.PRODUCT_FK1">
+            <End Role="USER1" EntitySet="USER1" />
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+          </AssociationSet>
+          <AssociationSet Name="PRODUCT_FK2" Association="Self.PRODUCT_FK2">
+            <End Role="CATEGORY" EntitySet="CATEGORY" />
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+          </AssociationSet>
+          <AssociationSet Name="PURCHASE_USER1_FK1" Association="Self.PURCHASE_USER1_FK1">
+            <End Role="USER1" EntitySet="USER1" />
+            <End Role="PURCHASE" EntitySet="PURCHASE" />
+          </AssociationSet>
+          <AssociationSet Name="PURCHASECONTAINS_PRODUCT_FK1" Association="Self.PURCHASECONTAINS_PRODUCT_FK1">
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+            <End Role="PURCHASECONTAINS" EntitySet="PURCHASECONTAINS" />
+          </AssociationSet>
+          <AssociationSet Name="PURCHASECONTAINS_PURCHASE_FK1" Association="Self.PURCHASECONTAINS_PURCHASE_FK1">
+            <End Role="PURCHASE" EntitySet="PURCHASE" />
+            <End Role="PURCHASECONTAINS" EntitySet="PURCHASECONTAINS" />
+          </AssociationSet>
+          <AssociationSet Name="RE_EVENT_FK" Association="Self.RE_EVENT_FK">
+            <End Role="EVENT" EntitySet="EVENT" />
+            <End Role="REPETITIVE_EVENT" EntitySet="REPETITIVE_EVENT" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ACCESSORY">
+          <Key>
+            <PropertyRef Name="ACCESSORY_ID" />
+          </Key>
+          <Property Name="ACCESSORY_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ACCESSORY_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ACCESSORY_QUANTITY" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="CONTAINSACCESSORY" Relationship="Self.CONTAINSACC_ACCESSORY_FK2" FromRole="ACCESSORY" ToRole="CONTAINSACCESSORY" />
+        </EntityType>
+        <EntityType Name="ACTIVITY">
+          <Key>
+            <PropertyRef Name="ACTIVITY_ID" />
+          </Key>
+          <Property Name="ACTIVITY_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ACTIVITY_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ACTIVITY_SHORTDESC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ACTIVITY_MANAGER" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ACTIVITY_LONGDESC" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MANAGER" Relationship="Self.ACTIVITY_FK" FromRole="ACTIVITY" ToRole="MANAGER" />
+          <NavigationProperty Name="EVENT" Relationship="Self.EVENT_ACTIVITY_FK" FromRole="ACTIVITY" ToRole="EVENT" />
+        </EntityType>
+        <EntityType Name="ADMIN">
+          <Key>
+            <PropertyRef Name="ADMIN_ID" />
+          </Key>
+          <Property Name="ADMIN_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="USER1" Relationship="Self.ADMIN_FK" FromRole="ADMIN" ToRole="USER1" />
+        </EntityType>
+        <EntityType Name="CATEGORY">
+          <Key>
+            <PropertyRef Name="CAT_ID" />
+          </Key>
+          <Property Name="CAT_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CAT_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CAT_DESCR" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="CAT_VALIDATIONDATE" Type="DateTime" />
+          <Property Name="CAT_PARENT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.PRODUCT_FK2" FromRole="CATEGORY" ToRole="PRODUCT" />
+        </EntityType>
+        <EntityType Name="CONTAINSACCESSORY">
+          <Key>
+            <PropertyRef Name="ROOM_ID" />
+            <PropertyRef Name="ACCESSORY_ID" />
+          </Key>
+          <Property Name="ROOM_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ACCESSORY_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CONTAINS_QUANTITY" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="ACCESSORY" Relationship="Self.CONTAINSACC_ACCESSORY_FK2" FromRole="CONTAINSACCESSORY" ToRole="ACCESSORY" />
+          <NavigationProperty Name="ROOM" Relationship="Self.CONTAINSACCESSORY_ROOM_FK1" FromRole="CONTAINSACCESSORY" ToRole="ROOM" />
+        </EntityType>
+        <EntityType Name="CONTRIBUTOR">
+          <Key>
+            <PropertyRef Name="CONTRIBUTOR_ID" />
+          </Key>
+          <Property Name="CONTRIBUTOR_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CONTRIBUTOR_SHORTDESC" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CONTRIBUTOR_LONGDESC" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USER1" Relationship="Self.CONTRIBUTOR_FK" FromRole="CONTRIBUTOR" ToRole="USER1" />
+          <NavigationProperty Name="EVENT" Relationship="Self.EVENT_CONTRIBUTOR_FK" FromRole="CONTRIBUTOR" ToRole="EVENT" />
+        </EntityType>
+        <EntityType Name="EVENT">
+          <Key>
+            <PropertyRef Name="EVENT_ID" />
+          </Key>
+          <Property Name="EVENT_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EVENT_DURATION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="EVENT_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EVENT_PRICE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="EVENT_MAXNBR" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="EVENT_ACTIVITY" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EVENT_ROOM" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EVENT_CONTRIBUTOR" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EVENT_MANAGER" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EVENT_TYPE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EVENT_DATE" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="ACTIVITY" Relationship="Self.EVENT_ACTIVITY_FK" FromRole="EVENT" ToRole="ACTIVITY" />
+          <NavigationProperty Name="CONTRIBUTOR" Relationship="Self.EVENT_CONTRIBUTOR_FK" FromRole="EVENT" ToRole="CONTRIBUTOR" />
+          <NavigationProperty Name="MANAGER" Relationship="Self.EVENT_MANAGER_FK" FromRole="EVENT" ToRole="MANAGER" />
+          <NavigationProperty Name="EVENTTYPE" Relationship="Self.EVENT_TYPE_FK" FromRole="EVENT" ToRole="EVENTTYPE" />
+          <NavigationProperty Name="PUNCTUAL_EVENT" Relationship="Self.PE_EVENT_FK" FromRole="EVENT" ToRole="PUNCTUAL_EVENT" />
+          <NavigationProperty Name="REPETITIVE_EVENT" Relationship="Self.RE_EVENT_FK" FromRole="EVENT" ToRole="REPETITIVE_EVENT" />
+          <NavigationProperty Name="USER1" Relationship="Self.ISREGISTERED" FromRole="EVENT" ToRole="USER1" />
+          <NavigationProperty Name="ROOM" Relationship="Model.ROOMEVENT" FromRole="EVENT" ToRole="ROOM" />
+          <Property Name="ROOMROOM_ID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="EVENTTYPE">
+          <Key>
+            <PropertyRef Name="EVENTTYPE_ID" />
+          </Key>
+          <Property Name="EVENTTYPE_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EVENTTYPE_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="EVENT" Relationship="Self.EVENT_TYPE_FK" FromRole="EVENTTYPE" ToRole="EVENT" />
+        </EntityType>
+        <EntityType Name="HASINBASKET">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRODUCT_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="QUANTITY" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.HASINBASKET_PRODUCT_FK1" FromRole="HASINBASKET" ToRole="PRODUCT" />
+          <NavigationProperty Name="USER1" Relationship="Self.HASINBASKET_USER1_FK1" FromRole="HASINBASKET" ToRole="USER1" />
+        </EntityType>
+        <EntityType Name="MANAGER">
+          <Key>
+            <PropertyRef Name="MANAGER_ID" />
+          </Key>
+          <Property Name="MANAGER_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ACTIVITY" Relationship="Self.ACTIVITY_FK" FromRole="MANAGER" ToRole="ACTIVITY" />
+          <NavigationProperty Name="EVENT" Relationship="Self.EVENT_MANAGER_FK" FromRole="MANAGER" ToRole="EVENT" />
+          <NavigationProperty Name="USER1" Relationship="Self.MANAGER_FK" FromRole="MANAGER" ToRole="USER1" />
+        </EntityType>
+        <EntityType Name="MEMBER">
+          <Key>
+            <PropertyRef Name="MEMBER_ID" />
+          </Key>
+          <Property Name="MEMBER_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MEMBER_PAYFEEDATE" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="USER1" Relationship="Self.MEMBER_FK" FromRole="MEMBER" ToRole="USER1" />
+        </EntityType>
+        <EntityType Name="NOTIFICATION">
+          <Key>
+            <PropertyRef Name="NOTIF_ID" />
+          </Key>
+          <Property Name="NOTIF_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOTIF_MESSAGE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="NOTIF_DATE" Type="DateTime" />
+          <Property Name="NOTIF_USERID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NOTIF_NAME" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USER1" Relationship="Self.NOTIFICATION_USER1_FK1" FromRole="NOTIFICATION" ToRole="USER1" />
+        </EntityType>
+        <EntityType Name="PRICE">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+            <PropertyRef Name="DATE_PRICE" />
+          </Key>
+          <Property Name="PRODUCT_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DATE_PRICE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRODUCT_PRICE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="PRODUCT" Relationship="Model.PRICEPRODUCT" FromRole="PRICE" ToRole="PRODUCT" />
+        </EntityType>
+        <EntityType Name="PRODUCT">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="PRODUCT_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRODUCT_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRODUCT_DESCRIPTION" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="PRODUCT_AVAILABLEQUANTITY" Type="Int32" Nullable="false" />
+          <Property Name="PRODUCT_MEMBERREDUCTION" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="PRODUCT_CAT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRODUCT_USERID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CATEGORY" Relationship="Self.PRODUCT_FK2" FromRole="PRODUCT" ToRole="CATEGORY" />
+          <NavigationProperty Name="HASINBASKET" Relationship="Self.HASINBASKET_PRODUCT_FK1" FromRole="PRODUCT" ToRole="HASINBASKET" />
+          <NavigationProperty Name="USER1" Relationship="Self.PRODUCT_FK1" FromRole="PRODUCT" ToRole="USER1" />
+          <NavigationProperty Name="PURCHASECONTAINS" Relationship="Self.PURCHASECONTAINS_PRODUCT_FK1" FromRole="PRODUCT" ToRole="PURCHASECONTAINS" />
+          <NavigationProperty Name="PRICE" Relationship="Model.PRICEPRODUCT" FromRole="PRODUCT" ToRole="PRICE" />
+        </EntityType>
+        <EntityType Name="PUNCTUAL_EVENT">
+          <Key>
+            <PropertyRef Name="PE_ID" />
+          </Key>
+          <Property Name="PE_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PE_DATE" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="EVENT" Relationship="Self.PE_EVENT_FK" FromRole="PUNCTUAL_EVENT" ToRole="EVENT" />
+        </EntityType>
+        <EntityType Name="PURCHASE">
+          <Key>
+            <PropertyRef Name="PURCHASE_ID" />
+          </Key>
+          <Property Name="PURCHASE_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PURCHASE_USERID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PURCHASE_DATE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PURCHASE_SHIPDATE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PURCHASE_TOTALPRICE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="USER1" Relationship="Self.PURCHASE_USER1_FK1" FromRole="PURCHASE" ToRole="USER1" />
+          <NavigationProperty Name="PURCHASECONTAINS" Relationship="Self.PURCHASECONTAINS_PURCHASE_FK1" FromRole="PURCHASE" ToRole="PURCHASECONTAINS" />
+        </EntityType>
+        <EntityType Name="PURCHASECONTAINS">
+          <Key>
+            <PropertyRef Name="PURCHASE_ID" />
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="PURCHASE_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRODUCT_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRODUCTQUANTITY" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VALIDATIONDATE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.PURCHASECONTAINS_PRODUCT_FK1" FromRole="PURCHASECONTAINS" ToRole="PRODUCT" />
+          <NavigationProperty Name="PURCHASE" Relationship="Self.PURCHASECONTAINS_PURCHASE_FK1" FromRole="PURCHASECONTAINS" ToRole="PURCHASE" />
+        </EntityType>
+        <EntityType Name="REPETITIVE_EVENT">
+          <Key>
+            <PropertyRef Name="RE_ID" />
+            <PropertyRef Name="RE_DATE" />
+          </Key>
+          <Property Name="RE_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RE_DATE" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="EVENT" Relationship="Self.RE_EVENT_FK" FromRole="REPETITIVE_EVENT" ToRole="EVENT" />
+        </EntityType>
+        <EntityType Name="ROOM">
+          <Key>
+            <PropertyRef Name="ROOM_ID" />
+          </Key>
+          <Property Name="ROOM_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ROOM_SUPERFICY" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ROOM_MAXNBR" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ROOM_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CONTAINSACCESSORY" Relationship="Self.CONTAINSACCESSORY_ROOM_FK1" FromRole="ROOM" ToRole="CONTAINSACCESSORY" />
+          <NavigationProperty Name="EVENT" Relationship="Model.ROOMEVENT" FromRole="ROOM" ToRole="EVENT" />
+        </EntityType>
+        <EntityType Name="USER1">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="USER_PASSWORD" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="USER_LASTNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="USER_FIRSTNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="USER_ADR1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="USER_ADR2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="USER_PC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="USER_TOWN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="USER_PHONE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="USER_MAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ADMIN" Relationship="Self.ADMIN_FK" FromRole="USER1" ToRole="ADMIN" />
+          <NavigationProperty Name="CONTRIBUTOR" Relationship="Self.CONTRIBUTOR_FK" FromRole="USER1" ToRole="CONTRIBUTOR" />
+          <NavigationProperty Name="HASINBASKET" Relationship="Self.HASINBASKET_USER1_FK1" FromRole="USER1" ToRole="HASINBASKET" />
+          <NavigationProperty Name="MANAGER" Relationship="Self.MANAGER_FK" FromRole="USER1" ToRole="MANAGER" />
+          <NavigationProperty Name="MEMBER" Relationship="Self.MEMBER_FK" FromRole="USER1" ToRole="MEMBER" />
+          <NavigationProperty Name="NOTIFICATION" Relationship="Self.NOTIFICATION_USER1_FK1" FromRole="USER1" ToRole="NOTIFICATION" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.PRODUCT_FK1" FromRole="USER1" ToRole="PRODUCT" />
+          <NavigationProperty Name="PURCHASE" Relationship="Self.PURCHASE_USER1_FK1" FromRole="USER1" ToRole="PURCHASE" />
+          <NavigationProperty Name="EVENT" Relationship="Self.ISREGISTERED" FromRole="USER1" ToRole="EVENT" />
+        </EntityType>
+        <Association Name="CONTAINSACC_ACCESSORY_FK2">
+          <End Role="ACCESSORY" Type="Self.ACCESSORY" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CONTAINSACCESSORY" Type="Self.CONTAINSACCESSORY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCESSORY">
+              <PropertyRef Name="ACCESSORY_ID" />
+            </Principal>
+            <Dependent Role="CONTAINSACCESSORY">
+              <PropertyRef Name="ACCESSORY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ACTIVITY_FK">
+          <End Role="MANAGER" Type="Self.MANAGER" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ACTIVITY" Type="Self.ACTIVITY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MANAGER">
+              <PropertyRef Name="MANAGER_ID" />
+            </Principal>
+            <Dependent Role="ACTIVITY">
+              <PropertyRef Name="ACTIVITY_MANAGER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EVENT_ACTIVITY_FK">
+          <End Role="ACTIVITY" Type="Self.ACTIVITY" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EVENT" Type="Self.EVENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACTIVITY">
+              <PropertyRef Name="ACTIVITY_ID" />
+            </Principal>
+            <Dependent Role="EVENT">
+              <PropertyRef Name="EVENT_ACTIVITY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ADMIN_FK">
+          <End Role="USER1" Type="Self.USER1" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ADMIN" Type="Self.ADMIN" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="USER1">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="ADMIN">
+              <PropertyRef Name="ADMIN_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PRODUCT_FK2">
+          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORY">
+              <PropertyRef Name="CAT_ID" />
+            </Principal>
+            <Dependent Role="PRODUCT">
+              <PropertyRef Name="PRODUCT_CAT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CONTAINSACCESSORY_ROOM_FK1">
+          <End Role="ROOM" Type="Self.ROOM" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CONTAINSACCESSORY" Type="Self.CONTAINSACCESSORY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROOM">
+              <PropertyRef Name="ROOM_ID" />
+            </Principal>
+            <Dependent Role="CONTAINSACCESSORY">
+              <PropertyRef Name="ROOM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CONTRIBUTOR_FK">
+          <End Role="USER1" Type="Self.USER1" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CONTRIBUTOR" Type="Self.CONTRIBUTOR" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="USER1">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="CONTRIBUTOR">
+              <PropertyRef Name="CONTRIBUTOR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EVENT_CONTRIBUTOR_FK">
+          <End Role="CONTRIBUTOR" Type="Self.CONTRIBUTOR" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EVENT" Type="Self.EVENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONTRIBUTOR">
+              <PropertyRef Name="CONTRIBUTOR_ID" />
+            </Principal>
+            <Dependent Role="EVENT">
+              <PropertyRef Name="EVENT_CONTRIBUTOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EVENT_MANAGER_FK">
+          <End Role="MANAGER" Type="Self.MANAGER" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EVENT" Type="Self.EVENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MANAGER">
+              <PropertyRef Name="MANAGER_ID" />
+            </Principal>
+            <Dependent Role="EVENT">
+              <PropertyRef Name="EVENT_MANAGER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EVENT_TYPE_FK">
+          <End Role="EVENTTYPE" Type="Self.EVENTTYPE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EVENT" Type="Self.EVENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVENTTYPE">
+              <PropertyRef Name="EVENTTYPE_ID" />
+            </Principal>
+            <Dependent Role="EVENT">
+              <PropertyRef Name="EVENT_TYPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PE_EVENT_FK">
+          <End Role="EVENT" Type="Self.EVENT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PUNCTUAL_EVENT" Type="Self.PUNCTUAL_EVENT" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EVENT">
+              <PropertyRef Name="EVENT_ID" />
+            </Principal>
+            <Dependent Role="PUNCTUAL_EVENT">
+              <PropertyRef Name="PE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RE_EVENT_FK">
+          <End Role="EVENT" Type="Self.EVENT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="REPETITIVE_EVENT" Type="Self.REPETITIVE_EVENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVENT">
+              <PropertyRef Name="EVENT_ID" />
+            </Principal>
+            <Dependent Role="REPETITIVE_EVENT">
+              <PropertyRef Name="RE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HASINBASKET_PRODUCT_FK1">
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HASINBASKET" Type="Self.HASINBASKET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="HASINBASKET">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HASINBASKET_USER1_FK1">
+          <End Role="USER1" Type="Self.USER1" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HASINBASKET" Type="Self.HASINBASKET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER1">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="HASINBASKET">
+              <PropertyRef Name="USER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MANAGER_FK">
+          <End Role="USER1" Type="Self.USER1" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MANAGER" Type="Self.MANAGER" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="USER1">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="MANAGER">
+              <PropertyRef Name="MANAGER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MEMBER_FK">
+          <End Role="USER1" Type="Self.USER1" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MEMBER" Type="Self.MEMBER" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="USER1">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="MEMBER">
+              <PropertyRef Name="MEMBER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="NOTIFICATION_USER1_FK1">
+          <End Role="USER1" Type="Self.USER1" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NOTIFICATION" Type="Self.NOTIFICATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER1">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="NOTIFICATION">
+              <PropertyRef Name="NOTIF_USERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PRODUCT_FK1">
+          <End Role="USER1" Type="Self.USER1" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER1">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="PRODUCT">
+              <PropertyRef Name="PRODUCT_USERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PURCHASECONTAINS_PRODUCT_FK1">
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PURCHASECONTAINS" Type="Self.PURCHASECONTAINS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="PURCHASECONTAINS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PURCHASE_USER1_FK1">
+          <End Role="USER1" Type="Self.USER1" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PURCHASE" Type="Self.PURCHASE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER1">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="PURCHASE">
+              <PropertyRef Name="PURCHASE_USERID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PURCHASECONTAINS_PURCHASE_FK1">
+          <End Role="PURCHASE" Type="Self.PURCHASE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PURCHASECONTAINS" Type="Self.PURCHASECONTAINS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PURCHASE">
+              <PropertyRef Name="PURCHASE_ID" />
+            </Principal>
+            <Dependent Role="PURCHASECONTAINS">
+              <PropertyRef Name="PURCHASE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ISREGISTERED">
+          <End Role="EVENT" Type="Self.EVENT" Multiplicity="*" />
+          <End Role="USER1" Type="Self.USER1" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ACCESSORY" EntityType="Self.ACCESSORY" />
+          <EntitySet Name="ACTIVITY" EntityType="Self.ACTIVITY" />
+          <EntitySet Name="ADMIN" EntityType="Self.ADMIN" />
+          <EntitySet Name="CATEGORY" EntityType="Self.CATEGORY" />
+          <EntitySet Name="CONTAINSACCESSORY" EntityType="Self.CONTAINSACCESSORY" />
+          <EntitySet Name="CONTRIBUTOR" EntityType="Self.CONTRIBUTOR" />
+          <EntitySet Name="EVENT" EntityType="Self.EVENT" />
+          <EntitySet Name="EVENTTYPE" EntityType="Self.EVENTTYPE" />
+          <EntitySet Name="HASINBASKET" EntityType="Self.HASINBASKET" />
+          <EntitySet Name="MANAGER" EntityType="Self.MANAGER" />
+          <EntitySet Name="MEMBER" EntityType="Self.MEMBER" />
+          <EntitySet Name="NOTIFICATION" EntityType="Self.NOTIFICATION" />
+          <EntitySet Name="PRICE" EntityType="Self.PRICE" />
+          <EntitySet Name="PRODUCT" EntityType="Self.PRODUCT" />
+          <EntitySet Name="PUNCTUAL_EVENT" EntityType="Self.PUNCTUAL_EVENT" />
+          <EntitySet Name="PURCHASE" EntityType="Self.PURCHASE" />
+          <EntitySet Name="PURCHASECONTAINS" EntityType="Self.PURCHASECONTAINS" />
+          <EntitySet Name="REPETITIVE_EVENT" EntityType="Self.REPETITIVE_EVENT" />
+          <EntitySet Name="ROOM" EntityType="Self.ROOM" />
+          <EntitySet Name="USER1" EntityType="Self.USER1" />
+          <AssociationSet Name="CONTAINSACC_ACCESSORY_FK2" Association="Self.CONTAINSACC_ACCESSORY_FK2">
+            <End Role="ACCESSORY" EntitySet="ACCESSORY" />
+            <End Role="CONTAINSACCESSORY" EntitySet="CONTAINSACCESSORY" />
+          </AssociationSet>
+          <AssociationSet Name="ACTIVITY_FK" Association="Self.ACTIVITY_FK">
+            <End Role="MANAGER" EntitySet="MANAGER" />
+            <End Role="ACTIVITY" EntitySet="ACTIVITY" />
+          </AssociationSet>
+          <AssociationSet Name="EVENT_ACTIVITY_FK" Association="Self.EVENT_ACTIVITY_FK">
+            <End Role="ACTIVITY" EntitySet="ACTIVITY" />
+            <End Role="EVENT" EntitySet="EVENT" />
+          </AssociationSet>
+          <AssociationSet Name="ADMIN_FK" Association="Self.ADMIN_FK">
+            <End Role="USER1" EntitySet="USER1" />
+            <End Role="ADMIN" EntitySet="ADMIN" />
+          </AssociationSet>
+          <AssociationSet Name="PRODUCT_FK2" Association="Self.PRODUCT_FK2">
+            <End Role="CATEGORY" EntitySet="CATEGORY" />
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+          </AssociationSet>
+          <AssociationSet Name="CONTAINSACCESSORY_ROOM_FK1" Association="Self.CONTAINSACCESSORY_ROOM_FK1">
+            <End Role="ROOM" EntitySet="ROOM" />
+            <End Role="CONTAINSACCESSORY" EntitySet="CONTAINSACCESSORY" />
+          </AssociationSet>
+          <AssociationSet Name="CONTRIBUTOR_FK" Association="Self.CONTRIBUTOR_FK">
+            <End Role="USER1" EntitySet="USER1" />
+            <End Role="CONTRIBUTOR" EntitySet="CONTRIBUTOR" />
+          </AssociationSet>
+          <AssociationSet Name="EVENT_CONTRIBUTOR_FK" Association="Self.EVENT_CONTRIBUTOR_FK">
+            <End Role="CONTRIBUTOR" EntitySet="CONTRIBUTOR" />
+            <End Role="EVENT" EntitySet="EVENT" />
+          </AssociationSet>
+          <AssociationSet Name="EVENT_MANAGER_FK" Association="Self.EVENT_MANAGER_FK">
+            <End Role="MANAGER" EntitySet="MANAGER" />
+            <End Role="EVENT" EntitySet="EVENT" />
+          </AssociationSet>
+          <AssociationSet Name="EVENT_TYPE_FK" Association="Self.EVENT_TYPE_FK">
+            <End Role="EVENTTYPE" EntitySet="EVENTTYPE" />
+            <End Role="EVENT" EntitySet="EVENT" />
+          </AssociationSet>
+          <AssociationSet Name="PE_EVENT_FK" Association="Self.PE_EVENT_FK">
+            <End Role="EVENT" EntitySet="EVENT" />
+            <End Role="PUNCTUAL_EVENT" EntitySet="PUNCTUAL_EVENT" />
+          </AssociationSet>
+          <AssociationSet Name="RE_EVENT_FK" Association="Self.RE_EVENT_FK">
+            <End Role="EVENT" EntitySet="EVENT" />
+            <End Role="REPETITIVE_EVENT" EntitySet="REPETITIVE_EVENT" />
+          </AssociationSet>
+          <AssociationSet Name="HASINBASKET_PRODUCT_FK1" Association="Self.HASINBASKET_PRODUCT_FK1">
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+            <End Role="HASINBASKET" EntitySet="HASINBASKET" />
+          </AssociationSet>
+          <AssociationSet Name="HASINBASKET_USER1_FK1" Association="Self.HASINBASKET_USER1_FK1">
+            <End Role="USER1" EntitySet="USER1" />
+            <End Role="HASINBASKET" EntitySet="HASINBASKET" />
+          </AssociationSet>
+          <AssociationSet Name="MANAGER_FK" Association="Self.MANAGER_FK">
+            <End Role="USER1" EntitySet="USER1" />
+            <End Role="MANAGER" EntitySet="MANAGER" />
+          </AssociationSet>
+          <AssociationSet Name="MEMBER_FK" Association="Self.MEMBER_FK">
+            <End Role="USER1" EntitySet="USER1" />
+            <End Role="MEMBER" EntitySet="MEMBER" />
+          </AssociationSet>
+          <AssociationSet Name="NOTIFICATION_USER1_FK1" Association="Self.NOTIFICATION_USER1_FK1">
+            <End Role="USER1" EntitySet="USER1" />
+            <End Role="NOTIFICATION" EntitySet="NOTIFICATION" />
+          </AssociationSet>
+          <AssociationSet Name="PRODUCT_FK1" Association="Self.PRODUCT_FK1">
+            <End Role="USER1" EntitySet="USER1" />
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+          </AssociationSet>
+          <AssociationSet Name="PURCHASECONTAINS_PRODUCT_FK1" Association="Self.PURCHASECONTAINS_PRODUCT_FK1">
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+            <End Role="PURCHASECONTAINS" EntitySet="PURCHASECONTAINS" />
+          </AssociationSet>
+          <AssociationSet Name="PURCHASE_USER1_FK1" Association="Self.PURCHASE_USER1_FK1">
+            <End Role="USER1" EntitySet="USER1" />
+            <End Role="PURCHASE" EntitySet="PURCHASE" />
+          </AssociationSet>
+          <AssociationSet Name="PURCHASECONTAINS_PURCHASE_FK1" Association="Self.PURCHASECONTAINS_PURCHASE_FK1">
+            <End Role="PURCHASE" EntitySet="PURCHASE" />
+            <End Role="PURCHASECONTAINS" EntitySet="PURCHASECONTAINS" />
+          </AssociationSet>
+          <AssociationSet Name="ISREGISTERED" Association="Self.ISREGISTERED">
+            <End Role="EVENT" EntitySet="EVENT" />
+            <End Role="USER1" EntitySet="USER1" />
+          </AssociationSet>
+          <AssociationSet Name="PRICEPRODUCT" Association="Model.PRICEPRODUCT">
+            <End Role="PRICE" EntitySet="PRICE" />
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+          </AssociationSet>
+          <AssociationSet Name="ROOMEVENT" Association="Model.ROOMEVENT">
+            <End Role="ROOM" EntitySet="ROOM" />
+            <End Role="EVENT" EntitySet="EVENT" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="PRICEPRODUCT">
+          <End Type="Model.PRICE" Role="PRICE" Multiplicity="*" />
+          <End Type="Model.PRODUCT" Role="PRODUCT" Multiplicity="1" />
+        </Association>
+        <Association Name="ROOMEVENT">
+          <End Type="Model.ROOM" Role="ROOM" Multiplicity="1" />
+          <End Type="Model.EVENT" Role="EVENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROOM">
+              <PropertyRef Name="ROOM_ID" />
+            </Principal>
+            <Dependent Role="EVENT">
+              <PropertyRef Name="ROOMROOM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="ACCESSORY">
+            <EntityTypeMapping TypeName="Model.ACCESSORY">
+              <MappingFragment StoreEntitySet="ACCESSORY">
+                <ScalarProperty Name="ACCESSORY_ID" ColumnName="ACCESSORY_ID" />
+                <ScalarProperty Name="ACCESSORY_NAME" ColumnName="ACCESSORY_NAME" />
+                <ScalarProperty Name="ACCESSORY_QUANTITY" ColumnName="ACCESSORY_QUANTITY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ACTIVITY">
+            <EntityTypeMapping TypeName="Model.ACTIVITY">
+              <MappingFragment StoreEntitySet="ACTIVITY">
+                <ScalarProperty Name="ACTIVITY_ID" ColumnName="ACTIVITY_ID" />
+                <ScalarProperty Name="ACTIVITY_NAME" ColumnName="ACTIVITY_NAME" />
+                <ScalarProperty Name="ACTIVITY_SHORTDESC" ColumnName="ACTIVITY_SHORTDESC" />
+                <ScalarProperty Name="ACTIVITY_MANAGER" ColumnName="ACTIVITY_MANAGER" />
+                <ScalarProperty Name="ACTIVITY_LONGDESC" ColumnName="ACTIVITY_LONGDESC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ADMIN">
+            <EntityTypeMapping TypeName="Model.ADMIN">
+              <MappingFragment StoreEntitySet="ADMIN">
+                <ScalarProperty Name="ADMIN_ID" ColumnName="ADMIN_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CATEGORY">
+            <EntityTypeMapping TypeName="Model.CATEGORY">
+              <MappingFragment StoreEntitySet="CATEGORY">
+                <ScalarProperty Name="CAT_ID" ColumnName="CAT_ID" />
+                <ScalarProperty Name="CAT_NAME" ColumnName="CAT_NAME" />
+                <ScalarProperty Name="CAT_DESCR" ColumnName="CAT_DESCR" />
+                <ScalarProperty Name="CAT_VALIDATIONDATE" ColumnName="CAT_VALIDATIONDATE" />
+                <ScalarProperty Name="CAT_PARENT" ColumnName="CAT_PARENT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CONTAINSACCESSORY">
+            <EntityTypeMapping TypeName="Model.CONTAINSACCESSORY">
+              <MappingFragment StoreEntitySet="CONTAINSACCESSORY">
+                <ScalarProperty Name="ROOM_ID" ColumnName="ROOM_ID" />
+                <ScalarProperty Name="ACCESSORY_ID" ColumnName="ACCESSORY_ID" />
+                <ScalarProperty Name="CONTAINS_QUANTITY" ColumnName="CONTAINS_QUANTITY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CONTRIBUTOR">
+            <EntityTypeMapping TypeName="Model.CONTRIBUTOR">
+              <MappingFragment StoreEntitySet="CONTRIBUTOR">
+                <ScalarProperty Name="CONTRIBUTOR_ID" ColumnName="CONTRIBUTOR_ID" />
+                <ScalarProperty Name="CONTRIBUTOR_SHORTDESC" ColumnName="CONTRIBUTOR_SHORTDESC" />
+                <ScalarProperty Name="CONTRIBUTOR_LONGDESC" ColumnName="CONTRIBUTOR_LONGDESC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EVENT">
+            <EntityTypeMapping TypeName="Model.EVENT">
+              <MappingFragment StoreEntitySet="EVENT">
+                <ScalarProperty Name="EVENT_ID" ColumnName="EVENT_ID" />
+                <ScalarProperty Name="EVENT_DURATION" ColumnName="EVENT_DURATION" />
+                <ScalarProperty Name="EVENT_NAME" ColumnName="EVENT_NAME" />
+                <ScalarProperty Name="EVENT_PRICE" ColumnName="EVENT_PRICE" />
+                <ScalarProperty Name="EVENT_MAXNBR" ColumnName="EVENT_MAXNBR" />
+                <ScalarProperty Name="EVENT_ACTIVITY" ColumnName="EVENT_ACTIVITY" />
+                <ScalarProperty Name="EVENT_ROOM" ColumnName="EVENT_ROOM" />
+                <ScalarProperty Name="EVENT_CONTRIBUTOR" ColumnName="EVENT_CONTRIBUTOR" />
+                <ScalarProperty Name="EVENT_MANAGER" ColumnName="EVENT_MANAGER" />
+                <ScalarProperty Name="EVENT_TYPE" ColumnName="EVENT_TYPE" />
+                <ScalarProperty Name="EVENT_DATE" ColumnName="EVENT_DATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EVENTTYPE">
+            <EntityTypeMapping TypeName="Model.EVENTTYPE">
+              <MappingFragment StoreEntitySet="EVENTTYPE">
+                <ScalarProperty Name="EVENTTYPE_ID" ColumnName="EVENTTYPE_ID" />
+                <ScalarProperty Name="EVENTTYPE_NAME" ColumnName="EVENTTYPE_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HASINBASKET">
+            <EntityTypeMapping TypeName="Model.HASINBASKET">
+              <MappingFragment StoreEntitySet="HASINBASKET">
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MANAGER">
+            <EntityTypeMapping TypeName="Model.MANAGER">
+              <MappingFragment StoreEntitySet="MANAGER">
+                <ScalarProperty Name="MANAGER_ID" ColumnName="MANAGER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MEMBER">
+            <EntityTypeMapping TypeName="Model.MEMBER">
+              <MappingFragment StoreEntitySet="MEMBER">
+                <ScalarProperty Name="MEMBER_ID" ColumnName="MEMBER_ID" />
+                <ScalarProperty Name="MEMBER_PAYFEEDATE" ColumnName="MEMBER_PAYFEEDATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NOTIFICATION">
+            <EntityTypeMapping TypeName="Model.NOTIFICATION">
+              <MappingFragment StoreEntitySet="NOTIFICATION">
+                <ScalarProperty Name="NOTIF_ID" ColumnName="NOTIF_ID" />
+                <ScalarProperty Name="NOTIF_MESSAGE" ColumnName="NOTIF_MESSAGE" />
+                <ScalarProperty Name="NOTIF_DATE" ColumnName="NOTIF_DATE" />
+                <ScalarProperty Name="NOTIF_USERID" ColumnName="NOTIF_USERID" />
+                <ScalarProperty Name="NOTIF_NAME" ColumnName="NOTIF_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRICE">
+            <EntityTypeMapping TypeName="Model.PRICE">
+              <MappingFragment StoreEntitySet="PRICE">
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+                <ScalarProperty Name="DATE_PRICE" ColumnName="DATE_PRICE" />
+                <ScalarProperty Name="PRODUCT_PRICE" ColumnName="PRODUCT_PRICE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCT">
+            <EntityTypeMapping TypeName="Model.PRODUCT">
+              <MappingFragment StoreEntitySet="PRODUCT">
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+                <ScalarProperty Name="PRODUCT_NAME" ColumnName="PRODUCT_NAME" />
+                <ScalarProperty Name="PRODUCT_DESCRIPTION" ColumnName="PRODUCT_DESCRIPTION" />
+                <ScalarProperty Name="PRODUCT_AVAILABLEQUANTITY" ColumnName="PRODUCT_AVAILABLEQUANTITY" />
+                <ScalarProperty Name="PRODUCT_MEMBERREDUCTION" ColumnName="PRODUCT_MEMBERREDUCTION" />
+                <ScalarProperty Name="PRODUCT_CAT" ColumnName="PRODUCT_CAT" />
+                <ScalarProperty Name="PRODUCT_USERID" ColumnName="PRODUCT_USERID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PUNCTUAL_EVENT">
+            <EntityTypeMapping TypeName="Model.PUNCTUAL_EVENT">
+              <MappingFragment StoreEntitySet="PUNCTUAL_EVENT">
+                <ScalarProperty Name="PE_ID" ColumnName="PE_ID" />
+                <ScalarProperty Name="PE_DATE" ColumnName="PE_DATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PURCHASE">
+            <EntityTypeMapping TypeName="Model.PURCHASE">
+              <MappingFragment StoreEntitySet="PURCHASE">
+                <ScalarProperty Name="PURCHASE_ID" ColumnName="PURCHASE_ID" />
+                <ScalarProperty Name="PURCHASE_USERID" ColumnName="PURCHASE_USERID" />
+                <ScalarProperty Name="PURCHASE_DATE" ColumnName="PURCHASE_DATE" />
+                <ScalarProperty Name="PURCHASE_SHIPDATE" ColumnName="PURCHASE_SHIPDATE" />
+                <ScalarProperty Name="PURCHASE_TOTALPRICE" ColumnName="PURCHASE_TOTALPRICE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PURCHASECONTAINS">
+            <EntityTypeMapping TypeName="Model.PURCHASECONTAINS">
+              <MappingFragment StoreEntitySet="PURCHASECONTAINS">
+                <ScalarProperty Name="PURCHASE_ID" ColumnName="PURCHASE_ID" />
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+                <ScalarProperty Name="PRODUCTQUANTITY" ColumnName="PRODUCTQUANTITY" />
+                <ScalarProperty Name="VALIDATIONDATE" ColumnName="VALIDATIONDATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REPETITIVE_EVENT">
+            <EntityTypeMapping TypeName="Model.REPETITIVE_EVENT">
+              <MappingFragment StoreEntitySet="REPETITIVE_EVENT">
+                <ScalarProperty Name="RE_ID" ColumnName="RE_ID" />
+                <ScalarProperty Name="RE_DATE" ColumnName="RE_DATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROOM">
+            <EntityTypeMapping TypeName="Model.ROOM">
+              <MappingFragment StoreEntitySet="ROOM">
+                <ScalarProperty Name="ROOM_NAME" ColumnName="ROOM_NAME" />
+                <ScalarProperty Name="ROOM_SUPERFICY" ColumnName="ROOM_SUPERFICY" />
+                <ScalarProperty Name="ROOM_MAXNBR" ColumnName="ROOM_MAXNBR" />
+                <ScalarProperty Name="ROOM_ID" ColumnName="ROOM_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER1">
+            <EntityTypeMapping TypeName="Model.USER1">
+              <MappingFragment StoreEntitySet="USER1">
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+                <ScalarProperty Name="USER_PASSWORD" ColumnName="USER_PASSWORD" />
+                <ScalarProperty Name="USER_LASTNAME" ColumnName="USER_LASTNAME" />
+                <ScalarProperty Name="USER_FIRSTNAME" ColumnName="USER_FIRSTNAME" />
+                <ScalarProperty Name="USER_ADR1" ColumnName="USER_ADR1" />
+                <ScalarProperty Name="USER_ADR2" ColumnName="USER_ADR2" />
+                <ScalarProperty Name="USER_PC" ColumnName="USER_PC" />
+                <ScalarProperty Name="USER_TOWN" ColumnName="USER_TOWN" />
+                <ScalarProperty Name="USER_PHONE" ColumnName="USER_PHONE" />
+                <ScalarProperty Name="USER_MAIL" ColumnName="USER_MAIL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ISREGISTERED" TypeName="Model.ISREGISTERED" StoreEntitySet="ISREGISTERED">
+            <EndProperty Name="EVENT">
+              <ScalarProperty Name="EVENT_ID" ColumnName="EVENT_ID" />
+            </EndProperty>
+            <EndProperty Name="USER1">
+              <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -6,7 +6,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{42EACFE0-EF3F-41D4-B9CD-773D13EF2B7D}</ProjectGuid>
+    <ProjectGuid>{6B9D7C15-AE09-48FC-AA64-1EA32EEAC5B1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BodyBalance.Tests</RootNamespace>
@@ -103,7 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BodyBalance\BodyBalance.csproj">
-      <Project>{E6D5A2BD-C2D4-4913-AE6B-C73635ED3DDF}</Project>
+      <Project>{41EBDB14-B158-4795-BBB1-DBE9BA79A2B2}</Project>
       <Name>BodyBalance</Name>
     </ProjectReference>
   </ItemGroup>
