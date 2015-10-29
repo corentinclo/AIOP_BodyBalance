@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6b3e44d889ea4904978427563e4ac155" Name="Diagram1" ZoomLevel="82">
+        <EntityTypeShape EntityType="Model.ACCESSORY" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ACTIVITY" Width="1.5" PointX="9.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ADMIN" Width="1.5" PointX="7.5" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CATEGORY" Width="1.5" PointX="8.25" PointY="26.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CONTAINSACCESSORY" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CONTRIBUTOR" Width="1.5" PointX="7.5" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EVENT" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EVENTTYPE" Width="1.5" PointX="0.75" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.HASINBASKET" Width="1.5" PointX="10.5" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.MANAGER" Width="1.5" PointX="7.5" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.MEMBER" Width="1.5" PointX="7.5" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.NOTIFICATION" Width="1.5" PointX="7.5" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PRICE" Width="1.5" PointX="12.875" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PRODUCT" Width="1.5" PointX="10.5" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PUNCTUAL_EVENT" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PURCHASE" Width="1.5" PointX="7.5" PointY="30" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PURCHASECONTAINS" Width="1.5" PointX="12.75" PointY="25.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.REPETITIVE_EVENT" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ROOM" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.USER1" Width="1.5" PointX="5.25" PointY="15.625" IsExpanded="true" />
+        <AssociationConnector Association="Model.CONTAINSACC_ACCESSORY_FK2" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.ACTIVITY_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.EVENT_ACTIVITY_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.ADMIN_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.PRODUCT_FK2" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.CONTAINSACCESSORY_ROOM_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.CONTRIBUTOR_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.EVENT_CONTRIBUTOR_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.EVENT_MANAGER_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.EVENT_TYPE_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.PE_EVENT_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.RE_EVENT_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.HASINBASKET_PRODUCT_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.HASINBASKET_USER1_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.MANAGER_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.MEMBER_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.NOTIFICATION_USER1_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.PRODUCT_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.PURCHASECONTAINS_PRODUCT_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.PURCHASE_USER1_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.PURCHASECONTAINS_PURCHASE_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.ISREGISTERED" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.PRICEPRODUCT" />
+        <AssociationConnector Association="Model.EVENTROOM" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
