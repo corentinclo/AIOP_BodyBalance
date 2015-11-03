@@ -32,7 +32,6 @@ namespace BodyBalance.Persistence
         public string EVENT_MANAGER { get; set; }
         public string EVENT_TYPE { get; set; }
         public System.DateTime EVENT_DATE { get; set; }
-        public string ROOMROOM_ID { get; set; }
     
         public virtual ACTIVITY ACTIVITY { get; set; }
         public virtual CONTRIBUTOR CONTRIBUTOR { get; set; }
@@ -43,6 +42,5 @@ namespace BodyBalance.Persistence
         public virtual ICollection<REPETITIVE_EVENT> REPETITIVE_EVENT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USER1> USER1 { get; set; }
-        public virtual ROOM ROOM { get; set; }
     }
 }

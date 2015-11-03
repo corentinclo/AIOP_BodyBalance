@@ -17,7 +17,5 @@ namespace BodyBalance.Persistence
         public string PRODUCT_ID { get; set; }
         public string DATE_PRICE { get; set; }
         public decimal PRODUCT_PRICE { get; set; }
-    
-        public virtual PRODUCT PRODUCT { get; set; }
     }
 }
