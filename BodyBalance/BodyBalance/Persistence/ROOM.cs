@@ -18,7 +18,6 @@ namespace BodyBalance.Persistence
         public ROOM()
         {
             this.CONTAINSACCESSORY = new HashSet<CONTAINSACCESSORY>();
-            this.EVENT = new HashSet<EVENT>();
         }
     
         public string ROOM_NAME { get; set; }
@@ -28,7 +27,5 @@ namespace BodyBalance.Persistence
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CONTAINSACCESSORY> CONTAINSACCESSORY { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EVENT> EVENT { get; set; }
     }
 }

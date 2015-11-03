@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e264fc0d86d349fd9af5956237a3f874" Name="Diagram1" ZoomLevel="64">
+      <Diagram DiagramId="e264fc0d86d349fd9af5956237a3f874" Name="Diagram1" ZoomLevel="49">
         <EntityTypeShape EntityType="Model.ACCESSORY" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.ACTIVITY" Width="1.5" PointX="9.75" PointY="17.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.ADMIN" Width="1.5" PointX="7.5" PointY="10.125" IsExpanded="true" />
@@ -47,8 +47,6 @@
         <AssociationConnector Association="Model.PURCHASE_USER1_FK1" ManuallyRouted="false" />
         <AssociationConnector Association="Model.PURCHASECONTAINS_PURCHASE_FK1" ManuallyRouted="false" />
         <AssociationConnector Association="Model.ISREGISTERED" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.PRICEPRODUCT" />
-        <AssociationConnector Association="Model.ROOMEVENT" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

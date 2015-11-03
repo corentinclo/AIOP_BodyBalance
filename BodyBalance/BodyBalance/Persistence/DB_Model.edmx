@@ -785,8 +785,6 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS
           <NavigationProperty Name="PUNCTUAL_EVENT" Relationship="Self.PE_EVENT_FK" FromRole="EVENT" ToRole="PUNCTUAL_EVENT" />
           <NavigationProperty Name="REPETITIVE_EVENT" Relationship="Self.RE_EVENT_FK" FromRole="EVENT" ToRole="REPETITIVE_EVENT" />
           <NavigationProperty Name="USER1" Relationship="Self.ISREGISTERED" FromRole="EVENT" ToRole="USER1" />
-          <NavigationProperty Name="ROOM" Relationship="Model.ROOMEVENT" FromRole="EVENT" ToRole="ROOM" />
-          <Property Name="ROOMROOM_ID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="EVENTTYPE">
           <Key>
@@ -843,7 +841,6 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS
           <Property Name="PRODUCT_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DATE_PRICE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PRODUCT_PRICE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <NavigationProperty Name="PRODUCT" Relationship="Model.PRICEPRODUCT" FromRole="PRICE" ToRole="PRODUCT" />
         </EntityType>
         <EntityType Name="PRODUCT">
           <Key>
@@ -860,7 +857,6 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS
           <NavigationProperty Name="HASINBASKET" Relationship="Self.HASINBASKET_PRODUCT_FK1" FromRole="PRODUCT" ToRole="HASINBASKET" />
           <NavigationProperty Name="USER1" Relationship="Self.PRODUCT_FK1" FromRole="PRODUCT" ToRole="USER1" />
           <NavigationProperty Name="PURCHASECONTAINS" Relationship="Self.PURCHASECONTAINS_PRODUCT_FK1" FromRole="PRODUCT" ToRole="PURCHASECONTAINS" />
-          <NavigationProperty Name="PRICE" Relationship="Model.PRICEPRODUCT" FromRole="PRODUCT" ToRole="PRICE" />
         </EntityType>
         <EntityType Name="PUNCTUAL_EVENT">
           <Key>
@@ -912,7 +908,6 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS
           <Property Name="ROOM_MAXNBR" Type="Decimal" Precision="38" Scale="0" />
           <Property Name="ROOM_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="CONTAINSACCESSORY" Relationship="Self.CONTAINSACCESSORY_ROOM_FK1" FromRole="ROOM" ToRole="CONTAINSACCESSORY" />
-          <NavigationProperty Name="EVENT" Relationship="Model.ROOMEVENT" FromRole="ROOM" ToRole="EVENT" />
         </EntityType>
         <EntityType Name="USER1">
           <Key>
@@ -1345,31 +1340,7 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS
             <End Role="EVENT" EntitySet="EVENT" />
             <End Role="USER1" EntitySet="USER1" />
           </AssociationSet>
-          <AssociationSet Name="PRICEPRODUCT" Association="Model.PRICEPRODUCT">
-            <End Role="PRICE" EntitySet="PRICE" />
-            <End Role="PRODUCT" EntitySet="PRODUCT" />
-          </AssociationSet>
-          <AssociationSet Name="ROOMEVENT" Association="Model.ROOMEVENT">
-            <End Role="ROOM" EntitySet="ROOM" />
-            <End Role="EVENT" EntitySet="EVENT" />
-          </AssociationSet>
         </EntityContainer>
-        <Association Name="PRICEPRODUCT">
-          <End Type="Model.PRICE" Role="PRICE" Multiplicity="*" />
-          <End Type="Model.PRODUCT" Role="PRODUCT" Multiplicity="1" />
-        </Association>
-        <Association Name="ROOMEVENT">
-          <End Type="Model.ROOM" Role="ROOM" Multiplicity="1" />
-          <End Type="Model.EVENT" Role="EVENT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ROOM">
-              <PropertyRef Name="ROOM_ID" />
-            </Principal>
-            <Dependent Role="EVENT">
-              <PropertyRef Name="ROOMROOM_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
