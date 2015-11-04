@@ -14,7 +14,7 @@ namespace BodyBalance.Controllers
         {
             DbBodyBalance dao = new DbBodyBalance();
             USER1 u = dao.USER1.Find("Lpisa");
-            ViewBag.Title = u.USER_FIRSTNAME.ToString() + u.USER_LASTNAME.ToString();
+            ViewBag.Title = u.USER_FIRSTNAME.ToString() + " " + u.USER_LASTNAME.ToString();
             return View();
         }
     }
