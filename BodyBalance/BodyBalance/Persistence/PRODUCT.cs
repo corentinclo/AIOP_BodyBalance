@@ -18,6 +18,7 @@ namespace BodyBalance.Persistence
         public PRODUCT()
         {
             this.HASINBASKET = new HashSet<HASINBASKET>();
+            this.PRICE = new HashSet<PRICE>();
             this.PURCHASECONTAINS = new HashSet<PURCHASECONTAINS>();
         }
     
@@ -32,6 +33,8 @@ namespace BodyBalance.Persistence
         public virtual CATEGORY CATEGORY { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HASINBASKET> HASINBASKET { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PRICE> PRICE { get; set; }
         public virtual USER1 USER1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PURCHASECONTAINS> PURCHASECONTAINS { get; set; }

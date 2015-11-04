@@ -36,6 +36,7 @@ namespace BodyBalance.Persistence
         public virtual ACTIVITY ACTIVITY { get; set; }
         public virtual CONTRIBUTOR CONTRIBUTOR { get; set; }
         public virtual MANAGER MANAGER { get; set; }
+        public virtual ROOM ROOM { get; set; }
         public virtual EVENTTYPE EVENTTYPE { get; set; }
         public virtual PUNCTUAL_EVENT PUNCTUAL_EVENT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

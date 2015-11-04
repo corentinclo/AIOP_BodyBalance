@@ -373,6 +373,20 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="EVENT_ROOM_FK">
+          <End Role="ROOM" Type="Self.ROOM" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EVENT" Type="Self.EVENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROOM">
+              <PropertyRef Name="ROOM_ID" />
+            </Principal>
+            <Dependent Role="EVENT">
+              <PropertyRef Name="EVENT_ROOM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="EVENT_TYPE_FK">
           <End Role="EVENTTYPE" Type="Self.EVENTTYPE" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -496,6 +510,20 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS
             </Principal>
             <Dependent Role="PUNCTUAL_EVENT">
               <PropertyRef Name="PE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PRICE_FK1">
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PRICE" Type="Self.PRICE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="PRICE">
+              <PropertyRef Name="PRODUCT_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -637,6 +665,10 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS
             <End Role="MANAGER" EntitySet="MANAGER" />
             <End Role="EVENT" EntitySet="EVENT" />
           </AssociationSet>
+          <AssociationSet Name="EVENT_ROOM_FK" Association="Self.EVENT_ROOM_FK">
+            <End Role="ROOM" EntitySet="ROOM" />
+            <End Role="EVENT" EntitySet="EVENT" />
+          </AssociationSet>
           <AssociationSet Name="EVENT_TYPE_FK" Association="Self.EVENT_TYPE_FK">
             <End Role="EVENTTYPE" EntitySet="EVENTTYPE" />
             <End Role="EVENT" EntitySet="EVENT" />
@@ -672,6 +704,10 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS
           <AssociationSet Name="PE_EVENT_FK" Association="Self.PE_EVENT_FK">
             <End Role="EVENT" EntitySet="EVENT" />
             <End Role="PUNCTUAL_EVENT" EntitySet="PUNCTUAL_EVENT" />
+          </AssociationSet>
+          <AssociationSet Name="PRICE_FK1" Association="Self.PRICE_FK1">
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+            <End Role="PRICE" EntitySet="PRICE" />
           </AssociationSet>
           <AssociationSet Name="PRODUCT_FK1" Association="Self.PRODUCT_FK1">
             <End Role="USER1" EntitySet="USER1" />
@@ -781,6 +817,7 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS
           <NavigationProperty Name="ACTIVITY" Relationship="Self.EVENT_ACTIVITY_FK" FromRole="EVENT" ToRole="ACTIVITY" />
           <NavigationProperty Name="CONTRIBUTOR" Relationship="Self.EVENT_CONTRIBUTOR_FK" FromRole="EVENT" ToRole="CONTRIBUTOR" />
           <NavigationProperty Name="MANAGER" Relationship="Self.EVENT_MANAGER_FK" FromRole="EVENT" ToRole="MANAGER" />
+          <NavigationProperty Name="ROOM" Relationship="Self.EVENT_ROOM_FK" FromRole="EVENT" ToRole="ROOM" />
           <NavigationProperty Name="EVENTTYPE" Relationship="Self.EVENT_TYPE_FK" FromRole="EVENT" ToRole="EVENTTYPE" />
           <NavigationProperty Name="PUNCTUAL_EVENT" Relationship="Self.PE_EVENT_FK" FromRole="EVENT" ToRole="PUNCTUAL_EVENT" />
           <NavigationProperty Name="REPETITIVE_EVENT" Relationship="Self.RE_EVENT_FK" FromRole="EVENT" ToRole="REPETITIVE_EVENT" />
@@ -841,6 +878,7 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS
           <Property Name="PRODUCT_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DATE_PRICE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PRODUCT_PRICE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.PRICE_FK1" FromRole="PRICE" ToRole="PRODUCT" />
         </EntityType>
         <EntityType Name="PRODUCT">
           <Key>
@@ -855,6 +893,7 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS
           <Property Name="PRODUCT_USERID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="CATEGORY" Relationship="Self.PRODUCT_FK2" FromRole="PRODUCT" ToRole="CATEGORY" />
           <NavigationProperty Name="HASINBASKET" Relationship="Self.HASINBASKET_PRODUCT_FK1" FromRole="PRODUCT" ToRole="HASINBASKET" />
+          <NavigationProperty Name="PRICE" Relationship="Self.PRICE_FK1" FromRole="PRODUCT" ToRole="PRICE" />
           <NavigationProperty Name="USER1" Relationship="Self.PRODUCT_FK1" FromRole="PRODUCT" ToRole="USER1" />
           <NavigationProperty Name="PURCHASECONTAINS" Relationship="Self.PURCHASECONTAINS_PRODUCT_FK1" FromRole="PRODUCT" ToRole="PURCHASECONTAINS" />
         </EntityType>
@@ -908,6 +947,7 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS
           <Property Name="ROOM_MAXNBR" Type="Decimal" Precision="38" Scale="0" />
           <Property Name="ROOM_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="CONTAINSACCESSORY" Relationship="Self.CONTAINSACCESSORY_ROOM_FK1" FromRole="ROOM" ToRole="CONTAINSACCESSORY" />
+          <NavigationProperty Name="EVENT" Relationship="Self.EVENT_ROOM_FK" FromRole="ROOM" ToRole="EVENT" />
         </EntityType>
         <EntityType Name="USER1">
           <Key>
@@ -1059,6 +1099,20 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="EVENT_ROOM_FK">
+          <End Role="ROOM" Type="Self.ROOM" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EVENT" Type="Self.EVENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROOM">
+              <PropertyRef Name="ROOM_ID" />
+            </Principal>
+            <Dependent Role="EVENT">
+              <PropertyRef Name="EVENT_ROOM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="EVENT_TYPE_FK">
           <End Role="EVENTTYPE" Type="Self.EVENTTYPE" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1171,6 +1225,20 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="PRICE_FK1">
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PRICE" Type="Self.PRICE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="PRICE">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="PRODUCT_FK1">
           <End Role="USER1" Type="Self.USER1" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1231,7 +1299,7 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS
           <End Role="EVENT" Type="Self.EVENT" Multiplicity="*" />
           <End Role="USER1" Type="Self.USER1" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DbBodyBalance" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ACCESSORY" EntityType="Self.ACCESSORY" />
           <EntitySet Name="ACTIVITY" EntityType="Self.ACTIVITY" />
           <EntitySet Name="ADMIN" EntityType="Self.ADMIN" />
@@ -1288,6 +1356,10 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS
             <End Role="MANAGER" EntitySet="MANAGER" />
             <End Role="EVENT" EntitySet="EVENT" />
           </AssociationSet>
+          <AssociationSet Name="EVENT_ROOM_FK" Association="Self.EVENT_ROOM_FK">
+            <End Role="ROOM" EntitySet="ROOM" />
+            <End Role="EVENT" EntitySet="EVENT" />
+          </AssociationSet>
           <AssociationSet Name="EVENT_TYPE_FK" Association="Self.EVENT_TYPE_FK">
             <End Role="EVENTTYPE" EntitySet="EVENTTYPE" />
             <End Role="EVENT" EntitySet="EVENT" />
@@ -1320,6 +1392,10 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS
             <End Role="USER1" EntitySet="USER1" />
             <End Role="NOTIFICATION" EntitySet="NOTIFICATION" />
           </AssociationSet>
+          <AssociationSet Name="PRICE_FK1" Association="Self.PRICE_FK1">
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+            <End Role="PRICE" EntitySet="PRICE" />
+          </AssociationSet>
           <AssociationSet Name="PRODUCT_FK1" Association="Self.PRODUCT_FK1">
             <End Role="USER1" EntitySet="USER1" />
             <End Role="PRODUCT" EntitySet="PRODUCT" />
@@ -1346,7 +1422,7 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="DbBodyBalance">
           <EntitySetMapping Name="ACCESSORY">
             <EntityTypeMapping TypeName="Model.ACCESSORY">
               <MappingFragment StoreEntitySet="ACCESSORY">
