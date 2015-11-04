@@ -21,6 +21,7 @@ namespace BodyBalance.Persistence
             this.NOTIFICATION = new HashSet<NOTIFICATION>();
             this.PRODUCT = new HashSet<PRODUCT>();
             this.PURCHASE = new HashSet<PURCHASE>();
+            this.TOKEN = new HashSet<TOKEN>();
             this.EVENT = new HashSet<EVENT>();
         }
     
@@ -47,6 +48,8 @@ namespace BodyBalance.Persistence
         public virtual ICollection<PRODUCT> PRODUCT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PURCHASE> PURCHASE { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TOKEN> TOKEN { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EVENT> EVENT { get; set; }
     }

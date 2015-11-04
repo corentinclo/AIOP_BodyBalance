@@ -29,68 +29,6 @@
           </Key>
           <Property Name="ADMIN_ID" Type="varchar2" MaxLength="20" Nullable="false" />
         </EntityType>
-        <!--Erreurs détectées durant la génération :
-avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS.PISA.BIN$9D4cFr4odCDgRAADuhzxdw==$0' ; en outre, aucune clé primaire valide n'a pu être déduite. Cette table/vue a été exclue. Pour utiliser l'entité, vous devez passer en revue votre schéma, ajouter les clés appropriées et supprimer le commentaire associé.
-        <EntityType Name="BIN$9D4cFr4odCDgRAADuhzxdw==$0">
-          <Property Name="COL1" Type="number" Precision="38" Scale="0" />
-          <Property Name="COL2" Type="number" Precision="38" Scale="0" />
-        </EntityType>-->
-        <!--Erreurs détectées durant la génération :
-avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS.PISA.BIN$BU5uVYPRP7vgVAADuhzxdw==$0' ; en outre, aucune clé primaire valide n'a pu être déduite. Cette table/vue a été exclue. Pour utiliser l'entité, vous devez passer en revue votre schéma, ajouter les clés appropriées et supprimer le commentaire associé.
-        <EntityType Name="BIN$BU5uVYPRP7vgVAADuhzxdw==$0">
-          <Property Name="RUE" Type="varchar2" MaxLength="50" />
-          <Property Name="VILLE" Type="varchar2" MaxLength="25" />
-          <Property Name="CODE_POSTAL" Type="number" Precision="38" Scale="0" />
-        </EntityType>-->
-        <!--Erreurs détectées durant la génération :
-avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS.PISA.BIN$Bx2BpE8ebLzgVAADuhzxdw==$0' ; en outre, aucune clé primaire valide n'a pu être déduite. Cette table/vue a été exclue. Pour utiliser l'entité, vous devez passer en revue votre schéma, ajouter les clés appropriées et supprimer le commentaire associé.
-        <EntityType Name="BIN$Bx2BpE8ebLzgVAADuhzxdw==$0">
-          <Property Name="INTITULE" Type="varchar2" MaxLength="25" />
-          <Property Name="DEPARTEMENT" Type="varchar2" MaxLength="25" />
-          <Property Name="ÉCOLE" Type="varchar2" MaxLength="25" />
-        </EntityType>-->
-        <!--Erreurs détectées durant la génération :
-avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS.PISA.BIN$D6/pY/v9U2XgVAADuhzxdw==$0' ; en outre, aucune clé primaire valide n'a pu être déduite. Cette table/vue a été exclue. Pour utiliser l'entité, vous devez passer en revue votre schéma, ajouter les clés appropriées et supprimer le commentaire associé.
-        <EntityType Name="BIN$D6/pY/v9U2XgVAADuhzxdw==$0">
-          <Property Name="RUE" Type="varchar2" MaxLength="50" />
-          <Property Name="VILLE" Type="varchar2" MaxLength="25" />
-          <Property Name="CODE_POSTAL" Type="number" Precision="38" Scale="0" />
-        </EntityType>-->
-        <!--Erreurs détectées durant la génération :
-avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS.PISA.BIN$D6/pY/w/U2XgVAADuhzxdw==$0' ; en outre, aucune clé primaire valide n'a pu être déduite. Cette table/vue a été exclue. Pour utiliser l'entité, vous devez passer en revue votre schéma, ajouter les clés appropriées et supprimer le commentaire associé.
-        <EntityType Name="BIN$D6/pY/w/U2XgVAADuhzxdw==$0">
-          <Property Name="NUM_AB" Type="number" Precision="6" Scale="0" />
-          <Property Name="NUM_EX" Type="number" Precision="4" Scale="0" />
-          <Property Name="D_EMPRUNT" Type="date" />
-          <Property Name="D_RETOUR" Type="date" />
-          <Property Name="D_RET_REEL" Type="date" />
-          <Property Name="NB_RELANCE" Type="number" Precision="1" Scale="0" />
-        </EntityType>-->
-        <!--Erreurs détectées durant la génération :
-avertissement 6005: Le type de données 'tliste_prenoms' n'est actuellement pas pris en charge pour la version Entity Framework cible ; la colonne 'PRENOMS' de la table 'LUCAS.PISA.BIN$D6/pY/w1U2XgVAADuhzxdw==$0' a été exclue.
-avertissement 6005: Le type de données 'nt_adresse' n'est actuellement pas pris en charge pour la version Entity Framework cible ; la colonne 'ADRESSE' de la table 'LUCAS.PISA.BIN$D6/pY/w1U2XgVAADuhzxdw==$0' a été exclue.
-avertissement 6005: Le type de données 'tliste_telephone' n'est actuellement pas pris en charge pour la version Entity Framework cible ; la colonne 'TELEPHONE' de la table 'LUCAS.PISA.BIN$D6/pY/w1U2XgVAADuhzxdw==$0' a été exclue.
-avertissement 6005: Le type de données 'nt_diplome' n'est actuellement pas pris en charge pour la version Entity Framework cible ; la colonne 'DIPLOMES' de la table 'LUCAS.PISA.BIN$D6/pY/w1U2XgVAADuhzxdw==$0' a été exclue.
-avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS.PISA.BIN$D6/pY/w1U2XgVAADuhzxdw==$0' ; en outre, aucune clé primaire valide n'a pu être déduite. Cette table/vue a été exclue. Pour utiliser l'entité, vous devez passer en revue votre schéma, ajouter les clés appropriées et supprimer le commentaire associé.
-        <EntityType Name="BIN$D6/pY/w1U2XgVAADuhzxdw==$0">
-          <Property Name="NUM_ETUDIANT" Type="number" Precision="38" Scale="0" />
-          <Property Name="NOM" Type="varchar2" MaxLength="25" />
-          <Property Name="DATE_NAISS" Type="date" />
-        </EntityType>-->
-        <!--Erreurs détectées durant la génération :
-avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS.PISA.BIN$D6/pY/wIU2XgVAADuhzxdw==$0' ; en outre, aucune clé primaire valide n'a pu être déduite. Cette table/vue a été exclue. Pour utiliser l'entité, vous devez passer en revue votre schéma, ajouter les clés appropriées et supprimer le commentaire associé.
-        <EntityType Name="BIN$D6/pY/wIU2XgVAADuhzxdw==$0">
-          <Property Name="BORNE_INF" Type="number" Precision="6" Scale="0" />
-          <Property Name="BORNE_SUP" Type="number" Precision="6" Scale="0" />
-          <Property Name="COEFF" Type="number" Precision="6" Scale="1" />
-        </EntityType>-->
-        <!--Erreurs détectées durant la génération :
-avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS.PISA.BIN$D6/pY/wsU2XgVAADuhzxdw==$0' ; en outre, aucune clé primaire valide n'a pu être déduite. Cette table/vue a été exclue. Pour utiliser l'entité, vous devez passer en revue votre schéma, ajouter les clés appropriées et supprimer le commentaire associé.
-        <EntityType Name="BIN$D6/pY/wsU2XgVAADuhzxdw==$0">
-          <Property Name="INTITULE" Type="varchar2" MaxLength="25" />
-          <Property Name="DEPARTEMENT" Type="varchar2" MaxLength="25" />
-          <Property Name="ÉCOLE" Type="varchar2" MaxLength="25" />
-        </EntityType>-->
         <EntityType Name="CATEGORY">
           <Key>
             <PropertyRef Name="CAT_ID" />
@@ -245,6 +183,15 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS
           <Property Name="ROOM_SUPERFICY" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ROOM_MAXNBR" Type="number" Precision="38" Scale="0" />
           <Property Name="ROOM_ID" Type="varchar2" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TOKEN">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+            <PropertyRef Name="TOKEN" />
+          </Key>
+          <Property Name="USER_ID" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="TOKEN" Type="varchar2" MaxLength="255" Nullable="false" />
+          <Property Name="EXP_DATE" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="USER1">
           <Key>
@@ -611,6 +558,20 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="TOKEN_FK1">
+          <End Role="USER1" Type="Self.USER1" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TOKEN" Type="Self.TOKEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER1">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="TOKEN">
+              <PropertyRef Name="USER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="ACCESSORY" EntityType="Self.ACCESSORY" Schema="LUCAS.PISA" store:Type="Tables" />
           <EntitySet Name="ACTIVITY" EntityType="Self.ACTIVITY" Schema="LUCAS.PISA" store:Type="Tables" />
@@ -632,6 +593,7 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS
           <EntitySet Name="PURCHASECONTAINS" EntityType="Self.PURCHASECONTAINS" Schema="LUCAS.PISA" store:Type="Tables" />
           <EntitySet Name="REPETITIVE_EVENT" EntityType="Self.REPETITIVE_EVENT" Schema="LUCAS.PISA" store:Type="Tables" />
           <EntitySet Name="ROOM" EntityType="Self.ROOM" Schema="LUCAS.PISA" store:Type="Tables" />
+          <EntitySet Name="TOKEN" EntityType="Self.TOKEN" Schema="LUCAS.PISA" store:Type="Tables" />
           <EntitySet Name="USER1" EntityType="Self.USER1" Schema="LUCAS.PISA" store:Type="Tables" />
           <AssociationSet Name="ACTIVITY_FK" Association="Self.ACTIVITY_FK">
             <End Role="MANAGER" EntitySet="MANAGER" />
@@ -732,6 +694,10 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS
           <AssociationSet Name="RE_EVENT_FK" Association="Self.RE_EVENT_FK">
             <End Role="EVENT" EntitySet="EVENT" />
             <End Role="REPETITIVE_EVENT" EntitySet="REPETITIVE_EVENT" />
+          </AssociationSet>
+          <AssociationSet Name="TOKEN_FK1" Association="Self.TOKEN_FK1">
+            <End Role="USER1" EntitySet="USER1" />
+            <End Role="TOKEN" EntitySet="TOKEN" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -949,6 +915,16 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS
           <NavigationProperty Name="CONTAINSACCESSORY" Relationship="Self.CONTAINSACCESSORY_ROOM_FK1" FromRole="ROOM" ToRole="CONTAINSACCESSORY" />
           <NavigationProperty Name="EVENT" Relationship="Self.EVENT_ROOM_FK" FromRole="ROOM" ToRole="EVENT" />
         </EntityType>
+        <EntityType Name="TOKEN">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+            <PropertyRef Name="TOKEN1" />
+          </Key>
+          <Property Name="USER_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TOKEN1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EXP_DATE" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="USER1" Relationship="Self.TOKEN_FK1" FromRole="TOKEN" ToRole="USER1" />
+        </EntityType>
         <EntityType Name="USER1">
           <Key>
             <PropertyRef Name="USER_ID" />
@@ -971,6 +947,7 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS
           <NavigationProperty Name="NOTIFICATION" Relationship="Self.NOTIFICATION_USER1_FK1" FromRole="USER1" ToRole="NOTIFICATION" />
           <NavigationProperty Name="PRODUCT" Relationship="Self.PRODUCT_FK1" FromRole="USER1" ToRole="PRODUCT" />
           <NavigationProperty Name="PURCHASE" Relationship="Self.PURCHASE_USER1_FK1" FromRole="USER1" ToRole="PURCHASE" />
+          <NavigationProperty Name="TOKEN" Relationship="Self.TOKEN_FK1" FromRole="USER1" ToRole="TOKEN" />
           <NavigationProperty Name="EVENT" Relationship="Self.ISREGISTERED" FromRole="USER1" ToRole="EVENT" />
         </EntityType>
         <Association Name="CONTAINSACC_ACCESSORY_FK2">
@@ -1295,11 +1272,25 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="TOKEN_FK1">
+          <End Role="USER1" Type="Self.USER1" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TOKEN" Type="Self.TOKEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER1">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="TOKEN">
+              <PropertyRef Name="USER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="ISREGISTERED">
           <End Role="EVENT" Type="Self.EVENT" Multiplicity="*" />
           <End Role="USER1" Type="Self.USER1" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="DbBodyBalance" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ACCESSORY" EntityType="Self.ACCESSORY" />
           <EntitySet Name="ACTIVITY" EntityType="Self.ACTIVITY" />
           <EntitySet Name="ADMIN" EntityType="Self.ADMIN" />
@@ -1319,6 +1310,7 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS
           <EntitySet Name="PURCHASECONTAINS" EntityType="Self.PURCHASECONTAINS" />
           <EntitySet Name="REPETITIVE_EVENT" EntityType="Self.REPETITIVE_EVENT" />
           <EntitySet Name="ROOM" EntityType="Self.ROOM" />
+          <EntitySet Name="TOKEN" EntityType="Self.TOKEN" />
           <EntitySet Name="USER1" EntityType="Self.USER1" />
           <AssociationSet Name="CONTAINSACC_ACCESSORY_FK2" Association="Self.CONTAINSACC_ACCESSORY_FK2">
             <End Role="ACCESSORY" EntitySet="ACCESSORY" />
@@ -1412,6 +1404,10 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS
             <End Role="PURCHASE" EntitySet="PURCHASE" />
             <End Role="PURCHASECONTAINS" EntitySet="PURCHASECONTAINS" />
           </AssociationSet>
+          <AssociationSet Name="TOKEN_FK1" Association="Self.TOKEN_FK1">
+            <End Role="USER1" EntitySet="USER1" />
+            <End Role="TOKEN" EntitySet="TOKEN" />
+          </AssociationSet>
           <AssociationSet Name="ISREGISTERED" Association="Self.ISREGISTERED">
             <End Role="EVENT" EntitySet="EVENT" />
             <End Role="USER1" EntitySet="USER1" />
@@ -1422,7 +1418,7 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="DbBodyBalance">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="ACCESSORY">
             <EntityTypeMapping TypeName="Model.ACCESSORY">
               <MappingFragment StoreEntitySet="ACCESSORY">
@@ -1605,6 +1601,15 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'LUCAS
                 <ScalarProperty Name="ROOM_SUPERFICY" ColumnName="ROOM_SUPERFICY" />
                 <ScalarProperty Name="ROOM_MAXNBR" ColumnName="ROOM_MAXNBR" />
                 <ScalarProperty Name="ROOM_ID" ColumnName="ROOM_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TOKEN">
+            <EntityTypeMapping TypeName="Model.TOKEN">
+              <MappingFragment StoreEntitySet="TOKEN">
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+                <ScalarProperty Name="TOKEN1" ColumnName="TOKEN" />
+                <ScalarProperty Name="EXP_DATE" ColumnName="EXP_DATE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -13,10 +13,10 @@ namespace BodyBalance.Persistence
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DbBodyBalance : DbContext
+    public partial class Entities : DbContext
     {
-        public DbBodyBalance()
-            : base("name=DbBodyBalance")
+        public Entities()
+            : base("name=Entities")
         {
         }
     
@@ -44,6 +44,7 @@ namespace BodyBalance.Persistence
         public virtual DbSet<PURCHASECONTAINS> PURCHASECONTAINS { get; set; }
         public virtual DbSet<REPETITIVE_EVENT> REPETITIVE_EVENT { get; set; }
         public virtual DbSet<ROOM> ROOM { get; set; }
+        public virtual DbSet<TOKEN> TOKEN { get; set; }
         public virtual DbSet<USER1> USER1 { get; set; }
     }
 }
