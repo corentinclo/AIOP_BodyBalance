@@ -13,10 +13,10 @@ namespace BodyBalance.Persistence
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DbBodyBalance : DbContext
+    public partial class Entities : DbContext
     {
-        public DbBodyBalance()
-            : base("name=DbBodyBalance")
+        public Entities()
+            : base("name=Entities")
         {
         }
     

@@ -37,21 +37,9 @@ namespace BodyBalance.Services
 
         public UserModel FindUserById(String id)
         {
-            UserModel um = new UserModel();
-
             USER1 u = db.USER1.Find(id);
-            um.UserId = u.USER_ID;
-            um.Password = u.USER_PASSWORD;
-            um.FirstName = u.USER_FIRSTNAME;
-            um.LastName = u.USER_LASTNAME;
-            um.Adress1 = u.USER_ADR1;
-            um.Adress2 = u.USER_ADR2;
-            um.PC = u.USER_PC;
-            um.Town = u.USER_TOWN;
-            um.Phone = u.USER_PHONE;
-            um.Mail = u.USER_MAIL;
 
-            return um;
+            return ConvertUserToUserModel(u);
         }
 
         public Boolean UpdateUser(UserModel um)
@@ -94,6 +82,40 @@ namespace BodyBalance.Services
                 return true;
             }
             return false;
+        }
+
+        public List<UserModel> FindAllUsers()
+        {
+            List<UserModel> usersList = new List<UserModel>();
+            IQueryable<USER1> query = db.Set<USER1>();
+
+            foreach(USER1 u in query)
+            {
+                usersList.Add(ConvertUserToUserModel(u));
+            }
+
+            return usersList;
+        }
+
+        private UserModel ConvertUserToUserModel(USER1 u)
+        {
+            UserModel um = new UserModel();
+
+            if(u != null)
+            {
+                um.UserId = u.USER_ID;
+                um.Password = u.USER_PASSWORD;
+                um.FirstName = u.USER_FIRSTNAME;
+                um.LastName = u.USER_LASTNAME;
+                um.Adress1 = u.USER_ADR1;
+                um.Adress2 = u.USER_ADR2;
+                um.PC = u.USER_PC;
+                um.Town = u.USER_TOWN;
+                um.Phone = u.USER_PHONE;
+                um.Mail = u.USER_MAIL;
+            }
+
+            return um;
         }
     }
 }
