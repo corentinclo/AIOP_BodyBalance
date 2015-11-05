@@ -4,19 +4,24 @@ using System.Linq;
 using System.Web;
 using BodyBalance.Models;
 using BodyBalance.Persistence;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace BodyBalance.Services
 {
     public class UserServices
     {
-        private DbBodyBalance db = new DbBodyBalance();
+        private Entities db = new Entities();
         
         public Boolean CreateUser(UserModel um)
         {
             USER1 u = db.USER1.Create();
 
             u.USER_ID = um.UserId;
-            u.USER_PASSWORD = um.Password;
+            using (SHA512 shaM = new SHA512Managed())
+            {
+                u.USER_PASSWORD = shaM.ComputeHash(Encoding.UTF8.GetBytes(um.Password)).ToString();
+            }
             u.USER_FIRSTNAME = um.FirstName;
             u.USER_LASTNAME = um.LastName;
             u.USER_ADR1 = um.Adress1;
@@ -37,21 +42,9 @@ namespace BodyBalance.Services
 
         public UserModel FindUserById(String id)
         {
-            UserModel um = new UserModel();
-
             USER1 u = db.USER1.Find(id);
-            um.UserId = u.USER_ID;
-            um.Password = u.USER_PASSWORD;
-            um.FirstName = u.USER_FIRSTNAME;
-            um.LastName = u.USER_LASTNAME;
-            um.Adress1 = u.USER_ADR1;
-            um.Adress2 = u.USER_ADR2;
-            um.PC = u.USER_PC;
-            um.Town = u.USER_TOWN;
-            um.Phone = u.USER_PHONE;
-            um.Mail = u.USER_MAIL;
 
-            return um;
+            return ConvertUserToUserModel(u);
         }
 
         public Boolean UpdateUser(UserModel um)
@@ -60,7 +53,10 @@ namespace BodyBalance.Services
 
             if (u != null)
             {
-                u.USER_PASSWORD = um.Password;
+                using (SHA512 shaM = new SHA512Managed())
+                {
+                    u.USER_PASSWORD = shaM.ComputeHash(Encoding.UTF8.GetBytes(um.Password)).ToString();
+                }
                 u.USER_FIRSTNAME = um.FirstName;
                 u.USER_LASTNAME = um.LastName;
                 u.USER_ADR1 = um.Adress1;
@@ -94,6 +90,40 @@ namespace BodyBalance.Services
                 return true;
             }
             return false;
+        }
+
+        public List<UserModel> FindAllUsers()
+        {
+            List<UserModel> usersList = new List<UserModel>();
+            IQueryable<USER1> query = db.Set<USER1>();
+
+            foreach(USER1 u in query)
+            {
+                usersList.Add(ConvertUserToUserModel(u));
+            }
+
+            return usersList;
+        }
+
+        private UserModel ConvertUserToUserModel(USER1 u)
+        {
+            UserModel um = new UserModel();
+
+            if(u != null)
+            {
+                um.UserId = u.USER_ID;
+                um.Password = u.USER_PASSWORD;
+                um.FirstName = u.USER_FIRSTNAME;
+                um.LastName = u.USER_LASTNAME;
+                um.Adress1 = u.USER_ADR1;
+                um.Adress2 = u.USER_ADR2;
+                um.PC = u.USER_PC;
+                um.Town = u.USER_TOWN;
+                um.Phone = u.USER_PHONE;
+                um.Mail = u.USER_MAIL;
+            }
+
+            return um;
         }
     }
 }
