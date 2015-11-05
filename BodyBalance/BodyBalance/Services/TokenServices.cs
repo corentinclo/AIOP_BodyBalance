@@ -9,7 +9,7 @@ namespace BodyBalance.Services
 {
     public class TokenServices
     {
-        private DbBodyBalance db = new DbBodyBalance();
+        private Entities db = new Entities();
 
         public Boolean CreateToken(TokenModel tm)
         {

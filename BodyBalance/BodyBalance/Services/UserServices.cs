@@ -4,19 +4,24 @@ using System.Linq;
 using System.Web;
 using BodyBalance.Models;
 using BodyBalance.Persistence;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace BodyBalance.Services
 {
     public class UserServices
     {
-        private DbBodyBalance db = new DbBodyBalance();
+        private Entities db = new Entities();
         
         public Boolean CreateUser(UserModel um)
         {
             USER1 u = db.USER1.Create();
 
             u.USER_ID = um.UserId;
-            u.USER_PASSWORD = um.Password;
+            using (SHA512 shaM = new SHA512Managed())
+            {
+                u.USER_PASSWORD = shaM.ComputeHash(Encoding.UTF8.GetBytes(um.Password)).ToString();
+            }
             u.USER_FIRSTNAME = um.FirstName;
             u.USER_LASTNAME = um.LastName;
             u.USER_ADR1 = um.Adress1;
@@ -48,7 +53,10 @@ namespace BodyBalance.Services
 
             if (u != null)
             {
-                u.USER_PASSWORD = um.Password;
+                using (SHA512 shaM = new SHA512Managed())
+                {
+                    u.USER_PASSWORD = shaM.ComputeHash(Encoding.UTF8.GetBytes(um.Password)).ToString();
+                }
                 u.USER_FIRSTNAME = um.FirstName;
                 u.USER_LASTNAME = um.LastName;
                 u.USER_ADR1 = um.Adress1;
