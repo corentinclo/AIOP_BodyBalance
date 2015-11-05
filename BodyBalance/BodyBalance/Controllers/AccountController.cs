@@ -26,23 +26,25 @@ namespace BodyBalance.Controllers
     {
         private const string LocalLoginProvider = "Local";
         private IUserServices userServices;
+        private ITokenServices tokenServices;
 
         public AccountController()
         {
         }
 
         public AccountController(
-            IUserServices userServices)
+            IUserServices userServices,
+            ITokenServices tokenServices)
         {
             this.userServices = userServices;
+            this.tokenServices = tokenServices;
         }
-
-        public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
         // POST Account/Register
         [AllowAnonymous]
         [Route("Register")]
-        public IHttpActionResult Register(UserModel model) //RegisterBindingModel model)
+        [HttpPost]
+        public IHttpActionResult Register(UserModel model) 
         {
             if (!ModelState.IsValid)
             {
@@ -55,7 +57,15 @@ namespace BodyBalance.Controllers
                 return BadRequest();
             }
 
-            return Ok();
+            string token = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
+            var expireDate = DateTime.UtcNow.AddDays(1);
+
+            var createTokenResult = tokenServices.CreateToken(new TokenModel() { ExpireDate = expireDate, Token = token, UserId = model.UserId});
+            if (!createTokenResult)
+            {
+                return BadRequest();
+            }
+            return Ok(token);
         }
 
         // POST api/Account/Logout

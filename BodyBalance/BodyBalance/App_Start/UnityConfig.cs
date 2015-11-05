@@ -39,6 +39,7 @@ namespace BodyBalance.App_Start
             // TODO: Register your types here
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<IUserServices, UserServices>();
+            container.RegisterType<ITokenServices, TokenServices>();
         }
     }
 }
