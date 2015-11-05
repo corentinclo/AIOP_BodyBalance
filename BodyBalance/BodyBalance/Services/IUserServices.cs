@@ -10,5 +10,9 @@ namespace BodyBalance.Services
     public interface IUserServices
     {
         Boolean CreateUser(UserModel um);
+        UserModel FindUserById(String id);
+        Boolean UpdateUser(UserModel um);
+        Boolean DeleteUser(UserModel um);
+        List<UserModel> FindAllUsers();
     }
 }
