@@ -9,7 +9,7 @@ using System.Text;
 
 namespace BodyBalance.Services
 {
-    public class UserServices
+    public class UserServices : IUserServices
     {
         private Entities db = new Entities();
         

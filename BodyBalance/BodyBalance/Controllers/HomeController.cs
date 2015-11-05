@@ -12,9 +12,9 @@ namespace BodyBalance.Controllers
     {
         public ActionResult Index()
         {
-            DbBodyBalance dao = new DbBodyBalance();
-            USER1 u = dao.USER1.Find("Lpisa");
-            ViewBag.Title = "Page de test : " + u.USER_FIRSTNAME + " " + u.USER_LASTNAME;
+            //DbBodyBalance dao = new DbBodyBalance();
+            //USER1 u = dao.USER1.Find("Lpisa");
+            ViewBag.Title = "Home"; // + u.USER_FIRSTNAME + " " + u.USER_LASTNAME;
             return View();
         }
     }
