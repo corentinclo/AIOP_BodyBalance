@@ -39,7 +39,7 @@ namespace BodyBalance.Controllers
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
-        // POST api/Account/Register
+        // POST Account/Register
         [AllowAnonymous]
         [Route("Register")]
         public IHttpActionResult Register(UserModel model) //RegisterBindingModel model)
@@ -48,7 +48,7 @@ namespace BodyBalance.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var result = this.userServices.CreateUser(model);
+            var result = userServices.CreateUser(model);
 
             if (!result)
             {

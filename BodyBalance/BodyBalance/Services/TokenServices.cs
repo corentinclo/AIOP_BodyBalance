@@ -7,7 +7,7 @@ using System.Web;
 
 namespace BodyBalance.Services
 {
-    public class TokenServices
+    public class TokenServices : ITokenServices
     {
         private Entities db = new Entities();
 
