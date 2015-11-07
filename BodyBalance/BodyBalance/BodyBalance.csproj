@@ -354,6 +354,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="front-end\index.html" />
     <Content Include="front-end\jquery-2.1.4.min.js" />
+    <Content Include="front-end\login.html" />
+    <Content Include="front-end\register.html" />
     <Content Include="Global.asax" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
     <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
