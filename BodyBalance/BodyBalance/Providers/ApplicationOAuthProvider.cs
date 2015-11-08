@@ -10,6 +10,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using BodyBalance.Models;
+using BodyBalance.Services;
 
 namespace BodyBalance.Providers
 {
@@ -29,9 +30,9 @@ namespace BodyBalance.Providers
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
+            var userManager = new UserServices();
 
-            ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
+            UserModel user = userManager.FindUserById(context.UserName); //A MODFIER par la fonction qui check le password
 
             if (user == null)
             {
@@ -39,15 +40,15 @@ namespace BodyBalance.Providers
                 return;
             }
 
-            ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
-               OAuthDefaults.AuthenticationType);
-            ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
-                CookieAuthenticationDefaults.AuthenticationType);
+            var identity = new ClaimsIdentity(context.Options.AuthenticationType);
+            identity.AddClaim(new Claim("userId", context.UserName));
+            identity.AddClaim(new Claim("role", "user"));
+            identity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
 
-            AuthenticationProperties properties = CreateProperties(user.UserName);
-            AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
+            AuthenticationProperties properties = CreateProperties(user.UserId);
+            AuthenticationTicket ticket = new AuthenticationTicket(identity, properties);
             context.Validated(ticket);
-            context.Request.Context.Authentication.SignIn(cookiesIdentity);
+            context.Request.Context.Authentication.SignIn(identity);
         }
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)
