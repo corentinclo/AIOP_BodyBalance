@@ -6,6 +6,7 @@
         //Tableau de fonctions contenant les triggers à déclencher par hrefToAjax
         this.mappers = [];
         this.token = "";
+        this.username = "";
     }
 
     /**
@@ -48,9 +49,15 @@
         return res;
     }
 
-    Application.prototype.ajaxifyFormJson = function (form_id, on_success, on_error, contentType) {
+    Application.prototype.ajaxifyFormJson = function (form_id, on_success, on_error, contentType, beforesend) {
         var t = this;
         $(form_id).submit(function () {
+            if (typeof beforesend != 'undefined') {
+                var res = beforesend(form_id);
+                if (res === false) {
+                    return false;
+                }
+            }
             $.ajax({
                 type: $(form_id).attr("method"), //La méthode (GET, POST, PUT, DELETE)
                 url: $(form_id).attr("action"), //URL
@@ -91,6 +98,33 @@
                 request.setRequestHeader("Authorization", "Bearer " + t.token);
             }
         })
+    }
+    
+    Application.prototype.storeLoginParameters = function (userId, token, cookie) {
+        this.token = token;
+        this.username = userId;
+        if (cookie) {
+            var expire = new Date();
+            expire.setFullYear(expire.getFullYear + 1);
+            document.cookie = "uid=" + userId + ";expires=" + expire.toUTCString() + "; path=/";
+            document.cookie = "access_token=" + token + ";expires=" + expire.toUTCString() + "; path=/";
+        }
+    }
+
+    Application.prototype.clearLoginParameters = function () {
+        this.token = "";
+        this.username = "";
+        document.cookie = "access_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+        document.cookie = "uid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+    }
+
+    Application.prototype.processCookies = function () {
+        if (document.cookie.indexOf('access_token') >= 0 && document.cookie.indexOf('uid') >= 0) {
+            window.app.token = /.*access_token=([a-zA-Z0-9]+)/.exec(document.cookie)[0];
+            window.app.username = /.*uid=([a-zA-Z0-9]+)/.exec(document.cookie)[0];
+            return true;
+        }
+        return false;
     }
 
     window.app = new Application();

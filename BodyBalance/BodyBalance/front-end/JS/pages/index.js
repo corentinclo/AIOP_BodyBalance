@@ -32,10 +32,7 @@ window.app.mappers['#register'] = function () {
 }
 
 window.app.ajaxifyForm('#login_form', function (result) {
-    window.app.token = result.access_token;
-    if ($('#cookie_input').is(':checked')) {
-        document.cookie = "access_token=" + result.access_token + ";expires=Thu, 3 Dec 2015 12:00:00 UTC; path=/";
-    }
+    window.app.storeLoginParameters(result.username, result.access_token, $('#cookie_input').is(':checked'));
     $.get('pages/MainPage.html', null, function (data) {
         $('#main').html(data);
     });
@@ -45,8 +42,7 @@ window.app.ajaxifyForm('#login_form', function (result) {
 
 $(function () {
     window.app.hrefToFunction('body');
-    if (document.cookie.indexOf('access_token') >= 0) {
-        window.app.token = /.*access_token=([a-zA-Z0-9]+)/.exec(document.cookie)[0];
+    if (window.app.processCookies()) {
         $.get('pages/MainPage.html', null, function (data) {
             $('#main').html(data);
         });
