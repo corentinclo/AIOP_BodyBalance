@@ -68,6 +68,19 @@ namespace BodyBalance.Controllers
             return Ok();
         }
 
+        // GET Account/IsValidToken
+        [Route("IsValidToken")]
+        [HttpGet]
+        public IHttpActionResult IsValidToken()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return Ok();
+            }
+            return Unauthorized();
+        }
+
+
         // POST Account/ChangePassword
         [Route("ChangePassword")]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
