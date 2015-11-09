@@ -55,8 +55,14 @@
         });
     }
 
-    Application.prototype.ajaxifyFormJson = function (form_id, on_success, on_error, contentType, beforesend) {
+    Application.prototype.ajaxifyFormJson = function (form_id, on_success, on_error, contentType, beforesend, sendToken) {
         var t = this;
+        var before = null;
+        if (sendToken === true) {
+            before = function (request) {
+                request.setRequestHeader("Authorization", "Bearer " + t.token);
+            };
+        }
         $(form_id).submit(function () {
             if (typeof beforesend != 'undefined') {
                 var res = beforesend(form_id);
@@ -72,7 +78,8 @@
                 error: on_error, //Fonction en cas d'erreur
                 cache: false, //Pas de cache
                 contentType: (typeof contentType == "undefined") ? false : contentType, //Pas de contenu de retour spécifique
-                processData: false
+                processData: false,
+                beforeSend: before
             });
             return false;
         });
@@ -126,8 +133,8 @@
 
     Application.prototype.processCookies = function () {
         if (document.cookie.indexOf('access_token') >= 0 && document.cookie.indexOf('uid') >= 0) {
-            window.app.token = /.*access_token=([a-zA-Z0-9]+)/.exec(document.cookie)[0];
-            window.app.username = /.*uid=([a-zA-Z0-9]+)/.exec(document.cookie)[0];
+            window.app.token = $.cookie('access_token');
+            window.app.username = $.cookie('uid');
             return true;
         }
         return false;

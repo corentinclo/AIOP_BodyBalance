@@ -6,6 +6,8 @@
     //On remplit le formulaire avec le compte utilisateur
     window.app.FillFormWithObject('#my_account_form', testAccount);
 
+    $('#change_pass_usrId_input').val(window.app.username);
+
     var changePass = false;
     //Lors du click sur changement de mot de passe
     window.app.mappers['#changePassword'] = function () {
@@ -28,9 +30,33 @@
         else {
             //Sinon, on vire le lien dans mappers et on supprime les modal
             window.app.mappers['#changePassword'] = null;
-            $('#myAccountModal').dispose();
-            $('#changePassModal').dispose();
+            $('#myAccountModal').remove();
+            $('#changePassModal').remove();
         }
     });
     window.app.hrefToFunction('#myAccountModal');
-})
+    window.app.ajaxifyFormJson('#change_password_form', function () {
+        bootbox.alert('Your password has been changed');
+        $('#changePassModal').modal('hide');
+        return false;
+    }, function () {
+        bootbox.alert('An error has occured');
+        return false;
+    },
+    'application/json',
+    function () {
+        //Validation
+        if ($('#change_password_input').val() != $('#c_password_input').val()) {
+            $('#c_password_input').tooltip({ title: "Le mot de passe ne correspond pas", placement: "bottom", trigger: "manual" }).tooltip("show");
+            $('#c_password_input').parent().parent().addClass('has-error');
+            $('html, body').animate({
+                scrollTop: $("#c_password_input").offset().top - 100
+            }, 500);
+            setTimeout(function () {
+                $('#c_password_input').tooltip('hide').tooltip('destroy');
+            }, 5000);
+            return false;
+        }
+        return true;
+    },true);
+});

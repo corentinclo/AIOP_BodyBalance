@@ -89,7 +89,8 @@
                 <h4 class="modal-title">Change password</h4>
             </div>
             <div class="modal-body">
-                <form action="Users/" method="PUT" id="change_password_form" class="form-horizontal">
+                <form action="/Account/ChangePassword" method="PUT" id="change_password_form" class="form-horizontal">
+                    <input type="hidden" name="UserId" id="change_pass_usrId_input"/>
                     <div class="form-group">
                         <label class="col-sm-6 col-md-4" for="old_password_input">Old password</label>
                         <div class="col-sm-6 col-md-8">
@@ -97,13 +98,13 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-6 col-md-4" for="password_input">New password</label>
+                        <label class="col-sm-6 col-md-4" for="change_password_input">New password</label>
                         <div class="col-sm-6 col-md-8">
-                            <input class="form-control" type="password" name="password" placeholder="Password" id="password_input" required />
+                            <input class="form-control" type="password" name="NewPassword" placeholder="Password" id="change_password_input" required />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-6 col-md-4" for="password_input">Confirm new password</label>
+                        <label class="col-sm-6 col-md-4" for="c_password_input">Confirm new password</label>
                         <div class="col-sm-6 col-md-8">
                             <input class="form-control" type="password" name="c_password" placeholder="Password" id="c_password_input" required />
                         </div>
