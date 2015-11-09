@@ -63,9 +63,9 @@ namespace BodyBalance.Services
             return result;
         }
 
-        public AdminModel FindAdminById(string id)
+        public AdminModel FindAdminById(string AdminId)
         {
-            ADMIN a = db.ADMIN.Find(id);
+            ADMIN a = db.ADMIN.Find(AdminId);
 
             return ConvertAdminToAdminModel(a);
         }

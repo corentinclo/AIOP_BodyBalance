@@ -21,7 +21,7 @@ namespace BodyBalance.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        ManagerModel FindManagerById(string id);
+        ManagerModel FindManagerById(string ManagerId);
 
         /// <summary>
         /// Delete a manager

@@ -65,9 +65,9 @@ namespace BodyBalance.Services
             return result;
         }
 
-        public ContributorModel FindContributorById(string id)
+        public ContributorModel FindContributorById(string ContributorId)
         {
-            CONTRIBUTOR c = db.CONTRIBUTOR.Find(id);
+            CONTRIBUTOR c = db.CONTRIBUTOR.Find(ContributorId);
 
             return ConvertContributorToContributorModel(c);
         }

@@ -63,9 +63,9 @@ namespace BodyBalance.Services
             return result;
         }
 
-        public ManagerModel FindManagerById(string id)
+        public ManagerModel FindManagerById(string ManagerId)
         {
-            MANAGER m = db.MANAGER.Find(id);
+            MANAGER m = db.MANAGER.Find(ManagerId);
 
             return ConvertManagerToManagerModel(m);
         }

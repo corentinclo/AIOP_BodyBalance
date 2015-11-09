@@ -65,9 +65,9 @@ namespace BodyBalance.Services
             return result;
         }
 
-        public MemberModel FindMemberById(string id)
+        public MemberModel FindMemberById(string MemberId)
         {
-            MEMBER m = db.MEMBER.Find(id);
+            MEMBER m = db.MEMBER.Find(MemberId);
 
             return ConvertMemberToMemberModel(m);
         }
