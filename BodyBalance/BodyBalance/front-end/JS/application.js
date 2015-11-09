@@ -49,6 +49,12 @@
         return res;
     }
 
+    Application.prototype.FillFormWithObject = function (form_id, object) {
+        $.each(object, function (i, e) {
+            $(form_id + ' [name="' + i + '"]').val(e);
+        });
+    }
+
     Application.prototype.ajaxifyFormJson = function (form_id, on_success, on_error, contentType, beforesend) {
         var t = this;
         $(form_id).submit(function () {

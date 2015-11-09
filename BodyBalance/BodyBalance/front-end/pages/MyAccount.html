@@ -81,6 +81,11 @@
 
 <script>
     $(function () {
+        var testAccount = {
+            UserId: "Test",
+            Phone: "0648128406"
+        };
+        window.app.FillFormWithObject('#my_account_form', testAccount);
         $('#myAccountModal').modal('show');
     })
 </script>
