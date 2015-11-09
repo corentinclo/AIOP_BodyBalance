@@ -258,6 +258,7 @@
     <Compile Include="Models\ActivityModel.cs" />
     <Compile Include="Models\AdminModel.cs" />
     <Compile Include="Models\ContributorModel.cs" />
+    <Compile Include="Models\EventModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManagerModel.cs" />
     <Compile Include="Models\MemberModel.cs" />
@@ -347,9 +348,11 @@
     <Compile Include="Services\ActivityServices.cs" />
     <Compile Include="Services\AdminServices.cs" />
     <Compile Include="Services\ContributorServices.cs" />
+    <Compile Include="Services\EventServices.cs" />
     <Compile Include="Services\IActivityServices.cs" />
     <Compile Include="Services\IAdminServices.cs" />
     <Compile Include="Services\IContributorServices.cs" />
+    <Compile Include="Services\IEventServices.cs" />
     <Compile Include="Services\IManagerServices.cs" />
     <Compile Include="Services\IMemberServices.cs" />
     <Compile Include="Services\ITokenServices.cs" />
