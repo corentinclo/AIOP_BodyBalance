@@ -21,7 +21,7 @@ namespace BodyBalance.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        UserModel FindUserById(String id);
+        UserModel FindUserById(string id);
 
         /// <summary>
         /// Find user by id and password
@@ -29,7 +29,7 @@ namespace BodyBalance.Services
         /// <param name="id"></param>
         /// <param name="pwd"></param>
         /// <returns></returns>
-        UserModel FindUserByIdAndPassword(String id, String pwd);
+        UserModel FindUserByIdAndPassword(string id, string pwd);
 
         /// <summary>
         /// Update a user
@@ -56,28 +56,28 @@ namespace BodyBalance.Services
         /// </summary>
         /// <param name="um"></param>
         /// <returns></returns>
-        Boolean IsAdmin(UserModel um);
+        bool IsAdmin(UserModel um);
 
         /// <summary>
         /// Return true if this user is a contributor
         /// </summary>
         /// <param name="um"></param>
         /// <returns></returns>
-        Boolean IsContributor(UserModel um);
+        bool IsContributor(UserModel um);
 
         /// <summary>
         /// Return true if this user is a manager
         /// </summary>
         /// <param name="um"></param>
         /// <returns></returns>
-        Boolean IsManager(UserModel um);
+        bool IsManager(UserModel um);
 
         /// <summary>
         /// Return true if this user is a member
         /// </summary>
         /// <param name="um"></param>
         /// <returns></returns>
-        Boolean IsMember(UserModel um);
+        bool IsMember(UserModel um);
 
     }
 }

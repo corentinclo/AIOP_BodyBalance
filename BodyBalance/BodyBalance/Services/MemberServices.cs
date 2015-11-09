@@ -1,40 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using BodyBalance.Models;
+﻿using BodyBalance.Models;
 using BodyBalance.Persistence;
-using System.Security.Cryptography;
-using System.Text;
 using BodyBalance.Utilities;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
+using System.Linq;
+using System.Web;
 
 namespace BodyBalance.Services
 {
-    public class UserServices : IUserServices
+    public class MemberServices : IMemberServices
     {
         private Entities db = new Entities();
 
-        public int CreateUser(UserModel um)
+        public int CreateMember(MemberModel mm)
         {
-            int result = DaoUtilities.NO_CHANGES;
+            int result = DaoUtilities.NO_CHANGES; 
 
-            USER1 u = db.USER1.Create();
+            MEMBER m = db.MEMBER.Create();
 
-            u.USER_ID = um.UserId;
-            u.USER_PASSWORD = hashSHA512(um.Password);
-            u.USER_FIRSTNAME = um.FirstName;
-            u.USER_LASTNAME = um.LastName;
-            u.USER_ADR1 = um.Adress1;
-            u.USER_ADR2 = um.Adress2;
-            u.USER_PC = um.PC;
-            u.USER_TOWN = um.Town;
-            u.USER_PHONE = um.Phone;
-            u.USER_MAIL = um.Mail;
+            m.MEMBER_ID = mm.UserId;
+            m.MEMBER_PAYFEEDATE = mm.PayDate;
 
-            db.USER1.Add(u);
-            try {
+            db.MEMBER.Add(m);
+            try
+            {
                 int saveResult = db.SaveChanges();
 
                 if (saveResult == 1)
@@ -70,41 +61,26 @@ namespace BodyBalance.Services
                 Console.WriteLine(e.GetBaseException().ToString());
                 result = DaoUtilities.INVALID_OPERATION_EXCEPTION;
             }
+
             return result;
         }
 
-        public UserModel FindUserById(string id)
+        public MemberModel FindMemberById(string id)
         {
-            USER1 u = db.USER1.Find(id);
+            MEMBER m = db.MEMBER.Find(id);
 
-            return ConvertUserToUserModel(u);
+            return ConvertMemberToMemberModel(m);
         }
 
-        public UserModel FindUserByIdAndPassword(string id, string pwd)
-        {
-            pwd = hashSHA512(pwd);
-            USER1 u = ((USER1) db.USER1.Where(USER1 => USER1.USER_ID == id && USER1.USER_PASSWORD == pwd).FirstOrDefault());
-
-            return ConvertUserToUserModel(u);
-        }
-
-        public int UpdateUser(UserModel um)
+        public int UpdateMember(MemberModel mm)
         {
             int result = DaoUtilities.NO_CHANGES;
 
-            USER1 u = db.USER1.Find(um.UserId);
+            MEMBER m = db.MEMBER.Find(mm.UserId);
 
-            if (u != null)
+            if (m != null)
             {
-                u.USER_PASSWORD = hashSHA512(um.Password);
-                u.USER_FIRSTNAME = um.FirstName;
-                u.USER_LASTNAME = um.LastName;
-                u.USER_ADR1 = um.Adress1;
-                u.USER_ADR2 = um.Adress2;
-                u.USER_PC = um.PC;
-                u.USER_TOWN = um.Town;
-                u.USER_PHONE = um.Phone;
-                u.USER_MAIL = um.Mail;
+                m.MEMBER_PAYFEEDATE = mm.PayDate;
 
                 try
                 {
@@ -147,15 +123,15 @@ namespace BodyBalance.Services
             return result;
         }
 
-        public int DeleteUser(UserModel um)
+        public int DeleteMember(MemberModel mm)
         {
             int result = DaoUtilities.NO_CHANGES;
 
-            USER1 u = db.USER1.Find(um.UserId);
+            MEMBER m = db.MEMBER.Find(mm.UserId);
 
-            if (u != null)
+            if (m != null)
             {
-                db.USER1.Remove(u);
+                db.MEMBER.Remove(m);
                 try
                 {
                     int saveResult = db.SaveChanges();
@@ -197,85 +173,44 @@ namespace BodyBalance.Services
             return result;
         }
 
-        public List<UserModel> FindAllUsers()
+        public List<MemberModel> FindAllMembers()
         {
-            List<UserModel> usersList = new List<UserModel>();
-            IQueryable<USER1> query = db.Set<USER1>();
+            List<MemberModel> membersList = new List<MemberModel>();
+            IQueryable<MEMBER> query = db.Set<MEMBER>();
 
-            foreach(USER1 u in query)
+            foreach (MEMBER m in query)
             {
-                usersList.Add(ConvertUserToUserModel(u));
+                membersList.Add(ConvertMemberToMemberModel(m));
             }
 
-            return usersList;
+            return membersList;
         }
 
-        public bool IsAdmin(UserModel um)
+        private MemberModel ConvertMemberToMemberModel(MEMBER m)
         {
-            if (db.ADMIN.Find(um.UserId) != null)
-                return true;
+            USER1 u = db.USER1.Find(m.MEMBER_ID);
 
-            return false;
-        }
+            MemberModel mm = new MemberModel();
 
-        public bool IsContributor(UserModel um)
-        {
-            if (db.CONTRIBUTOR.Find(um.UserId) != null)
-                return true;
-
-            return false;
-        }
-
-        public bool IsManager(UserModel um)
-        {
-            if (db.MANAGER.Find(um.UserId) != null)
-                return true;
-
-            return false;
-        }
-
-        public bool IsMember(UserModel um)
-        {
-            if (db.MEMBER.Find(um.UserId) != null)
-                return true;
-
-            return false;
-        }
-
-        private UserModel ConvertUserToUserModel(USER1 u)
-        {
-            UserModel um = new UserModel();
-
-            if (u != null)
+            if (m != null && u != null)
             {
-                um.UserId = u.USER_ID;
-                um.Password = u.USER_PASSWORD;
-                um.FirstName = u.USER_FIRSTNAME;
-                um.LastName = u.USER_LASTNAME;
-                um.Adress1 = u.USER_ADR1;
-                um.Adress2 = u.USER_ADR2;
-                um.PC = u.USER_PC;
-                um.Town = u.USER_TOWN;
-                um.Phone = u.USER_PHONE;
-                um.Mail = u.USER_MAIL;
+                mm.UserId = u.USER_ID;
+                mm.Password = u.USER_PASSWORD;
+                mm.FirstName = u.USER_FIRSTNAME;
+                mm.LastName = u.USER_LASTNAME;
+                mm.Adress1 = u.USER_ADR1;
+                mm.Adress2 = u.USER_ADR2;
+                mm.PC = u.USER_PC;
+                mm.Town = u.USER_TOWN;
+                mm.Phone = u.USER_PHONE;
+                mm.Mail = u.USER_MAIL;
+
+                mm.PayDate = m.MEMBER_PAYFEEDATE;
             }
             else
-                um = null;
+                mm = null;
 
-            return um;
-        }
-
-        private string hashSHA512(string unhashedValue)
-        {
-            SHA512 shaM = new SHA512Managed();
-            byte[] hash = shaM.ComputeHash(Encoding.ASCII.GetBytes(unhashedValue));
-
-            StringBuilder stringBuilder = new StringBuilder();
-            foreach (byte b in hash)
-            {
-                stringBuilder.AppendFormat("{0:x2}", b);
-            }
-            return stringBuilder.ToString();
+            return mm;
         }
     }
 }

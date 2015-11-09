@@ -1,40 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using BodyBalance.Models;
+﻿using BodyBalance.Models;
 using BodyBalance.Persistence;
-using System.Security.Cryptography;
-using System.Text;
 using BodyBalance.Utilities;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
+using System.Linq;
+using System.Web;
 
 namespace BodyBalance.Services
 {
-    public class UserServices : IUserServices
+    public class ContributorServices : IContributorServices
     {
         private Entities db = new Entities();
 
-        public int CreateUser(UserModel um)
+        public int CreateContributor(ContributorModel cm)
         {
             int result = DaoUtilities.NO_CHANGES;
 
-            USER1 u = db.USER1.Create();
+            CONTRIBUTOR c = db.CONTRIBUTOR.Create();
 
-            u.USER_ID = um.UserId;
-            u.USER_PASSWORD = hashSHA512(um.Password);
-            u.USER_FIRSTNAME = um.FirstName;
-            u.USER_LASTNAME = um.LastName;
-            u.USER_ADR1 = um.Adress1;
-            u.USER_ADR2 = um.Adress2;
-            u.USER_PC = um.PC;
-            u.USER_TOWN = um.Town;
-            u.USER_PHONE = um.Phone;
-            u.USER_MAIL = um.Mail;
+            c.CONTRIBUTOR_ID = cm.UserId;
+            c.CONTRIBUTOR_SHORTDESC = cm.ShortDesc;
+            c.CONTRIBUTOR_LONGDESC = cm.LongDesc;
 
-            db.USER1.Add(u);
-            try {
+            db.CONTRIBUTOR.Add(c);
+            try
+            {
                 int saveResult = db.SaveChanges();
 
                 if (saveResult == 1)
@@ -73,38 +65,23 @@ namespace BodyBalance.Services
             return result;
         }
 
-        public UserModel FindUserById(string id)
+        public ContributorModel FindContributorById(string id)
         {
-            USER1 u = db.USER1.Find(id);
+            CONTRIBUTOR c = db.CONTRIBUTOR.Find(id);
 
-            return ConvertUserToUserModel(u);
+            return ConvertContributorToContributorModel(c);
         }
 
-        public UserModel FindUserByIdAndPassword(string id, string pwd)
-        {
-            pwd = hashSHA512(pwd);
-            USER1 u = ((USER1) db.USER1.Where(USER1 => USER1.USER_ID == id && USER1.USER_PASSWORD == pwd).FirstOrDefault());
-
-            return ConvertUserToUserModel(u);
-        }
-
-        public int UpdateUser(UserModel um)
+        public int UpdateContributor(ContributorModel cm)
         {
             int result = DaoUtilities.NO_CHANGES;
 
-            USER1 u = db.USER1.Find(um.UserId);
+            CONTRIBUTOR c = db.CONTRIBUTOR.Find(cm.UserId);
 
-            if (u != null)
+            if (c != null)
             {
-                u.USER_PASSWORD = hashSHA512(um.Password);
-                u.USER_FIRSTNAME = um.FirstName;
-                u.USER_LASTNAME = um.LastName;
-                u.USER_ADR1 = um.Adress1;
-                u.USER_ADR2 = um.Adress2;
-                u.USER_PC = um.PC;
-                u.USER_TOWN = um.Town;
-                u.USER_PHONE = um.Phone;
-                u.USER_MAIL = um.Mail;
+                c.CONTRIBUTOR_SHORTDESC = cm.ShortDesc;
+                c.CONTRIBUTOR_LONGDESC = cm.LongDesc;
 
                 try
                 {
@@ -147,15 +124,15 @@ namespace BodyBalance.Services
             return result;
         }
 
-        public int DeleteUser(UserModel um)
+        public int DeleteContributor(ContributorModel cm)
         {
             int result = DaoUtilities.NO_CHANGES;
 
-            USER1 u = db.USER1.Find(um.UserId);
+            CONTRIBUTOR c = db.CONTRIBUTOR.Find(cm.UserId);
 
-            if (u != null)
+            if (c != null)
             {
-                db.USER1.Remove(u);
+                db.CONTRIBUTOR.Remove(c);
                 try
                 {
                     int saveResult = db.SaveChanges();
@@ -197,85 +174,45 @@ namespace BodyBalance.Services
             return result;
         }
 
-        public List<UserModel> FindAllUsers()
+        public List<ContributorModel> FindAllContributors()
         {
-            List<UserModel> usersList = new List<UserModel>();
-            IQueryable<USER1> query = db.Set<USER1>();
+            List<ContributorModel> contributorsList = new List<ContributorModel>();
+            IQueryable<CONTRIBUTOR> query = db.Set<CONTRIBUTOR>();
 
-            foreach(USER1 u in query)
+            foreach (CONTRIBUTOR c in query)
             {
-                usersList.Add(ConvertUserToUserModel(u));
+                contributorsList.Add(ConvertContributorToContributorModel(c));
             }
 
-            return usersList;
+            return contributorsList;
         }
 
-        public bool IsAdmin(UserModel um)
+        private ContributorModel ConvertContributorToContributorModel(CONTRIBUTOR c)
         {
-            if (db.ADMIN.Find(um.UserId) != null)
-                return true;
+            USER1 u = db.USER1.Find(c.CONTRIBUTOR_ID);
 
-            return false;
-        }
+            ContributorModel cm = new ContributorModel();
 
-        public bool IsContributor(UserModel um)
-        {
-            if (db.CONTRIBUTOR.Find(um.UserId) != null)
-                return true;
-
-            return false;
-        }
-
-        public bool IsManager(UserModel um)
-        {
-            if (db.MANAGER.Find(um.UserId) != null)
-                return true;
-
-            return false;
-        }
-
-        public bool IsMember(UserModel um)
-        {
-            if (db.MEMBER.Find(um.UserId) != null)
-                return true;
-
-            return false;
-        }
-
-        private UserModel ConvertUserToUserModel(USER1 u)
-        {
-            UserModel um = new UserModel();
-
-            if (u != null)
+            if (c != null && u != null)
             {
-                um.UserId = u.USER_ID;
-                um.Password = u.USER_PASSWORD;
-                um.FirstName = u.USER_FIRSTNAME;
-                um.LastName = u.USER_LASTNAME;
-                um.Adress1 = u.USER_ADR1;
-                um.Adress2 = u.USER_ADR2;
-                um.PC = u.USER_PC;
-                um.Town = u.USER_TOWN;
-                um.Phone = u.USER_PHONE;
-                um.Mail = u.USER_MAIL;
+                cm.UserId = u.USER_ID;
+                cm.Password = u.USER_PASSWORD;
+                cm.FirstName = u.USER_FIRSTNAME;
+                cm.LastName = u.USER_LASTNAME;
+                cm.Adress1 = u.USER_ADR1;
+                cm.Adress2 = u.USER_ADR2;
+                cm.PC = u.USER_PC;
+                cm.Town = u.USER_TOWN;
+                cm.Phone = u.USER_PHONE;
+                cm.Mail = u.USER_MAIL;
+
+                cm.ShortDesc = c.CONTRIBUTOR_SHORTDESC;
+                cm.LongDesc = c.CONTRIBUTOR_LONGDESC;
             }
             else
-                um = null;
+                cm = null;
 
-            return um;
-        }
-
-        private string hashSHA512(string unhashedValue)
-        {
-            SHA512 shaM = new SHA512Managed();
-            byte[] hash = shaM.ComputeHash(Encoding.ASCII.GetBytes(unhashedValue));
-
-            StringBuilder stringBuilder = new StringBuilder();
-            foreach (byte b in hash)
-            {
-                stringBuilder.AppendFormat("{0:x2}", b);
-            }
-            return stringBuilder.ToString();
+            return cm;
         }
     }
 }
