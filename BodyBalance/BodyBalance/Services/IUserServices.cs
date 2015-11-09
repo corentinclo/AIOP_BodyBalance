@@ -56,28 +56,28 @@ namespace BodyBalance.Services
         /// </summary>
         /// <param name="um"></param>
         /// <returns></returns>
-        Boolean isAdmin(UserModel um);
+        Boolean IsAdmin(UserModel um);
 
         /// <summary>
         /// Return true if this user is a contributor
         /// </summary>
         /// <param name="um"></param>
         /// <returns></returns>
-        Boolean isContributor(UserModel um);
+        Boolean IsContributor(UserModel um);
 
         /// <summary>
         /// Return true if this user is a manager
         /// </summary>
         /// <param name="um"></param>
         /// <returns></returns>
-        Boolean isManager(UserModel um);
+        Boolean IsManager(UserModel um);
 
         /// <summary>
         /// Return true if this user is a member
         /// </summary>
         /// <param name="um"></param>
         /// <returns></returns>
-        Boolean isMember(UserModel um);
+        Boolean IsMember(UserModel um);
 
     }
 }
