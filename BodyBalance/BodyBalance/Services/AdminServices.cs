@@ -10,21 +10,19 @@ using System.Web;
 
 namespace BodyBalance.Services
 {
-    public class TokenServices : ITokenServices
+    public class AdminServices : IAdminServices
     {
         private Entities db = new Entities();
 
-        public int CreateToken(TokenModel tm)
+        public int CreateAdmin(AdminModel am)
         {
             int result = DaoUtilities.NO_CHANGES;
 
-            TOKEN t = db.TOKEN.Create();
+            ADMIN a = db.ADMIN.Create();
 
-            t.USER_ID = tm.UserId;
-            t.TOKEN1 = tm.Token;
-            t.EXP_DATE = tm.ExpireDate;
+            a.ADMIN_ID = am.UserId;
 
-            db.TOKEN.Add(t);
+            db.ADMIN.Add(a);
             try
             {
                 int saveResult = db.SaveChanges();
@@ -65,29 +63,22 @@ namespace BodyBalance.Services
             return result;
         }
 
-        public TokenModel FindToken(String id, String token)
+        public AdminModel FindAdminById(string id)
         {
-            TokenModel tm = new TokenModel();
+            ADMIN a = db.ADMIN.Find(id);
 
-            TOKEN t = db.TOKEN.Find(id, token);
-            tm.UserId = t.USER_ID;
-            tm.Token = t.TOKEN1;
-            tm.ExpireDate = t.EXP_DATE;
-
-            return tm;
+            return ConvertAdminToAdminModel(a);
         }
 
-        public int UpdateToken(TokenModel tm)
+        public int DeleteAdmin(AdminModel am)
         {
             int result = DaoUtilities.NO_CHANGES;
 
-            TOKEN t = db.TOKEN.Find(tm.UserId, tm.Token);
+            ADMIN a = db.ADMIN.Find(am.UserId);
 
-            if (t != null)
+            if (a != null)
             {
-                t.TOKEN1 = tm.Token;
-                t.EXP_DATE = tm.ExpireDate;
-
+                db.ADMIN.Remove(a);
                 try
                 {
                     int saveResult = db.SaveChanges();
@@ -129,54 +120,42 @@ namespace BodyBalance.Services
             return result;
         }
 
-        public int DeleteToken(TokenModel tm)
+        public List<AdminModel> FindAllAdmins()
         {
-            int result = DaoUtilities.NO_CHANGES;
+            List<AdminModel> adminsList = new List<AdminModel>();
+            IQueryable<ADMIN> query = db.Set<ADMIN>();
 
-            TOKEN t = db.TOKEN.Find(tm.UserId, tm.Token);
-
-            if (t != null)
+            foreach (ADMIN m in query)
             {
-                db.TOKEN.Remove(t);
-                try
-                {
-                    int saveResult = db.SaveChanges();
-
-                    if (saveResult == 1)
-                        result = DaoUtilities.SAVE_SUCCESSFUL;
-                }
-                catch (DbUpdateConcurrencyException e)
-                {
-                    Console.WriteLine(e.GetBaseException().ToString());
-                    result = DaoUtilities.UPDATE_CONCURRENCY_EXCEPTION;
-                }
-                catch (DbUpdateException e)
-                {
-                    Console.WriteLine(e.GetBaseException().ToString());
-                    result = DaoUtilities.UPDATE_EXCEPTION;
-                }
-                catch (DbEntityValidationException e)
-                {
-                    Console.WriteLine(e.GetBaseException().ToString());
-                    result = DaoUtilities.ENTITY_VALIDATION_EXCEPTION;
-                }
-                catch (NotSupportedException e)
-                {
-                    Console.WriteLine(e.GetBaseException().ToString());
-                    result = DaoUtilities.UNSUPPORTED_EXCEPTION;
-                }
-                catch (ObjectDisposedException e)
-                {
-                    Console.WriteLine(e.GetBaseException().ToString());
-                    result = DaoUtilities.DISPOSED_EXCEPTION;
-                }
-                catch (InvalidOperationException e)
-                {
-                    Console.WriteLine(e.GetBaseException().ToString());
-                    result = DaoUtilities.INVALID_OPERATION_EXCEPTION;
-                }
+                adminsList.Add(ConvertAdminToAdminModel(m));
             }
-            return result;
+
+            return adminsList;
+        }
+
+        private AdminModel ConvertAdminToAdminModel(ADMIN a)
+        {
+            USER1 u = db.USER1.Find(a.ADMIN_ID);
+
+            AdminModel am = new AdminModel();
+
+            if (a != null && u != null)
+            {
+                am.UserId = u.USER_ID;
+                am.Password = u.USER_PASSWORD;
+                am.FirstName = u.USER_FIRSTNAME;
+                am.LastName = u.USER_LASTNAME;
+                am.Adress1 = u.USER_ADR1;
+                am.Adress2 = u.USER_ADR2;
+                am.PC = u.USER_PC;
+                am.Town = u.USER_TOWN;
+                am.Phone = u.USER_PHONE;
+                am.Mail = u.USER_MAIL;
+            }
+            else
+                am = null;
+
+            return am;
         }
     }
 }
