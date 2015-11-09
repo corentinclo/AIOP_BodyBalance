@@ -32,7 +32,7 @@ window.app.mappers['#register'] = function () {
 }
 
 window.app.ajaxifyForm('#login_form', function (result) {
-    window.app.storeLoginParameters(result.username, result.access_token, $('#cookie_input').is(':checked'));
+    window.app.storeLoginParameters(result.userName, result.access_token, $('#cookie_input').is(':checked'));
     $.get('pages/MainPage.html', null, function (data) {
         $('#main').html(data);
     });
