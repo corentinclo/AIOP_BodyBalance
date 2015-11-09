@@ -39,5 +39,30 @@
         });
     }
 
+    Application.prototype.FormToObject = function (form_id) {
+        var res = {};
+        $(form_id + ' input, ' + form_id + ' textarea').each(function() {
+            res[$(this).attr('name')] = $(this).val();
+        });
+        return res;
+    }
+
+    Application.prototype.ajaxifyFormJson = function (form_id, on_success, on_error, contentType) {
+        var t = this;
+        $(form_id).submit(function () {
+            $.ajax({
+                type: $(form_id).attr("method"), //La méthode (GET, POST, PUT, DELETE)
+                url: $(form_id).attr("action"), //URL
+                data: JSON.stringify(t.FormToObject(form_id)), //On met les données
+                success: on_success, //Fonction en cas de succès
+                error: on_error, //Fonction en cas d'erreur
+                cache: false, //Pas de cache
+                contentType: (typeof contentType == "undefined") ? false : contentType, //Pas de contenu de retour spécifique
+                processData: false
+            });
+            return false;
+        });
+    }
+
     window.app = new Application();
 })(jQuery);

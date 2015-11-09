@@ -1,4 +1,4 @@
-﻿window.app.ajaxifyForm('#register_form', function () {
+﻿window.app.ajaxifyFormJson('#register_form', function () {
     location.reload();
     return false;
 }, function () {
