@@ -132,6 +132,7 @@
     }
 
     Application.prototype.processCookies = function () {
+        var t = this;
         if (document.cookie.indexOf('access_token') >= 0 && document.cookie.indexOf('uid') >= 0) {
             window.app.token = $.cookie('access_token');
             window.app.username = $.cookie('uid');

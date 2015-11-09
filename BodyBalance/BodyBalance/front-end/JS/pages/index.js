@@ -38,8 +38,16 @@ window.app.ajaxifyForm('#login_form', function (result) {
 $(function () {
     window.app.hrefToFunction('body');
     if (window.app.processCookies()) {
-        $.get('pages/MainPage.html', null, function (data) {
-            $('#main').html(data);
+        //Vérification de la validité du token
+        window.app.sendRestRequest('/Account/IsValidToken', 'GET', null, function () {
+            //Good credentials
+            $.get('pages/MainPage.html', null, function (data) {
+                $('#main').html(data);
+            });
+        }, function () {
+            //Bad credentials
+            window.app.clearLoginParameters();
+            bootbox.alert('Your authorization has ended. Please log in again.');
         });
     }
 });
