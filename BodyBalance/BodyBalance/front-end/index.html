@@ -21,9 +21,9 @@
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Accueil</a></li>
-                    <li><a href="#about">A propos</a></li>
-                    <li><a href="#contact">Nous contacter</a></li>
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -34,29 +34,29 @@
             <div class="col-xs-12 col-md-4 col-md-offset-4">
                 <form class="form-horizontal" id="login_form" action="/Account/Login" method="POST">
                     <input type="hidden" value="password" name="grant_type" />
-                    <h2>Merci de vous connecter</h2>
+                    <h2>Please log in</h2>
                     <div class="form-group">
-                        <label class="control-label col-sm-6" for="username_input">Nom d'utilisateur</label>
+                        <label class="control-label col-sm-6" for="username_input">Username</label>
                         <div class="col-sm-6">
-                            <input class="form-control" type="text" name="username" placeholder="Nom d'utilisateur" id="username_input" required />
+                            <input class="form-control" type="text" name="username" placeholder="Username" id="username_input" required />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-6" for="password_input">Mot de passe</label>
+                        <label class="control-label col-sm-6" for="password_input">Password</label>
                         <div class="col-sm-6">
-                            <input class="form-control" type="password" name="password" placeholder="Mot de passe" id="password_input" required />
+                            <input class="form-control" type="password" name="password" placeholder="Password" id="password_input" required />
                         </div>
                     </div>
                     <div class="form-group text-center">
                         <label class="control-label" for="cookie_input">
                             <input type="checkbox" name="cookie_input" id="cookie_input" />
-                            Rester connecté
+                            Keep me logged in
                         </label>
                     </div>
                     <div class="form-group">
                         <div class="col-xs-12">
-                            <input type="submit" class="btn btn-block btn-primary" value="Se connecter" />
-                            <a href="#register" class="btn btn-block btn-info">S'enregistrer</a>
+                            <input type="submit" class="btn btn-block btn-primary" value="Log in" />
+                            <a href="#register" class="btn btn-block btn-info">Register</a>
                         </div>
                     </div>
                 </form>
