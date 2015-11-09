@@ -47,6 +47,18 @@ namespace BodyBalance.Services
             return ConvertUserToUserModel(u);
         }
 
+        public UserModel FindUserByIdAndPassword(String id, String pwd)
+        {
+            using (SHA512 shaM = new SHA512Managed())
+            {
+                pwd = shaM.ComputeHash(Encoding.UTF8.GetBytes(pwd)).ToString();
+            }
+
+            USER1 u = ((USER1) db.USER1.Where(USER1 => USER1.USER_ID == id && USER1.USER_PASSWORD == pwd));
+
+            return ConvertUserToUserModel(u);
+        }
+
         public Boolean UpdateUser(UserModel um)
         {
             USER1 u = db.USER1.Find(um.UserId);
@@ -103,6 +115,26 @@ namespace BodyBalance.Services
             }
 
             return usersList;
+        }
+
+        public Boolean IsAdmin(UserModel um)
+        {
+
+        }
+
+        public Boolean IsContributor(UserModel um)
+        {
+
+        }
+
+        public Boolean IsManager(UserModel um)
+        {
+
+        }
+
+        public Boolean IsMember(UserModel um)
+        {
+
         }
 
         private UserModel ConvertUserToUserModel(USER1 u)
