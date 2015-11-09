@@ -57,6 +57,11 @@ namespace BodyBalance.Controllers
             {
                 return Ok();
             }
+            if(result == DaoUtilities.UPDATE_EXCEPTION)
+            {
+                var ex = new Exception("User already exists");
+                return InternalServerError(ex);
+            }
             return InternalServerError();
         }
 
@@ -84,41 +89,35 @@ namespace BodyBalance.Controllers
 
         // POST Account/ChangePassword
         [Route("ChangePassword")]
-        public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
+        [HttpPut]
+        public IHttpActionResult ChangePassword(ChangePasswordBindingModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            //IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
-            //    model.NewPassword);
-            
-            //if (!result.Succeeded)
-            //{
-            //    //return GetErrorResult(result);
-            //}
+            var user = userServices.FindUserByIdAndPassword(model.UserId,model.OldPassword);
 
-            return Ok();
-        }
-
-        // POST api/Account/SetPassword
-        [Route("SetPassword")]
-        public async Task<IHttpActionResult> SetPassword(SetPasswordBindingModel model)
-        {
-            if (!ModelState.IsValid)
+            if(user == null)
             {
-                return BadRequest(ModelState);
+                return BadRequest("UserId or OldPassword wrong");
+            }
+            user.Password = model.NewPassword;
+
+            var updateResult = userServices.UpdateUser(user);
+
+            if (updateResult == DaoUtilities.SAVE_SUCCESSFUL)
+            {
+                return Ok();
+            }
+            if (updateResult == DaoUtilities.DISPOSED_EXCEPTION)
+            {
+                var ex = new Exception("Connection have been disposed");
+                return InternalServerError(ex);
             }
 
-            //IdentityResult result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
-
-            //if (!result.Succeeded)
-            //{
-            //    return GetErrorResult(result);
-            //}
-
-            return Ok();
+            return InternalServerError();
         }
 
         #region Helpers
