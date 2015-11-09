@@ -2,7 +2,7 @@
     location.reload();
     return false;
 }, function () {
-    alert('Erreur');
+    bootbox.alert('An error has occured');
     return false;
 },
 'application/json',

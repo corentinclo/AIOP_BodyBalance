@@ -37,7 +37,7 @@ window.app.ajaxifyForm('#login_form', function (result) {
         $('#main').html(data);
     });
 }, function (result) {
-    alert('Mauvais login et/ou mot de passe');
+    bootbox.alert('Bad username or password');
 }, 'application/json');
 
 $(function () {
