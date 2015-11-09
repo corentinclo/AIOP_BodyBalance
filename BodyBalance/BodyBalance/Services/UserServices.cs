@@ -18,10 +18,7 @@ namespace BodyBalance.Services
             USER1 u = db.USER1.Create();
 
             u.USER_ID = um.UserId;
-            using (SHA512 shaM = new SHA512Managed())
-            {
-                u.USER_PASSWORD = shaM.ComputeHash(Encoding.UTF8.GetBytes(um.Password)).ToString();
-            }
+            u.USER_PASSWORD = hashSHA512(um.Password);
             u.USER_FIRSTNAME = um.FirstName;
             u.USER_LASTNAME = um.LastName;
             u.USER_ADR1 = um.Adress1;
@@ -49,12 +46,8 @@ namespace BodyBalance.Services
 
         public UserModel FindUserByIdAndPassword(String id, String pwd)
         {
-            using (SHA512 shaM = new SHA512Managed())
-            {
-                pwd = shaM.ComputeHash(Encoding.UTF8.GetBytes(pwd)).ToString();
-            }
-
-            USER1 u = ((USER1) db.USER1.Where(USER1 => USER1.USER_ID == id && USER1.USER_PASSWORD == pwd).FirstOrDefault(null));
+            pwd = hashSHA512(pwd);
+            USER1 u = ((USER1) db.USER1.Where(USER1 => USER1.USER_ID == id && USER1.USER_PASSWORD == pwd).FirstOrDefault());
 
             return ConvertUserToUserModel(u);
         }
@@ -65,10 +58,7 @@ namespace BodyBalance.Services
 
             if (u != null)
             {
-                using (SHA512 shaM = new SHA512Managed())
-                {
-                    u.USER_PASSWORD = shaM.ComputeHash(Encoding.UTF8.GetBytes(um.Password)).ToString();
-                }
+                u.USER_PASSWORD = hashSHA512(um.Password);
                 u.USER_FIRSTNAME = um.FirstName;
                 u.USER_LASTNAME = um.LastName;
                 u.USER_ADR1 = um.Adress1;
@@ -153,7 +143,7 @@ namespace BodyBalance.Services
         {
             UserModel um = new UserModel();
 
-            if(u != null)
+            if (u != null)
             {
                 um.UserId = u.USER_ID;
                 um.Password = u.USER_PASSWORD;
@@ -166,8 +156,23 @@ namespace BodyBalance.Services
                 um.Phone = u.USER_PHONE;
                 um.Mail = u.USER_MAIL;
             }
+            else
+                um = null;
 
             return um;
+        }
+
+        private string hashSHA512(string unhashedValue)
+        {
+            SHA512 shaM = new SHA512Managed();
+            byte[] hash = shaM.ComputeHash(Encoding.ASCII.GetBytes(unhashedValue));
+
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (byte b in hash)
+            {
+                stringBuilder.AppendFormat("{0:x2}", b);
+            }
+            return stringBuilder.ToString();
         }
     }
 }
