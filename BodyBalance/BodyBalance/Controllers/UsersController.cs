@@ -7,12 +7,16 @@ using System.Web.Http;
 
 namespace BodyBalance.Controllers
 {
+    [Authorize]
     public class UsersController : ApiController
     {
-        // GET: api/Users
+        // GET: /Users
+        [Route("Users")]
+        [HttpGet]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
+            
         }
 
         // GET: api/Users/{user-id}

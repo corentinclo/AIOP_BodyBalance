@@ -10,6 +10,7 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using BodyBalance.Providers;
 using BodyBalance.Models;
+using Microsoft.Owin.Security;
 
 namespace BodyBalance
 {
@@ -38,7 +39,7 @@ namespace BodyBalance
                 TokenEndpointPath = new PathString("/Token"),
                 Provider = new ApplicationOAuthProvider(PublicClientId),
                 AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
+                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
                 // Jeu de modes en production AllowInsecureHttp = false
                 AllowInsecureHttp = true
             };
