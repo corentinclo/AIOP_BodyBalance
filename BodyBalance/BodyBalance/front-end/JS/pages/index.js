@@ -19,8 +19,8 @@ window.app.mappers['#about'] = function () {
     return false;
 }
 
-window.app.mappers['#contact'] = function () {
-    alert('Nous contacter');
+window.app.mappers['#myaccount'] = function () {
+    //do something
     return false;
 }
 
