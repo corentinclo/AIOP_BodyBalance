@@ -4,6 +4,7 @@
 }, function () {
     alert('Erreur');
     return false;
-});
+},
+'application/json');
 
 window.app.hrefToFunction('#main');
