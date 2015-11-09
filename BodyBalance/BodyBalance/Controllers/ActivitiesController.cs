@@ -10,8 +10,14 @@ namespace BodyBalance.Controllers
     [Authorize]
     public class ActivitiesController : ApiController
     {
+        public ActivitiesController()
+        {
+
+        }
+
         // GET: Activities
         [Route("Activities")]
+        [HttpGet]
         public IHttpActionResult Get()
         {
             //return new string[] { "value1", "value2" };
