@@ -72,6 +72,9 @@
         if (typeof force_json == 'undefined') {
             force_json = false;
         }
+        if (typeof on_error == 'undefined') {
+            on_error = on_success;
+        }
         if (force_json === true) {
             data = JSON.stringify(data);
         }
