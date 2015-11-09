@@ -24,11 +24,11 @@
 
     Application.prototype.ajaxifyForm = function (form_id, on_success, on_error, contentType) {
         $(form_id).submit(function () {
-            var formData = new FormData($(form_id)[0]); //Les données du formulaire
+            //var formData = new FormData($(form_id)[0]); //Les données du formulaire
             $.ajax({
                 type: $(form_id).attr("method"), //La méthode (GET, POST, PUT, DELETE)
                 url: $(form_id).attr("action"), //URL
-                data: formData, //On met les données
+                data: $(form_id).serialize(), //On met les données
                 success: on_success, //Fonction en cas de succès
                 error: on_error, //Fonction en cas d'erreur
                 cache: false, //Pas de cache
