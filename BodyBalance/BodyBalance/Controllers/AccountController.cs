@@ -17,6 +17,7 @@ using BodyBalance.Models;
 using BodyBalance.Providers;
 using BodyBalance.Results;
 using BodyBalance.Services;
+using BodyBalance.Utilities;
 
 namespace BodyBalance.Controllers
 {
@@ -52,7 +53,7 @@ namespace BodyBalance.Controllers
             }
             var result = userServices.CreateUser(model);
 
-           if (result == 1)
+           if (result == DaoUtilities.SAVE_SUCCESSFUL)
             {
                 return Ok();
             }
