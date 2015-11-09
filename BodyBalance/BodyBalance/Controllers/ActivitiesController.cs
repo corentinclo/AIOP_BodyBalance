@@ -15,9 +15,13 @@ namespace BodyBalance.Controllers
     public class ActivitiesController : ApiController
     {
         private IActivityServices activityServices;
-        public ActivitiesController(IActivityServices activityServices)
+        private IEventServices eventServices;
+        public ActivitiesController
+            (IActivityServices activityServices,
+             IEventServices eventServices)
         {
             this.activityServices = activityServices;
+            this.eventServices = eventServices;
         }
 
         // GET: Activities
@@ -118,6 +122,21 @@ namespace BodyBalance.Controllers
             }
 
             return InternalServerError();
+        }
+
+        // GET: Activities/{activity_id}/Events
+        [HttpGet]
+        [Route("Activities/{activity_id}/Events")]
+        public IHttpActionResult GetEvents(string activity_id)
+        {
+            var activity = activityServices.FindActivityById(activity_id);
+            if (activity == null)
+            {
+                return NotFound();
+            }
+
+            var listevents = eventServices.FindAllEventsOfActivity(activity_id);
+            return Ok(listevents);
         }
     }
 }
