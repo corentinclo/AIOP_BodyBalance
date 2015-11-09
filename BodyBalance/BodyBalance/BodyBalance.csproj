@@ -343,6 +343,7 @@
     <Compile Include="Services\TokenServices.cs" />
     <Compile Include="Services\UserServices.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utilities\DaoUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />

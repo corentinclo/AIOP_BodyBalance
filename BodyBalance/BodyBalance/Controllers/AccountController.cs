@@ -52,10 +52,10 @@ namespace BodyBalance.Controllers
             }
             var result = userServices.CreateUser(model);
 
-            if (!result)
+           /* if (!result)
             {
                 return BadRequest();
-            }
+            }*/
             return Ok();
         }
 
