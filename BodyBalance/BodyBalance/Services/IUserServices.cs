@@ -42,5 +42,13 @@ namespace BodyBalance.Services
         /// </summary>
         /// <returns></returns>
         List<UserModel> FindAllUsers();
+
+        /// <summary>
+        /// Find user by id and password
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="pwd"></param>
+        /// <returns></returns>
+        UserModel FindUserByIdAndPassword(String id, String pwd);
     }
 }

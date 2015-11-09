@@ -32,7 +32,7 @@ namespace BodyBalance.Providers
         {
             var userManager = new UserServices();
 
-            UserModel user = userManager.FindUserById(context.UserName); //A MODFIER par la fonction qui check le password
+            UserModel user = userManager.FindUserByIdAndPassword(context.UserName,context.Password); 
 
             if (user == null)
             {
