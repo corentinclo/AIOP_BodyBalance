@@ -1,48 +1,67 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
-  <head>
+<head>
     <meta charset="utf-8" />
-    <title>Application de test</title>
-  </head>
-  <body>
-  	<p>Sortie</p>
-  	<textarea style="width:100%" id="log"></textarea>
-  	<form>
-  		URL <input type="text" name="uri" placeholder="URL" required> <br>
-  		Données (JSON) <br>
-  		<textarea name="vars" placeholder="Données (json)">{}</textarea><br>
-  		Méthode <br>
-  		<select name="method">
-  			<option value="GET">Get</option>
-  			<option value="POST">Post</option>
-  			<option value="DELETE">Delete</option>
-  			<option value="PUT">Put</option>
-  		</select>
-  		<input type="submit" value="OK !">
-  	</form>
-	
-	<!-- Javascript files -->
-	<script src="jquery-2.1.4.min.js"></script>
-	<!-- Javascript for this page -->
-	<script>
-(function($) {
-	$(function() {
-		$('form').submit(function() {
-			$.ajax({
-				url: 	$(this).find('[name="uri"]').val(),
-				method: $(this).find('[name="method"]').val(),
-				data: 	JSON.parse($(this).find('[name="vars"]').val()),
-				type: 'text/plain',
-				complete: function(result) {
-					$('#log').html(result.responseText);
-				}
-			})
-			return false;
-		});
-	});
-})(jQuery);
+    <title>Zen Lounge</title>
+    <!-- CSS Files -->
+    <link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="CSS/application.css" />
+</head>
+<body>
+    <nav class="navbar navbar-fixed-top navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Afficher la navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Zen Lounge</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Accueil</a></li>
+                    <li><a href="#about">A propos</a></li>
+                    <li><a href="#contact">Nous contacter</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div id="main" class="row row-off-canvas row-off-canvas-right">
 
+            <div class="col-xs-12 col-md-4 col-md-offset-4">
+                <form class="form-horizontal" id="login_form" action="/api/account/login" method="POST">
+                    <h2>Merci de vous connecter</h2>
+                    <div class="form-group">
+                        <label class="control-label col-sm-6" for="username_input">Nom d'utilisateur</label>
+                        <div class="col-sm-6">
+                            <input class="form-control" type="text" name="username" placeholder="Nom d'utilisateur" id="username_input" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-6" for="password_input">Mot de passe</label>
+                        <div class="col-sm-6">
+                            <input class="form-control" type="password" name="password" placeholder="Mot de passe" id="password_input" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input type="submit" class="btn btn-block btn-primary" value="Se connecter" />
+                            <a href="#register" class="btn btn-block btn-info">S'enregistrer</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
 
-	</script>
-  </body>
+    </div>
+
+    <!-- Javascript files -->
+    <script src="JS/jquery-2.1.4.min.js"></script>
+    <script src="JS/bootstrap.min.js"></script>
+    <script src="JS/application.js"></script>
+    <script src="JS/pages/index.js"></script>
+</body>
 </html>
