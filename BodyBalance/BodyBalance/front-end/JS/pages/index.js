@@ -19,11 +19,6 @@ window.app.mappers['#about'] = function () {
     return false;
 }
 
-window.app.mappers['#myaccount'] = function () {
-    //do something
-    return false;
-}
-
 window.app.mappers['#register'] = function () {
     $.get('pages/Register.html', null, function (data) {
         $('#main').html(data);
