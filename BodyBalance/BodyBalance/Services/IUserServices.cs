@@ -14,7 +14,7 @@ namespace BodyBalance.Services
         /// </summary>
         /// <param name="um"> A user model which contains all the information about the user</param>
         /// <returns></returns>
-        Boolean CreateUser(UserModel um);
+        int CreateUser(UserModel um);
 
         /// <summary>
         /// Find a user with his id
@@ -24,18 +24,26 @@ namespace BodyBalance.Services
         UserModel FindUserById(String id);
 
         /// <summary>
+        /// Find user by id and password
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="pwd"></param>
+        /// <returns></returns>
+        UserModel FindUserByIdAndPassword(String id, String pwd);
+
+        /// <summary>
         /// Update a user
         /// </summary>
         /// <param name="um"></param>
         /// <returns></returns>
-        Boolean UpdateUser(UserModel um);
+        int UpdateUser(UserModel um);
 
         /// <summary>
         /// Delete a user
         /// </summary>
         /// <param name="um"></param>
         /// <returns></returns>
-        Boolean DeleteUser(UserModel um);
+        int DeleteUser(UserModel um);
 
         /// <summary>
         /// Retrieves all the users
@@ -44,11 +52,32 @@ namespace BodyBalance.Services
         List<UserModel> FindAllUsers();
 
         /// <summary>
-        /// Find user by id and password
+        /// Return true if this user is an admin
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="pwd"></param>
+        /// <param name="um"></param>
         /// <returns></returns>
-        UserModel FindUserByIdAndPassword(String id, String pwd);
+        Boolean isAdmin(UserModel um);
+
+        /// <summary>
+        /// Return true if this user is a contributor
+        /// </summary>
+        /// <param name="um"></param>
+        /// <returns></returns>
+        Boolean isContributor(UserModel um);
+
+        /// <summary>
+        /// Return true if this user is a manager
+        /// </summary>
+        /// <param name="um"></param>
+        /// <returns></returns>
+        Boolean isManager(UserModel um);
+
+        /// <summary>
+        /// Return true if this user is a member
+        /// </summary>
+        /// <param name="um"></param>
+        /// <returns></returns>
+        Boolean isMember(UserModel um);
+
     }
 }

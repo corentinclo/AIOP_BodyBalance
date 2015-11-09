@@ -6,15 +6,20 @@ using BodyBalance.Models;
 using BodyBalance.Persistence;
 using System.Security.Cryptography;
 using System.Text;
+using BodyBalance.Utilities;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 
 namespace BodyBalance.Services
 {
     public class UserServices : IUserServices
     {
         private Entities db = new Entities();
-        
-        public Boolean CreateUser(UserModel um)
+
+        public int CreateUser(UserModel um)
         {
+            int result;
+
             USER1 u = db.USER1.Create();
 
             u.USER_ID = um.UserId;
@@ -29,12 +34,39 @@ namespace BodyBalance.Services
             u.USER_MAIL = um.Mail;
 
             db.USER1.Add(u);
-            int saveResult = db.SaveChanges();
+            try {
+                int saveResult = db.SaveChanges();
 
-            if (saveResult == 0)
-                return false;
+                if (saveResult == 1)
+                    result = DaoUtilities.SAVE_SUCCESSFUL;
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+                result = DaoUtilities.UPDATE_CONCURRENCY_EXCEPTION;
+            }
+            catch (DbUpdateException e)
+            {
+                result = DaoUtilities.UPDATE_EXCEPTION;
+            }
+            catch (DbEntityValidationException e)
+            {
+                result = DaoUtilities.ENTITY_VALIDATION_EXCEPTION;
+            }
+            catch (NotSupportedException e)
+            {
+                result = DaoUtilities.UNSUPPORTED_EXCEPTION;
+            }
+            catch (ObjectDisposedException e)
+            {
+                result = DaoUtilities.DISPOSED_EXCEPTION;
+            }
+            catch (InvalidOperationException e)
+            {
+                result = DaoUtilities.INVALID_OPERATION_EXCEPTION;
+            }
 
-            return true;
+            result = DaoUtilities.NO_CHANGES;
+            return result;
         }
 
         public UserModel FindUserById(String id)
@@ -52,8 +84,10 @@ namespace BodyBalance.Services
             return ConvertUserToUserModel(u);
         }
 
-        public Boolean UpdateUser(UserModel um)
+        public int UpdateUser(UserModel um)
         {
+            int result = DaoUtilities.NO_CHANGES;
+
             USER1 u = db.USER1.Find(um.UserId);
 
             if (u != null)
@@ -68,30 +102,87 @@ namespace BodyBalance.Services
                 u.USER_PHONE = um.Phone;
                 u.USER_MAIL = um.Mail;
 
-                int saveResult = db.SaveChanges();
-                if (saveResult == 0)
-                    return false;
+                try
+                {
+                    int saveResult = db.SaveChanges();
 
-                return true;
+                    if (saveResult == 1)
+                        result = DaoUtilities.SAVE_SUCCESSFUL;
+                }
+                catch (DbUpdateConcurrencyException e)
+                {
+                    result = DaoUtilities.UPDATE_CONCURRENCY_EXCEPTION;
+                }
+                catch (DbUpdateException e)
+                {
+                    result = DaoUtilities.UPDATE_EXCEPTION;
+                }
+                catch (DbEntityValidationException e)
+                {
+                    result = DaoUtilities.ENTITY_VALIDATION_EXCEPTION;
+                }
+                catch (NotSupportedException e)
+                {
+                    result = DaoUtilities.UNSUPPORTED_EXCEPTION;
+                }
+                catch (ObjectDisposedException e)
+                {
+                    result = DaoUtilities.DISPOSED_EXCEPTION;
+                }
+                catch (InvalidOperationException e)
+                {
+                    result = DaoUtilities.INVALID_OPERATION_EXCEPTION;
+                }
+
+                result = DaoUtilities.NO_CHANGES;
             }
-            return false;
+            return result;
         }
 
-        public Boolean DeleteUser(UserModel um)
+        public int DeleteUser(UserModel um)
         {
+            int result = DaoUtilities.NO_CHANGES;
+
             USER1 u = db.USER1.Find(um.UserId);
 
             if (u != null)
             {
                 db.USER1.Remove(u);
-                int saveResult = db.SaveChanges();
+                try
+                {
+                    int saveResult = db.SaveChanges();
 
-                if (saveResult == 0)
-                    return false;
+                    if (saveResult == 1)
+                        result = DaoUtilities.SAVE_SUCCESSFUL;
+                }
+                catch (DbUpdateConcurrencyException e)
+                {
+                    result = DaoUtilities.UPDATE_CONCURRENCY_EXCEPTION;
+                }
+                catch (DbUpdateException e)
+                {
+                    result = DaoUtilities.UPDATE_EXCEPTION;
+                }
+                catch (DbEntityValidationException e)
+                {
+                    result = DaoUtilities.ENTITY_VALIDATION_EXCEPTION;
+                }
+                catch (NotSupportedException e)
+                {
+                    result = DaoUtilities.UNSUPPORTED_EXCEPTION;
+                }
+                catch (ObjectDisposedException e)
+                {
+                    result = DaoUtilities.DISPOSED_EXCEPTION;
+                }
+                catch (InvalidOperationException e)
+                {
+                    result = DaoUtilities.INVALID_OPERATION_EXCEPTION;
+                }
 
-                return true;
+                result = DaoUtilities.NO_CHANGES;
             }
-            return false;
+            return result;
         }
 
         public List<UserModel> FindAllUsers()

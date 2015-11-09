@@ -1,7 +1,10 @@
 ﻿using BodyBalance.Models;
 using BodyBalance.Persistence;
+using BodyBalance.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 
@@ -11,8 +14,10 @@ namespace BodyBalance.Services
     {
         private Entities db = new Entities();
 
-        public Boolean CreateToken(TokenModel tm)
+        public int CreateToken(TokenModel tm)
         {
+            int result;
+
             TOKEN t = db.TOKEN.Create();
 
             t.USER_ID = tm.UserId;
@@ -20,12 +25,40 @@ namespace BodyBalance.Services
             t.EXP_DATE = tm.ExpireDate;
 
             db.TOKEN.Add(t);
-            int saveResult = db.SaveChanges();
+            try
+            {
+                int saveResult = db.SaveChanges();
 
-            if (saveResult == 0)
-                return false;
+                if (saveResult == 1)
+                    result = DaoUtilities.SAVE_SUCCESSFUL;
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+                result = DaoUtilities.UPDATE_CONCURRENCY_EXCEPTION;
+            }
+            catch (DbUpdateException e)
+            {
+                result = DaoUtilities.UPDATE_EXCEPTION;
+            }
+            catch (DbEntityValidationException e)
+            {
+                result = DaoUtilities.ENTITY_VALIDATION_EXCEPTION;
+            }
+            catch (NotSupportedException e)
+            {
+                result = DaoUtilities.UNSUPPORTED_EXCEPTION;
+            }
+            catch (ObjectDisposedException e)
+            {
+                result = DaoUtilities.DISPOSED_EXCEPTION;
+            }
+            catch (InvalidOperationException e)
+            {
+                result = DaoUtilities.INVALID_OPERATION_EXCEPTION;
+            }
 
-            return true;
+            result = DaoUtilities.NO_CHANGES;
+            return result;
         }
 
         public TokenModel FindToken(String id, String token)
@@ -40,8 +73,10 @@ namespace BodyBalance.Services
             return tm;
         }
 
-        public Boolean UpdateToken(TokenModel tm)
+        public int UpdateToken(TokenModel tm)
         {
+            int result = DaoUtilities.NO_CHANGES;
+
             TOKEN t = db.TOKEN.Find(tm.UserId, tm.Token);
 
             if (t != null)
@@ -49,30 +84,87 @@ namespace BodyBalance.Services
                 t.TOKEN1 = tm.Token;
                 t.EXP_DATE = tm.ExpireDate;
 
-                int saveResult = db.SaveChanges();
-                if (saveResult == 0)
-                    return false;
+                try
+                {
+                    int saveResult = db.SaveChanges();
 
-                return true;
+                    if (saveResult == 1)
+                        result = DaoUtilities.SAVE_SUCCESSFUL;
+                }
+                catch (DbUpdateConcurrencyException e)
+                {
+                    result = DaoUtilities.UPDATE_CONCURRENCY_EXCEPTION;
+                }
+                catch (DbUpdateException e)
+                {
+                    result = DaoUtilities.UPDATE_EXCEPTION;
+                }
+                catch (DbEntityValidationException e)
+                {
+                    result = DaoUtilities.ENTITY_VALIDATION_EXCEPTION;
+                }
+                catch (NotSupportedException e)
+                {
+                    result = DaoUtilities.UNSUPPORTED_EXCEPTION;
+                }
+                catch (ObjectDisposedException e)
+                {
+                    result = DaoUtilities.DISPOSED_EXCEPTION;
+                }
+                catch (InvalidOperationException e)
+                {
+                    result = DaoUtilities.INVALID_OPERATION_EXCEPTION;
+                }
+
+                result = DaoUtilities.NO_CHANGES;
             }
-            return false;
+            return result;
         }
 
-        public Boolean DeleteToken(TokenModel tm)
+        public int DeleteToken(TokenModel tm)
         {
+            int result = DaoUtilities.NO_CHANGES;
+
             TOKEN t = db.TOKEN.Find(tm.UserId, tm.Token);
 
             if (t != null)
             {
                 db.TOKEN.Remove(t);
-                int saveResult = db.SaveChanges();
+                try
+                {
+                    int saveResult = db.SaveChanges();
 
-                if (saveResult == 0)
-                    return false;
+                    if (saveResult == 1)
+                        result = DaoUtilities.SAVE_SUCCESSFUL;
+                }
+                catch (DbUpdateConcurrencyException e)
+                {
+                    result = DaoUtilities.UPDATE_CONCURRENCY_EXCEPTION;
+                }
+                catch (DbUpdateException e)
+                {
+                    result = DaoUtilities.UPDATE_EXCEPTION;
+                }
+                catch (DbEntityValidationException e)
+                {
+                    result = DaoUtilities.ENTITY_VALIDATION_EXCEPTION;
+                }
+                catch (NotSupportedException e)
+                {
+                    result = DaoUtilities.UNSUPPORTED_EXCEPTION;
+                }
+                catch (ObjectDisposedException e)
+                {
+                    result = DaoUtilities.DISPOSED_EXCEPTION;
+                }
+                catch (InvalidOperationException e)
+                {
+                    result = DaoUtilities.INVALID_OPERATION_EXCEPTION;
+                }
 
-                return true;
+                result = DaoUtilities.NO_CHANGES;
             }
-            return false;
+            return result;
         }
     }
 }
