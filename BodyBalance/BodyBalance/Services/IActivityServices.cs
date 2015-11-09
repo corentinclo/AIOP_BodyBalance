@@ -33,7 +33,7 @@ namespace BodyBalance.Services
         /// <summary>
         /// Delete an activity
         /// </summary>
-        /// <param name="ActivityId"></param>
+        /// <param name="am"></param>
         /// <returns></returns>
         int DeleteActivity(ActivityModel am);
 
@@ -44,10 +44,10 @@ namespace BodyBalance.Services
         List<ActivityModel> FindAllActivities();
 
         /// <summary>
-        /// Retrieve all event of the activity with the id in parameter
+        /// Find all the activities of a manager with the id in parameter
         /// </summary>
-        /// <param name="ActivityId"></param>
+        /// <param name="ManagerId"></param>
         /// <returns></returns>
-        List<EventModel> FindAllEventOfActivity(string ActivityId);
+        List<ActivityModel> FindAllActivityOfManager(string ManagerId);
     }
 }

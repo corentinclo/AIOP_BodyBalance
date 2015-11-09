@@ -192,10 +192,18 @@ namespace BodyBalance.Services
             return activitiesList;
         }
 
-        /*public List<EventModel> FindAllEventOfActivity(string ActivityId)
+        public List<ActivityModel> FindAllActivityOfManager(string ManagerId)
         {
+            List<ActivityModel> activitiesList = new List<ActivityModel>();
+            IQueryable<ACTIVITY> query = db.Set<ACTIVITY>().Where(ACTIVITY => ACTIVITY.ACTIVITY_MANAGER == ManagerId);
 
-        }*/
+            foreach (ACTIVITY a in query)
+            {
+                activitiesList.Add(ConvertActivityToActivityModel(a));
+            }
+
+            return activitiesList;
+        }
 
         private ActivityModel ConvertActivityToActivityModel(ACTIVITY a)
         {

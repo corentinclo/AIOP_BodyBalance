@@ -19,7 +19,7 @@ namespace BodyBalance.Services
         /// <summary>
         /// Find an Event with his id
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="EventId"></param>
         /// <returns></returns>
         EventModel FindEventById(string EventId);
 
@@ -33,7 +33,7 @@ namespace BodyBalance.Services
         /// <summary>
         /// Delete an event
         /// </summary>
-        /// <param name="EventId"></param>
+        /// <param name="em"></param>
         /// <returns></returns>
         int DeleteEvent(EventModel em);
 
@@ -42,5 +42,26 @@ namespace BodyBalance.Services
         /// </summary>
         /// <returns></returns>
         List<EventModel> FindAllEvents();
+
+        /// <summary>
+        /// Retrieve all event of the activity with the id in parameter
+        /// </summary>
+        /// <param name="ActivityId"></param>
+        /// <returns></returns>
+        List<EventModel> FindAllEventsOfActivity(string ActivityId);
+
+        /// <summary>
+        /// Find all the events of a contributor with the id in parameter
+        /// </summary>
+        /// <param name="ContributorId"></param>
+        /// <returns></returns>
+        List<EventModel> FindAllEventsOfContributor(string ContributorId);
+
+        /// <summary>
+        /// Find all the events of a manager with the id in parameter
+        /// </summary>
+        /// <param name="ManagerId"></param>
+        /// <returns></returns>
+        List<EventModel> FindAllEventsOfManager(string ManagerId);
     }
 }

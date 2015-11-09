@@ -19,7 +19,7 @@ namespace BodyBalance.Services
         /// <summary>
         /// Find a member with his id
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="MemberId"></param>
         /// <returns></returns>
         MemberModel FindMemberById(string MemberId);
 

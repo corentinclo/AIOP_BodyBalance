@@ -19,7 +19,7 @@ namespace BodyBalance.Services
         /// <summary>
         /// Find a contributor with his id
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="ContributorId"></param>
         /// <returns></returns>
         ContributorModel FindContributorById(string ContributorId);
 

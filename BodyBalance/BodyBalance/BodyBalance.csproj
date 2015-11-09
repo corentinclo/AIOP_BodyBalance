@@ -375,7 +375,6 @@
     <Content Include="front-end\CSS\application.css" />
     <Content Include="front-end\CSS\bootstrap.min.css" />
     <Content Include="front-end\JS\application.js" />
-    <Content Include="front-end\JS\bootbox.min.js" />
     <Content Include="front-end\JS\bootstrap.min.js" />
     <Content Include="front-end\index.html" />
     <Content Include="front-end\JS\jquery-2.1.4.min.js" />
@@ -385,7 +384,6 @@
     <Content Include="front-end\JS\pages\Register.js" />
     <Content Include="front-end\pages\MainPage.html" />
     <Content Include="front-end\JS\pages\MainPage.js" />
-    <Content Include="front-end\pages\MyAccount.html" />
     <Content Include="front-end\pages\Register.html" />
     <Content Include="front-end\Test.html" />
     <Content Include="Global.asax" />

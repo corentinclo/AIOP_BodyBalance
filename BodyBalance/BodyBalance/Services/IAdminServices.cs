@@ -19,7 +19,7 @@ namespace BodyBalance.Services
         /// <summary>
         /// Find an admin with his id
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="AdminId"></param>
         /// <returns></returns>
         AdminModel FindAdminById(string AdminId);
 

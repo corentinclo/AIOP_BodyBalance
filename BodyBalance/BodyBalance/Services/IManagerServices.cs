@@ -19,7 +19,7 @@ namespace BodyBalance.Services
         /// <summary>
         /// Find a manager with his id
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="ManagerId"></param>
         /// <returns></returns>
         ManagerModel FindManagerById(string ManagerId);
 

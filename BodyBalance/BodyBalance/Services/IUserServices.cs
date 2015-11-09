@@ -19,14 +19,14 @@ namespace BodyBalance.Services
         /// <summary>
         /// Find a user with his id
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="UserId"></param>
         /// <returns></returns>
         UserModel FindUserById(string UserId);
 
         /// <summary>
         /// Find user by id and password
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="UserId"></param>
         /// <param name="pwd"></param>
         /// <returns></returns>
         UserModel FindUserByIdAndPassword(string UserId, string pwd);
