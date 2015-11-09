@@ -1,13 +1,16 @@
-﻿window.app.mappers['*'] = function (sender) { //Toujours appelé
+﻿/*
+//Méthode toujours appelée, exemple
+window.app.mappers['*'] = function (sender) { //Toujours appelé
     $(sender).tooltip({ title: "Clické !", trigger: 'manual' , placement: 'bottom'}).tooltip('show');
     setTimeout(function () {
         $(sender).tooltip('hide').tooltip('destroy');
     }, 1000);
     return true;
 }
+*/
 
 window.app.mappers['#'] = function () {
-    alert("Retour à l'accueil");
+    location.reload();
     return false;
 }
 
@@ -22,7 +25,9 @@ window.app.mappers['#contact'] = function () {
 }
 
 window.app.mappers['#register'] = function () {
-    alert('S\'enregistrer');
+    $.get('pages/Register.html', null, function (data) {
+        $('#main').html(data);
+    });
     return false;
 }
 
@@ -32,7 +37,7 @@ window.app.ajaxifyForm('#login_form', function (result) {
     });
 }, function (result) {
     $.get('pages/MainPage.html', null, function (data) {
-        $('#main').html(data);
+        alert('Mauvais login et/ou mot de passe');
     });
 }, 'application/json');
 

@@ -359,8 +359,10 @@
     <Content Include="front-end\index.html" />
     <Content Include="front-end\JS\jquery-2.1.4.min.js" />
     <Content Include="front-end\JS\pages\index.js" />
+    <Content Include="front-end\JS\pages\Register.js" />
     <Content Include="front-end\pages\MainPage.html" />
     <Content Include="front-end\JS\pages\MainPage.js" />
+    <Content Include="front-end\pages\Register.html" />
     <Content Include="front-end\Test.html" />
     <Content Include="Global.asax" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
