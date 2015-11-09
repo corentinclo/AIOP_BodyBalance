@@ -54,7 +54,7 @@ namespace BodyBalance.Services
                 pwd = shaM.ComputeHash(Encoding.UTF8.GetBytes(pwd)).ToString();
             }
 
-            USER1 u = ((USER1) db.USER1.Where(USER1 => USER1.USER_ID == id && USER1.USER_PASSWORD == pwd));
+            USER1 u = ((USER1) db.USER1.Where(USER1 => USER1.USER_ID == id && USER1.USER_PASSWORD == pwd).FirstOrDefault(null));
 
             return ConvertUserToUserModel(u);
         }
@@ -119,22 +119,34 @@ namespace BodyBalance.Services
 
         public Boolean IsAdmin(UserModel um)
         {
+            if (db.ADMIN.Find(um.UserId) != null)
+                return true;
 
+            return false;
         }
 
         public Boolean IsContributor(UserModel um)
         {
+            if (db.CONTRIBUTOR.Find(um.UserId) != null)
+                return true;
 
+            return false;
         }
 
         public Boolean IsManager(UserModel um)
         {
+            if (db.MANAGER.Find(um.UserId) != null)
+                return true;
 
+            return false;
         }
 
         public Boolean IsMember(UserModel um)
         {
+            if (db.MEMBER.Find(um.UserId) != null)
+                return true;
 
+            return false;
         }
 
         private UserModel ConvertUserToUserModel(USER1 u)
