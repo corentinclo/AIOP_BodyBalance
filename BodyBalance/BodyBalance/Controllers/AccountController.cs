@@ -81,7 +81,7 @@ namespace BodyBalance.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return Ok();
+                return Ok(User.Identity.Name);
             }
             return Unauthorized();
         }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BodyBalance.Services
 {
-    interface IActivityServices
+    public interface IActivityServices
     {
         /// <summary>
         /// Create an activity

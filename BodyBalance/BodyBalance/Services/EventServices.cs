@@ -10,7 +10,7 @@ using System.Web;
 
 namespace BodyBalance.Services
 {
-    public class EventServices
+    public class EventServices : IEventServices
     {
         private Entities db = new Entities();
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BodyBalance.Services
 {
-    interface IEventServices
+    public interface IEventServices
     {
         /// <summary>
         /// Create an event

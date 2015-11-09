@@ -40,6 +40,12 @@ namespace BodyBalance.App_Start
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<IUserServices, UserServices>();
             container.RegisterType<ITokenServices, TokenServices>();
+            container.RegisterType<IActivityServices, ActivityServices>();
+            container.RegisterType<IAdminServices, AdminServices>();
+            container.RegisterType<IContributorServices, ContributorServices>();
+            container.RegisterType<IEventServices, EventServices>();
+            container.RegisterType<IManagerServices, ManagerServices>();
+            container.RegisterType<IMemberServices, MemberServices>();
         }
     }
 }
