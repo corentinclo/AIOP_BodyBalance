@@ -5,6 +5,7 @@
     var Application = function () {
         //Tableau de fonctions contenant les triggers à déclencher par hrefToAjax
         this.mappers = [];
+        this.token = "";
     }
 
     /**
@@ -62,6 +63,31 @@
             });
             return false;
         });
+    }
+
+    Application.prototype.sendRestRequest = function (url, method, data, on_success, on_error, contentType, force_json) {
+        if (typeof contentType == 'undefined') {
+            contentType = "application/json";
+        }
+        if (typeof force_json == 'undefined') {
+            force_json = false;
+        }
+        if (force_json === true) {
+            data = JSON.stringify(data);
+        }
+
+        var t = this;
+        $.ajax({
+            url: url,
+            method: method,
+            data: data,
+            success: on_success,
+            error: on_error,
+            contentType: contentType,
+            beforeSend: function (request) {
+                request.setRequestHeader("Authorization", "Bearer " + t.token);
+            }
+        })
     }
 
     window.app = new Application();
