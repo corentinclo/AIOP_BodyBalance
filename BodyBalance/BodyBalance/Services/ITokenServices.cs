@@ -10,7 +10,7 @@ namespace BodyBalance.Services
     public interface ITokenServices
     {
         int CreateToken(TokenModel tm);
-        TokenModel FindToken(String id, String token);
+        TokenModel FindToken(String TokenId, String token);
         int UpdateToken(TokenModel tm);
         int DeleteToken(TokenModel tm);
 

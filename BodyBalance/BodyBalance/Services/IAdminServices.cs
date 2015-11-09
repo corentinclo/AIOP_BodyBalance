@@ -21,7 +21,7 @@ namespace BodyBalance.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        AdminModel FindAdminById(string id);
+        AdminModel FindAdminById(string AdminId);
 
         /// <summary>
         /// Delete an admin

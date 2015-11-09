@@ -7,42 +7,40 @@ using System.Threading.Tasks;
 
 namespace BodyBalance.Services
 {
-    interface IMemberServices
+    interface IEventServices
     {
         /// <summary>
-        /// Create a member
+        /// Create an event
         /// </summary>
-        /// <param name="mm"></param>
+        /// <param name="am"></param>
         /// <returns></returns>
-        int CreateMember(MemberModel mm);
+        int CreateEvent(EventModel em);
 
         /// <summary>
-        /// Find a member with his id
+        /// Find an Event with his id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        MemberModel FindMemberById(string MemberId);
+        EventModel FindEventById(string EventId);
 
         /// <summary>
-        /// Update a member
+        /// Update an event
         /// </summary>
-        /// <param name="mm"></param>
+        /// <param name="am"></param>
         /// <returns></returns>
-        int UpdateMember(MemberModel mm);
+        int UpdateEvent(EventModel em);
 
         /// <summary>
-        /// Delete a member
+        /// Delete an event
         /// </summary>
-        /// <param name="mm"></param>
+        /// <param name="EventId"></param>
         /// <returns></returns>
-        int DeleteMember(MemberModel mm);
+        int DeleteEvent(EventModel em);
 
         /// <summary>
-        /// Retrieve all the members
+        /// Retrieve all events
         /// </summary>
         /// <returns></returns>
-        List<MemberModel> FindAllMembers();
-
-
+        List<EventModel> FindAllEvents();
     }
 }

@@ -21,7 +21,7 @@ namespace BodyBalance.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        UserModel FindUserById(string id);
+        UserModel FindUserById(string UserId);
 
         /// <summary>
         /// Find user by id and password
@@ -29,7 +29,7 @@ namespace BodyBalance.Services
         /// <param name="id"></param>
         /// <param name="pwd"></param>
         /// <returns></returns>
-        UserModel FindUserByIdAndPassword(string id, string pwd);
+        UserModel FindUserByIdAndPassword(string UserId, string pwd);
 
         /// <summary>
         /// Update a user

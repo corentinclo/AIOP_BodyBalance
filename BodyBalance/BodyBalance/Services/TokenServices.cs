@@ -65,11 +65,11 @@ namespace BodyBalance.Services
             return result;
         }
 
-        public TokenModel FindToken(String id, String token)
+        public TokenModel FindToken(String TokenId, String token)
         {
             TokenModel tm = new TokenModel();
 
-            TOKEN t = db.TOKEN.Find(id, token);
+            TOKEN t = db.TOKEN.Find(TokenId, token);
             tm.UserId = t.USER_ID;
             tm.Token = t.TOKEN1;
             tm.ExpireDate = t.EXP_DATE;
