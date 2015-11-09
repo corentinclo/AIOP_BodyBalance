@@ -4,6 +4,7 @@
 
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <a class="btn btn-default pull-right" style="margin-right:10px" href="#changePassword">Change password</a>
                 <h4 class="modal-title">My Account</h4>
             </div>
             <div class="modal-body">
@@ -79,13 +80,43 @@
     </div>
 </div>
 
-<script>
-    $(function () {
-        var testAccount = {
-            UserId: "Test",
-            Phone: "0648128406"
-        };
-        window.app.FillFormWithObject('#my_account_form', testAccount);
-        $('#myAccountModal').modal('show');
-    })
-</script>
+<div id="changePassModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Change password</h4>
+            </div>
+            <div class="modal-body">
+                <form action="Users/" method="PUT" id="change_password_form" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-6 col-md-4" for="old_password_input">Old password</label>
+                        <div class="col-sm-6 col-md-8">
+                            <input class="form-control" type="password" name="OldPassword" placeholder="Old password" id="old_password_input" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 col-md-4" for="password_input">New password</label>
+                        <div class="col-sm-6 col-md-8">
+                            <input class="form-control" type="password" name="password" placeholder="Password" id="password_input" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 col-md-4" for="password_input">Confirm new password</label>
+                        <div class="col-sm-6 col-md-8">
+                            <input class="form-control" type="password" name="c_password" placeholder="Password" id="c_password_input" required />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" onclick="$('#change_password_form').submit();" class="btn btn-primary">Save changes</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="JS/pages/MyAccount.js"></script>
