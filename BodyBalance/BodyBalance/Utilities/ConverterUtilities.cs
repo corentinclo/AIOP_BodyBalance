@@ -181,5 +181,38 @@ namespace BodyBalance.Utilities
 
             return em;
         }
+
+        public RoomModel ConvertRoomToRoomModel(ROOM r)
+        {
+            RoomModel rm = new RoomModel();
+
+            if (r != null)
+            {
+                rm.RoomId = r.ROOM_ID;
+                rm.Name = r.ROOM_NAME;
+                rm.Superficy = r.ROOM_SUPERFICY;
+                rm.MaxNb = r.ROOM_MAXNBR;
+            }
+            else
+                rm = null;
+
+            return rm;
+        }
+
+        public AccessoryModel ConvertAccesoryToAccessoryModel(ACCESSORY a)
+        {
+            AccessoryModel am = new AccessoryModel();
+
+            if (a != null)
+            {
+                am.AccessoryId = a.ACCESSORY_ID;
+                am.Name = a.ACCESSORY_NAME;
+                am.Quantity = a.ACCESSORY_QUANTITY;
+            }
+            else
+                am = null;
+
+            return am;
+        }
     }
 }
