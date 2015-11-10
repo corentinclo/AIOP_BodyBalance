@@ -42,26 +42,5 @@ namespace BodyBalance.Services
         /// </summary>
         /// <returns></returns>
         List<EventModel> FindAllEvents();
-
-        /// <summary>
-        /// Retrieve all event of the activity with the id in parameter
-        /// </summary>
-        /// <param name="ActivityId"></param>
-        /// <returns></returns>
-        List<EventModel> FindAllEventsOfActivity(string ActivityId);
-
-        /// <summary>
-        /// Find all the events of a contributor with the id in parameter
-        /// </summary>
-        /// <param name="ContributorId"></param>
-        /// <returns></returns>
-        List<EventModel> FindAllEventsOfContributor(string ContributorId);
-
-        /// <summary>
-        /// Find all the events of a manager with the id in parameter
-        /// </summary>
-        /// <param name="ManagerId"></param>
-        /// <returns></returns>
-        List<EventModel> FindAllEventsOfManager(string ManagerId);
     }
 }

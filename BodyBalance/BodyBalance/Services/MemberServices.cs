@@ -13,6 +13,7 @@ namespace BodyBalance.Services
     public class MemberServices : IMemberServices
     {
         private Entities db = new Entities();
+        private ConverterUtilities cu = new ConverterUtilities();
 
         public int CreateMember(MemberModel mm)
         {
@@ -69,7 +70,7 @@ namespace BodyBalance.Services
         {
             MEMBER m = db.MEMBER.Find(MemberId);
 
-            return ConvertMemberToMemberModel(m);
+            return cu.ConvertMemberToMemberModel(m);
         }
 
         public int UpdateMember(MemberModel mm)
@@ -180,37 +181,10 @@ namespace BodyBalance.Services
 
             foreach (MEMBER m in query)
             {
-                membersList.Add(ConvertMemberToMemberModel(m));
+                membersList.Add(cu.ConvertMemberToMemberModel(m));
             }
 
             return membersList;
-        }
-
-        private MemberModel ConvertMemberToMemberModel(MEMBER m)
-        {
-            USER1 u = db.USER1.Find(m.MEMBER_ID);
-
-            MemberModel mm = new MemberModel();
-
-            if (m != null && u != null)
-            {
-                mm.UserId = u.USER_ID;
-                mm.Password = u.USER_PASSWORD;
-                mm.FirstName = u.USER_FIRSTNAME;
-                mm.LastName = u.USER_LASTNAME;
-                mm.Adress1 = u.USER_ADR1;
-                mm.Adress2 = u.USER_ADR2;
-                mm.PC = u.USER_PC;
-                mm.Town = u.USER_TOWN;
-                mm.Phone = u.USER_PHONE;
-                mm.Mail = u.USER_MAIL;
-
-                mm.PayDate = m.MEMBER_PAYFEEDATE;
-            }
-            else
-                mm = null;
-
-            return mm;
         }
     }
 }

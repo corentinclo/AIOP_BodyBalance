@@ -13,6 +13,7 @@ namespace BodyBalance.Services
     public class ContributorServices : IContributorServices
     {
         private Entities db = new Entities();
+        private ConverterUtilities cu = new ConverterUtilities();
 
         public int CreateContributor(ContributorModel cm)
         {
@@ -69,7 +70,7 @@ namespace BodyBalance.Services
         {
             CONTRIBUTOR c = db.CONTRIBUTOR.Find(ContributorId);
 
-            return ConvertContributorToContributorModel(c);
+            return cu.ConvertContributorToContributorModel(c);
         }
 
         public int UpdateContributor(ContributorModel cm)
@@ -181,38 +182,23 @@ namespace BodyBalance.Services
 
             foreach (CONTRIBUTOR c in query)
             {
-                contributorsList.Add(ConvertContributorToContributorModel(c));
+                contributorsList.Add(cu.ConvertContributorToContributorModel(c));
             }
 
             return contributorsList;
         }
 
-        private ContributorModel ConvertContributorToContributorModel(CONTRIBUTOR c)
+        public List<EventModel> FindAllEventsOfContributor(string ContributorID)
         {
-            USER1 u = db.USER1.Find(c.CONTRIBUTOR_ID);
+            List<EventModel> eventsList = new List<EventModel>();
+            IQueryable<EVENT> query = db.Set<EVENT>().Where(EVENT => EVENT.EVENT_CONTRIBUTOR == ContributorID);
 
-            ContributorModel cm = new ContributorModel();
-
-            if (c != null && u != null)
+            foreach (EVENT e in query)
             {
-                cm.UserId = u.USER_ID;
-                cm.Password = u.USER_PASSWORD;
-                cm.FirstName = u.USER_FIRSTNAME;
-                cm.LastName = u.USER_LASTNAME;
-                cm.Adress1 = u.USER_ADR1;
-                cm.Adress2 = u.USER_ADR2;
-                cm.PC = u.USER_PC;
-                cm.Town = u.USER_TOWN;
-                cm.Phone = u.USER_PHONE;
-                cm.Mail = u.USER_MAIL;
-
-                cm.ShortDesc = c.CONTRIBUTOR_SHORTDESC;
-                cm.LongDesc = c.CONTRIBUTOR_LONGDESC;
+                eventsList.Add(cu.ConvertEventToEventModel(e));
             }
-            else
-                cm = null;
 
-            return cm;
+            return eventsList;
         }
     }
 }

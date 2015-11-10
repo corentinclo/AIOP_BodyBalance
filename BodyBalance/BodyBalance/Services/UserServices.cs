@@ -15,6 +15,7 @@ namespace BodyBalance.Services
     public class UserServices : IUserServices
     {
         private Entities db = new Entities();
+        private ConverterUtilities cu = new ConverterUtilities();
 
         public int CreateUser(UserModel um)
         {
@@ -77,7 +78,7 @@ namespace BodyBalance.Services
         {
             USER1 u = db.USER1.Find(UserId);
 
-            return ConvertUserToUserModel(u);
+            return cu.ConvertUserToUserModel(u);
         }
 
         public UserModel FindUserByIdAndPassword(string id, string pwd)
@@ -85,7 +86,7 @@ namespace BodyBalance.Services
             pwd = hashSHA512(pwd);
             USER1 u = ((USER1) db.USER1.Where(USER1 => USER1.USER_ID == id && USER1.USER_PASSWORD == pwd).FirstOrDefault());
 
-            return ConvertUserToUserModel(u);
+            return cu.ConvertUserToUserModel(u);
         }
 
         public int UpdateUser(UserModel um)
@@ -204,7 +205,7 @@ namespace BodyBalance.Services
 
             foreach(USER1 u in query)
             {
-                usersList.Add(ConvertUserToUserModel(u));
+                usersList.Add(cu.ConvertUserToUserModel(u));
             }
 
             return usersList;
@@ -240,29 +241,6 @@ namespace BodyBalance.Services
                 return true;
 
             return false;
-        }
-
-        private UserModel ConvertUserToUserModel(USER1 u)
-        {
-            UserModel um = new UserModel();
-
-            if (u != null)
-            {
-                um.UserId = u.USER_ID;
-                um.Password = u.USER_PASSWORD;
-                um.FirstName = u.USER_FIRSTNAME;
-                um.LastName = u.USER_LASTNAME;
-                um.Adress1 = u.USER_ADR1;
-                um.Adress2 = u.USER_ADR2;
-                um.PC = u.USER_PC;
-                um.Town = u.USER_TOWN;
-                um.Phone = u.USER_PHONE;
-                um.Mail = u.USER_MAIL;
-            }
-            else
-                um = null;
-
-            return um;
         }
 
         private string hashSHA512(string unhashedValue)
