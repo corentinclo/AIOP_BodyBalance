@@ -1,15 +1,28 @@
 ﻿$(function () {
-    var testActivity = {
-        ACTIVITY_NAME: "Yoga",
-        ACTIVITY_SHORTDESC: "Faite du yoga",
-        ACTIVITY_MANAGER: "Bob",
-        ACTIVITY_LONGDESC: "Le yoga, c'est trop cool!"
-    };
-
-    $.getJSON("ajax/test.json", function (data) {
-        var items = [];
+    window.app.sendRestRequest('/activities', 'GET', null, function (data) {
         $.each(data, function (key, val) {
-            items.push("<tr><td>"+ val + "</td></tr>");
+            var $tr = $(document.createElement("tr")).appendTo(".table tbody");
+            $tr.append("<td>" + val.Name + "</td><td>" + val.ShortDesc + "</td><td>" + val.ManagerId + "</td>")
+            $tr.click(function () {
+                bootbox.dialog({
+                    message: val.LongDesc,
+                    title: val.Name,
+                    buttons: {
+                        success: {
+                            label: "This activity events",
+                            className: "btn-success",
+                            callback: function () {
+                                bootbox.alert("Soon...");
+                            }
+                        },
+                        main: {
+                            label: "Back",
+                            className: "btn-primary",
+                        }
+                    }
+                });
+            });
         });
     });
+
 });

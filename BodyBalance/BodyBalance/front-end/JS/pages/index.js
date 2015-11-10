@@ -15,7 +15,16 @@ window.app.mappers['#'] = function () {
 }
 
 window.app.mappers['#about'] = function () {
-    alert('A propos de');
+    bootbox.dialog({
+        message: "ZenLounge is a great gym or association or shop, well nobody knows... But it's great! We are great! And YOU are great!",
+        title: "About ZenLounge",
+        buttons: {
+            main: {
+                label: "Thanks for these information",
+                className: "btn-primary",
+            }
+        }
+    });
     return false;
 }
 
@@ -28,6 +37,8 @@ window.app.mappers['#register'] = function () {
 
 window.app.mappers['#activities'] = function () {
     $.get('pages/Activities.html', null, function (data) {
+        $("li.active").removeClass("active");
+        $("#activities").toggleClass("active"),
         $('#main').html(data);
     });
     return false;
