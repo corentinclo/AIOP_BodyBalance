@@ -16,14 +16,16 @@ namespace BodyBalance.Controllers
         private IUserServices userServices;
         private ITokenServices tokenServices;
 
-        // GET: /Users
-        [Route("Users")]
-        [HttpGet]
+        
         public UsersController(IUserServices user,ITokenServices token)
         {
             this.userServices = user;
             this.tokenServices = token;
         }
+
+        // GET: /Users
+        [Route("Users")]
+        [HttpGet]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
