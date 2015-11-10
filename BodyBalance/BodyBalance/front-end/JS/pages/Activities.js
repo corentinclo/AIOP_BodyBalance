@@ -6,6 +6,10 @@
         ACTIVITY_LONGDESC: "Le yoga, c'est trop cool!"
     };
 
-    $('#activitiesTable > tbody:last-child').append('<tr><td>' + testActivity.ACTIVITY_NAME + '</td><td>' + testActivity.ACTIVITY_SHORTDESC + '</td><td>' + testActivity.ACTIVITY_MANAGER + '</td></tr>');
-
+    $.getJSON("ajax/test.json", function (data) {
+        var items = [];
+        $.each(data, function (key, val) {
+            items.push("<tr><td>"+ val + "</td></tr>");
+        });
+    });
 });
