@@ -26,6 +26,13 @@ window.app.mappers['#register'] = function () {
     return false;
 }
 
+window.app.mappers['#activities'] = function () {
+    $.get('pages/Activities.html', null, function (data) {
+        $('#main').html(data);
+    });
+    return false;
+}
+
 window.app.ajaxifyForm('#login_form', function (result) {
     window.app.storeLoginParameters(result.userName, result.access_token, $('#cookie_input').is(':checked'));
     $.get('pages/MainPage.html', null, function (data) {
