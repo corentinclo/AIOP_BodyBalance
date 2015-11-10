@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BodyBalance.Services
 {
-    interface IAccessoryServices
+    public interface IAccessoryServices
     {
         int CreateAccessory(AccessoryModel am);
         AccessoryModel FindAccessoryById(string AccessoryId);
