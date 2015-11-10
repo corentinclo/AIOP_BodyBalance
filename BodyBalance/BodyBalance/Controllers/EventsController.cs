@@ -118,5 +118,53 @@ namespace BodyBalance.Controllers
             }
             return InternalServerError();
         }
+
+        // GET: /Events/{event_id}/Users
+        [Route("Events/{event_id}/Users")]
+        [HttpGet]
+        public IHttpActionResult GetUsers(string event_id)
+        {
+            var myEvent = eventServices.FindEventById(event_id);
+            if (myEvent == null)
+            {
+                return NotFound();
+            }
+
+            var listUsers = eventServices.FindUsersOfEvent(event_id);
+
+            return Ok(listUsers);
+        }
+
+        // GET: /Events/{event_id}/Contributor
+        [Route("Events/{event_id}/Contributor")]
+        [HttpGet]
+        public IHttpActionResult GetContributor(string event_id)
+        {
+            var myEvent = eventServices.FindEventById(event_id);
+            if (myEvent == null)
+            {
+                return NotFound();
+            }
+
+            var contributor = eventServices.FindContributorOfEvent(event_id);
+
+            return Ok(contributor);
+        }
+
+        // GET: /Events/{event_id}/Manager
+        [Route("Events/{event_id}/Manager")]
+        [HttpGet]
+        public IHttpActionResult GetManager(string event_id)
+        {
+            var myEvent = eventServices.FindEventById(event_id);
+            if (myEvent == null)
+            {
+                return NotFound();
+            }
+
+            var manager = eventServices.FindManagerOfEvent(event_id);
+
+            return Ok(manager);
+        }
     }
 }

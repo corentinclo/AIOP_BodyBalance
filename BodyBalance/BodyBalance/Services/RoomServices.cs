@@ -1,39 +1,32 @@
-﻿using BodyBalance.Models;
-using BodyBalance.Persistence;
-using BodyBalance.Utilities;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
-using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
+using BodyBalance.Models;
+using BodyBalance.Utilities;
+using BodyBalance.Persistence;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 
 namespace BodyBalance.Services
 {
-    public class EventServices : IEventServices
+    public class RoomServices : IRoomServices
     {
         private Entities db = new Entities();
         private ConverterUtilities cu = new ConverterUtilities();
 
-        public int CreateEvent(EventModel em)
+        public int CreateRoom(RoomModel rm)
         {
             int result = DaoUtilities.NO_CHANGES;
 
-            EVENT ev = db.EVENT.Create();
+            ROOM r = db.ROOM.Create();
 
-            ev.EVENT_ID = em.EventId;
-            ev.EVENT_NAME = em.name;
-            ev.EVENT_DURATION = em.Duration;
-            ev.EVENT_MAXNBR = em.MaxNb;
-            ev.EVENT_PRICE = em.Price;
-            ev.EVENT_ROOM = em.RoomId;
-            ev.EVENT_ACTIVITY = em.ActivityId;
-            ev.EVENT_CONTRIBUTOR = em.ContributorId;
-            ev.EVENT_MANAGER = em.ManagerId;
-            ev.EVENT_TYPE = em.Type;
-            ev.EVENT_DATE = em.EventDate;
+            r.ROOM_ID = rm.RoomId;
+            r.ROOM_NAME = rm.Name;
+            r.ROOM_SUPERFICY = rm.Superficy;
+            r.ROOM_MAXNBR = rm.MaxNb;
 
-            db.EVENT.Add(ev);
+            db.ROOM.Add(r);
             try
             {
                 int saveResult = db.SaveChanges();
@@ -72,33 +65,26 @@ namespace BodyBalance.Services
                 result = DaoUtilities.INVALID_OPERATION_EXCEPTION;
             }
             return result;
-    }
-
-        public EventModel FindEventById(string EventId)
-        {
-            EVENT ev = db.EVENT.Find(EventId);
-
-            return cu.ConvertEventToEventModel(ev);
         }
 
-        public int UpdateEvent(EventModel em)
+        public RoomModel FindRoomById(string RoomId)
+        {
+            ROOM r = db.ROOM.Find(RoomId);
+
+            return cu.ConvertRoomToRoomModel(r);
+        }
+
+        public int UpdateRoom(RoomModel rm)
         {
             int result = DaoUtilities.NO_CHANGES;
 
-            EVENT ev = db.EVENT.Find(em.EventId);
+            ROOM r = db.ROOM.Find(rm.RoomId);
 
-            if (ev != null)
+            if (r != null)
             {
-                ev.EVENT_NAME = em.name;
-                ev.EVENT_DURATION = em.Duration;
-                ev.EVENT_MAXNBR = em.MaxNb;
-                ev.EVENT_PRICE = em.Price;
-                ev.EVENT_ROOM = em.RoomId;
-                ev.EVENT_ACTIVITY = em.ActivityId;
-                ev.EVENT_CONTRIBUTOR = em.ContributorId;
-                ev.EVENT_MANAGER = em.ManagerId;
-                ev.EVENT_TYPE = em.Type;
-                ev.EVENT_DATE = em.EventDate;
+                r.ROOM_NAME = rm.Name;
+                r.ROOM_SUPERFICY = rm.Superficy;
+                r.ROOM_MAXNBR = rm.MaxNb;
 
                 try
                 {
@@ -141,16 +127,15 @@ namespace BodyBalance.Services
             return result;
         }
 
-
-        public int DeleteEvent(EventModel em)
+        public int DeleteRoom(RoomModel rm)
         {
             int result = DaoUtilities.NO_CHANGES;
 
-            EVENT ev = db.EVENT.Find(em.EventId);
+            ROOM r = db.ROOM.Find(rm.RoomId);
 
-            if (ev != null)
+            if (r != null)
             {
-                db.EVENT.Remove(ev);
+                db.ROOM.Remove(r);
                 try
                 {
                     int saveResult = db.SaveChanges();
@@ -193,49 +178,27 @@ namespace BodyBalance.Services
             return result;
         }
 
-
-        public List<EventModel> FindAllEvents()
+        public List<RoomModel> FindAllRooms()
         {
-            List<EventModel> eventsList = new List<EventModel>();
-            IQueryable<EVENT> query = db.Set<EVENT>();
+            List<RoomModel> roomsList = new List<RoomModel>();
+            IQueryable<ROOM> query = db.Set<ROOM>();
 
-            foreach (EVENT e in query)
+            foreach (ROOM r in query)
             {
-                eventsList.Add(cu.ConvertEventToEventModel(e));
+                roomsList.Add(cu.ConvertRoomToRoomModel(r));
             }
 
-            return eventsList;
+            return roomsList;
         }
 
-        public List<UserModel> FindUsersOfEvent(string EventId)
+        public List<EventModel> FindAllEventsOfRoom(string RoomId)
         {
-            List<UserModel> usersList = new List<UserModel>();
-            IQueryable<USER1> query = db.Set<USER1>().Where(USER1 => USER1.EVENT.Any(EVENT => EVENT.EVENT_ID == EventId));
-
-            foreach (USER1 u in query)
-            {
-                usersList.Add(cu.ConvertUserToUserModel(u));
-            }
-
-            return usersList;
+            throw new NotImplementedException();
         }
 
-        public UserModel FindContributorOfEvent(string EventId)
+        public List<AccessoryModel> FindAllAccessoriesOfRoom(string RoomId)
         {
-            EVENT ev = db.EVENT.Find(EventId);
-
-            CONTRIBUTOR c = db.CONTRIBUTOR.Find(ev.EVENT_CONTRIBUTOR);
-
-            return cu.ConvertContributorToContributorModel(c);
-        }
-
-        public UserModel FindManagerOfEvent(string EventId)
-        {
-            EVENT ev = db.EVENT.Find(EventId);
-
-            MANAGER m = db.MANAGER.Find(ev.EVENT_MANAGER);
-
-            return cu.ConvertManagerToManagerModel(m);
+            throw new NotImplementedException();
         }
     }
 }

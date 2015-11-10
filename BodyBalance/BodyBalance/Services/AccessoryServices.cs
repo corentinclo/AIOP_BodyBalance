@@ -1,39 +1,31 @@
-﻿using BodyBalance.Models;
-using BodyBalance.Persistence;
-using BodyBalance.Utilities;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
-using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
+using BodyBalance.Models;
+using BodyBalance.Persistence;
+using BodyBalance.Utilities;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 
 namespace BodyBalance.Services
 {
-    public class EventServices : IEventServices
+    public class AccessoryServices : IAccessoryServices
     {
         private Entities db = new Entities();
         private ConverterUtilities cu = new ConverterUtilities();
 
-        public int CreateEvent(EventModel em)
+        public int CreateAccessory(AccessoryModel am)
         {
             int result = DaoUtilities.NO_CHANGES;
 
-            EVENT ev = db.EVENT.Create();
+            ACCESSORY a = db.ACCESSORY.Create();
 
-            ev.EVENT_ID = em.EventId;
-            ev.EVENT_NAME = em.name;
-            ev.EVENT_DURATION = em.Duration;
-            ev.EVENT_MAXNBR = em.MaxNb;
-            ev.EVENT_PRICE = em.Price;
-            ev.EVENT_ROOM = em.RoomId;
-            ev.EVENT_ACTIVITY = em.ActivityId;
-            ev.EVENT_CONTRIBUTOR = em.ContributorId;
-            ev.EVENT_MANAGER = em.ManagerId;
-            ev.EVENT_TYPE = em.Type;
-            ev.EVENT_DATE = em.EventDate;
+            a.ACCESSORY_ID = am.AccessoryId;
+            a.ACCESSORY_NAME = am.Name;
+            a.ACCESSORY_QUANTITY = am.Quantity;
 
-            db.EVENT.Add(ev);
+            db.ACCESSORY.Add(a);
             try
             {
                 int saveResult = db.SaveChanges();
@@ -72,33 +64,25 @@ namespace BodyBalance.Services
                 result = DaoUtilities.INVALID_OPERATION_EXCEPTION;
             }
             return result;
-    }
-
-        public EventModel FindEventById(string EventId)
-        {
-            EVENT ev = db.EVENT.Find(EventId);
-
-            return cu.ConvertEventToEventModel(ev);
         }
 
-        public int UpdateEvent(EventModel em)
+        public AccessoryModel FindAccessoryById(string AccessoryId)
+        {
+            ACCESSORY a = db.ACCESSORY.Find(AccessoryId);
+
+            return cu.ConvertAccesoryToAccessoryModel(a);
+        }
+
+        public int UpdateAccessory(AccessoryModel am)
         {
             int result = DaoUtilities.NO_CHANGES;
 
-            EVENT ev = db.EVENT.Find(em.EventId);
+            ACCESSORY a = db.ACCESSORY.Find(am.AccessoryId);
 
-            if (ev != null)
+            if (a != null)
             {
-                ev.EVENT_NAME = em.name;
-                ev.EVENT_DURATION = em.Duration;
-                ev.EVENT_MAXNBR = em.MaxNb;
-                ev.EVENT_PRICE = em.Price;
-                ev.EVENT_ROOM = em.RoomId;
-                ev.EVENT_ACTIVITY = em.ActivityId;
-                ev.EVENT_CONTRIBUTOR = em.ContributorId;
-                ev.EVENT_MANAGER = em.ManagerId;
-                ev.EVENT_TYPE = em.Type;
-                ev.EVENT_DATE = em.EventDate;
+                a.ACCESSORY_NAME = am.Name;
+                a.ACCESSORY_QUANTITY = am.Quantity;
 
                 try
                 {
@@ -141,16 +125,15 @@ namespace BodyBalance.Services
             return result;
         }
 
-
-        public int DeleteEvent(EventModel em)
+        public int DeleteAccessory(AccessoryModel am)
         {
             int result = DaoUtilities.NO_CHANGES;
 
-            EVENT ev = db.EVENT.Find(em.EventId);
+            ACCESSORY a = db.ACCESSORY.Find(am.AccessoryId);
 
-            if (ev != null)
+            if (a != null)
             {
-                db.EVENT.Remove(ev);
+                db.ACCESSORY.Remove(a);
                 try
                 {
                     int saveResult = db.SaveChanges();
@@ -193,49 +176,17 @@ namespace BodyBalance.Services
             return result;
         }
 
-
-        public List<EventModel> FindAllEvents()
+        public List<AccessoryModel> FindAllAccessories()
         {
-            List<EventModel> eventsList = new List<EventModel>();
-            IQueryable<EVENT> query = db.Set<EVENT>();
+            List<AccessoryModel> accessoriesList = new List<AccessoryModel>();
+            IQueryable<ACCESSORY> query = db.Set<ACCESSORY>();
 
-            foreach (EVENT e in query)
+            foreach (ACCESSORY a in query)
             {
-                eventsList.Add(cu.ConvertEventToEventModel(e));
+                accessoriesList.Add(cu.ConvertAccesoryToAccessoryModel(a));
             }
 
-            return eventsList;
-        }
-
-        public List<UserModel> FindUsersOfEvent(string EventId)
-        {
-            List<UserModel> usersList = new List<UserModel>();
-            IQueryable<USER1> query = db.Set<USER1>().Where(USER1 => USER1.EVENT.Any(EVENT => EVENT.EVENT_ID == EventId));
-
-            foreach (USER1 u in query)
-            {
-                usersList.Add(cu.ConvertUserToUserModel(u));
-            }
-
-            return usersList;
-        }
-
-        public UserModel FindContributorOfEvent(string EventId)
-        {
-            EVENT ev = db.EVENT.Find(EventId);
-
-            CONTRIBUTOR c = db.CONTRIBUTOR.Find(ev.EVENT_CONTRIBUTOR);
-
-            return cu.ConvertContributorToContributorModel(c);
-        }
-
-        public UserModel FindManagerOfEvent(string EventId)
-        {
-            EVENT ev = db.EVENT.Find(EventId);
-
-            MANAGER m = db.MANAGER.Find(ev.EVENT_MANAGER);
-
-            return cu.ConvertManagerToManagerModel(m);
+            return accessoriesList;
         }
     }
 }

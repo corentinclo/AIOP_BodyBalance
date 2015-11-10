@@ -245,15 +245,17 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AccessoriesController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RoomsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccessoryModel.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ActivityModel.cs" />
@@ -263,6 +265,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManagerModel.cs" />
     <Compile Include="Models\MemberModel.cs" />
+    <Compile Include="Models\RoomModel.cs" />
     <Compile Include="Models\TokenModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Persistence\ACCESSORY.cs">
@@ -346,10 +349,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="Services\AccessoryServices.cs" />
     <Compile Include="Services\ActivityServices.cs" />
     <Compile Include="Services\AdminServices.cs" />
     <Compile Include="Services\ContributorServices.cs" />
     <Compile Include="Services\EventServices.cs" />
+    <Compile Include="Services\IAccessoryServices.cs" />
     <Compile Include="Services\IActivityServices.cs" />
     <Compile Include="Services\IAdminServices.cs" />
     <Compile Include="Services\IContributorServices.cs" />
@@ -358,12 +363,14 @@
     <Compile Include="Services\IMemberServices.cs" />
     <Compile Include="Services\IPunctualEventServices.cs" />
     <Compile Include="Services\IRepetitiveEventServices.cs" />
+    <Compile Include="Services\IRoomServices.cs" />
     <Compile Include="Services\ITokenServices.cs" />
     <Compile Include="Services\IUserServices.cs" />
     <Compile Include="Services\ManagerServices.cs" />
     <Compile Include="Services\MemberServices.cs" />
     <Compile Include="Services\PunctualEventServices.cs" />
     <Compile Include="Services\RepetitiveEventServices.cs" />
+    <Compile Include="Services\RoomServices.cs" />
     <Compile Include="Services\TokenServices.cs" />
     <Compile Include="Services\UserServices.cs" />
     <Compile Include="Startup.cs" />
