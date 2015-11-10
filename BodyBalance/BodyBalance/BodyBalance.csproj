@@ -356,13 +356,18 @@
     <Compile Include="Services\IEventServices.cs" />
     <Compile Include="Services\IManagerServices.cs" />
     <Compile Include="Services\IMemberServices.cs" />
+    <Compile Include="Services\IPunctualEventServices.cs" />
+    <Compile Include="Services\IRepetitiveEventServices.cs" />
     <Compile Include="Services\ITokenServices.cs" />
     <Compile Include="Services\IUserServices.cs" />
     <Compile Include="Services\ManagerServices.cs" />
     <Compile Include="Services\MemberServices.cs" />
+    <Compile Include="Services\PunctualEventServices.cs" />
+    <Compile Include="Services\RepetitiveEventServices.cs" />
     <Compile Include="Services\TokenServices.cs" />
     <Compile Include="Services\UserServices.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utilities\ConverterUtilities.cs" />
     <Compile Include="Utilities\DaoUtilities.cs" />
   </ItemGroup>
   <ItemGroup>

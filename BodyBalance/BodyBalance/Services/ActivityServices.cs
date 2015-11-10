@@ -13,6 +13,7 @@ namespace BodyBalance.Services
     public class ActivityServices : IActivityServices
     {
         private Entities db = new Entities();
+        private ConverterUtilities cu = new ConverterUtilities();
 
         public int CreateActivity(ActivityModel am)
         {
@@ -71,7 +72,7 @@ namespace BodyBalance.Services
         {
             ACTIVITY a = db.ACTIVITY.Find(ActivityId);
 
-            return ConvertActivityToActivityModel(a);
+            return cu.ConvertActivityToActivityModel(a);
         }
 
         public int UpdateActivity(ActivityModel am)
@@ -186,41 +187,25 @@ namespace BodyBalance.Services
 
             foreach (ACTIVITY a in query)
             {
-                activitiesList.Add(ConvertActivityToActivityModel(a));
+                activitiesList.Add(cu.ConvertActivityToActivityModel(a));
             }
 
             return activitiesList;
         }
 
-        public List<ActivityModel> FindAllActivityOfManager(string ManagerId)
+        public List<EventModel> FindAllEventsOfActivity(string ActivityId)
         {
-            List<ActivityModel> activitiesList = new List<ActivityModel>();
-            IQueryable<ACTIVITY> query = db.Set<ACTIVITY>().Where(ACTIVITY => ACTIVITY.ACTIVITY_MANAGER == ManagerId);
+            List<EventModel> eventsList = new List<EventModel>();
+            IQueryable<EVENT> query = db.Set<EVENT>().Where(EVENT => EVENT.EVENT_ACTIVITY == ActivityId);
 
-            foreach (ACTIVITY a in query)
+            foreach (EVENT e in query)
             {
-                activitiesList.Add(ConvertActivityToActivityModel(a));
+                eventsList.Add(cu.ConvertEventToEventModel(e));
             }
 
-            return activitiesList;
+            return eventsList;
         }
 
-        private ActivityModel ConvertActivityToActivityModel(ACTIVITY a)
-        {
-            ActivityModel am = new ActivityModel();
-
-            if (a != null)
-            {
-                am.ActivityId = a.ACTIVITY_ID;
-                am.Name = a.ACTIVITY_NAME;
-                am.ShortDesc = a.ACTIVITY_SHORTDESC;
-                am.LongDesc = a.ACTIVITY_LONGDESC;
-                am.ManagerId = a.ACTIVITY_MANAGER;
-            }
-            else
-                am = null;
-
-            return am;
-        }
+        
     }
 }

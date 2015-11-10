@@ -13,6 +13,7 @@ namespace BodyBalance.Services
     public class ManagerServices : IManagerServices
     {
         private Entities db = new Entities();
+        private ConverterUtilities cu = new ConverterUtilities();
 
         public int CreateManager(ManagerModel mm)
         {
@@ -67,7 +68,7 @@ namespace BodyBalance.Services
         {
             MANAGER m = db.MANAGER.Find(ManagerId);
 
-            return ConvertManagerToManagerModel(m);
+            return cu.ConvertManagerToManagerModel(m);
         }
 
         public int DeleteManager(ManagerModel mm)
@@ -127,35 +128,36 @@ namespace BodyBalance.Services
 
             foreach (MANAGER m in query)
             {
-                managersList.Add(ConvertManagerToManagerModel(m));
+                managersList.Add(cu.ConvertManagerToManagerModel(m));
             }
 
             return managersList;
         }
 
-        private ManagerModel ConvertManagerToManagerModel(MANAGER m)
+        public List<ActivityModel> FindAllActivitiesOfManager(string ManagerId)
         {
-            USER1 u = db.USER1.Find(m.MANAGER_ID);
+            List<ActivityModel> activitiesList = new List<ActivityModel>();
+            IQueryable<ACTIVITY> query = db.Set<ACTIVITY>().Where(ACTIVITY => ACTIVITY.ACTIVITY_MANAGER == ManagerId);
 
-            ManagerModel mm = new ManagerModel();
-
-            if (m != null && u != null)
+            foreach (ACTIVITY a in query)
             {
-                mm.UserId = u.USER_ID;
-                mm.Password = u.USER_PASSWORD;
-                mm.FirstName = u.USER_FIRSTNAME;
-                mm.LastName = u.USER_LASTNAME;
-                mm.Adress1 = u.USER_ADR1;
-                mm.Adress2 = u.USER_ADR2;
-                mm.PC = u.USER_PC;
-                mm.Town = u.USER_TOWN;
-                mm.Phone = u.USER_PHONE;
-                mm.Mail = u.USER_MAIL;
+                activitiesList.Add(cu.ConvertActivityToActivityModel(a));
             }
-            else
-                mm = null;
 
-            return mm;
+            return activitiesList;
+        }
+
+        public List<EventModel> FindAllEventsOfManager(string ManagerId)
+        {
+            List<EventModel> eventsList = new List<EventModel>();
+            IQueryable<EVENT> query = db.Set<EVENT>().Where(EVENT => EVENT.EVENT_MANAGER == ManagerId);
+
+            foreach (EVENT e in query)
+            {
+                eventsList.Add(cu.ConvertEventToEventModel(e));
+            }
+
+            return eventsList;
         }
     }
 }

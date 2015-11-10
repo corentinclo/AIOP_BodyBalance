@@ -42,5 +42,12 @@ namespace BodyBalance.Services
         /// </summary>
         /// <returns></returns>
         List<ContributorModel> FindAllContributors();
+
+        /// <summary>
+        /// Find all the events of a contributor with the id in parameter
+        /// </summary>
+        /// <param name="ContributorId"></param>
+        /// <returns></returns>
+        List<EventModel> FindAllEventsOfContributor(string ContributorId);
     }
 }

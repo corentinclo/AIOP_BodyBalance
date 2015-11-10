@@ -13,6 +13,7 @@ namespace BodyBalance.Services
     public class EventServices : IEventServices
     {
         private Entities db = new Entities();
+        private ConverterUtilities cu = new ConverterUtilities();
 
         public int CreateEvent(EventModel em)
         {
@@ -77,7 +78,7 @@ namespace BodyBalance.Services
         {
             EVENT ev = db.EVENT.Find(EventId);
 
-            return ConvertEventToEventModel(ev);
+            return cu.ConvertEventToEventModel(ev);
         }
 
         public int UpdateEvent(EventModel em)
@@ -200,72 +201,10 @@ namespace BodyBalance.Services
 
             foreach (EVENT e in query)
             {
-                eventsList.Add(ConvertEventToEventModel(e));
+                eventsList.Add(cu.ConvertEventToEventModel(e));
             }
 
             return eventsList;
-        }
-        public List<EventModel> FindAllEventsOfActivity(string ActivityId)
-        {
-            List<EventModel> eventsList = new List<EventModel>();
-            IQueryable<EVENT> query = db.Set<EVENT>().Where(EVENT => EVENT.EVENT_ACTIVITY == ActivityId);
-
-            foreach (EVENT e in query)
-            {
-                eventsList.Add(ConvertEventToEventModel(e));
-            }
-
-            return eventsList;
-        }
-
-        public List<EventModel> FindAllEventsOfContributor(string ContributorID)
-        {
-            List<EventModel> eventsList = new List<EventModel>();
-            IQueryable<EVENT> query = db.Set<EVENT>().Where(EVENT => EVENT.EVENT_CONTRIBUTOR == ContributorID);
-
-            foreach (EVENT e in query)
-            {
-                eventsList.Add(ConvertEventToEventModel(e));
-            }
-
-            return eventsList;
-        }
-
-        public List<EventModel> FindAllEventsOfManager(string ManagerId)
-        {
-            List<EventModel> eventsList = new List<EventModel>();
-            IQueryable<EVENT> query = db.Set<EVENT>().Where(EVENT => EVENT.EVENT_MANAGER == ManagerId);
-
-            foreach (EVENT e in query)
-            {
-                eventsList.Add(ConvertEventToEventModel(e));
-            }
-
-            return eventsList;
-        }
-
-        private EventModel ConvertEventToEventModel(EVENT e)
-        {
-            EventModel em = new EventModel();
-
-            if (e != null)
-            {
-                em.EventId = e.EVENT_ID;
-                em.name = e.EVENT_NAME;
-                em.Duration = e.EVENT_DURATION;
-                em.MaxNb = e.EVENT_MAXNBR;
-                em.Price = e.EVENT_PRICE;
-                em.RoomId = e.EVENT_ROOM;
-                em.ActivityId = e.EVENT_ACTIVITY;
-                em.ContributorId = e.EVENT_CONTRIBUTOR;
-                em.ManagerId = e.EVENT_MANAGER;
-                em.Type = e.EVENT_TYPE;
-                em.EventDate = e.EVENT_DATE;
-            }
-            else
-                em = null;
-
-            return em;
         }
     }
 }

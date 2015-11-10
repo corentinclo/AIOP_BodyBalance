@@ -15,13 +15,9 @@ namespace BodyBalance.Controllers
     public class ActivitiesController : ApiController
     {
         private IActivityServices activityServices;
-        private IEventServices eventServices;
-        public ActivitiesController
-            (IActivityServices activityServices,
-             IEventServices eventServices)
+        public ActivitiesController(IActivityServices activityServices)
         {
             this.activityServices = activityServices;
-            this.eventServices = eventServices;
         }
 
         // GET: Activities
@@ -135,7 +131,7 @@ namespace BodyBalance.Controllers
                 return NotFound();
             }
 
-            var listevents = eventServices.FindAllEventsOfActivity(activity_id);
+            var listevents = activityServices.FindAllEventsOfActivity(activity_id);
             return Ok(listevents);
         }
     }
