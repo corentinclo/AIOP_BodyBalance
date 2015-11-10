@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BodyBalance.Services
 {
-    interface IRoomServices
+    public interface IRoomServices
     {
         int CreateRoom(RoomModel rm);
         RoomModel FindRoomById(string RoomId);
