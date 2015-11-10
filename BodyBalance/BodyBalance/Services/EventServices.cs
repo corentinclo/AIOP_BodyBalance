@@ -206,5 +206,36 @@ namespace BodyBalance.Services
 
             return eventsList;
         }
+
+        public List<UserModel> FindUsersOfEvent(string EventId)
+        {
+            List<UserModel> usersList = new List<UserModel>();
+            IQueryable<USER1> query = db.Set<USER1>().Where(USER1 => USER1.EVENT.Any(EVENT => EVENT.EVENT_ID == EventId));
+
+            foreach (USER1 u in query)
+            {
+                usersList.Add(cu.ConvertUserToUserModel(u));
+            }
+
+            return usersList;
+        }
+
+        public UserModel FindContributorOfEvent(string EventId)
+        {
+            EVENT ev = db.EVENT.Find(EventId);
+
+            CONTRIBUTOR c = db.CONTRIBUTOR.Find(ev.EVENT_CONTRIBUTOR);
+
+            return cu.ConvertContributorToContributorModel(c);
+        }
+
+        public UserModel FindManagerOfEvent(string EventId)
+        {
+            EVENT ev = db.EVENT.Find(EventId);
+
+            MANAGER m = db.MANAGER.Find(ev.EVENT_MANAGER);
+
+            return cu.ConvertManagerToManagerModel(m);
+        }
     }
 }
