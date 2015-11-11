@@ -173,7 +173,7 @@ namespace BodyBalance.Controllers
         // POST: Events/{event_id}
         [HttpPost]
         [Route("Events/{event_id}/RegisterUser")]
-        public IHttpActionResult RegisterUserToEvent(string event_id, [FromBody]string user_id )
+        public IHttpActionResult RegisterUserToEvent(string event_id, string user_id )
         {
             var user = userServices.FindUserById(user_id);
             if(user == null)
