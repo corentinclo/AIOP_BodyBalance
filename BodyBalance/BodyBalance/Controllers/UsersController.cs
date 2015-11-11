@@ -26,10 +26,10 @@ namespace BodyBalance.Controllers
         // GET: /Users
         [Route("Users")]
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IHttpActionResult Get()
         {
-            return new string[] { "value1", "value2" };
-            
+            var users = this.userServices.FindAllUsers();
+            return Ok(users);
         }
 
         [HttpGet]
