@@ -243,7 +243,7 @@ namespace BodyBalance.Services
             return false;
         }
 
-        List<ProductModel> FindAllProductsOfUser(string UserId)
+        public List<ProductModel> FindAllProductsOfUser(string UserId)
         {
             List<ProductModel> productsList = new List<ProductModel>();
             IQueryable<PRODUCT> query = db.Set<PRODUCT>().Where(PRODUCT => PRODUCT.PRODUCT_USERID == UserId);

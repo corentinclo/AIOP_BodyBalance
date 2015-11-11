@@ -195,7 +195,7 @@ namespace BodyBalance.Services
             return categoriesList;
         }
 
-        List<ProductModel> FindAllProductsOfCategory(string CategoryId)
+        public List<ProductModel> FindAllProductsOfCategory(string CategoryId)
         {
             List<ProductModel> productsList = new List<ProductModel>();
             IQueryable<PRODUCT> query = db.Set<PRODUCT>().Where(PRODUCT => PRODUCT.PRODUCT_CAT == CategoryId);

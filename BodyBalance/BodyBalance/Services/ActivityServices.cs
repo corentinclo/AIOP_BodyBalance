@@ -206,7 +206,7 @@ namespace BodyBalance.Services
             return eventsList;
         }
 
-        ManagerModel FindManagerOfActivity(string ActivityId)
+        public ManagerModel FindManagerOfActivity(string ActivityId)
         {
             ACTIVITY a = db.ACTIVITY.Find(ActivityId);
 
