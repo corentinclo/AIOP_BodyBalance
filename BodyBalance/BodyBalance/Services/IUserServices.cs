@@ -79,5 +79,18 @@ namespace BodyBalance.Services
         /// <returns></returns>
         bool IsMember(UserModel um);
 
+        /// <summary>
+        /// Find all the products of the user with the id in parameter
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
+        List<ProductModel> FindAllProductsOfUser(string UserId);
+
+        /// <summary>
+        /// Find all the notifications of the user with the id in parameter
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
+        List<NotificationModel> FindAllNotificationssOfUser(string UserId);
     }
 }

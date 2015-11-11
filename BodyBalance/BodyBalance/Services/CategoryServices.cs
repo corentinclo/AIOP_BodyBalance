@@ -3,31 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using BodyBalance.Models;
-using BodyBalance.Utilities;
 using BodyBalance.Persistence;
+using BodyBalance.Utilities;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 
 namespace BodyBalance.Services
 {
-    public class RoomServices : IRoomServices
+    public class CategoryServices : ICategoryServices
     {
         private Entities db = new Entities();
         private ConverterUtilities cu = new ConverterUtilities();
-        private IAccessoryServices acs;
+        private IProductServices pcs;
 
-        public int CreateRoom(RoomModel rm)
+        public int CreateCategory(CategoryModel cm)
         {
             int result = DaoUtilities.NO_CHANGES;
 
-            ROOM r = db.ROOM.Create();
+            CATEGORY c = db.CATEGORY.Create();
 
-            r.ROOM_ID = rm.RoomId;
-            r.ROOM_NAME = rm.Name;
-            r.ROOM_SUPERFICY = rm.Superficy;
-            r.ROOM_MAXNBR = rm.MaxNb;
+            c.CAT_ID = cm.CategoryId;
+            c.CAT_NAME = cm.Name;
+            c.CAT_DESCR = cm.Description;
+            c.CAT_VALIDATIONDATE = cm.ValidationDate;
+            c.CAT_PARENT = cm.ParentId;
 
-            db.ROOM.Add(r);
+            db.CATEGORY.Add(c);
             try
             {
                 int saveResult = db.SaveChanges();
@@ -68,24 +69,26 @@ namespace BodyBalance.Services
             return result;
         }
 
-        public RoomModel FindRoomById(string RoomId)
+        public CategoryModel FindCategoryWithId(string CategoryId)
         {
-            ROOM r = db.ROOM.Find(RoomId);
+            CATEGORY c = db.CATEGORY.Find(CategoryId);
 
-            return cu.ConvertRoomToRoomModel(r);
+            return cu.ConvertCategoryToCategoryModel(c);
         }
 
-        public int UpdateRoom(RoomModel rm)
+        public int UpdateCategory(CategoryModel cm)
         {
             int result = DaoUtilities.NO_CHANGES;
 
-            ROOM r = db.ROOM.Find(rm.RoomId);
+            CATEGORY c = db.CATEGORY.Find(cm.CategoryId);
 
-            if (r != null)
+            if (c != null)
             {
-                r.ROOM_NAME = rm.Name;
-                r.ROOM_SUPERFICY = rm.Superficy;
-                r.ROOM_MAXNBR = rm.MaxNb;
+                c.CAT_ID = cm.CategoryId;
+                c.CAT_NAME = cm.Name;
+                c.CAT_DESCR = cm.Description;
+                c.CAT_VALIDATIONDATE = cm.ValidationDate;
+                c.CAT_PARENT = cm.ParentId;
 
                 try
                 {
@@ -128,15 +131,15 @@ namespace BodyBalance.Services
             return result;
         }
 
-        public int DeleteRoom(RoomModel rm)
+        public int DeleteCategory(CategoryModel cm)
         {
             int result = DaoUtilities.NO_CHANGES;
 
-            ROOM r = db.ROOM.Find(rm.RoomId);
+            CATEGORY c = db.CATEGORY.Find(cm.CategoryId);
 
-            if (r != null)
+            if (c != null)
             {
-                db.ROOM.Remove(r);
+                db.CATEGORY.Remove(c);
                 try
                 {
                     int saveResult = db.SaveChanges();
@@ -179,77 +182,56 @@ namespace BodyBalance.Services
             return result;
         }
 
-        public List<RoomModel> FindAllRooms()
+        public List<CategoryModel> FindAllCategories()
         {
-            List<RoomModel> roomsList = new List<RoomModel>();
-            IQueryable<ROOM> query = db.Set<ROOM>();
+            List<CategoryModel> categoriesList = new List<CategoryModel>();
+            IQueryable<CATEGORY> query = db.Set<CATEGORY>();
 
-            foreach (ROOM r in query)
+            foreach (CATEGORY c in query)
             {
-                roomsList.Add(cu.ConvertRoomToRoomModel(r));
+                categoriesList.Add(cu.ConvertCategoryToCategoryModel(c));
             }
 
-            return roomsList;
+            return categoriesList;
         }
 
-        public List<EventModel> FindAllEventsOfRoom(string RoomId)
+        public List<ProductModel> FindAllProductsOfCategory(string CategoryId)
         {
-            List<EventModel> eventsList = new List<EventModel>();
-            IQueryable<EVENT> query = db.Set<EVENT>().Where(EVENT => EVENT.EVENT_ROOM == RoomId);
+            List<ProductModel> productsList = new List<ProductModel>();
+            IQueryable<PRODUCT> query = db.Set<PRODUCT>().Where(PRODUCT => PRODUCT.PRODUCT_CAT == CategoryId);
 
-            foreach (EVENT e in query)
+            foreach (PRODUCT p in query)
             {
-                eventsList.Add(cu.ConvertEventToEventModel(e));
+                productsList.Add(cu.ConvertProductToProductModel(p));
             }
 
-            return eventsList;
+            return productsList;
         }
 
-        public List<AccessoryModel> FindAllAccessoriesOfRoom(string RoomId)
-        {
-            List<AccessoryModel> accessoriesList = new List<AccessoryModel>();
-            IQueryable<ACCESSORY> query = db.Set<ACCESSORY>().Where(ACCESSORY => ACCESSORY.CONTAINSACCESSORY.Any(CONTAINSACCESSORY => CONTAINSACCESSORY.ROOM_ID == RoomId));
-
-            foreach (ACCESSORY a in query)
-            {
-                accessoriesList.Add(cu.ConvertAccesoryToAccessoryModel(a));
-            }
-
-            return accessoriesList;
-        }
-
-        public int AddAccessoryToRoom(string RoomId, AccessoryModel am, Nullable<decimal> quantity)
+        public int AddProductToCategory(string CategoryId, ProductModel pm)
         {
             int result = DaoUtilities.NO_CHANGES;
 
-            ROOM r = db.ROOM.Find(RoomId);
+            CATEGORY c = db.CATEGORY.Find(CategoryId);
 
-            if (r != null)
+            if (c != null)
             {
-                ACCESSORY a = db.ACCESSORY.Find(am.AccessoryId);
-                if (a == null)
+                PRODUCT p = db.PRODUCT.Find(pm.ProductId);
+                if (p == null)
                 {
-                    acs = new AccessoryServices();
-                    int creationResult = acs.CreateAccessory(am);
-                    if(creationResult == DaoUtilities.SAVE_SUCCESSFUL)
+                    pcs = new ProductServices();
+                    int creationResult = pcs.CreateProduct(pm);
+                    if (creationResult == DaoUtilities.SAVE_SUCCESSFUL)
                     {
-                        CONTAINSACCESSORY ca = db.CONTAINSACCESSORY.Create();
-                        ca.ROOM_ID = RoomId;
-                        ca.ACCESSORY_ID = am.AccessoryId;
-                        ca.CONTAINS_QUANTITY = quantity;
-                        r.CONTAINSACCESSORY.Add(ca);
-                        a = db.ACCESSORY.Find(am.AccessoryId);
-                        a.CONTAINSACCESSORY.Add(ca);
+                        p = db.PRODUCT.Find(pm.ProductId);
+                        c.PRODUCT.Add(p);
+                        p.CATEGORY = c;
                     }
                 }
                 else
                 {
-                    CONTAINSACCESSORY ca = db.CONTAINSACCESSORY.Create();
-                    ca.ROOM_ID = RoomId;
-                    ca.ACCESSORY_ID = a.ACCESSORY_ID;
-                    ca.CONTAINS_QUANTITY = quantity;
-                    r.CONTAINSACCESSORY.Add(ca);
-                    a.CONTAINSACCESSORY.Add(ca);
+                    c.PRODUCT.Add(p);
+                    p.CATEGORY = c;
                 }
                 try
                 {

@@ -72,7 +72,7 @@ namespace BodyBalance.Services
                 result = DaoUtilities.INVALID_OPERATION_EXCEPTION;
             }
             return result;
-    }
+        }
 
         public EventModel FindEventById(string EventId)
         {
@@ -220,7 +220,7 @@ namespace BodyBalance.Services
             return usersList;
         }
 
-        public UserModel FindContributorOfEvent(string EventId)
+        public ContributorModel FindContributorOfEvent(string EventId)
         {
             EVENT ev = db.EVENT.Find(EventId);
 
@@ -229,13 +229,68 @@ namespace BodyBalance.Services
             return cu.ConvertContributorToContributorModel(c);
         }
 
-        public UserModel FindManagerOfEvent(string EventId)
+        public ManagerModel FindManagerOfEvent(string EventId)
         {
             EVENT ev = db.EVENT.Find(EventId);
 
             MANAGER m = db.MANAGER.Find(ev.EVENT_MANAGER);
 
             return cu.ConvertManagerToManagerModel(m);
+        }
+
+        public int RegisterUserToEvent(string EventId, UserModel um)
+        {
+            int result = DaoUtilities.NO_CHANGES;
+
+            EVENT ev = db.EVENT.Find(EventId);
+
+            if (ev != null)
+            {
+                USER1 u = db.USER1.Find(um.UserId);
+                if (u != null)
+                {
+                    u.EVENT.Add(ev);
+                    ev.USER1.Add(u);
+                    try
+                    {
+                        int saveResult = db.SaveChanges();
+
+                        if (saveResult == 1)
+                            result = DaoUtilities.SAVE_SUCCESSFUL;
+                    }
+                    catch (DbUpdateConcurrencyException e)
+                    {
+                        Console.WriteLine(e.GetBaseException().ToString());
+                        result = DaoUtilities.UPDATE_CONCURRENCY_EXCEPTION;
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        Console.WriteLine(e.GetBaseException().ToString());
+                        result = DaoUtilities.UPDATE_EXCEPTION;
+                    }
+                    catch (DbEntityValidationException e)
+                    {
+                        Console.WriteLine(e.GetBaseException().ToString());
+                        result = DaoUtilities.ENTITY_VALIDATION_EXCEPTION;
+                    }
+                    catch (NotSupportedException e)
+                    {
+                        Console.WriteLine(e.GetBaseException().ToString());
+                        result = DaoUtilities.UNSUPPORTED_EXCEPTION;
+                    }
+                    catch (ObjectDisposedException e)
+                    {
+                        Console.WriteLine(e.GetBaseException().ToString());
+                        result = DaoUtilities.DISPOSED_EXCEPTION;
+                    }
+                    catch (InvalidOperationException e)
+                    {
+                        Console.WriteLine(e.GetBaseException().ToString());
+                        result = DaoUtilities.INVALID_OPERATION_EXCEPTION;
+                    }
+                }
+            }
+            return result;
         }
     }
 }

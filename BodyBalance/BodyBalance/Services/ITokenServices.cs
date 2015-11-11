@@ -17,7 +17,7 @@ namespace BodyBalance.Services
         int CreateToken(TokenModel tm);
 
         /// <summary>
-        /// Find a token with his id and his token string
+        /// Find a token with its id and its token string
         /// </summary>
         /// <param name="TokenId"></param>
         /// <param name="token"></param>

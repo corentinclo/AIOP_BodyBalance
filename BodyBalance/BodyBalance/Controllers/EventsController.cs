@@ -14,10 +14,13 @@ namespace BodyBalance.Controllers
     public class EventsController : ApiController
     {
         private IEventServices eventServices;
+        private IUserServices userServices;
 
-        public EventsController(IEventServices eventServices)
+        public EventsController(IEventServices eventServices, 
+            IUserServices userServices)
         {
             this.eventServices = eventServices;
+            this.userServices = userServices;
         }
 
         // GET: /Events
@@ -165,6 +168,34 @@ namespace BodyBalance.Controllers
             var manager = eventServices.FindManagerOfEvent(event_id);
 
             return Ok(manager);
+        }
+
+        // POST: Events/{event_id}
+        [HttpPost]
+        [Route("Events/{event_id}/RegisterUser")]
+        public IHttpActionResult RegisterUserToEvent(string event_id, string user_id )
+        {
+            var user = userServices.FindUserById(user_id);
+            if(user == null)
+            {
+               return NotFound();
+            }
+            var myEvent = eventServices.FindEventById(event_id);
+            if (myEvent == null)
+            {
+                return NotFound();
+            }
+
+            var registerResult = eventServices.RegisterUserToEvent(event_id, user);
+            if (registerResult == DaoUtilities.SAVE_SUCCESSFUL)
+            {
+                return Ok("User registered sucessfully");
+            }
+            if (registerResult == DaoUtilities.UPDATE_EXCEPTION)
+            {
+                return BadRequest("The user is already register to this event");
+            }
+            return InternalServerError();
         }
     }
 }

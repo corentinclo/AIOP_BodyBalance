@@ -17,7 +17,7 @@ namespace BodyBalance.Services
         int CreateActivity(ActivityModel am);
 
         /// <summary>
-        /// Find an activity with his id
+        /// Find an activity with its id
         /// </summary>
         /// <param name="ActivityId"></param>
         /// <returns></returns>
@@ -49,5 +49,12 @@ namespace BodyBalance.Services
         /// <param name="ActivityId"></param>
         /// <returns></returns>
         List<EventModel> FindAllEventsOfActivity(string ActivityId);
+
+        /// <summary>
+        /// Find the manager of the activity with the id in parameter
+        /// </summary>
+        /// <param name="ActivityId"></param>
+        /// <returns></returns>
+        ManagerModel FindManagerOfActivity(string ActivityId);
     }
 }

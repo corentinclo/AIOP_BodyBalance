@@ -243,6 +243,32 @@ namespace BodyBalance.Services
             return false;
         }
 
+        public List<ProductModel> FindAllProductsOfUser(string UserId)
+        {
+            List<ProductModel> productsList = new List<ProductModel>();
+            IQueryable<PRODUCT> query = db.Set<PRODUCT>().Where(PRODUCT => PRODUCT.PRODUCT_USERID == UserId);
+
+            foreach (PRODUCT p in query)
+            {
+                productsList.Add(cu.ConvertProductToProductModel(p));
+            }
+
+            return productsList;
+        }
+
+        public List<NotificationModel> FindAllNotificationssOfUser(string UserId)
+        {
+            List<NotificationModel> notificationsList = new List<NotificationModel>();
+            IQueryable<NOTIFICATION> query = db.Set<NOTIFICATION>().Where(NOTIFICATION => NOTIFICATION.NOTIF_USERID == UserId);
+
+            foreach (NOTIFICATION n in query)
+            {
+                notificationsList.Add(cu.ConvertNotificationToNotificatiobModel(n));
+            }
+
+            return notificationsList;
+        }
+
         private string hashSHA512(string unhashedValue)
         {
             SHA512 shaM = new SHA512Managed();
