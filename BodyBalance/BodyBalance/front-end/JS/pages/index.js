@@ -44,6 +44,15 @@ window.app.mappers['#activities'] = function () {
     return false;
 }
 
+window.app.mappers['#events'] = function () {
+    $.get('pages/Events.html', null, function (data) {
+        $("li.active").removeClass("active");
+        $("#events").toggleClass("active"),
+        $('#main').html(data);
+    });
+    return false;
+}
+
 window.app.ajaxifyForm('#login_form', function (result) {
     window.app.storeLoginParameters(result.userName, result.access_token, $('#cookie_input').is(':checked'));
     $.get('pages/MainPage.html', null, function (data) {
