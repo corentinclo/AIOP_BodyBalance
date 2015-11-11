@@ -17,7 +17,7 @@ namespace BodyBalance.Services
         int CreateEvent(EventModel em);
 
         /// <summary>
-        /// Find an Event with his id
+        /// Find an Event with its id
         /// </summary>
         /// <param name="EventId"></param>
         /// <returns></returns>
@@ -63,5 +63,13 @@ namespace BodyBalance.Services
         /// <param name="EventId"></param>
         /// <returns></returns>
         UserModel FindManagerOfEvent(string EventId);
+
+        /// <summary>
+        /// Register the user in parameter to the event with the id in parameter
+        /// </summary>
+        /// <param name="EventId"></param>
+        /// <param name="um"></param>
+        /// <returns></returns>
+        int RegisterUserToEvent(string EventId, UserModel um);
     }
 }

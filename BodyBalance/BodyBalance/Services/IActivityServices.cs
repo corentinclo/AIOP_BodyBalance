@@ -17,7 +17,7 @@ namespace BodyBalance.Services
         int CreateActivity(ActivityModel am);
 
         /// <summary>
-        /// Find an activity with his id
+        /// Find an activity with its id
         /// </summary>
         /// <param name="ActivityId"></param>
         /// <returns></returns>

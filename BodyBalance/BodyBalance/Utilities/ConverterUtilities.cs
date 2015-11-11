@@ -12,6 +12,11 @@ namespace BodyBalance.Utilities
 
         private Entities db = new Entities();
 
+        /// <summary>
+        /// Convert a user from the database to a UserModel
+        /// </summary>
+        /// <param name="u"></param>
+        /// <returns></returns>
         public UserModel ConvertUserToUserModel(USER1 u)
         {
             UserModel um = new UserModel();
@@ -35,6 +40,11 @@ namespace BodyBalance.Utilities
             return um;
         }
 
+        /// <summary>
+        /// Convert an admin from the database to an AdminModel
+        /// </summary>
+        /// <param name="a"></param>
+        /// <returns></returns>
         public AdminModel ConvertAdminToAdminModel(ADMIN a)
         {
             USER1 u = db.USER1.Find(a.ADMIN_ID);
@@ -60,6 +70,11 @@ namespace BodyBalance.Utilities
             return am;
         }
 
+        /// <summary>
+        /// Convert a contributor from the database to a ContributorModel
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
         public ContributorModel ConvertContributorToContributorModel(CONTRIBUTOR c)
         {
             USER1 u = db.USER1.Find(c.CONTRIBUTOR_ID);
@@ -88,6 +103,11 @@ namespace BodyBalance.Utilities
             return cm;
         }
 
+        /// <summary>
+        /// Convert a manager from the database to a ManagerModel
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
         public ManagerModel ConvertManagerToManagerModel(MANAGER m)
         {
             USER1 u = db.USER1.Find(m.MANAGER_ID);
@@ -113,6 +133,11 @@ namespace BodyBalance.Utilities
             return mm;
         }
 
+        /// <summary>
+        /// Convert a member from the database to a MemberModel
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
         public MemberModel ConvertMemberToMemberModel(MEMBER m)
         {
             USER1 u = db.USER1.Find(m.MEMBER_ID);
@@ -140,6 +165,11 @@ namespace BodyBalance.Utilities
             return mm;
         }
 
+        /// <summary>
+        /// Convert an activity from the database to an ActivityModel
+        /// </summary>
+        /// <param name="a"></param>
+        /// <returns></returns>
         public ActivityModel ConvertActivityToActivityModel(ACTIVITY a)
         {
             ActivityModel am = new ActivityModel();
@@ -158,6 +188,11 @@ namespace BodyBalance.Utilities
             return am;
         }
 
+        /// <summary>
+        /// Convert a event from the database to a EventModel
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns></returns>
         public EventModel ConvertEventToEventModel(EVENT e)
         {
             EventModel em = new EventModel();
@@ -182,6 +217,11 @@ namespace BodyBalance.Utilities
             return em;
         }
 
+        /// <summary>
+        /// Convert a room from the database to a RoomModel
+        /// </summary>
+        /// <param name="r"></param>
+        /// <returns></returns>
         public RoomModel ConvertRoomToRoomModel(ROOM r)
         {
             RoomModel rm = new RoomModel();
@@ -199,6 +239,11 @@ namespace BodyBalance.Utilities
             return rm;
         }
 
+        /// <summary>
+        /// Convert an accessory from the database to an AccessoryModel
+        /// </summary>
+        /// <param name="a"></param>
+        /// <returns></returns>
         public AccessoryModel ConvertAccesoryToAccessoryModel(ACCESSORY a)
         {
             AccessoryModel am = new AccessoryModel();
