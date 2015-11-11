@@ -10,25 +10,22 @@ using System.Data.Entity.Validation;
 
 namespace BodyBalance.Services
 {
-    public class CategoryServices : ICategoryServices
+    public class PriceServices : IPriceServices
     {
         private Entities db = new Entities();
         private ConverterUtilities cu = new ConverterUtilities();
-        private IProductServices pcs;
 
-        public int CreateCategory(CategoryModel cm)
+        public int CreatePrice(PriceModel pm)
         {
             int result = DaoUtilities.NO_CHANGES;
 
-            CATEGORY c = db.CATEGORY.Create();
+            PRICE p = db.PRICE.Create();
 
-            c.CAT_ID = cm.CategoryId;
-            c.CAT_NAME = cm.Name;
-            c.CAT_DESCR = cm.Description;
-            c.CAT_VALIDATIONDATE = cm.ValidationDate;
-            c.CAT_PARENT = cm.ParentId;
+            p.PRODUCT_ID = pm.ProductId;
+            p.DATE_PRICE = pm.DatePrice;
+            p.PRODUCT_PRICE = pm.ProductPrice;
 
-            db.CATEGORY.Add(c);
+            db.PRICE.Add(p);
             try
             {
                 int saveResult = db.SaveChanges();
@@ -69,26 +66,22 @@ namespace BodyBalance.Services
             return result;
         }
 
-        public CategoryModel FindCategoryWithId(string CategoryId)
+        public PriceModel FindPriceWithId(string PriceId)
         {
-            CATEGORY c = db.CATEGORY.Find(CategoryId);
+            PRICE p = db.PRICE.Find(PriceId);
 
-            return cu.ConvertCategoryToCategoryModel(c);
+            return cu.ConvertPriceToPriceModel(p);
         }
 
-        public int UpdateCategory(CategoryModel cm)
+        public int UpdatePrice(PriceModel pm)
         {
             int result = DaoUtilities.NO_CHANGES;
 
-            CATEGORY c = db.CATEGORY.Find(cm.CategoryId);
+            PRICE p = db.PRICE.Find(pm.ProductId, pm.DatePrice);
 
-            if (c != null)
+            if (p != null)
             {
-                c.CAT_ID = cm.CategoryId;
-                c.CAT_NAME = cm.Name;
-                c.CAT_DESCR = cm.Description;
-                c.CAT_VALIDATIONDATE = cm.ValidationDate;
-                c.CAT_PARENT = cm.ParentId;
+                p.PRODUCT_PRICE = pm.ProductPrice;
 
                 try
                 {
@@ -131,108 +124,15 @@ namespace BodyBalance.Services
             return result;
         }
 
-        public int DeleteCategory(CategoryModel cm)
+        public int DeletePrice(PriceModel pm)
         {
             int result = DaoUtilities.NO_CHANGES;
 
-            CATEGORY c = db.CATEGORY.Find(cm.CategoryId);
+            PRICE p = db.PRICE.Find(pm.ProductId, pm.DatePrice);
 
-            if (c != null)
+            if (p != null)
             {
-                db.CATEGORY.Remove(c);
-                try
-                {
-                    int saveResult = db.SaveChanges();
-
-                    if (saveResult == 1)
-                        result = DaoUtilities.SAVE_SUCCESSFUL;
-                }
-                catch (DbUpdateConcurrencyException e)
-                {
-                    Console.WriteLine(e.GetBaseException().ToString());
-                    result = DaoUtilities.UPDATE_CONCURRENCY_EXCEPTION;
-                }
-                catch (DbUpdateException e)
-                {
-                    Console.WriteLine(e.GetBaseException().ToString());
-                    result = DaoUtilities.UPDATE_EXCEPTION;
-                }
-                catch (DbEntityValidationException e)
-                {
-                    Console.WriteLine(e.GetBaseException().ToString());
-                    result = DaoUtilities.ENTITY_VALIDATION_EXCEPTION;
-                }
-                catch (NotSupportedException e)
-                {
-                    Console.WriteLine(e.GetBaseException().ToString());
-                    result = DaoUtilities.UNSUPPORTED_EXCEPTION;
-                }
-                catch (ObjectDisposedException e)
-                {
-                    Console.WriteLine(e.GetBaseException().ToString());
-                    result = DaoUtilities.DISPOSED_EXCEPTION;
-                }
-                catch (InvalidOperationException e)
-                {
-                    Console.WriteLine(e.GetBaseException().ToString());
-                    result = DaoUtilities.INVALID_OPERATION_EXCEPTION;
-                }
-            }
-
-            return result;
-        }
-
-        public List<CategoryModel> FindAllCategories()
-        {
-            List<CategoryModel> categoriesList = new List<CategoryModel>();
-            IQueryable<CATEGORY> query = db.Set<CATEGORY>();
-
-            foreach (CATEGORY c in query)
-            {
-                categoriesList.Add(cu.ConvertCategoryToCategoryModel(c));
-            }
-
-            return categoriesList;
-        }
-
-        public List<ProductModel> FindAllProductsOfCategory(string CategoryId)
-        {
-            List<ProductModel> productsList = new List<ProductModel>();
-            IQueryable<PRODUCT> query = db.Set<PRODUCT>().Where(PRODUCT => PRODUCT.PRODUCT_CAT == CategoryId);
-
-            foreach (PRODUCT p in query)
-            {
-                productsList.Add(cu.ConvertProductToProductModel(p));
-            }
-
-            return productsList;
-        }
-
-        public int AddProductToCategory(string CategoryId, ProductModel pm)
-        {
-            int result = DaoUtilities.NO_CHANGES;
-
-            CATEGORY c = db.CATEGORY.Find(CategoryId);
-
-            if (c != null)
-            {
-                PRODUCT p = db.PRODUCT.Find(pm.ProductId);
-                if (p == null)
-                {
-                    pcs = new ProductServices();
-                    int creationResult = pcs.CreateProduct(pm);
-                    if (creationResult == DaoUtilities.SAVE_SUCCESSFUL)
-                    {
-                        p = db.PRODUCT.Find(pm.ProductId);
-                        c.PRODUCT.Add(p);
-                        p.CATEGORY = c;
-                    }
-                }
-                else
-                {
-                    c.PRODUCT.Add(p);
-                    p.CATEGORY = c;
-                }
+                db.PRICE.Remove(p);
                 try
                 {
                     int saveResult = db.SaveChanges();
@@ -272,6 +172,19 @@ namespace BodyBalance.Services
                 }
             }
             return result;
+        }
+
+        public List<PriceModel> FindAllPrices()
+        {
+            List<PriceModel> pricesList = new List<PriceModel>();
+            IQueryable<PRICE> query = db.Set<PRICE>();
+
+            foreach (PRICE p in query)
+            {
+                pricesList.Add(cu.ConvertPriceToPriceModel(p));
+            }
+
+            return pricesList;
         }
     }
 }

@@ -243,7 +243,7 @@ namespace BodyBalance.Services
             return false;
         }
 
-        List<ProductModel> FindAllProductsOfUser(string UserId)
+        public List<ProductModel> FindAllProductsOfUser(string UserId)
         {
             List<ProductModel> productsList = new List<ProductModel>();
             IQueryable<PRODUCT> query = db.Set<PRODUCT>().Where(PRODUCT => PRODUCT.PRODUCT_USERID == UserId);
@@ -254,6 +254,19 @@ namespace BodyBalance.Services
             }
 
             return productsList;
+        }
+
+        public List<NotificationModel> FindAllNotificationssOfUser(string UserId)
+        {
+            List<NotificationModel> notificationsList = new List<NotificationModel>();
+            IQueryable<NOTIFICATION> query = db.Set<NOTIFICATION>().Where(NOTIFICATION => NOTIFICATION.NOTIF_USERID == UserId);
+
+            foreach (NOTIFICATION n in query)
+            {
+                notificationsList.Add(cu.ConvertNotificationToNotificatiobModel(n));
+            }
+
+            return notificationsList;
         }
 
         private string hashSHA512(string unhashedValue)
