@@ -4,38 +4,30 @@ using System.Linq;
 using System.Web;
 using BodyBalance.Models;
 using BodyBalance.Persistence;
-using System.Security.Cryptography;
-using System.Text;
 using BodyBalance.Utilities;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 
 namespace BodyBalance.Services
 {
-    public class UserServices : IUserServices
+    public class PriceServices : IPriceServices
     {
         private Entities db = new Entities();
         private ConverterUtilities cu = new ConverterUtilities();
 
-        public int CreateUser(UserModel um)
+        public int CreatePrice(PriceModel pm)
         {
             int result = DaoUtilities.NO_CHANGES;
 
-            USER1 u = db.USER1.Create();
+            PRICE p = db.PRICE.Create();
 
-            u.USER_ID = um.UserId;
-            u.USER_PASSWORD = hashSHA512(um.Password);
-            u.USER_FIRSTNAME = um.FirstName;
-            u.USER_LASTNAME = um.LastName;
-            u.USER_ADR1 = um.Adress1;
-            u.USER_ADR2 = um.Adress2;
-            u.USER_PC = um.PC;
-            u.USER_TOWN = um.Town;
-            u.USER_PHONE = um.Phone;
-            u.USER_MAIL = um.Mail;
+            p.PRODUCT_ID = pm.ProductId;
+            p.DATE_PRICE = pm.DatePrice;
+            p.PRODUCT_PRICE = pm.ProductPrice;
 
-            db.USER1.Add(u);
-            try {
+            db.PRICE.Add(p);
+            try
+            {
                 int saveResult = db.SaveChanges();
 
                 if (saveResult == 1)
@@ -74,38 +66,22 @@ namespace BodyBalance.Services
             return result;
         }
 
-        public UserModel FindUserById(string UserId)
+        public PriceModel FindPriceWithId(string PriceId)
         {
-            USER1 u = db.USER1.Find(UserId);
+            PRICE p = db.PRICE.Find(PriceId);
 
-            return cu.ConvertUserToUserModel(u);
+            return cu.ConvertPriceToPriceModel(p);
         }
 
-        public UserModel FindUserByIdAndPassword(string id, string pwd)
-        {
-            pwd = hashSHA512(pwd);
-            USER1 u = ((USER1) db.USER1.Where(USER1 => USER1.USER_ID == id && USER1.USER_PASSWORD == pwd).FirstOrDefault());
-
-            return cu.ConvertUserToUserModel(u);
-        }
-
-        public int UpdateUser(UserModel um)
+        public int UpdatePrice(PriceModel pm)
         {
             int result = DaoUtilities.NO_CHANGES;
 
-            USER1 u = db.USER1.Find(um.UserId);
+            PRICE p = db.PRICE.Find(pm.ProductId, pm.DatePrice);
 
-            if (u != null)
+            if (p != null)
             {
-                u.USER_PASSWORD = hashSHA512(um.Password);
-                u.USER_FIRSTNAME = um.FirstName;
-                u.USER_LASTNAME = um.LastName;
-                u.USER_ADR1 = um.Adress1;
-                u.USER_ADR2 = um.Adress2;
-                u.USER_PC = um.PC;
-                u.USER_TOWN = um.Town;
-                u.USER_PHONE = um.Phone;
-                u.USER_MAIL = um.Mail;
+                p.PRODUCT_PRICE = pm.ProductPrice;
 
                 try
                 {
@@ -148,15 +124,15 @@ namespace BodyBalance.Services
             return result;
         }
 
-        public int DeleteUser(UserModel um)
+        public int DeletePrice(PriceModel pm)
         {
             int result = DaoUtilities.NO_CHANGES;
 
-            USER1 u = db.USER1.Find(um.UserId);
+            PRICE p = db.PRICE.Find(pm.ProductId, pm.DatePrice);
 
-            if (u != null)
+            if (p != null)
             {
-                db.USER1.Remove(u);
+                db.PRICE.Remove(p);
                 try
                 {
                     int saveResult = db.SaveChanges();
@@ -198,88 +174,17 @@ namespace BodyBalance.Services
             return result;
         }
 
-        public List<UserModel> FindAllUsers()
+        public List<PriceModel> FindAllPrices()
         {
-            List<UserModel> usersList = new List<UserModel>();
-            IQueryable<USER1> query = db.Set<USER1>();
+            List<PriceModel> pricesList = new List<PriceModel>();
+            IQueryable<PRICE> query = db.Set<PRICE>();
 
-            foreach(USER1 u in query)
+            foreach (PRICE p in query)
             {
-                usersList.Add(cu.ConvertUserToUserModel(u));
+                pricesList.Add(cu.ConvertPriceToPriceModel(p));
             }
 
-            return usersList;
-        }
-
-        public bool IsAdmin(UserModel um)
-        {
-            if (db.ADMIN.Find(um.UserId) != null)
-                return true;
-
-            return false;
-        }
-
-        public bool IsContributor(UserModel um)
-        {
-            if (db.CONTRIBUTOR.Find(um.UserId) != null)
-                return true;
-
-            return false;
-        }
-
-        public bool IsManager(UserModel um)
-        {
-            if (db.MANAGER.Find(um.UserId) != null)
-                return true;
-
-            return false;
-        }
-
-        public bool IsMember(UserModel um)
-        {
-            if (db.MEMBER.Find(um.UserId) != null)
-                return true;
-
-            return false;
-        }
-
-        public List<ProductModel> FindAllProductsOfUser(string UserId)
-        {
-            List<ProductModel> productsList = new List<ProductModel>();
-            IQueryable<PRODUCT> query = db.Set<PRODUCT>().Where(PRODUCT => PRODUCT.PRODUCT_USERID == UserId);
-
-            foreach (PRODUCT p in query)
-            {
-                productsList.Add(cu.ConvertProductToProductModel(p));
-            }
-
-            return productsList;
-        }
-
-        public List<NotificationModel> FindAllNotificationssOfUser(string UserId)
-        {
-            List<NotificationModel> notificationsList = new List<NotificationModel>();
-            IQueryable<NOTIFICATION> query = db.Set<NOTIFICATION>().Where(NOTIFICATION => NOTIFICATION.NOTIF_USERID == UserId);
-
-            foreach (NOTIFICATION n in query)
-            {
-                notificationsList.Add(cu.ConvertNotificationToNotificatiobModel(n));
-            }
-
-            return notificationsList;
-        }
-
-        private string hashSHA512(string unhashedValue)
-        {
-            SHA512 shaM = new SHA512Managed();
-            byte[] hash = shaM.ComputeHash(Encoding.ASCII.GetBytes(unhashedValue));
-
-            StringBuilder stringBuilder = new StringBuilder();
-            foreach (byte b in hash)
-            {
-                stringBuilder.AppendFormat("{0:x2}", b);
-            }
-            return stringBuilder.ToString();
+            return pricesList;
         }
     }
 }

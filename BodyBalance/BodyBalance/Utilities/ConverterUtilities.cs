@@ -260,6 +260,34 @@ namespace BodyBalance.Utilities
             return am;
         }
 
+        /// <summary>
+        /// Convert a notification from the database to a NotificatiobModel
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public NotificationModel ConvertNotificationToNotificatiobModel(NOTIFICATION n)
+        {
+            NotificationModel nm = new NotificationModel();
+
+            if (n != null)
+            {
+                nm.NotificationId = n.NOTIF_ID;
+                nm.Title = n.NOTIF_NAME;
+                nm.Message = n.NOTIF_MESSAGE;
+                nm.NotifDate = n.NOTIF_DATE;
+                nm.UserId = n.NOTIF_USERID;
+            }
+            else
+                nm = null;
+
+            return nm;
+        }
+
+        /// <summary>
+        /// Convert a product from the database to a ProductModel
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
         public ProductModel ConvertProductToProductModel(PRODUCT p)
         {
             ProductModel pm = new ProductModel();
@@ -280,6 +308,11 @@ namespace BodyBalance.Utilities
             return pm;
         }
 
+        /// <summary>
+        /// Convert a category from the database to a CategoryModel
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
         public CategoryModel ConvertCategoryToCategoryModel(CATEGORY c)
         {
             CategoryModel cm = new CategoryModel();
@@ -296,6 +329,27 @@ namespace BodyBalance.Utilities
                 cm = null;
 
             return cm;
+        }
+
+        /// <summary>
+        /// Convert a price from the database to a PriceModel
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        public PriceModel ConvertPriceToPriceModel(PRICE p)
+        {
+            PriceModel pm = new PriceModel();
+
+            if (p != null)
+            {
+                pm.ProductId = p.PRODUCT_ID;
+                pm.DatePrice = p.DATE_PRICE;
+                pm.ProductPrice = p.PRODUCT_PRICE;
+            }
+            else
+               pm = null;
+
+            return pm;
         }
     }
 }
