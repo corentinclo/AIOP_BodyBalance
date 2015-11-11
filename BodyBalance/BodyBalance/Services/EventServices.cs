@@ -72,7 +72,7 @@ namespace BodyBalance.Services
                 result = DaoUtilities.INVALID_OPERATION_EXCEPTION;
             }
             return result;
-    }
+        }
 
         public EventModel FindEventById(string EventId)
         {
@@ -220,7 +220,7 @@ namespace BodyBalance.Services
             return usersList;
         }
 
-        public UserModel FindContributorOfEvent(string EventId)
+        public ContributorModel FindContributorOfEvent(string EventId)
         {
             EVENT ev = db.EVENT.Find(EventId);
 
@@ -229,7 +229,7 @@ namespace BodyBalance.Services
             return cu.ConvertContributorToContributorModel(c);
         }
 
-        public UserModel FindManagerOfEvent(string EventId)
+        public ManagerModel FindManagerOfEvent(string EventId)
         {
             EVENT ev = db.EVENT.Find(EventId);
 

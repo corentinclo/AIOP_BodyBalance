@@ -49,5 +49,12 @@ namespace BodyBalance.Services
         /// <param name="ActivityId"></param>
         /// <returns></returns>
         List<EventModel> FindAllEventsOfActivity(string ActivityId);
+
+        /// <summary>
+        /// Find the manager of the activity with the id in parameter
+        /// </summary>
+        /// <param name="ActivityId"></param>
+        /// <returns></returns>
+        ManagerModel FindManagerOfActivity(string ActivityId);
     }
 }

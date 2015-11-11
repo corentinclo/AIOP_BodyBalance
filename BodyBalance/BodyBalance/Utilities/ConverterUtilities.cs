@@ -259,5 +259,43 @@ namespace BodyBalance.Utilities
 
             return am;
         }
+
+        public ProductModel ConvertProductToProductModel(PRODUCT p)
+        {
+            ProductModel pm = new ProductModel();
+
+            if (p != null)
+            {
+                pm.ProductId = p.PRODUCT_ID;
+                pm.Name = p.PRODUCT_NAME;
+                pm.Description = p.PRODUCT_DESCRIPTION;
+                pm.AvailableQuantity = p.PRODUCT_AVAILABLEQUANTITY;
+                pm.MemberReduction = p.PRODUCT_MEMBERREDUCTION;
+                pm.CategoryId = p.PRODUCT_CAT;
+                pm.UserId = p.PRODUCT_USERID;
+            }
+            else
+                pm = null;
+
+            return pm;
+        }
+
+        public CategoryModel ConvertCategoryToCategoryModel(CATEGORY c)
+        {
+            CategoryModel cm = new CategoryModel();
+
+            if (c != null)
+            {
+                cm.CategoryId = c.CAT_ID;
+                cm.Name = c.CAT_NAME;
+                cm.Description = c.CAT_DESCR;
+                cm.ValidationDate = c.CAT_VALIDATIONDATE;
+                cm.ParentId = c.CAT_PARENT;
+            }
+            else
+                cm = null;
+
+            return cm;
+        }
     }
 }

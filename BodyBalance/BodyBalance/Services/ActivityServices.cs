@@ -206,6 +206,13 @@ namespace BodyBalance.Services
             return eventsList;
         }
 
-        
+        ManagerModel FindManagerOfActivity(string ActivityId)
+        {
+            ACTIVITY a = db.ACTIVITY.Find(ActivityId);
+
+            MANAGER m = db.MANAGER.Find(a.ACTIVITY_MANAGER);
+
+            return cu.ConvertManagerToManagerModel(m);
+        }
     }
 }

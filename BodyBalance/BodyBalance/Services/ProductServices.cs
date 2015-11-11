@@ -3,39 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using BodyBalance.Models;
-using BodyBalance.Persistence;
-using System.Security.Cryptography;
-using System.Text;
 using BodyBalance.Utilities;
+using BodyBalance.Persistence;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 
 namespace BodyBalance.Services
 {
-    public class UserServices : IUserServices
+    public class ProductServices : IProductServices
     {
         private Entities db = new Entities();
         private ConverterUtilities cu = new ConverterUtilities();
 
-        public int CreateUser(UserModel um)
+        public int CreateProduct(ProductModel pm)
         {
             int result = DaoUtilities.NO_CHANGES;
 
-            USER1 u = db.USER1.Create();
+            PRODUCT p = db.PRODUCT.Create();
 
-            u.USER_ID = um.UserId;
-            u.USER_PASSWORD = hashSHA512(um.Password);
-            u.USER_FIRSTNAME = um.FirstName;
-            u.USER_LASTNAME = um.LastName;
-            u.USER_ADR1 = um.Adress1;
-            u.USER_ADR2 = um.Adress2;
-            u.USER_PC = um.PC;
-            u.USER_TOWN = um.Town;
-            u.USER_PHONE = um.Phone;
-            u.USER_MAIL = um.Mail;
+            p.PRODUCT_ID = pm.ProductId;
+            p.PRODUCT_NAME = pm.Name;
+            p.PRODUCT_DESCRIPTION = pm.Description;
+            p.PRODUCT_AVAILABLEQUANTITY = pm.AvailableQuantity;
+            p.PRODUCT_MEMBERREDUCTION = pm.MemberReduction;
+            p.PRODUCT_CAT = pm.CategoryId;
+            p.PRODUCT_USERID = pm.UserId;
 
-            db.USER1.Add(u);
-            try {
+            db.PRODUCT.Add(p);
+            try
+            {
                 int saveResult = db.SaveChanges();
 
                 if (saveResult == 1)
@@ -74,38 +70,28 @@ namespace BodyBalance.Services
             return result;
         }
 
-        public UserModel FindUserById(string UserId)
+        public ProductModel FindProductWithId(string ProductId)
         {
-            USER1 u = db.USER1.Find(UserId);
+            PRODUCT p = db.PRODUCT.Find(ProductId);
 
-            return cu.ConvertUserToUserModel(u);
+            return cu.ConvertProductToProductModel(p);
         }
 
-        public UserModel FindUserByIdAndPassword(string id, string pwd)
-        {
-            pwd = hashSHA512(pwd);
-            USER1 u = ((USER1) db.USER1.Where(USER1 => USER1.USER_ID == id && USER1.USER_PASSWORD == pwd).FirstOrDefault());
-
-            return cu.ConvertUserToUserModel(u);
-        }
-
-        public int UpdateUser(UserModel um)
+        public int UpdateProduct(ProductModel pm)
         {
             int result = DaoUtilities.NO_CHANGES;
 
-            USER1 u = db.USER1.Find(um.UserId);
+            PRODUCT p = db.PRODUCT.Find(pm.ProductId);
 
-            if (u != null)
+            if (p != null)
             {
-                u.USER_PASSWORD = hashSHA512(um.Password);
-                u.USER_FIRSTNAME = um.FirstName;
-                u.USER_LASTNAME = um.LastName;
-                u.USER_ADR1 = um.Adress1;
-                u.USER_ADR2 = um.Adress2;
-                u.USER_PC = um.PC;
-                u.USER_TOWN = um.Town;
-                u.USER_PHONE = um.Phone;
-                u.USER_MAIL = um.Mail;
+                p.PRODUCT_ID = pm.ProductId;
+                p.PRODUCT_NAME = pm.Name;
+                p.PRODUCT_DESCRIPTION = pm.Description;
+                p.PRODUCT_AVAILABLEQUANTITY = pm.AvailableQuantity;
+                p.PRODUCT_MEMBERREDUCTION = pm.MemberReduction;
+                p.PRODUCT_CAT = pm.CategoryId;
+                p.PRODUCT_USERID = pm.UserId;
 
                 try
                 {
@@ -148,15 +134,15 @@ namespace BodyBalance.Services
             return result;
         }
 
-        public int DeleteUser(UserModel um)
+        public int DeleteProduct(ProductModel pm)
         {
             int result = DaoUtilities.NO_CHANGES;
 
-            USER1 u = db.USER1.Find(um.UserId);
+            PRODUCT p = db.PRODUCT.Find(pm.ProductId);
 
-            if (u != null)
+            if (p != null)
             {
-                db.USER1.Remove(u);
+                db.PRODUCT.Remove(p);
                 try
                 {
                     int saveResult = db.SaveChanges();
@@ -195,58 +181,14 @@ namespace BodyBalance.Services
                     result = DaoUtilities.INVALID_OPERATION_EXCEPTION;
                 }
             }
+
             return result;
         }
 
-        public List<UserModel> FindAllUsers()
-        {
-            List<UserModel> usersList = new List<UserModel>();
-            IQueryable<USER1> query = db.Set<USER1>();
-
-            foreach(USER1 u in query)
-            {
-                usersList.Add(cu.ConvertUserToUserModel(u));
-            }
-
-            return usersList;
-        }
-
-        public bool IsAdmin(UserModel um)
-        {
-            if (db.ADMIN.Find(um.UserId) != null)
-                return true;
-
-            return false;
-        }
-
-        public bool IsContributor(UserModel um)
-        {
-            if (db.CONTRIBUTOR.Find(um.UserId) != null)
-                return true;
-
-            return false;
-        }
-
-        public bool IsManager(UserModel um)
-        {
-            if (db.MANAGER.Find(um.UserId) != null)
-                return true;
-
-            return false;
-        }
-
-        public bool IsMember(UserModel um)
-        {
-            if (db.MEMBER.Find(um.UserId) != null)
-                return true;
-
-            return false;
-        }
-
-        List<ProductModel> FindAllProductsOfUser(string UserId)
+        public List<ProductModel> FindAllProducts()
         {
             List<ProductModel> productsList = new List<ProductModel>();
-            IQueryable<PRODUCT> query = db.Set<PRODUCT>().Where(PRODUCT => PRODUCT.PRODUCT_USERID == UserId);
+            IQueryable<PRODUCT> query = db.Set<PRODUCT>();
 
             foreach (PRODUCT p in query)
             {
@@ -254,19 +196,6 @@ namespace BodyBalance.Services
             }
 
             return productsList;
-        }
-
-        private string hashSHA512(string unhashedValue)
-        {
-            SHA512 shaM = new SHA512Managed();
-            byte[] hash = shaM.ComputeHash(Encoding.ASCII.GetBytes(unhashedValue));
-
-            StringBuilder stringBuilder = new StringBuilder();
-            foreach (byte b in hash)
-            {
-                stringBuilder.AppendFormat("{0:x2}", b);
-            }
-            return stringBuilder.ToString();
         }
     }
 }
