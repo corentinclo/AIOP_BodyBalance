@@ -842,7 +842,7 @@
             <PropertyRef Name="DATE_PRICE" />
           </Key>
           <Property Name="PRODUCT_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DATE_PRICE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DATE_PRICE" Type="DateTime" Nullable="false" />
           <Property Name="PRODUCT_PRICE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <NavigationProperty Name="PRODUCT" Relationship="Self.PRICE_FK1" FromRole="PRICE" ToRole="PRODUCT" />
         </EntityType>
@@ -877,8 +877,8 @@
           </Key>
           <Property Name="PURCHASE_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PURCHASE_USERID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PURCHASE_DATE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PURCHASE_SHIPDATE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PURCHASE_DATE" Type="DateTime" Nullable="false" />
+          <Property Name="PURCHASE_SHIPDATE" Type="DateTime" />
           <Property Name="PURCHASE_TOTALPRICE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <NavigationProperty Name="USER1" Relationship="Self.PURCHASE_USER1_FK1" FromRole="PURCHASE" ToRole="USER1" />
           <NavigationProperty Name="PURCHASECONTAINS" Relationship="Self.PURCHASECONTAINS_PURCHASE_FK1" FromRole="PURCHASE" ToRole="PURCHASECONTAINS" />
@@ -890,8 +890,8 @@
           </Key>
           <Property Name="PURCHASE_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PRODUCT_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PRODUCTQUANTITY" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="VALIDATIONDATE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PRODUCTQUANTITY" Type="Decimal" Nullable="false" />
+          <Property Name="VALIDATIONDATE" Type="DateTime" />
           <NavigationProperty Name="PRODUCT" Relationship="Self.PURCHASECONTAINS_PRODUCT_FK1" FromRole="PURCHASECONTAINS" ToRole="PRODUCT" />
           <NavigationProperty Name="PURCHASE" Relationship="Self.PURCHASECONTAINS_PURCHASE_FK1" FromRole="PURCHASECONTAINS" ToRole="PURCHASE" />
         </EntityType>
