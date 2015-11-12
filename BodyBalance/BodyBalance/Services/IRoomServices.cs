@@ -65,5 +65,12 @@ namespace BodyBalance.Services
         /// <returns></returns>
         int AddAccessoryToRoom(string RoomId, AccessoryModel am, Nullable<decimal> quantity);
 
+        /// <summary>
+        /// Update the quantity of an accessory to the room with the id in parameter and its quantity
+        /// </summary>
+        /// <param name="RoomId"></param>
+        /// <param name="am"></param>
+        /// <returns></returns>
+        int UpdateAccessoryInRoom(string RoomId, AccessoryModel am, Nullable<decimal> quantity);
     }
 }
