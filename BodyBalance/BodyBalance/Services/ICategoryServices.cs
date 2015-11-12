@@ -49,13 +49,5 @@ namespace BodyBalance.Services
         /// <param name="CategoryId"></param>
         /// <returns></returns>
         List<ProductModel> FindAllProductsOfCategory(string CategoryId);
-
-        /// <summary>
-        /// Add a product to the category with the id in parameter
-        /// </summary>
-        /// <param name="CategoryId"></param>
-        /// <param name="pm"></param>
-        /// <returns></returns>
-        int AddProductToCategory(string CategoryId, ProductModel pm);
     }
 }

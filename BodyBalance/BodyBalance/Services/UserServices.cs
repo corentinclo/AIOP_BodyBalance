@@ -269,6 +269,11 @@ namespace BodyBalance.Services
             return notificationsList;
         }
 
+        public List<PurchaseModel> FindAllPurchasesOfUser(string UserId)
+        {
+            throw new NotImplementedException();
+        }
+
         private string hashSHA512(string unhashedValue)
         {
             SHA512 shaM = new SHA512Managed();

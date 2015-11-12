@@ -270,6 +270,7 @@
     <Compile Include="Models\PriceModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\PunctualEventModel.cs" />
+    <Compile Include="Models\PurchaseModel.cs" />
     <Compile Include="Models\RepetitiveEventModel.cs" />
     <Compile Include="Models\RoomModel.cs" />
     <Compile Include="Models\TokenModel.cs" />
@@ -373,6 +374,7 @@
     <Compile Include="Services\IPriceServices.cs" />
     <Compile Include="Services\IProductServices.cs" />
     <Compile Include="Services\IPunctualEventServices.cs" />
+    <Compile Include="Services\IPurchaseServices.cs" />
     <Compile Include="Services\IRepetitiveEventServices.cs" />
     <Compile Include="Services\IRoomServices.cs" />
     <Compile Include="Services\ITokenServices.cs" />
@@ -383,6 +385,7 @@
     <Compile Include="Services\PriceServices.cs" />
     <Compile Include="Services\ProductServices.cs" />
     <Compile Include="Services\PunctualEventServices.cs" />
+    <Compile Include="Services\PurchaseServices.cs" />
     <Compile Include="Services\RepetitiveEventServices.cs" />
     <Compile Include="Services\RoomServices.cs" />
     <Compile Include="Services\TokenServices.cs" />

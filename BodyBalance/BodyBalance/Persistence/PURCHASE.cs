@@ -22,8 +22,8 @@ namespace BodyBalance.Persistence
     
         public string PURCHASE_ID { get; set; }
         public string PURCHASE_USERID { get; set; }
-        public string PURCHASE_DATE { get; set; }
-        public string PURCHASE_SHIPDATE { get; set; }
+        public System.DateTime PURCHASE_DATE { get; set; }
+        public Nullable<System.DateTime> PURCHASE_SHIPDATE { get; set; }
         public decimal PURCHASE_TOTALPRICE { get; set; }
     
         public virtual USER1 USER1 { get; set; }

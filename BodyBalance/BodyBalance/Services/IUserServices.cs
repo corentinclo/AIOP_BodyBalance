@@ -92,5 +92,12 @@ namespace BodyBalance.Services
         /// <param name="UserId"></param>
         /// <returns></returns>
         List<NotificationModel> FindAllNotificationssOfUser(string UserId);
+
+        /// <summary>
+        /// Find all the purchases of the user with the id in parameter
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
+        List<PurchaseModel> FindAllPurchasesOfUser(string UserId);
     }
 }

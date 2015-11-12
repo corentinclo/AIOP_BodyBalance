@@ -8,7 +8,7 @@ namespace BodyBalance.Models
     public class PriceModel
     {
         public string ProductId { get; set; }
-        public string DatePrice { get; set; }
+        public System.DateTime DatePrice { get; set; }
         public decimal ProductPrice { get; set; }
     }
 }

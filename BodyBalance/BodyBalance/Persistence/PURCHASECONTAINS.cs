@@ -17,7 +17,7 @@ namespace BodyBalance.Persistence
         public string PURCHASE_ID { get; set; }
         public string PRODUCT_ID { get; set; }
         public string PRODUCTQUANTITY { get; set; }
-        public string VALIDATIONDATE { get; set; }
+        public Nullable<System.DateTime> VALIDATIONDATE { get; set; }
     
         public virtual PRODUCT PRODUCT { get; set; }
         public virtual PURCHASE PURCHASE { get; set; }
