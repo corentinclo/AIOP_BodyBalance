@@ -50,6 +50,7 @@ namespace BodyBalance.App_Start
             container.RegisterType<IAccessoryServices, AccessoryServices>();
             container.RegisterType<IProductServices, ProductServices>();
             container.RegisterType<ICategoryServices, CategoryServices>();
+            container.RegisterType<INotificationServices, NotificationServices>();
         }
     }
 }
