@@ -48,6 +48,7 @@ namespace BodyBalance.App_Start
             container.RegisterType<IMemberServices, MemberServices>();
             container.RegisterType<IRoomServices, RoomServices>();
             container.RegisterType<IAccessoryServices, AccessoryServices>();
+            container.RegisterType<IProductServices, ProductServices>();
         }
     }
 }

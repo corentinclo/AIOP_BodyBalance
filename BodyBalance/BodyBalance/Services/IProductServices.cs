@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BodyBalance.Services
 {
-    interface IProductServices
+    public interface IProductServices
     {
         /// <summary>
         /// Create a product
