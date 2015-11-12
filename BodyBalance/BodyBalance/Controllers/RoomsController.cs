@@ -176,5 +176,36 @@ namespace BodyBalance.Controllers
             }
             return InternalServerError();
         }
+
+        // DELETE: Rooms/{room_id}/Accessories
+        //[HttpDelete]
+        //[Route("Rooms/{room_id}/Accessories")]
+        //public IHttpActionResult DeleteAccessories(string room_id, [FromBody] AccessoryModel model)
+        //{
+        //    var room = roomServices.FindRoomById(room_id);
+        //    if (room == null)
+        //    {
+        //        return BadRequest("Invalid room id supplied");
+        //    }
+
+        //    var accessory = accessoryServices.FindAccessoryById(model.AccessoryId);
+        //    if (accessory == null)
+        //    {
+        //        return BadRequest("Invalid accessory id supplied");
+        //    }
+
+        //    var addResult = roomServices.AddAccessoryToRoom(room_id, accessory, model.Quantity);
+
+        //    if (addResult == DaoUtilities.SAVE_SUCCESSFUL)
+        //    {
+        //        return Ok("Accessories added to the room successfully");
+        //    }
+        //    if (addResult == DaoUtilities.DISPOSED_EXCEPTION)
+        //    {
+        //        var ex = new Exception("Connection have been disposed");
+        //        return InternalServerError(ex);
+        //    }
+        //    return InternalServerError();
+        //}
     }
 }

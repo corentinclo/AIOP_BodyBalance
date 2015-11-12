@@ -125,7 +125,7 @@
             <PropertyRef Name="DATE_PRICE" />
           </Key>
           <Property Name="PRODUCT_ID" Type="varchar2" MaxLength="20" Nullable="false" />
-          <Property Name="DATE_PRICE" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="DATE_PRICE" Type="date" Nullable="false" />
           <Property Name="PRODUCT_PRICE" Type="number" Precision="38" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="PRODUCT">
@@ -153,8 +153,8 @@
           </Key>
           <Property Name="PURCHASE_ID" Type="varchar2" MaxLength="20" Nullable="false" />
           <Property Name="PURCHASE_USERID" Type="varchar2" MaxLength="20" Nullable="false" />
-          <Property Name="PURCHASE_DATE" Type="varchar2" MaxLength="20" Nullable="false" />
-          <Property Name="PURCHASE_SHIPDATE" Type="varchar2" MaxLength="20" />
+          <Property Name="PURCHASE_DATE" Type="date" Nullable="false" />
+          <Property Name="PURCHASE_SHIPDATE" Type="date" />
           <Property Name="PURCHASE_TOTALPRICE" Type="number" Precision="38" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="PURCHASECONTAINS">
@@ -164,8 +164,8 @@
           </Key>
           <Property Name="PURCHASE_ID" Type="varchar2" MaxLength="20" Nullable="false" />
           <Property Name="PRODUCT_ID" Type="varchar2" MaxLength="20" Nullable="false" />
-          <Property Name="PRODUCTQUANTITY" Type="varchar2" MaxLength="20" Nullable="false" />
-          <Property Name="VALIDATIONDATE" Type="varchar2" MaxLength="20" />
+          <Property Name="PRODUCTQUANTITY" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="VALIDATIONDATE" Type="date" />
         </EntityType>
         <EntityType Name="REPETITIVE_EVENT">
           <Key>

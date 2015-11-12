@@ -170,7 +170,7 @@ namespace BodyBalance.Controllers
             return Ok(manager);
         }
 
-        // POST: Events/{event_id}
+        // POST: Events/{event_id}/RegisterUser
         [HttpPost]
         [Route("Events/{event_id}/RegisterUser")]
         public IHttpActionResult RegisterUserToEvent(string event_id, string user_id )
@@ -194,6 +194,30 @@ namespace BodyBalance.Controllers
             if (registerResult == DaoUtilities.UPDATE_EXCEPTION)
             {
                 return BadRequest("The user is already register to this event");
+            }
+            return InternalServerError();
+        }
+
+        // DELETE: Events/{event_id}
+        [HttpDelete]
+        [Route("Events/{event_id}/RemoveUser")]
+        public IHttpActionResult RemoveUserToEvent(string event_id, string user_id)
+        {
+            var user = userServices.FindUserById(user_id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            var myEvent = eventServices.FindEventById(event_id);
+            if (myEvent == null)
+            {
+                return NotFound();
+            }
+
+            var deleteResult = eventServices.RemoveUserOfEvent(event_id, user);
+            if (deleteResult == DaoUtilities.SAVE_SUCCESSFUL)
+            {
+                return Ok("User removed sucessfully");
             }
             return InternalServerError();
         }
