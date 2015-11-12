@@ -26,8 +26,14 @@
                     <li style="display:none" data-visible="loggedIn" id="events"><a href="#events">Calendar</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li style="display:none" data-visible="loggedIn"><a href="#myaccount">My Account</a></li>
-                    <li style="display:none" data-visible="loggedIn"><a href="#logout" style="color:indianred">Logout</a></li>
+                    <li style="display:none" data-visible="loggedIn" class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#myaccount">Settings</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a style="color:indianred" href="#logout">Log Out</a></li>
+                        </ul>
+                    </li>
                     <li><a href="#about">About</a></li>
                 </ul>
             </div>
@@ -74,7 +80,7 @@
     <script src="JS/jquery.cookie.min.js"></script>
     <script src="JS/bootstrap.min.js"></script>
     <script src="JS/bootbox.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.js"></script>
     <script src="JS/application.js"></script>
     <script src="JS/pages/index.js"></script>
 </body>

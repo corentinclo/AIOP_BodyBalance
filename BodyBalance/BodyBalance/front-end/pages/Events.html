@@ -1,23 +1,15 @@
-﻿<h1 style="text-align:center">Here are all the ZenLounge events!</h1>
-<div id="buttons">
-    <div class="btn-group">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Activity <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu actMenu" data-filter-group="activity">
-            <li class="li" data-filter=""><a href='#' class='a'>Any</a></li>
-        </ul>
-    </div>
-    <div class="btn-group">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Type <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu typeMenu" data-filter-group="type">
-            <li class="li" data-filter=""><a href='#' class='a'>Any</a></li>
-        </ul>
-    </div>
-    <div class="grid">
-    </div>
+﻿<h2 style="text-align:center">Calendar</h2>
+<div id="selects">
+    <label for="selAct">Activity:</label>
+    <select class="form-control" id="selAct">
+        <option value=".*">Any</option>
+    </select>
+    <label for="selType">Type:</label>
+    <select class="form-control" id="selType">
+        <option value=".*">Any</option>
+    </select>
+</div>
+<div class="grid" id="grid">
 </div>
 
 
