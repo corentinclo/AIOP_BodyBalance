@@ -72,5 +72,13 @@ namespace BodyBalance.Services
         /// <param name="am"></param>
         /// <returns></returns>
         int UpdateAccessoryInRoom(string RoomId, AccessoryModel am, Nullable<decimal> quantity);
+
+        /// <summary>
+        /// Remove an accessory to the room with the id in parameter
+        /// </summary>
+        /// <param name="RoomId"></param>
+        /// <param name="am"></param>
+        /// <returns></returns>
+        int RemoveAccessoryOfRoom(string RoomId, AccessoryModel am);
     }
 }
