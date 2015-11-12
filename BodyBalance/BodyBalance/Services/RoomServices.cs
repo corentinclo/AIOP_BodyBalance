@@ -310,46 +310,109 @@ namespace BodyBalance.Services
                 if (a != null)
                 {
                     CONTAINSACCESSORY ca = db.CONTAINSACCESSORY.Find(RoomId, am.AccessoryId);
-                    ca.CONTAINS_QUANTITY = quantity;
+                    
+                    if(ca != null)
+                    {
+                        ca.CONTAINS_QUANTITY = quantity;
 
-                    try
-                    {
-                        int saveResult = db.SaveChanges();
+                        try
+                        {
+                            int saveResult = db.SaveChanges();
 
-                        if (saveResult == 1)
-                            result = DaoUtilities.SAVE_SUCCESSFUL;
-                    }
-                    catch (DbUpdateConcurrencyException e)
-                    {
-                        Console.WriteLine(e.GetBaseException().ToString());
-                        result = DaoUtilities.UPDATE_CONCURRENCY_EXCEPTION;
-                    }
-                    catch (DbUpdateException e)
-                    {
-                        Console.WriteLine(e.GetBaseException().ToString());
-                        result = DaoUtilities.UPDATE_EXCEPTION;
-                    }
-                    catch (DbEntityValidationException e)
-                    {
-                        Console.WriteLine(e.GetBaseException().ToString());
-                        result = DaoUtilities.ENTITY_VALIDATION_EXCEPTION;
-                    }
-                    catch (NotSupportedException e)
-                    {
-                        Console.WriteLine(e.GetBaseException().ToString());
-                        result = DaoUtilities.UNSUPPORTED_EXCEPTION;
-                    }
-                    catch (ObjectDisposedException e)
-                    {
-                        Console.WriteLine(e.GetBaseException().ToString());
-                        result = DaoUtilities.DISPOSED_EXCEPTION;
-                    }
-                    catch (InvalidOperationException e)
-                    {
-                        Console.WriteLine(e.GetBaseException().ToString());
-                        result = DaoUtilities.INVALID_OPERATION_EXCEPTION;
+                            if (saveResult == 1)
+                                result = DaoUtilities.SAVE_SUCCESSFUL;
+                        }
+                        catch (DbUpdateConcurrencyException e)
+                        {
+                            Console.WriteLine(e.GetBaseException().ToString());
+                            result = DaoUtilities.UPDATE_CONCURRENCY_EXCEPTION;
+                        }
+                        catch (DbUpdateException e)
+                        {
+                            Console.WriteLine(e.GetBaseException().ToString());
+                            result = DaoUtilities.UPDATE_EXCEPTION;
+                        }
+                        catch (DbEntityValidationException e)
+                        {
+                            Console.WriteLine(e.GetBaseException().ToString());
+                            result = DaoUtilities.ENTITY_VALIDATION_EXCEPTION;
+                        }
+                        catch (NotSupportedException e)
+                        {
+                            Console.WriteLine(e.GetBaseException().ToString());
+                            result = DaoUtilities.UNSUPPORTED_EXCEPTION;
+                        }
+                        catch (ObjectDisposedException e)
+                        {
+                            Console.WriteLine(e.GetBaseException().ToString());
+                            result = DaoUtilities.DISPOSED_EXCEPTION;
+                        }
+                        catch (InvalidOperationException e)
+                        {
+                            Console.WriteLine(e.GetBaseException().ToString());
+                            result = DaoUtilities.INVALID_OPERATION_EXCEPTION;
+                        }
                     }
                 }               
+            }
+            return result;
+        }
+
+        public int RemoveAccessoryOfRoom(string RoomId, AccessoryModel am)
+        {
+            int result = DaoUtilities.NO_CHANGES;
+
+            ROOM r = db.ROOM.Find(RoomId);
+
+            if (r != null)
+            {
+                ACCESSORY a = db.ACCESSORY.Find(am.AccessoryId);
+                if (a != null)
+                {
+                    CONTAINSACCESSORY ca = db.CONTAINSACCESSORY.Find(RoomId, am.AccessoryId);
+                    if(ca != null)
+                    {
+                        db.CONTAINSACCESSORY.Remove(ca);
+
+                        try
+                        {
+                            int saveResult = db.SaveChanges();
+
+                            if (saveResult == 1)
+                                result = DaoUtilities.SAVE_SUCCESSFUL;
+                        }
+                        catch (DbUpdateConcurrencyException e)
+                        {
+                            Console.WriteLine(e.GetBaseException().ToString());
+                            result = DaoUtilities.UPDATE_CONCURRENCY_EXCEPTION;
+                        }
+                        catch (DbUpdateException e)
+                        {
+                            Console.WriteLine(e.GetBaseException().ToString());
+                            result = DaoUtilities.UPDATE_EXCEPTION;
+                        }
+                        catch (DbEntityValidationException e)
+                        {
+                            Console.WriteLine(e.GetBaseException().ToString());
+                            result = DaoUtilities.ENTITY_VALIDATION_EXCEPTION;
+                        }
+                        catch (NotSupportedException e)
+                        {
+                            Console.WriteLine(e.GetBaseException().ToString());
+                            result = DaoUtilities.UNSUPPORTED_EXCEPTION;
+                        }
+                        catch (ObjectDisposedException e)
+                        {
+                            Console.WriteLine(e.GetBaseException().ToString());
+                            result = DaoUtilities.DISPOSED_EXCEPTION;
+                        }
+                        catch (InvalidOperationException e)
+                        {
+                            Console.WriteLine(e.GetBaseException().ToString());
+                            result = DaoUtilities.INVALID_OPERATION_EXCEPTION;
+                        }
+                    }        
+                }
             }
             return result;
         }
