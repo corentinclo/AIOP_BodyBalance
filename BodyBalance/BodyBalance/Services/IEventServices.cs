@@ -71,5 +71,13 @@ namespace BodyBalance.Services
         /// <param name="um"></param>
         /// <returns></returns>
         int RegisterUserToEvent(string EventId, UserModel um);
+
+        /// <summary>
+        /// Remove the user in parameter of the event with the id in parameter
+        /// </summary>
+        /// <param name="EventId"></param>
+        /// <param name="um"></param>
+        /// <returns></returns>
+        int RemoveUserOfEvent(string EventId, UserModel um);
     }
 }
