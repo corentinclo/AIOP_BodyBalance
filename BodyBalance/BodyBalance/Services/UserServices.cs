@@ -299,7 +299,6 @@ namespace BodyBalance.Services
         {
             int result = DaoUtilities.NO_CHANGES;
 
-            List<BasketModel> basketsList = new List<BasketModel>();
             IQueryable<HASINBASKET> query = db.Set<HASINBASKET>().Where(HASINBASKET => HASINBASKET.USER_ID == UserId);
 
             foreach (HASINBASKET b in query)

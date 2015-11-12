@@ -347,5 +347,504 @@ namespace BodyBalance.Services
             }
             return result;
         }
+
+        public int CreatePunctualEvent(PunctualEventModel em)
+        {
+            int result = CreateEvent(em);
+
+            if (result == DaoUtilities.SAVE_SUCCESSFUL)
+            {
+                PUNCTUAL_EVENT pe = db.PUNCTUAL_EVENT.Create();
+
+                pe.PE_ID = em.EventId;
+                pe.PE_DATE = em.EventDate;
+
+                db.PUNCTUAL_EVENT.Add(pe);
+                try
+                {
+                    int saveResult = db.SaveChanges();
+
+                    if (saveResult == 1)
+                        result = DaoUtilities.SAVE_SUCCESSFUL;
+                }
+                catch (DbUpdateConcurrencyException e)
+                {
+                    Console.WriteLine(e.GetBaseException().ToString());
+                    result = DaoUtilities.UPDATE_CONCURRENCY_EXCEPTION;
+                }
+                catch (DbUpdateException e)
+                {
+                    Console.WriteLine(e.GetBaseException().ToString());
+                    result = DaoUtilities.UPDATE_EXCEPTION;
+                }
+                catch (DbEntityValidationException e)
+                {
+                    Console.WriteLine(e.GetBaseException().ToString());
+                    result = DaoUtilities.ENTITY_VALIDATION_EXCEPTION;
+                }
+                catch (NotSupportedException e)
+                {
+                    Console.WriteLine(e.GetBaseException().ToString());
+                    result = DaoUtilities.UNSUPPORTED_EXCEPTION;
+                }
+                catch (ObjectDisposedException e)
+                {
+                    Console.WriteLine(e.GetBaseException().ToString());
+                    result = DaoUtilities.DISPOSED_EXCEPTION;
+                }
+                catch (InvalidOperationException e)
+                {
+                    Console.WriteLine(e.GetBaseException().ToString());
+                    result = DaoUtilities.INVALID_OPERATION_EXCEPTION;
+                }
+            }
+            return result;
+        }
+
+        public int CreateRepetitiveEvent(RepetitiveEventModel em)
+        {
+            int result = CreateEvent(em);
+
+            if (result == DaoUtilities.SAVE_SUCCESSFUL)
+            {
+                REPETITIVE_EVENT re = db.REPETITIVE_EVENT.Create();
+
+                re.RE_ID = em.EventId;
+                re.RE_DATE = em.EventDate;
+
+                db.REPETITIVE_EVENT.Add(re);
+                try
+                {
+                    int saveResult = db.SaveChanges();
+
+                    if (saveResult == 1)
+                        result = DaoUtilities.SAVE_SUCCESSFUL;
+                }
+                catch (DbUpdateConcurrencyException e)
+                {
+                    Console.WriteLine(e.GetBaseException().ToString());
+                    result = DaoUtilities.UPDATE_CONCURRENCY_EXCEPTION;
+                }
+                catch (DbUpdateException e)
+                {
+                    Console.WriteLine(e.GetBaseException().ToString());
+                    result = DaoUtilities.UPDATE_EXCEPTION;
+                }
+                catch (DbEntityValidationException e)
+                {
+                    Console.WriteLine(e.GetBaseException().ToString());
+                    result = DaoUtilities.ENTITY_VALIDATION_EXCEPTION;
+                }
+                catch (NotSupportedException e)
+                {
+                    Console.WriteLine(e.GetBaseException().ToString());
+                    result = DaoUtilities.UNSUPPORTED_EXCEPTION;
+                }
+                catch (ObjectDisposedException e)
+                {
+                    Console.WriteLine(e.GetBaseException().ToString());
+                    result = DaoUtilities.DISPOSED_EXCEPTION;
+                }
+                catch (InvalidOperationException e)
+                {
+                    Console.WriteLine(e.GetBaseException().ToString());
+                    result = DaoUtilities.INVALID_OPERATION_EXCEPTION;
+                }
+            }
+            return result;
+        }
+
+        public int AddRepetitiveEventOccurrence(RepetitiveEventModel em)
+        {
+            int result = DaoUtilities.NO_CHANGES;
+            REPETITIVE_EVENT re = db.REPETITIVE_EVENT.Create();
+
+            re.RE_ID = em.EventId;
+            re.RE_DATE = em.EventDate;
+
+            db.REPETITIVE_EVENT.Add(re);
+            try
+            {
+                int saveResult = db.SaveChanges();
+
+                if (saveResult == 1)
+                    result = DaoUtilities.SAVE_SUCCESSFUL;
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+                Console.WriteLine(e.GetBaseException().ToString());
+                result = DaoUtilities.UPDATE_CONCURRENCY_EXCEPTION;
+            }
+            catch (DbUpdateException e)
+            {
+                Console.WriteLine(e.GetBaseException().ToString());
+                result = DaoUtilities.UPDATE_EXCEPTION;
+            }
+            catch (DbEntityValidationException e)
+            {
+                Console.WriteLine(e.GetBaseException().ToString());
+                result = DaoUtilities.ENTITY_VALIDATION_EXCEPTION;
+            }
+            catch (NotSupportedException e)
+            {
+                Console.WriteLine(e.GetBaseException().ToString());
+                result = DaoUtilities.UNSUPPORTED_EXCEPTION;
+            }
+            catch (ObjectDisposedException e)
+            {
+                Console.WriteLine(e.GetBaseException().ToString());
+                result = DaoUtilities.DISPOSED_EXCEPTION;
+            }
+            catch (InvalidOperationException e)
+            {
+                Console.WriteLine(e.GetBaseException().ToString());
+                result = DaoUtilities.INVALID_OPERATION_EXCEPTION;
+            }
+            return result;
+        }
+
+        public PunctualEventModel FindPunctualEventById(string EventId)
+        {
+            PUNCTUAL_EVENT pe = db.PUNCTUAL_EVENT.Find(EventId);
+
+            PunctualEventModel pem = null;
+
+            if (pe != null)
+            {
+                EventModel em = FindEventById(EventId);
+                pem = new PunctualEventModel();
+                pem = ((PunctualEventModel) em);
+            }
+
+            return pem;   
+        }
+
+        public List<RepetitiveEventModel> FindRepetitiveEventsById(string EventId)
+        {
+            EventModel em = FindEventById(EventId);
+
+            List<RepetitiveEventModel> repetitiveEventsList = new List<RepetitiveEventModel>();
+            if (em != null)
+            {
+                IQueryable<REPETITIVE_EVENT> query = db.Set<REPETITIVE_EVENT>().Where(REPETITIVE_EVENT => REPETITIVE_EVENT.RE_ID == em.EventId);
+
+                foreach (REPETITIVE_EVENT re in query)
+                {
+                    em.EventDate = re.RE_DATE;
+                    repetitiveEventsList.Add((RepetitiveEventModel) em);
+                }
+            }
+            return repetitiveEventsList;
+        }
+
+        public RepetitiveEventModel FindRepetitiveEventByIdAndDate(string EventId, DateTime EventDate)
+        {
+            REPETITIVE_EVENT re = db.REPETITIVE_EVENT.Find(EventId, EventDate);
+
+            RepetitiveEventModel rem = null;
+
+            if (re != null)
+            {
+                EventModel em = FindEventById(EventId);
+                rem = new RepetitiveEventModel();
+                rem = ((RepetitiveEventModel)em);
+                rem.EventDate = EventDate;
+            }
+
+            return rem;
+        }
+
+        public int UpdatePunctualEvent(PunctualEventModel em)
+        {
+            int result = UpdateEvent(em);
+
+            if (result == DaoUtilities.SAVE_SUCCESSFUL)
+            {
+                PUNCTUAL_EVENT pe = db.PUNCTUAL_EVENT.Find(em.EventId);
+
+                if(pe != null)
+                {
+                    pe.PE_DATE = em.EventDate;
+
+                    try
+                    {
+                        int saveResult = db.SaveChanges();
+
+                        if (saveResult == 1)
+                            result = DaoUtilities.SAVE_SUCCESSFUL;
+                    }
+                    catch (DbUpdateConcurrencyException e)
+                    {
+                        Console.WriteLine(e.GetBaseException().ToString());
+                        result = DaoUtilities.UPDATE_CONCURRENCY_EXCEPTION;
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        Console.WriteLine(e.GetBaseException().ToString());
+                        result = DaoUtilities.UPDATE_EXCEPTION;
+                    }
+                    catch (DbEntityValidationException e)
+                    {
+                        Console.WriteLine(e.GetBaseException().ToString());
+                        result = DaoUtilities.ENTITY_VALIDATION_EXCEPTION;
+                    }
+                    catch (NotSupportedException e)
+                    {
+                        Console.WriteLine(e.GetBaseException().ToString());
+                        result = DaoUtilities.UNSUPPORTED_EXCEPTION;
+                    }
+                    catch (ObjectDisposedException e)
+                    {
+                        Console.WriteLine(e.GetBaseException().ToString());
+                        result = DaoUtilities.DISPOSED_EXCEPTION;
+                    }
+                    catch (InvalidOperationException e)
+                    {
+                        Console.WriteLine(e.GetBaseException().ToString());
+                        result = DaoUtilities.INVALID_OPERATION_EXCEPTION;
+                    }
+                }               
+            }
+            return result;
+        }
+
+        public int UpdateRepetitiveEvent(RepetitiveEventModel em)
+        {
+            int result = UpdateEvent(em);
+
+            if (result == DaoUtilities.SAVE_SUCCESSFUL)
+            {
+                REPETITIVE_EVENT re = db.REPETITIVE_EVENT.Find(em.EventId, em.EventDate);
+
+                if(re != null)
+                {
+                    re.RE_DATE = em.EventDate;
+
+                    try
+                    {
+                        int saveResult = db.SaveChanges();
+
+                        if (saveResult == 1)
+                            result = DaoUtilities.SAVE_SUCCESSFUL;
+                    }
+                    catch (DbUpdateConcurrencyException e)
+                    {
+                        Console.WriteLine(e.GetBaseException().ToString());
+                        result = DaoUtilities.UPDATE_CONCURRENCY_EXCEPTION;
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        Console.WriteLine(e.GetBaseException().ToString());
+                        result = DaoUtilities.UPDATE_EXCEPTION;
+                    }
+                    catch (DbEntityValidationException e)
+                    {
+                        Console.WriteLine(e.GetBaseException().ToString());
+                        result = DaoUtilities.ENTITY_VALIDATION_EXCEPTION;
+                    }
+                    catch (NotSupportedException e)
+                    {
+                        Console.WriteLine(e.GetBaseException().ToString());
+                        result = DaoUtilities.UNSUPPORTED_EXCEPTION;
+                    }
+                    catch (ObjectDisposedException e)
+                    {
+                        Console.WriteLine(e.GetBaseException().ToString());
+                        result = DaoUtilities.DISPOSED_EXCEPTION;
+                    }
+                    catch (InvalidOperationException e)
+                    {
+                        Console.WriteLine(e.GetBaseException().ToString());
+                        result = DaoUtilities.INVALID_OPERATION_EXCEPTION;
+                    }
+                }              
+            }
+            return result;
+        }
+
+        public int DeletePunctualEvent(PunctualEventModel em)
+        {
+            int result = DeleteEvent(em);
+
+            if (result == DaoUtilities.SAVE_SUCCESSFUL)
+            {
+                PUNCTUAL_EVENT pe = db.PUNCTUAL_EVENT.Find(em.EventId);
+
+                if(pe != null)
+                {
+                    db.PUNCTUAL_EVENT.Remove(pe);
+
+                    try
+                    {
+                        int saveResult = db.SaveChanges();
+
+                        if (saveResult == 1)
+                            result = DaoUtilities.SAVE_SUCCESSFUL;
+                    }
+                    catch (DbUpdateConcurrencyException e)
+                    {
+                        Console.WriteLine(e.GetBaseException().ToString());
+                        result = DaoUtilities.UPDATE_CONCURRENCY_EXCEPTION;
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        Console.WriteLine(e.GetBaseException().ToString());
+                        result = DaoUtilities.UPDATE_EXCEPTION;
+                    }
+                    catch (DbEntityValidationException e)
+                    {
+                        Console.WriteLine(e.GetBaseException().ToString());
+                        result = DaoUtilities.ENTITY_VALIDATION_EXCEPTION;
+                    }
+                    catch (NotSupportedException e)
+                    {
+                        Console.WriteLine(e.GetBaseException().ToString());
+                        result = DaoUtilities.UNSUPPORTED_EXCEPTION;
+                    }
+                    catch (ObjectDisposedException e)
+                    {
+                        Console.WriteLine(e.GetBaseException().ToString());
+                        result = DaoUtilities.DISPOSED_EXCEPTION;
+                    }
+                    catch (InvalidOperationException e)
+                    {
+                        Console.WriteLine(e.GetBaseException().ToString());
+                        result = DaoUtilities.INVALID_OPERATION_EXCEPTION;
+                    }
+                }                
+            }
+            return result;
+        }
+
+        public int DeleteRepetitiveEvent(RepetitiveEventModel em)
+        {
+            int result = DaoUtilities.NO_CHANGES;
+
+            REPETITIVE_EVENT re = db.REPETITIVE_EVENT.Find(em.EventId, em.EventDate);
+
+            if (re != null)
+            {
+                db.REPETITIVE_EVENT.Remove(re);
+                try
+                {
+                    int saveResult = db.SaveChanges();
+
+                    if (saveResult == 1)
+                        result = DaoUtilities.SAVE_SUCCESSFUL;
+                }
+                catch (DbUpdateConcurrencyException e)
+                {
+                    Console.WriteLine(e.GetBaseException().ToString());
+                    result = DaoUtilities.UPDATE_CONCURRENCY_EXCEPTION;
+                }
+                catch (DbUpdateException e)
+                {
+                    Console.WriteLine(e.GetBaseException().ToString());
+                    result = DaoUtilities.UPDATE_EXCEPTION;
+                }
+                catch (DbEntityValidationException e)
+                {
+                    Console.WriteLine(e.GetBaseException().ToString());
+                    result = DaoUtilities.ENTITY_VALIDATION_EXCEPTION;
+                }
+                catch (NotSupportedException e)
+                {
+                    Console.WriteLine(e.GetBaseException().ToString());
+                    result = DaoUtilities.UNSUPPORTED_EXCEPTION;
+                }
+                catch (ObjectDisposedException e)
+                {
+                    Console.WriteLine(e.GetBaseException().ToString());
+                    result = DaoUtilities.DISPOSED_EXCEPTION;
+                }
+                catch (InvalidOperationException e)
+                {
+                    Console.WriteLine(e.GetBaseException().ToString());
+                    result = DaoUtilities.INVALID_OPERATION_EXCEPTION;
+                }
+            }
+            return result;
+        }
+
+        public int DeleteRepetitiveEvents(EventModel em)
+        {
+            int result = DeleteEvent(em);
+
+            if (result == DaoUtilities.SAVE_SUCCESSFUL)
+            {
+                IQueryable<REPETITIVE_EVENT> query = db.Set<REPETITIVE_EVENT>().Where(REPETITIVE_EVENT => REPETITIVE_EVENT.RE_ID == em.EventId);
+
+                foreach (REPETITIVE_EVENT re in query)
+                {
+                    db.REPETITIVE_EVENT.Remove(re);
+                }
+
+                try
+                {
+                    int saveResult = db.SaveChanges();
+
+                    if (saveResult != 0)
+                        result = DaoUtilities.SAVE_SUCCESSFUL;
+                }
+                catch (DbUpdateConcurrencyException e)
+                {
+                    Console.WriteLine(e.GetBaseException().ToString());
+                    result = DaoUtilities.UPDATE_CONCURRENCY_EXCEPTION;
+                }
+                catch (DbUpdateException e)
+                {
+                    Console.WriteLine(e.GetBaseException().ToString());
+                    result = DaoUtilities.UPDATE_EXCEPTION;
+                }
+                catch (DbEntityValidationException e)
+                {
+                    Console.WriteLine(e.GetBaseException().ToString());
+                    result = DaoUtilities.ENTITY_VALIDATION_EXCEPTION;
+                }
+                catch (NotSupportedException e)
+                {
+                    Console.WriteLine(e.GetBaseException().ToString());
+                    result = DaoUtilities.UNSUPPORTED_EXCEPTION;
+                }
+                catch (ObjectDisposedException e)
+                {
+                    Console.WriteLine(e.GetBaseException().ToString());
+                    result = DaoUtilities.DISPOSED_EXCEPTION;
+                }
+                catch (InvalidOperationException e)
+                {
+                    Console.WriteLine(e.GetBaseException().ToString());
+                    result = DaoUtilities.INVALID_OPERATION_EXCEPTION;
+                }
+            }
+            return result;
+        }
+        public List<PunctualEventModel> FindAllPunctualEvents()
+        {
+            List<PunctualEventModel> punctualEventsList = new List<PunctualEventModel>();
+            IQueryable<PUNCTUAL_EVENT> query = db.Set<PUNCTUAL_EVENT>();
+
+            foreach (PUNCTUAL_EVENT pe in query)
+            {
+                punctualEventsList.Add((PunctualEventModel) FindEventById(pe.PE_ID));
+            }
+
+            return punctualEventsList;
+        }
+
+        public List<RepetitiveEventModel> FindAllRepetitiveEvents()
+        {
+            List<RepetitiveEventModel> repetitiveEventsList = new List<RepetitiveEventModel>();
+            IQueryable<REPETITIVE_EVENT> query = db.Set<REPETITIVE_EVENT>();
+
+            foreach (REPETITIVE_EVENT re in query)
+            {
+                RepetitiveEventModel rem = (RepetitiveEventModel) FindEventById(re.RE_ID);
+                rem.EventDate = re.RE_DATE;
+                repetitiveEventsList.Add(rem);
+            }
+
+            return repetitiveEventsList;
+        }
     }
 }
