@@ -178,12 +178,12 @@ namespace BodyBalance.Controllers
             var user = userServices.FindUserById(user_id);
             if(user == null)
             {
-               return NotFound();
+               return BadRequest("Bad user id");
             }
             var myEvent = eventServices.FindEventById(event_id);
             if (myEvent == null)
             {
-                return NotFound();
+                return BadRequest("Bad event id");
             }
 
             var registerResult = eventServices.RegisterUserToEvent(event_id, user);
@@ -206,12 +206,12 @@ namespace BodyBalance.Controllers
             var user = userServices.FindUserById(user_id);
             if (user == null)
             {
-                return NotFound();
+                return BadRequest("Bad user id");
             }
             var myEvent = eventServices.FindEventById(event_id);
             if (myEvent == null)
             {
-                return NotFound();
+                return BadRequest("Bad event id");
             }
 
             var deleteResult = eventServices.RemoveUserOfEvent(event_id, user);
