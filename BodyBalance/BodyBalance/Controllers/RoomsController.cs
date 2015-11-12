@@ -14,9 +14,12 @@ namespace BodyBalance.Controllers
     public class RoomsController : ApiController
     {
         private IRoomServices roomServices;
-        public RoomsController(IRoomServices roomServices)
+        private IAccessoryServices accessoryServices;
+        public RoomsController(IRoomServices roomServices,
+            IAccessoryServices accessoryServices)
         {
             this.roomServices = roomServices;
+            this.accessoryServices = accessoryServices;
         }
         // GET: api/Rooms
         [HttpGet]
@@ -128,8 +131,8 @@ namespace BodyBalance.Controllers
         }
 
         // GET: api/Rooms/{room_id}/Accessories
-        [Route("Rooms/{room_id}/Accessories")]
         [HttpGet]
+        [Route("Rooms/{room_id}/Accessories")]
         public IHttpActionResult GetAccessories(string room_id)
         {
             var room = roomServices.FindRoomById(room_id);
@@ -141,6 +144,37 @@ namespace BodyBalance.Controllers
             var listAccessories = roomServices.FindAllAccessoriesOfRoom(room_id);
 
             return Ok(listAccessories);
+        }
+
+        // POST: Rooms/{room_id}/Accessories
+        [HttpPost]
+        [Route("Rooms/{room_id}/Accessories")]
+        public IHttpActionResult AddAccessories(string room_id, [FromBody] AccessoryModel model)
+        {
+            var room = roomServices.FindRoomById(room_id);
+            if (room == null)
+            {
+                return BadRequest("Invalid room id supplied");
+            }
+
+            var accessory = accessoryServices.FindAccessoryById(model.AccessoryId);
+            if (accessory == null)
+            {
+                return BadRequest("Invalid accessory id supplied");
+            }
+
+            var addResult = roomServices.AddAccessoryToRoom(room_id, accessory, model.Quantity);
+
+            if (addResult == DaoUtilities.SAVE_SUCCESSFUL)
+            {
+                return Ok("Accessories added to the room successfully");
+            }
+            if (addResult == DaoUtilities.DISPOSED_EXCEPTION)
+            {
+                var ex = new Exception("Connection have been disposed");
+                return InternalServerError(ex);
+            }
+            return InternalServerError();
         }
     }
 }
