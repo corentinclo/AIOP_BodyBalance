@@ -178,34 +178,65 @@ namespace BodyBalance.Controllers
         }
 
         // DELETE: Rooms/{room_id}/Accessories
-        //[HttpDelete]
-        //[Route("Rooms/{room_id}/Accessories")]
-        //public IHttpActionResult DeleteAccessories(string room_id, [FromBody] AccessoryModel model)
-        //{
-        //    var room = roomServices.FindRoomById(room_id);
-        //    if (room == null)
-        //    {
-        //        return BadRequest("Invalid room id supplied");
-        //    }
+        [HttpDelete]
+        [Route("Rooms/{room_id}/Accessories")]
+        public IHttpActionResult DeleteAccessories(string room_id, [FromBody] AccessoryModel model)
+        {
+            var room = roomServices.FindRoomById(room_id);
+            if (room == null)
+            {
+                return BadRequest("Invalid room id supplied");
+            }
 
-        //    var accessory = accessoryServices.FindAccessoryById(model.AccessoryId);
-        //    if (accessory == null)
-        //    {
-        //        return BadRequest("Invalid accessory id supplied");
-        //    }
+            var accessory = accessoryServices.FindAccessoryById(model.AccessoryId);
+            if (accessory == null)
+            {
+                return BadRequest("Invalid accessory id supplied");
+            }
 
-        //    var addResult = roomServices.AddAccessoryToRoom(room_id, accessory, model.Quantity);
+            var removeResult = roomServices.RemoveAccessoryOfRoom(room_id, accessory);
 
-        //    if (addResult == DaoUtilities.SAVE_SUCCESSFUL)
-        //    {
-        //        return Ok("Accessories added to the room successfully");
-        //    }
-        //    if (addResult == DaoUtilities.DISPOSED_EXCEPTION)
-        //    {
-        //        var ex = new Exception("Connection have been disposed");
-        //        return InternalServerError(ex);
-        //    }
-        //    return InternalServerError();
-        //}
+            if (removeResult == DaoUtilities.SAVE_SUCCESSFUL)
+            {
+                return Ok("Accessories removed to the room successfully");
+            }
+            if (removeResult == DaoUtilities.DISPOSED_EXCEPTION)
+            {
+                var ex = new Exception("Connection have been disposed");
+                return InternalServerError(ex);
+            }
+            return InternalServerError();
+        }
+
+        // PUT: Rooms/{room_id}/Accessories
+        [HttpPut]
+        [Route("Rooms/{room_id}/Accessories")]
+        public IHttpActionResult UpdateAccessories(string room_id, [FromBody] AccessoryModel model)
+        {
+            var room = roomServices.FindRoomById(room_id);
+            if (room == null)
+            {
+                return BadRequest("Invalid room id supplied");
+            }
+
+            var accessory = accessoryServices.FindAccessoryById(model.AccessoryId);
+            if (accessory == null)
+            {
+                return BadRequest("Invalid accessory id supplied");
+            }
+
+            var removeResult = roomServices.UpdateAccessoryInRoom(room_id, accessory, model.Quantity);
+
+            if (removeResult == DaoUtilities.SAVE_SUCCESSFUL)
+            {
+                return Ok("Accessories updated to the room successfully");
+            }
+            if (removeResult == DaoUtilities.DISPOSED_EXCEPTION)
+            {
+                var ex = new Exception("Connection have been disposed");
+                return InternalServerError(ex);
+            }
+            return InternalServerError();
+        }
     }
 }
