@@ -94,10 +94,24 @@ namespace BodyBalance.Services
         List<NotificationModel> FindAllNotificationssOfUser(string UserId);
 
         /// <summary>
+        /// Retrieve all the lines of the user's basket
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
+        List<BasketModel> FindBasketOfUser(string UserId);
+
+        /// <summary>
         /// Find all the purchases of the user with the id in parameter
         /// </summary>
         /// <param name="UserId"></param>
         /// <returns></returns>
         List<PurchaseModel> FindAllPurchasesOfUser(string UserId);
+
+        /// <summary>
+        /// Delete the entire basket of a user
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
+        int DeleteUserBasket(string UserId);
     }
 }

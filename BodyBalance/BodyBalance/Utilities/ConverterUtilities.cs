@@ -351,5 +351,71 @@ namespace BodyBalance.Utilities
 
             return pm;
         }
+
+        /// <summary>
+        /// Convert a purchase from the database to a PurchaseModel
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        public PurchaseModel ConvertPurchaseToPurchaseModel(PURCHASE p)
+        {
+            PurchaseModel pm = new PurchaseModel();
+
+            if (p != null)
+            {
+                pm.PurchaseId = p.PURCHASE_ID;
+                pm.UserId = p.PURCHASE_USERID;
+                pm.PurchaseDate = p.PURCHASE_DATE;
+                pm.ShipDate = p.PURCHASE_SHIPDATE;
+                pm.TotalPrice = p.PURCHASE_TOTALPRICE;
+            }
+            else
+                pm = null;
+
+            return pm;
+        }
+
+        /// <summary>
+        /// Convert a purchaseContains from the database to a PurchaseLineModel
+        /// </summary>
+        /// <param name="pc"></param>
+        /// <returns></returns>
+        public PurchaseLineModel ConvertPurchaseContainsToPurchaseLineModel(PURCHASECONTAINS pc)
+        {
+            PurchaseLineModel plm = new PurchaseLineModel();
+
+            if (pc != null)
+            {
+                plm.PurchaseId = pc.PURCHASE_ID;
+                plm.ProductId = pc.PRODUCT_ID;
+                plm.Quantity = pc.PRODUCTQUANTITY;
+                plm.ValidationDate = pc.VALIDATIONDATE;
+            }
+            else
+                plm = null;
+
+            return plm;
+        }
+
+        /// <summary>
+        /// Convert a basket from the database to a BasketModel
+        /// </summary>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public BasketModel ConvertBasketToBasketModel(HASINBASKET b)
+        {
+            BasketModel bm = new BasketModel();
+
+            if (b != null)
+            {
+                bm.UserId = b.USER_ID;
+                bm.ProductId = b.PRODUCT_ID;
+                bm.Quantity = b.QUANTITY;
+            }
+            else
+                bm = null;
+
+            return bm;
+        }
     }
 }

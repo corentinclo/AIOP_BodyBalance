@@ -44,10 +44,10 @@ namespace BodyBalance.Services
         List<PurchaseModel> FindAllPurchases();
 
         /// <summary>
-        /// Find all the products of the purchase with the id in parameter
+        /// Find all the lines of the purchase with the id in parameter
         /// </summary>
         /// <param name="PurchaseId"></param>
         /// <returns></returns>
-        List<ProductModel> FindAllProductsOfPurchase(string PurchaseId);
+        List<PurchaseLineModel> FindAllLinesOfPurchase(string PurchaseId);
     }
 }

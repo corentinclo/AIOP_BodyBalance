@@ -5,29 +5,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using BodyBalance.Models;
-using System.Data.Entity.Validation;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 
 namespace BodyBalance.Services
 {
-    public class PurchaseServices : IPurchaseServices
+    public class PurchaseLineServices : IPurchaseLineServices
     {
         private Entities db = new Entities();
         private ConverterUtilities cu = new ConverterUtilities();
 
-        public int CreatePurchase(PurchaseModel pm)
+        public int CreatePurchaseLine(PurchaseLineModel plm)
         {
             int result = DaoUtilities.NO_CHANGES;
 
-            PURCHASE p = db.PURCHASE.Create();
+            PURCHASECONTAINS pc = db.PURCHASECONTAINS.Create();
 
-            p.PURCHASE_ID = pm.PurchaseId;
-            p.PURCHASE_USERID = pm.UserId;
-            p.PURCHASE_DATE = pm.PurchaseDate;
-            p.PURCHASE_SHIPDATE = pm.ShipDate;
-            p.PURCHASE_TOTALPRICE = pm.TotalPrice;
+            pc.PURCHASE_ID = plm.PurchaseId;
+            pc.PRODUCT_ID = plm.ProductId;
+            pc.PRODUCTQUANTITY = plm.Quantity;
+            pc.VALIDATIONDATE = plm.ValidationDate; 
 
-            db.PURCHASE.Add(p);
+            db.PURCHASECONTAINS.Add(pc);
             try
             {
                 int saveResult = db.SaveChanges();
@@ -68,25 +67,23 @@ namespace BodyBalance.Services
             return result;
         }
 
-        public PurchaseModel FindPurchaseWithId(string PurchaseId)
+        public PurchaseLineModel FindPurchaseLineWithIds(string PurchaseId, string ProductId)
         {
-            PURCHASE p = db.PURCHASE.Find(PurchaseId);
+            PURCHASECONTAINS pc = db.PURCHASECONTAINS.Find(PurchaseId, ProductId);
 
-            return cu.ConvertPurchaseToPurchaseModel(p);
+            return cu.ConvertPurchaseContainsToPurchaseLineModel(pc);
         }
 
-        public int UpdatePurchase(PurchaseModel pm)
+        public int UpdatePurchaseLine(PurchaseLineModel plm)
         {
             int result = DaoUtilities.NO_CHANGES;
 
-            PURCHASE p = db.PURCHASE.Find(pm.PurchaseId);
-               
-            if(p != null)
+            PURCHASECONTAINS pc = db.PURCHASECONTAINS.Find(plm.PurchaseId, plm.ProductId);
+
+            if(pc != null)
             {
-                p.PURCHASE_USERID = pm.UserId;
-                p.PURCHASE_DATE = pm.PurchaseDate;
-                p.PURCHASE_SHIPDATE = pm.ShipDate;
-                p.PURCHASE_TOTALPRICE = pm.TotalPrice;
+                pc.PRODUCTQUANTITY = plm.Quantity;
+                pc.VALIDATIONDATE = plm.ValidationDate;
 
                 try
                 {
@@ -129,15 +126,15 @@ namespace BodyBalance.Services
             return result;
         }
 
-        public int DeletePurchase(PurchaseModel pm)
+        public int DeletePurchase(PurchaseLineModel plm)
         {
             int result = DaoUtilities.NO_CHANGES;
 
-            PURCHASE p = db.PURCHASE.Find(pm.PurchaseId);
+            PURCHASECONTAINS pc = db.PURCHASECONTAINS.Find(plm.PurchaseId, plm.ProductId);
 
-            if (p != null)
+            if (pc != null)
             {
-                db.PURCHASE.Remove(p);
+                db.PURCHASECONTAINS.Remove(pc);
 
                 try
                 {
@@ -177,33 +174,8 @@ namespace BodyBalance.Services
                     result = DaoUtilities.INVALID_OPERATION_EXCEPTION;
                 }
             }
+           
             return result;
-        }
-
-        public List<PurchaseModel> FindAllPurchases()
-        {
-            List<PurchaseModel> purchasesList = new List<PurchaseModel>();
-            IQueryable<PURCHASE> query = db.Set<PURCHASE>();
-
-            foreach (PURCHASE p in query)
-            {
-                purchasesList.Add(cu.ConvertPurchaseToPurchaseModel(p));
-            }
-
-            return purchasesList;
-        }
-
-        public List<PurchaseLineModel> FindAllLinesOfPurchase(string PurchaseId)
-        {
-            List<PurchaseLineModel> purchaseLinesList = new List<PurchaseLineModel>();
-            IQueryable<PURCHASECONTAINS> query = db.Set<PURCHASECONTAINS>().Where(PURCHASECONTAINS => PURCHASECONTAINS.PURCHASE_ID== PurchaseId);
-
-            foreach (PURCHASECONTAINS pc in query)
-            {
-                purchaseLinesList.Add(cu.ConvertPurchaseContainsToPurchaseLineModel(pc));
-            }
-
-            return purchaseLinesList;
         }
     }
 }

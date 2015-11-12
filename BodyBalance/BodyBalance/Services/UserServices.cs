@@ -271,7 +271,81 @@ namespace BodyBalance.Services
 
         public List<PurchaseModel> FindAllPurchasesOfUser(string UserId)
         {
-            throw new NotImplementedException();
+            List<PurchaseModel> purchasesList = new List<PurchaseModel>();
+            IQueryable<PURCHASE> query = db.Set<PURCHASE>().Where(PURCHASE => PURCHASE.PURCHASE_USERID == UserId);
+
+            foreach (PURCHASE p in query)
+            {
+                purchasesList.Add(cu.ConvertPurchaseToPurchaseModel(p));
+            }
+
+            return purchasesList;
+        }
+
+        public List<BasketModel> FindBasketOfUser(string UserId)
+        {
+            List<BasketModel> basketsList = new List<BasketModel>();
+            IQueryable<HASINBASKET> query = db.Set<HASINBASKET>().Where(HASINBASKET => HASINBASKET.USER_ID == UserId);
+
+            foreach (HASINBASKET b in query)
+            {
+                basketsList.Add(cu.ConvertBasketToBasketModel(b));
+            }
+
+            return basketsList;
+        }
+
+        public int DeleteUserBasket(string UserId)
+        {
+            int result = DaoUtilities.NO_CHANGES;
+
+            List<BasketModel> basketsList = new List<BasketModel>();
+            IQueryable<HASINBASKET> query = db.Set<HASINBASKET>().Where(HASINBASKET => HASINBASKET.USER_ID == UserId);
+
+            foreach (HASINBASKET b in query)
+            {
+                db.HASINBASKET.Remove(b);
+            }
+
+            try
+            {
+                int saveResult = db.SaveChanges();
+
+                if (saveResult != 0)
+                    result = DaoUtilities.SAVE_SUCCESSFUL;
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+                Console.WriteLine(e.GetBaseException().ToString());
+                result = DaoUtilities.UPDATE_CONCURRENCY_EXCEPTION;
+            }
+            catch (DbUpdateException e)
+            {
+                Console.WriteLine(e.GetBaseException().ToString());
+                result = DaoUtilities.UPDATE_EXCEPTION;
+            }
+            catch (DbEntityValidationException e)
+            {
+                Console.WriteLine(e.GetBaseException().ToString());
+                result = DaoUtilities.ENTITY_VALIDATION_EXCEPTION;
+            }
+            catch (NotSupportedException e)
+            {
+                Console.WriteLine(e.GetBaseException().ToString());
+                result = DaoUtilities.UNSUPPORTED_EXCEPTION;
+            }
+            catch (ObjectDisposedException e)
+            {
+                Console.WriteLine(e.GetBaseException().ToString());
+                result = DaoUtilities.DISPOSED_EXCEPTION;
+            }
+            catch (InvalidOperationException e)
+            {
+                Console.WriteLine(e.GetBaseException().ToString());
+                result = DaoUtilities.INVALID_OPERATION_EXCEPTION;
+            }
+
+            return result;
         }
 
         private string hashSHA512(string unhashedValue)
