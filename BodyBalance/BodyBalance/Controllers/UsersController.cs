@@ -44,6 +44,7 @@ namespace BodyBalance.Controllers
             }
             return Ok(user);
         }
+
         [HttpPost]
         // POST: api/Users
         public IHttpActionResult Post([FromBody]UserModel user)
@@ -113,6 +114,22 @@ namespace BodyBalance.Controllers
             }
 
             return InternalServerError();
+        }
+
+
+        // GET: /Users/{user-id}/Products
+        [HttpGet]
+        [Route("Users/{userid}/Products")]
+        public IHttpActionResult GetProducts(string userid)
+        {
+            var user = userServices.FindUserById(userid);
+            if (user == null)
+            {
+                return BadRequest("Bad user id supplied");
+            }
+            var listProducts = userServices.FindAllProductsOfUser(userid);
+
+            return Ok(listProducts);
         }
     }
 }

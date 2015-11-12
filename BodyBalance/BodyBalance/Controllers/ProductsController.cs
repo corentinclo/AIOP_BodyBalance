@@ -105,7 +105,7 @@ namespace BodyBalance.Controllers
         public IHttpActionResult Delete(string product_id)
         {
             var product = productServices.FindProductWithId(product_id);
-            if (product_id == null)
+            if (product == null)
             {
                 return BadRequest("Bad product id supplied");
             }

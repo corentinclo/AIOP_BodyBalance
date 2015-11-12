@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BodyBalance.Services
 {
-    interface ICategoryServices
+    public interface ICategoryServices
     {
         /// <summary>
         /// Create a category
