@@ -77,8 +77,14 @@ namespace BodyBalance.Controllers
                 return BadRequest("Invalid user supplied");
             }
 
-            var updateResult = userServices.UpdateUser(user);
+            if (userServices.FindUserByIdAndPassword(user.UserId, user.Password) == null)
+            {
+                //TODO: Renvoyer 403 Forbidden
+                return BadRequest("Wrong password");
+            }
 
+            var updateResult = userServices.UpdateUser(user);
+            
             if (updateResult == DaoUtilities.SAVE_SUCCESSFUL)
             {
                 return Ok();
