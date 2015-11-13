@@ -66,7 +66,7 @@
         return false;
     }, function () {
         $('#myAccountModal button').attr('disabled', false);
-        bootbox.alert('An error has occured');
+        bootbox.alert('Wrong password');
         return false;
     },
     'application/json', function () {

@@ -79,8 +79,7 @@ namespace BodyBalance.Controllers
 
             if (userServices.FindUserByIdAndPassword(user.UserId, user.Password) == null)
             {
-                //TODO: Renvoyer 403 Forbidden
-                return BadRequest("Wrong password");
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
             }
 
             var updateResult = userServices.UpdateUser(user);

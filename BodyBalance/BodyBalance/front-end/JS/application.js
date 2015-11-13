@@ -24,8 +24,14 @@
         });
     }
 
-    Application.prototype.ajaxifyForm = function (form_id, on_success, on_error, contentType) {
+    Application.prototype.ajaxifyForm = function (form_id, on_success, on_error, contentType, beforesend) {
         $(form_id).submit(function () {
+            if (typeof beforesend != 'undefined') {
+                var res = beforesend(form_id);
+                if (res === false) {
+                    return false;
+                }
+            }
             //var formData = new FormData($(form_id)[0]); //Les données du formulaire
             $.ajax({
                 type: $(form_id).attr("method"), //La méthode (GET, POST, PUT, DELETE)

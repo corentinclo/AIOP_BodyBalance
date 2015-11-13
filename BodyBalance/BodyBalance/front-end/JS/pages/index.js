@@ -59,8 +59,12 @@ window.app.ajaxifyForm('#login_form', function (result) {
         $('#main').html(data);
     });
 }, function (result) {
+    $('#login_form input[type=submit]').attr('disabled', false);
     bootbox.alert('Bad username or password');
-}, 'application/json');
+}, 'application/json',
+function () {
+    $('#login_form input[type=submit]').attr('disabled', true);
+});
 
 $(function () {
     window.app.hrefToFunction('body');
