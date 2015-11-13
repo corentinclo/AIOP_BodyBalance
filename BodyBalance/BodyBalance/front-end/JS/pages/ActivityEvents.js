@@ -81,3 +81,12 @@ function dateFromISO8601(iso8601Date) {
     var isoDate = new Date(isoTime);
     return isoDate;
 }
+
+// flatten object by concatting values
+function concatValues(obj) {
+    var value = '';
+    for (var prop in obj) {
+        value += obj[prop];
+    }
+    return value;
+}
