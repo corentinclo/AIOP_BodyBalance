@@ -33,6 +33,7 @@ namespace BodyBalance.Controllers
         }
 
         [HttpGet]
+        [Route("Users/{userid}")]
         // GET: api/Users/{user-id}
         public IHttpActionResult Get(string userid)
         {
@@ -68,6 +69,7 @@ namespace BodyBalance.Controllers
 
         // PUT: api/Users/{user-id}
         [HttpPut]
+        [Route("Users/{userid}")]
         public IHttpActionResult Put(string userid, [FromBody]UserModel user)
         {
             if (!ModelState.IsValid)
