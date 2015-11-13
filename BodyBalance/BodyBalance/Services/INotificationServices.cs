@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BodyBalance.Services
 {
-    interface INotificationServices
+    public interface INotificationServices
     {
         /// <summary>
         /// Create a notification

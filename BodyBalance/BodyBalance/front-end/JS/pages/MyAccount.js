@@ -1,10 +1,11 @@
 ﻿$(function () {
-    var testAccount = {
-        UserId: "Test",
-        Phone: "0600000000"
-    };
     //On remplit le formulaire avec le compte utilisateur
-    window.app.FillFormWithObject('#my_account_form', testAccount);
+    window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, function (data) {
+        window.app.FillFormWithObject('#my_account_form', data);
+    },
+    function () {
+        bootbox.alert('An error has occured, we were unable to get your informations');
+    });
 
     $('#change_pass_usrId_input').val(window.app.username);
 
@@ -58,5 +59,19 @@
             return false;
         }
         return true;
-    },true);
+    }, true);
+    window.app.ajaxifyFormJson('#my_account_form', function () {
+        $('#myAccountModal button').attr('disabled', false);
+        bootbox.alert('Your informations have been updated');
+        return false;
+    }, function () {
+        $('#myAccountModal button').attr('disabled', false);
+        bootbox.alert('An error has occured');
+        return false;
+    },
+    'application/json', function () {
+        $('#myAccountModal button').attr('disabled', true);
+    }, true);
+
+    $('#my_account_form').attr('action', '/Users/' + window.app.username);
 });

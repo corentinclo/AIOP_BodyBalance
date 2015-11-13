@@ -31,7 +31,7 @@ namespace BodyBalance.Controllers
             return Ok(listEvents);
         }
 
-        // POST: api/Events
+        // POST: /Events
         [HttpPost]
         public IHttpActionResult Post([FromBody]EventModel model)
         {
@@ -52,7 +52,7 @@ namespace BodyBalance.Controllers
             return InternalServerError();
         }
 
-        // GET: api/Events/{event_id}
+        // GET: /Events/{event_id}
         [HttpGet]
         public IHttpActionResult Get(string event_id)
         {

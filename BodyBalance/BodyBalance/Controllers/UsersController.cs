@@ -33,6 +33,7 @@ namespace BodyBalance.Controllers
         }
 
         [HttpGet]
+        [Route("Users/{userid}")]
         // GET: api/Users/{user-id}
         public IHttpActionResult Get(string userid)
         {
@@ -44,6 +45,7 @@ namespace BodyBalance.Controllers
             }
             return Ok(user);
         }
+
         [HttpPost]
         // POST: api/Users
         public IHttpActionResult Post([FromBody]UserModel user)
@@ -67,6 +69,7 @@ namespace BodyBalance.Controllers
 
         // PUT: api/Users/{user-id}
         [HttpPut]
+        [Route("Users/{userid}")]
         public IHttpActionResult Put(string userid, [FromBody]UserModel user)
         {
             if (!ModelState.IsValid)
@@ -113,6 +116,22 @@ namespace BodyBalance.Controllers
             }
 
             return InternalServerError();
+        }
+
+
+        // GET: /Users/{user-id}/Products
+        [HttpGet]
+        [Route("Users/{userid}/Products")]
+        public IHttpActionResult GetProducts(string userid)
+        {
+            var user = userServices.FindUserById(userid);
+            if (user == null)
+            {
+                return BadRequest("Bad user id supplied");
+            }
+            var listProducts = userServices.FindAllProductsOfUser(userid);
+
+            return Ok(listProducts);
         }
     }
 }
