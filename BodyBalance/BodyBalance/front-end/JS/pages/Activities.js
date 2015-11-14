@@ -1,34 +1,58 @@
 ﻿$(function () {
+    var myId = window.app.username;
+    var myActivities = new Array();
+    var otherActivities = new Array();
     window.app.sendRestRequest('/activities', 'GET', null, function (data) {
         $.each(data, function (key, val) {
-            var $tr = $(document.createElement("tr")).appendTo(".table tbody");
-            $tr.append("<td>" + val.Name + "</td><td>" + val.ShortDesc + "</td><td>" + val.ManagerId + "</td>")
-            $tr.click(function () {
-                bootbox.dialog({
-                    message: val.LongDesc,
-                    title: val.Name,
-                    buttons: {
-                        success: {
-                            label: "This activity events",
-                            className: "btn-success",
-                            callback: function () {
-                                var activityId = val.Name;
-                                showActivityEvents(activityId);
-                            }
-                        },
-                        main: {
-                            label: "Back",
-                            className: "btn-primary",
-                        }
-                    }
-                });
-            });
+            // check if this activity is manage by the logged in user
+            if (val.ManagerId == myId) {
+                myActivities.push(val);
+            } else {
+                otherActivities.push(val);
+            }
+            addOneActivity(val);
+         
         });
     });
 
+    $('.myActButton').click(function () {
+        $(".grid").empty();
+        $("#tbody").empty();
+        $(this).attr("disabled", true);
+        $(".allActButton").attr("disabled", false);
+        $("#activitiesTitle").text("The activities that you manage");
+        $.each(myActivities, function (key, val) {
+            addOneActivity(val);
+        });
+    });
+    $('.allActButton').click(function () {
+        $(".grid").empty();
+        $(this).attr("disabled", true);
+        $(".myActButton").attr("disabled", false);
+        $("#activitiesTitle").text("All the ZenLounge activities!");
+        $.each(otherActivities, function (key, val) {
+            addOneActivity(val);
+        });
+    });
+    $('#submitCreateButton').click(function () {
+        $('#activityId_input').val($('#name_input').val());
+        $('#managerId_input').val(myId);
+        window.app.ajaxifyFormJson('#create_act_form', function () {
+            bootbox.alert('Your activity has been created');
+            return false;
+        }, function () {
+            bootbox.alert('A problem occured');
+            return false;
+        },
+        'application/json', function () {
+            $('#create_act_form button').attr('disabled', true);
+        }, true);
+
+        $('#create_act_form').submit();
+    });
 });
 
-function showActivityEvents(activityId){
+function showActivityEvents(activityId) {
     window.app.sendRestRequest('/Activities/' + activityId + '/Events', 'GET', null, function (data) {
         if ($(".grid").length) {
             $(".grid").empty();
@@ -88,3 +112,32 @@ function dateFromISO8601(iso8601Date) {
     var isoDate = new Date(isoTime);
     return isoDate;
 }
+
+// function to add one activity to the table body
+function addOneActivity(val) {
+    var $tr = $(document.createElement("tr")).appendTo(".table tbody");
+    $tr.append("<td>" + val.Name + "</td><td>" + val.ShortDesc + "</td><td>" + val.ManagerId + "</td>")
+    $tr.click(function () {
+        bootbox.dialog({
+            message: val.LongDesc,
+            title: val.Name,
+            buttons: {
+                success: {
+                    label: "This activity events",
+                    className: "btn-success",
+                    callback: function () {
+                        var activityId = val.Name;
+                        showActivityEvents(activityId);
+                    }
+                },
+                main: {
+                    label: "Back",
+                    className: "btn-primary",
+                }
+            }
+        });
+    });
+}
+
+//if logged in user is a manager, with get role
+$('[data-visible="manager"]').show();

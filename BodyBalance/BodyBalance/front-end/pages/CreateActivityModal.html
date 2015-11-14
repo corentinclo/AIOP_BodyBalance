@@ -1,20 +1,4 @@
-﻿<h1 style="text-align:center" id="activitiesTitle">All the ZenLounge activities!</h1>
-<button class="btn btn-primarystyle myActButton" style="display:none" data-visible="manager">Handle my activities</button>
-<button class="btn btn-primarystyle allActButton" style="display:none" data-visible="manager">All activities</button>
-<button class="btn btn-primarystyle createActButton" style="display:none" data-visible="manager" data-toggle="modal" data-target="#createActModal">Create an activity</button>
-    <table class="table table-hover" id="activitiesTable">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Manager</th>
-            </tr>
-        </thead>
-        <tbody style="cursor:pointer" id="tbody">
-        </tbody>
-    </table>
-
-<div id="createActModal" class="modal fade" tabindex="-1" role="dialog">
+﻿<div id="createActModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
 
@@ -23,16 +7,11 @@
                 <h4 class="modal-title">Create an activity</h4>
             </div>
             <div class="modal-body">
-                <form action="Activities/" method="POST" id="create_act_form" class="form-horizontal">
-                    <div class="form-group" style="display:none">
-                        <div class="col-sm-6 col-md-8">
-                            <input class="form-control" type="text" name="ActivityId" id="activityId_input" />
-                        </div>
-                    </div>
+                <form action="Users/" method="POST" id="create_act_form" class="form-horizontal">
                     <div class="form-group">
                         <label class="col-sm-6 col-md-4" for="name_input">Name</label>
                         <div class="col-sm-6 col-md-8">
-                            <input class="form-control" type="text" name="Name" placeholder="Name" id="name_input" required />
+                            <input class="form-control" type="text" name="Name" placeholder="Name" id="name_input" required disabled />
                         </div>
                     </div>
                     <div class="form-group">
@@ -49,18 +28,21 @@
                     </div>
                     <div class="form-group" style="display:none">
                         <div class="col-sm-6 col-md-8">
-                            <input class="form-control" type="tel" name="ManagerId" id="managerId_input" />
+                            <input class="form-control" type="text" name="ActivityId" id="activityId_input" required />
+                        </div>
+                    </div>
+                    <div class="form-group" style="display:none">
+                        <div class="col-sm-6 col-md-8">
+                            <input class="form-control" type="tel" name="ManagerId" id="managerId_input" required />
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="submitCreateButton">Save changes</button>
+                <button type="button" onclick="$('#create_act_form').submit();" class="btn btn-primary">Save changes</button>
             </div>
 
         </div>
     </div>
-</div>    
-
-<script src="JS/pages/Activities.js"></script>
+</div>
