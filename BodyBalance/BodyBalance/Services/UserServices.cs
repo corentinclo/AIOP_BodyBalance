@@ -78,7 +78,17 @@ namespace BodyBalance.Services
         {
             USER1 u = db.USER1.Find(UserId);
 
-            return cu.ConvertUserToUserModel(u);
+            UserModel um = cu.ConvertUserToUserModel(u);
+
+            if ( um != null)
+            {
+                um.UserRoles = new RolesModel();
+                um.UserRoles.IsAdmin = IsAdmin(um);
+                um.UserRoles.IsContributor = IsContributor(um);
+                um.UserRoles.IsManager = IsManager(um);
+                um.UserRoles.IsMember = IsMember(um);
+            }
+            return um;
         }
 
         public UserModel FindUserByIdAndPassword(string id, string pwd)
@@ -86,7 +96,17 @@ namespace BodyBalance.Services
             pwd = hashSHA512(pwd);
             USER1 u = ((USER1) db.USER1.Where(USER1 => USER1.USER_ID == id && USER1.USER_PASSWORD == pwd).FirstOrDefault());
 
-            return cu.ConvertUserToUserModel(u);
+            UserModel um = cu.ConvertUserToUserModel(u);
+
+            if (um != null)
+            {
+                um.UserRoles = new RolesModel();
+                um.UserRoles.IsAdmin = IsAdmin(um);
+                um.UserRoles.IsContributor = IsContributor(um);
+                um.UserRoles.IsManager = IsManager(um);
+                um.UserRoles.IsMember = IsMember(um);
+            }
+            return um;
         }
 
         public int UpdateUser(UserModel um)

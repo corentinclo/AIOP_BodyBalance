@@ -10,7 +10,7 @@ using System.Web.Http;
 
 namespace BodyBalance.Controllers
 {
-    [Authorize]
+    
     public class UsersController : ApiController
     {
         private IUserServices userServices;
@@ -137,6 +137,21 @@ namespace BodyBalance.Controllers
             var listProducts = userServices.FindAllProductsOfUser(userid);
 
             return Ok(listProducts);
+        }
+
+        // GET: /Users/{user-id}/Notifications
+        [HttpGet]
+        [Route("Users/{userid}/Notifications")]
+        public IHttpActionResult GetNotifications(string userid)
+        {
+            var user = userServices.FindUserById(userid);
+            if (user == null)
+            {
+                return BadRequest("Bad user id supplied");
+            }
+            var listNotifications = userServices.FindAllNotificationssOfUser(userid);
+
+            return Ok(listNotifications);
         }
     }
 }

@@ -277,6 +277,7 @@
     <Compile Include="Models\PurchaseLineModel.cs" />
     <Compile Include="Models\PurchaseModel.cs" />
     <Compile Include="Models\RepetitiveEventModel.cs" />
+    <Compile Include="Models\RolesModel.cs" />
     <Compile Include="Models\RoomModel.cs" />
     <Compile Include="Models\TokenModel.cs" />
     <Compile Include="Models\UserModel.cs" />

@@ -17,5 +17,6 @@ namespace BodyBalance.Models
         public string Town { get; set; }
         public string Phone { get; set; }
         public string Mail { get; set; }
+        public RolesModel UserRoles { get; set; }
     }
 }
