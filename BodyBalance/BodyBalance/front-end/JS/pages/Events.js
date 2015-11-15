@@ -2,9 +2,11 @@
 var typeList = new Array();
 var actList = new Array();
 window.app.sendRestRequest('/events', 'GET', null, function (data) {
+    var isManager;
     window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, function (data) {
         //if logged in user is a manager, with get role
         if (data.UserRoles.IsManager) {
+            isManager = data.UserRoles.IsManager;
             $('[data-visible="manager"]').show();
         }
     });
@@ -31,7 +33,8 @@ window.app.sendRestRequest('/events', 'GET', null, function (data) {
         $panelBody.append("<p><b>" + val.MaxNb + "</b> places available</p>");
         $panelBody.append("<p>Room <b>n°" + val.RoomId + "</b></p>");
         $panelBody.append("<p>With <b>" + val.ContributorId + "</b></p>");
-
+        var $reg = $panelBody.append("<div class='register'><button class='btn btn-primarystyle'>Register</button></div>");
+        var $del = $panelBody.append("<div class='delete' style='display:none' data-visible='manager'><button class='btn btn-primarystyle'>Delete</button></div>");
 
         // The date is in ISO8601 format
         var date = dateFromISO8601(val.EventDate);
@@ -44,12 +47,57 @@ window.app.sendRestRequest('/events', 'GET', null, function (data) {
         var weekDay = days[date.getDay()];
         var hour = "0" + (date.getHours() - 1);
         var min = "0" + date.getMinutes();
-        var time = weekDay + ', ' + month + ' ' + day + ' ' + year + '. ' + hour.substr(hour.length - 2) + ':' + min.substr(min.length - 2);
+        var time = weekDay + ', ' + month + ' ' + day + ' ' + year //+ '. ' + hour.substr(hour.length - 2) + ':' + min.substr(min.length - 2);
         $panel.append("<div class='panel-footer'><p> <b>" + time + "</b></p>" + val.Price + "€</div>");
 
         // Hiden timestamp for isotope sorting
         $item.append("<div class='timestamp'>" + timestamp + "</div>");
+
+        /* REGISTER TO AN EVENT */
+        $reg.click(function () {
+            bootbox.confirm({
+                message: "Do you want to register to this event ?",
+                callback: function (result) {
+                    window.app.sendRestRequest('/Events/' + val.EventId + '/RegisterUser', 'POST', null, function (data) {
+                        bootbox.alert('You are now register to '+val.name);
+                    }, function () {
+                        bootbox.alert('An error occured, try again later.');
+                    });
+                }
+            });
+        });
+
+        /* DELETE AN EVENT */
+        $del.click(function () {
+            bootbox.confirm({
+                message: "Are you sure ?",
+                callback: function (result) {
+                    window.app.sendRestRequest('/Events/' + val.EventId, 'DELETE', null, function (data) {
+                        bootbox.alert('This event doesn\'t exist anymore...');
+                    }, function () {
+                        bootbox.alert('Cet evenement est coriace et ne veut pas se supprimer ! Try again later.');
+                    });
+                }
+            });
+        });
     });
+
+    isManagerReady(0);
+    function isManagerReady(i) {
+        if (typeof isManager !== "undefined") {
+            $('[data-visible="manager"]').show();
+        }
+        else if (i < 20) {
+            setTimeout(function () {
+                i += 1;
+                isManagerReady(i);
+            }, 500);
+        }
+        else {
+            return false;
+        }
+    }
+
 
     var iso = new Isotope('.grid', {
         itemSelector: '.grid-item',
@@ -80,6 +128,8 @@ window.app.sendRestRequest('/events', 'GET', null, function (data) {
     });
 });
 
+
+/* CREATE AN EVENT */
 $('#createEventModal').on('shown.bs.modal', function (e) {
     $.each(actList, function (key, val) {
         $("#selActivity").append("<option value=" + val + "> " + val + "</a>");
