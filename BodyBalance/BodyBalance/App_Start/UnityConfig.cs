@@ -51,6 +51,9 @@ namespace BodyBalance.App_Start
             container.RegisterType<IProductServices, ProductServices>();
             container.RegisterType<ICategoryServices, CategoryServices>();
             container.RegisterType<INotificationServices, NotificationServices>();
+            container.RegisterType<IBasketServices, BasketServices>();
+            container.RegisterType<IPurchaseLineServices, PurchaseLineServices>();
+            container.RegisterType<IPurchaseServices, PurchaseServices>();
         }
     }
 }

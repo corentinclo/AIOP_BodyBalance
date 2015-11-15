@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BodyBalance.Services
 {
-    interface IPurchaseLineServices
+    public interface IPurchaseLineServices
     {
         /// <summary>
         /// Create a purchaseLine
