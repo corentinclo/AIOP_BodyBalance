@@ -1,4 +1,5 @@
 ﻿<h2 style="text-align:center">Calendar</h2>
+<button class="btn btn-primarystyle createActButton" style="display:none" data-visible="manager" data-toggle="modal" data-target="#createEventModal">Create an events</button>
 <div id="selects">
     <label for="selAct">Activity:</label>
     <select class="form-control" id="selAct">
@@ -12,6 +13,89 @@
 <div class="grid" id="grid">
 </div>
 
+<div id="createEventModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Create an event</h4>
+            </div>
+            <div class="modal-body">
+                <form action="/Events/" method="POST" id="create_event_form" class="form-horizontal">
+                    <div class="form-group" style="display:none">
+                        <div class="col-sm-6 col-md-8">
+                            <input class="form-control" type="text" name="EventId" id="eventId_input" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 col-md-4" for="name_input">Name</label>
+                        <div class="col-sm-6 col-md-8">
+                            <input class="form-control" type="text" name="name" placeholder="Name" id="name_input" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-6 col-md-8" style="display:none">
+                            <input class="form-control" type="text" name="Duration" id="duration_input" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 col-md-4" for="maxnb_input">Max number</label>
+                        <div class="col-sm-6 col-md-8">
+                            <input class="form-control" type="text" name="MaxNb" placeholder="Max number" id="maxnb_input" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 col-md-4" for="price_input">Price</label>
+                        <div class="col-sm-6 col-md-8">
+                            <input class="form-control" type="number" name="Price" placeholder="Price" id="price_input" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 col-md-4" for="selActivity">Activity</label>
+                        <div class="col-sm-6 col-md-8">
+                            <select class="form-control" id="selActivity" name="ActivityId"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 col-md-4" for="selRoom">Room</label>
+                        <div class="col-sm-6 col-md-8">
+                            <select class="form-control" id="selRoom" name="RoomId"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 col-md-4" for="selContrib">Contributor</label>
+                        <div class="col-sm-6 col-md-8">
+                            <select class="form-control" id="selContrib" name="ContributorId">
+                                <option value="MrPatate">MrPatate</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" style="display:none">
+                        <div class="col-sm-6 col-md-8">
+                            <input class="form-control" type="tel" name="ManagerId" id="managerId_input" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 col-md-4" for="selTyp">Type</label>
+                        <div class="col-sm-6 col-md-8">
+                            <select class="form-control" id="selTyp" name="Type"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 col-md-4" for="date">Date</label>
+                        <div class="col-sm-6 col-md-8">
+                            <input id="date" type="date" name="EventDate">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="submitCreateButton">Create event</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="JS/pages/Events.js"></script>
 

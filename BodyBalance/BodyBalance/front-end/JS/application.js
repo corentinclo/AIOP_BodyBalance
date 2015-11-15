@@ -7,6 +7,7 @@
         this.mappers = [];
         this.token = "";
         this.username = "";
+        this.roles = {};
     }
 
     /**
@@ -49,7 +50,8 @@
 
     Application.prototype.FormToObject = function (form_id) {
         var res = {};
-        $(form_id + ' input, ' + form_id + ' textarea').each(function() {
+        $(form_id + ' input, ' + form_id + ' textarea, ' + form_id + ' select').each(function () {
+            console.log($(this).val());
             res[$(this).attr('name')] = $(this).val();
         });
         return res;
@@ -128,6 +130,7 @@
             document.cookie = "uid=" + userId + ";expires=" + expire.toUTCString() + "; path=/";
             document.cookie = "access_token=" + token + ";expires=" + expire.toUTCString() + "; path=/";
         }
+        
     }
 
     Application.prototype.clearLoginParameters = function () {

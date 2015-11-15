@@ -1,6 +1,13 @@
-﻿var typeList = new Array();
+﻿
+var typeList = new Array();
 var actList = new Array();
 window.app.sendRestRequest('/events', 'GET', null, function (data) {
+    window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, function (data) {
+        //if logged in user is a manager, with get role
+        if (data.UserRoles.IsManager) {
+            $('[data-visible="manager"]').show();
+        }
+    });
     $.each(data, function (key, val) {
         if (jQuery.inArray(val.Type, typeList) == -1) {
             $("#selType").append("<option value='." + val.Type + "'> " + val.Type + "</a>");
@@ -72,7 +79,44 @@ window.app.sendRestRequest('/events', 'GET', null, function (data) {
         iso.arrange({ filter: filterValue });
     });
 });
-    
+
+$('#createEventModal').on('shown.bs.modal', function (e) {
+    $.each(actList, function (key, val) {
+        $("#selActivity").append("<option value=" + val + "> " + val + "</a>");
+    });
+    $.each(typeList, function (key, val) {
+        $("#selTyp").append("<option value=" + val + "> " + val + "</a>");
+    });
+    window.app.sendRestRequest('/Rooms', 'GET', null, function (data) {
+        $.each(data, function (key, val) {
+            $("#selRoom").append("<option value=" + val.RoomId + "> N°" + val.RoomId + " - " + val.Name + "</a>");
+        });
+    });
+    /* TEMPORARY
+    window.app.sendRestRequest('/Contributors', 'GET', null, function (data) {
+        $.each(data, function (key, val) {
+            $("#selContrib").append("<option value=" + val.ContributorId + ">" + val.ContributorId + "</a>");
+        });
+    });*/
+});
+$('#submitCreateButton').click(function () {
+    $('#eventId_input').val($('#name_input').val());
+    $('#managerId_input').val(window.app.username);
+    $('#duration_input').val(1);
+    window.app.ajaxifyFormJson('#create_event_form', function () {
+        bootbox.alert('Your event has been created');
+        return false;
+    }, function () {
+        bootbox.alert('A problem occured');
+        return false;
+    },
+    'application/json', function () {
+        $('#create_event_form button').attr('disabled', true);
+    }, true);
+
+    $('#create_event_form').submit();
+});
+
 
 // function to convert date in ISO8601 format to a date for all browsers
 function dateFromISO8601(iso8601Date) {

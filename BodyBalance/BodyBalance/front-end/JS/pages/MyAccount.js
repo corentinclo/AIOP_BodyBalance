@@ -74,4 +74,5 @@
     }, true);
 
     $('#my_account_form').attr('action', '/Users/' + window.app.username);
+
 });

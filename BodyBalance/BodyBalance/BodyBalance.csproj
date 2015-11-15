@@ -427,7 +427,6 @@
     <Content Include="front-end\JS\pages\MyAccount.js" />
     <Content Include="front-end\JS\pages\Register.js" />
     <Content Include="front-end\pages\ActivityEvents.html" />
-    <Content Include="front-end\pages\CreateActivityModal.html" />
     <Content Include="front-end\pages\Events.html" />
     <Content Include="front-end\pages\Activities.html" />
     <Content Include="front-end\pages\MainPage.html" />
