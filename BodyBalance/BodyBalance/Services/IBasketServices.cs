@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BodyBalance.Services
 {
-    interface IBasketServices
+    public interface IBasketServices
     {
         /// <summary>
         /// Create a line in the basket of a user
