@@ -342,7 +342,7 @@ namespace BodyBalance.Controllers
             return InternalServerError();
         }
 
-        // POST: Events/{event_id}/IsRegisteredUser/{user_id}
+        // GET: Events/{event_id}/IsRegisteredUser/{user_id}
         [HttpGet]
         [Route("Events/{event_id}/IsRegisteredUser/{user_id}")]
         public IHttpActionResult IsRegisteredUser(string event_id, string user_id)

@@ -88,12 +88,12 @@ footer {
 }
 .panel-heading {
     overflow: hidden;
-    background-color:rgb(255, 228, 114)!important;
+    background-color: #ccc !important;
     color:#444444!important;
 }
 .panel-footer {
     overflow: hidden;
-    background-color:rgb(255, 228, 114)!important;
+    background-color:#ccc !important;
     color:#444444!important;
 }
 .panel-body{
@@ -159,3 +159,20 @@ hr{
     height: 1px;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
+
+/* Custom checkboxes */
+input[type=checkbox].checkbox-toggle { display:none; } /* On cache la vraie checkbox */
+input[type=checkbox].checkbox-toggle + label:before {
+  font-family: FontAwesome;
+  display: inline-block;
+}
+
+input[type=checkbox].checkbox-toggle + label {
+    font-weight:normal;
+}
+
+input[type=checkbox].checkbox-toggle + label:before { content: "\f204"; width: 1.28571429em; } /* Pas checked */
+input[type=checkbox].checkbox-toggle + label:before { letter-spacing: 5px; } /* Espace avant le label */
+
+input[type=checkbox].checkbox-toggle:checked + label:before { content: "\f205"; width: 1.28571429em; } /* Checked */
+input[type=checkbox].checkbox-toggle:checked + label:before { letter-spacing: 5px; } /* Espace avant le label */
