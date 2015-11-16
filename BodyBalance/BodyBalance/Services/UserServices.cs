@@ -400,6 +400,19 @@ namespace BodyBalance.Services
             return result;
         }
 
+        public List<EventModel> FindAllEventsOfUser(string UserId)
+        {
+            List<EventModel> eventsList = new List<EventModel>();
+            IQueryable<EVENT> query = db.Set<EVENT>().Where(EVENT => EVENT.USER1.Any(USER1 => USER1.USER_ID == UserId) );
+
+            foreach (EVENT e in query)
+            {
+                eventsList.Add(cu.ConvertEventToEventModel(e));
+            }
+
+            return eventsList;
+        }
+
         private string hashSHA512(string unhashedValue)
         {
             SHA512 shaM = new SHA512Managed();

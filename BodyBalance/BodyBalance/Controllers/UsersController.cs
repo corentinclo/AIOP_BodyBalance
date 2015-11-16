@@ -495,5 +495,32 @@ namespace BodyBalance.Controllers
 
             return Ok(listPurchases);
         }
+
+        // GET: /Users/{userid}/Events
+        [HttpGet]
+        [Route("Users/{userid}/Events")]
+        public IHttpActionResult GetEvents(string userid)
+        {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (userPermission.UserId != userid)
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
+            var user = userServices.FindUserById(userid);
+            if (user == null)
+            {
+                return BadRequest("Bad user id supplied");
+            }
+            var listEvents = userServices.FindAllEventsOfUser(userid);
+
+            return Ok(listEvents);
+        }
     }
 }
