@@ -418,6 +418,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="front-end\CSS\application.css" />
     <Content Include="front-end\CSS\bootstrap.min.css" />
+    <Content Include="front-end\CSS\font-awesome.css" />
+    <Content Include="front-end\CSS\font-awesome.min.css" />
+    <Content Include="front-end\fonts\fontawesome-webfont.svg" />
     <Content Include="front-end\JS\application.js" />
     <Content Include="front-end\JS\bootbox.min.js" />
     <Content Include="front-end\JS\bootstrap.min.js" />
@@ -484,6 +487,11 @@
     <Content Include="Persistence\DB_Model.edmx.diagram">
       <DependentUpon>DB_Model.edmx</DependentUpon>
     </Content>
+    <Content Include="front-end\fonts\fontawesome-webfont.eot" />
+    <Content Include="front-end\fonts\fontawesome-webfont.ttf" />
+    <Content Include="front-end\fonts\fontawesome-webfont.woff" />
+    <Content Include="front-end\fonts\fontawesome-webfont.woff2" />
+    <Content Include="front-end\fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
