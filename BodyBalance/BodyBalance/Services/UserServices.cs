@@ -368,7 +368,7 @@ namespace BodyBalance.Services
             List<BasketModel> bm = FindBasketOfUser(UserId);
 
             PurchaseModel pm = new PurchaseModel();
-            pm.PurchaseId = Guid.NewGuid().ToString();
+            pm.PurchaseId = "";
             pm.PurchaseDate = DateTime.Today;
             pm.UserId = UserId;
             pm.TotalPrice = 0;
@@ -379,8 +379,8 @@ namespace BodyBalance.Services
             {
                 ProductModel prm = prs.FindProductWithId(bl.ProductId);
                 pm.TotalPrice += prm.Price;
+
                 PurchaseLineModel plm = new PurchaseLineModel();
-                plm.PurchaseId = pm.PurchaseId;
                 plm.ProductId = bl.ProductId;
                 plm.Quantity = bl.Quantity;
                 purchaseLines.Add(plm);
@@ -389,15 +389,34 @@ namespace BodyBalance.Services
             result = pus.CreatePurchase(pm);
             if(result == DaoUtilities.SAVE_SUCCESSFUL)
             {
+                PURCHASE p = ((PURCHASE)db.PURCHASE.Where(PURCHASE => PURCHASE.PURCHASE_USERID == pm.UserId && PURCHASE.PURCHASE_TOTALPRICE == pm.TotalPrice && PURCHASE.PURCHASE_DATE == pm.PurchaseDate).FirstOrDefault());
                 foreach(PurchaseLineModel plm in purchaseLines)
                 {
+                    plm.PurchaseId = p.PURCHASE_ID;
                     result = pls.CreatePurchaseLine(plm);
                     if (result != DaoUtilities.SAVE_SUCCESSFUL)
                         break;
                 }
+                if (result == DaoUtilities.SAVE_SUCCESSFUL)
+                {
+                    result =  DeleteUserBasket(UserId);
+                }
             }
 
             return result;
+        }
+
+        public List<EventModel> FindAllEventsOfUser(string UserId)
+        {
+            List<EventModel> eventsList = new List<EventModel>();
+            IQueryable<EVENT> query = db.Set<EVENT>().Where(EVENT => EVENT.USER1.Any(USER1 => USER1.USER_ID == UserId) );
+
+            foreach (EVENT e in query)
+            {
+                eventsList.Add(cu.ConvertEventToEventModel(e));
+            }
+
+            return eventsList;
         }
 
         private string hashSHA512(string unhashedValue)

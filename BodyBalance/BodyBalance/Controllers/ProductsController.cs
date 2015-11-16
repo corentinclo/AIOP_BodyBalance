@@ -10,6 +10,9 @@ using System.Web.Http;
 
 namespace BodyBalance.Controllers
 {
+    /// <summary>
+    /// Manage Products
+    /// </summary>
     [Authorize]
     public class ProductsController : ApiController
     {
@@ -23,6 +26,10 @@ namespace BodyBalance.Controllers
             this.userServices = userServices;
         }
         // GET: Products
+        /// <summary>
+        /// Get all products
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IHttpActionResult Get()
         {
@@ -39,6 +46,11 @@ namespace BodyBalance.Controllers
         }
 
         // GET: Products/{product_id}
+        /// <summary>
+        /// Get information about a product
+        /// </summary>
+        /// <param name="product_id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Products/{product_id}")]
         public IHttpActionResult Get(string product_id)
@@ -61,6 +73,11 @@ namespace BodyBalance.Controllers
         }
 
         // POST: Products
+        /// <summary>
+        /// Create a product
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public IHttpActionResult Post([FromBody]ProductModel model)
         {
@@ -93,7 +110,13 @@ namespace BodyBalance.Controllers
             return InternalServerError();
         }
 
-        // PUT: api/Products/{product_id}
+        // PUT: Products/{product_id}
+        /// <summary>
+        /// Update information of a product
+        /// </summary>
+        /// <param name="product_id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("Products/{product_id}")]
         public IHttpActionResult Put(string product_id, [FromBody]ProductModel model)
@@ -145,7 +168,12 @@ namespace BodyBalance.Controllers
             return InternalServerError();
         }
 
-        // DELETE: api/Products/{product_id}
+        // DELETE: Products/{product_id}
+        /// <summary>
+        /// Delete a product
+        /// </summary>
+        /// <param name="product_id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("Products/{product_id}")]
         public IHttpActionResult Delete(string product_id)

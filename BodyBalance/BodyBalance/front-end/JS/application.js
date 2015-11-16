@@ -7,7 +7,10 @@
         this.mappers = [];
         this.token = "";
         this.username = "";
+        this.basket = [];
     }
+
+
 
     /**
      * Transforme tous les liens en fonctions dans un containeur
@@ -20,6 +23,8 @@
                     return false;
                 }
             }
+            if (typeof t.mappers[$(this).attr('href')] == 'undefined')
+                return true;
             return t.mappers[$(this).attr('href')](this);
         });
     }

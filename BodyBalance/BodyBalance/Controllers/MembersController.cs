@@ -10,6 +10,10 @@ using System.Web.Http;
 
 namespace BodyBalance.Controllers
 {
+    /// <summary>
+    /// Manage members
+    /// </summary>
+    [Authorize]
     public class MembersController : ApiController
     {
         private IMemberServices memberServices;
@@ -22,6 +26,10 @@ namespace BodyBalance.Controllers
         }
 
         // GET: /Members
+        /// <summary>
+        /// Get all members
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IHttpActionResult Get()
         {
@@ -42,6 +50,11 @@ namespace BodyBalance.Controllers
         }
 
         // GET: /Members/{member_id}
+        /// <summary>
+        /// Retrieves information about a member
+        /// </summary>
+        /// <param name="member_id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Members/{member_id}")]
         public IHttpActionResult Get(string member_id)
@@ -68,6 +81,11 @@ namespace BodyBalance.Controllers
         }
 
         // POST: Members
+        /// <summary>
+        /// Create a member
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public IHttpActionResult Post([FromBody] MemberModel model)
         {
@@ -101,6 +119,12 @@ namespace BodyBalance.Controllers
         }
 
         // PUT: Members/{member_id}
+        /// <summary>
+        /// Update member information
+        /// </summary>
+        /// <param name="member_id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("Members/{member_id}")]
         public IHttpActionResult Put(string member_id, [FromBody]MemberModel model)
@@ -150,6 +174,11 @@ namespace BodyBalance.Controllers
         }
 
         // DELETE: Members/{member_id}
+        /// <summary>
+        /// Delete a member
+        /// </summary>
+        /// <param name="member_id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("Members/{member_id}")]
         public IHttpActionResult Delete(string member_id)

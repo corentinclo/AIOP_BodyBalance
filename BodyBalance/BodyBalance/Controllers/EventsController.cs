@@ -10,6 +10,9 @@ using System.Web.Http;
 
 namespace BodyBalance.Controllers
 {
+    /// <summary>
+    /// Manage events
+    /// </summary>
     [Authorize]
     public class EventsController : ApiController
     {
@@ -24,6 +27,10 @@ namespace BodyBalance.Controllers
         }
 
         // GET: /Events
+        /// <summary>
+        /// Get all events
+        /// </summary>
+        /// <returns> List of events</returns>
         [HttpGet]
         public IHttpActionResult Get()
         {
@@ -39,6 +46,11 @@ namespace BodyBalance.Controllers
         }
 
         // POST: /Events
+        /// <summary>
+        /// Create an event
+        /// </summary>
+        /// <param name="model"> event model </param>
+        /// <returns></returns>
         [HttpPost]
         public IHttpActionResult Post([FromBody]EventModel model)
         {
@@ -74,6 +86,11 @@ namespace BodyBalance.Controllers
         }
 
         // GET: /Events/{event_id}
+        /// <summary>
+        /// Retrieves information about an event
+        /// </summary>
+        /// <param name="event_id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Events/{event_id}")]
         public IHttpActionResult Get(string event_id)
@@ -96,6 +113,12 @@ namespace BodyBalance.Controllers
         }
 
         // PUT: api/Events/{event_id}
+        /// <summary>
+        /// Update an event
+        /// </summary>
+        /// <param name="event_id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("Events/{event_id}")]
         public IHttpActionResult Put(string event_id, [FromBody]EventModel model)
@@ -148,6 +171,11 @@ namespace BodyBalance.Controllers
         }
 
         // DELETE: api/Events/{event_id}
+        /// <summary>
+        /// Delete an event
+        /// </summary>
+        /// <param name="event_id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("Events/{event_id}")]
         public IHttpActionResult Delete(string event_id)
@@ -179,6 +207,11 @@ namespace BodyBalance.Controllers
         }
 
         // GET: /Events/{event_id}/Users
+        /// <summary>
+        /// Retrieves all users of an event
+        /// </summary>
+        /// <param name="event_id"></param>
+        /// <returns></returns>
         [Route("Events/{event_id}/Users")]
         [HttpGet]
         public IHttpActionResult GetUsers(string event_id)
@@ -209,6 +242,11 @@ namespace BodyBalance.Controllers
         }
 
         // GET: /Events/{event_id}/Contributor
+        /// <summary>
+        /// Retrieves the contributor of an event
+        /// </summary>
+        /// <param name="event_id"></param>
+        /// <returns></returns>
         [Route("Events/{event_id}/Contributor")]
         [HttpGet]
         public IHttpActionResult GetContributor(string event_id)
@@ -237,6 +275,11 @@ namespace BodyBalance.Controllers
         }
 
         // GET: /Events/{event_id}/Manager
+        /// <summary>
+        /// Retrieves the manager of an event
+        /// </summary>
+        /// <param name="event_id"></param>
+        /// <returns></returns>
         [Route("Events/{event_id}/Manager")]
         [HttpGet]
         public IHttpActionResult GetManager(string event_id)
@@ -265,6 +308,12 @@ namespace BodyBalance.Controllers
         }
 
         // POST: Events/{event_id}/RegisterUser
+        /// <summary>
+        /// Register a user to an event
+        /// </summary>
+        /// <param name="event_id"></param>
+        /// <param name="user_id"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("Events/{event_id}/RegisterUser")]
         public IHttpActionResult RegisterUserToEvent(string event_id, [FromBody] string user_id )
@@ -306,7 +355,13 @@ namespace BodyBalance.Controllers
             return InternalServerError();
         }
 
-        // DELETE: Events/{event_id}
+        // DELETE: Events/{event_id}/RemoveUser
+        /// <summary>
+        /// Delete a user from an event
+        /// </summary>
+        /// <param name="event_id"></param>
+        /// <param name="user_id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("Events/{event_id}/RemoveUser")]
         public IHttpActionResult RemoveUserToEvent(string event_id, string user_id)
@@ -343,6 +398,12 @@ namespace BodyBalance.Controllers
         }
 
         // GET: Events/{event_id}/IsRegisteredUser/{user_id}
+        /// <summary>
+        /// To know if a user is register to an event
+        /// </summary>
+        /// <param name="event_id"></param>
+        /// <param name="user_id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Events/{event_id}/IsRegisteredUser/{user_id}")]
         public IHttpActionResult IsRegisteredUser(string event_id, string user_id)
