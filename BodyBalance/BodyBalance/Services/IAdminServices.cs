@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BodyBalance.Services
 {
-    interface IAdminServices
+    public interface IAdminServices
     {
         /// <summary>
         /// Create an admin

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BodyBalance.Services
 {
-    interface IMemberServices
+    public interface IMemberServices
     {
         /// <summary>
         /// Create a member

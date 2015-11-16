@@ -10,18 +10,17 @@ using System.Web.Http;
 
 namespace BodyBalance.Controllers
 {
-    public class ManagersController : ApiController
+    public class AdminsController : ApiController
     {
-        private IManagerServices managerServices;
+        private IAdminServices adminServices;
         private IUserServices userServices;
-        public ManagersController(IManagerServices managerServices,
-            IUserServices user)
+        public AdminsController(IAdminServices admin, IUserServices user)
         {
-            this.managerServices = managerServices;
+            this.adminServices = admin;
             this.userServices = user;
         }
 
-        // GET: Managers
+        // GET: Admins
         [HttpGet]
         public IHttpActionResult Get()
         {
@@ -37,14 +36,14 @@ namespace BodyBalance.Controllers
             }
             /************************/
 
-            var managers = managerServices.FindAllManagers();
-            return Ok(managers);
+            var admins = adminServices.FindAllAdmins();
+            return Ok(admins);
         }
 
-        // GET: Managers/{manager_id}
+        // GET: Admins/{adminid}
         [HttpGet]
-        [Route("Managers/{manager_id}")]
-        public IHttpActionResult Get(string manager_id)
+        [Route("Admins/{adminid}")]
+        public IHttpActionResult Get(string adminid)
         {
             /** Check Permissions **/
             var user = userServices.FindUserById(User.Identity.Name);
@@ -58,18 +57,17 @@ namespace BodyBalance.Controllers
             }
             /************************/
 
-            var manager = managerServices.FindManagerById(manager_id);
+            var admin = adminServices.FindAdminById(adminid);
 
-            if (manager == null)
+            if (admin == null)
             {
                 return NotFound();
             }
-            return Ok(manager);
+            return Ok(admin);
         }
 
-        // POST: /Managers
-        [HttpPost]
-        public IHttpActionResult Post([FromBody] ManagerModel model)
+        // POST: Admins
+        public IHttpActionResult Post([FromBody] AdminModel model)
         {
             /** Check Permissions **/
             var user = userServices.FindUserById(User.Identity.Name);
@@ -85,25 +83,25 @@ namespace BodyBalance.Controllers
 
             if (!ModelState.IsValid)
             {
-                return BadRequest("Invalid manager supplied");
+                return BadRequest("Invalid admin supplied");
             }
 
-            var createResult = managerServices.CreateManager(model);
+            var createResult = adminServices.CreateAdmin(model);
             if (createResult == DaoUtilities.SAVE_SUCCESSFUL)
             {
-                return Ok("Manager created sucessfully");
+                return Ok("Admin created sucessfully");
             }
             if (createResult == DaoUtilities.UPDATE_EXCEPTION)
             {
-                return BadRequest("The manager already exists");
+                return BadRequest("The admin already exists");
             }
             return InternalServerError();
         }
 
-        // DELETE: Managers/{manager_id}
+        // DELETE: Admins/{adminid}
         [HttpDelete]
-        [Route("Managers/{manager_id}")]
-        public IHttpActionResult Delete(string manager_id)
+        [Route("Admins/{adminid}")]
+        public IHttpActionResult Delete(string adminid)
         {
             /** Check Permissions **/
             var user = userServices.FindUserById(User.Identity.Name);
@@ -117,13 +115,13 @@ namespace BodyBalance.Controllers
             }
             /************************/
 
-            var manager = managerServices.FindManagerById(manager_id);
-            if (manager == null)
+            var admin = adminServices.FindAdminById(adminid);
+            if (admin == null)
             {
                 return NotFound();
             }
 
-            var deleteResult = managerServices.DeleteManager(manager);
+            var deleteResult = adminServices.DeleteAdmin(admin);
             if (deleteResult == DaoUtilities.SAVE_SUCCESSFUL)
             {
                 return Ok();

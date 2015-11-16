@@ -55,6 +55,7 @@ namespace BodyBalance.Controllers
         }
 
         // POST: Contributors
+        [HttpPost]
         public IHttpActionResult Post([FromBody]ContributorModel model)
         {
             /** Check Permissions **/
