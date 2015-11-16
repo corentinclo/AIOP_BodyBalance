@@ -23,6 +23,8 @@
                     return false;
                 }
             }
+            if (typeof t.mappers[$(this).attr('href')] == 'undefined')
+                return true;
             return t.mappers[$(this).attr('href')](this);
         });
     }
