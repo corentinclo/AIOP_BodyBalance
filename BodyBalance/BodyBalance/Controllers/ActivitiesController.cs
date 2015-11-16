@@ -30,6 +30,7 @@ namespace BodyBalance.Controllers
 
         // GET: Activities/{activity_id}
         [HttpGet]
+        [Route("Activities/{activity_id}")]
         public IHttpActionResult Get(string activity_id)
         {
             var activity = activityServices.FindActivityById(activity_id);
@@ -64,6 +65,7 @@ namespace BodyBalance.Controllers
 
         // PUT: /Activities/{activity_id}
         [HttpPut]
+        [Route("Activities/{activity_id}")]
         public IHttpActionResult Put(string activity_id, [FromBody]ActivityModel model)
         {
             if (!ModelState.IsValid)
@@ -103,6 +105,7 @@ namespace BodyBalance.Controllers
 
         // DELETE: /Activities/{activity_id}
         [HttpDelete]
+        [Route("Activities/{activity_id}")]
         public IHttpActionResult Delete(string activity_id)
         {
             var activity = activityServices.FindActivityById(activity_id);
