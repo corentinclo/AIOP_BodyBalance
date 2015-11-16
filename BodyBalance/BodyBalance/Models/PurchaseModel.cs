@@ -12,5 +12,6 @@ namespace BodyBalance.Models
         public System.DateTime PurchaseDate { get; set; }
         public Nullable<System.DateTime> ShipDate { get; set; }
         public decimal TotalPrice { get; set; }
+        public List<PurchaseLineModel> PurchaseLine { get; set; }
     }
 }

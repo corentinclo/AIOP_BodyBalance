@@ -11,6 +11,5 @@ namespace BodyBalance.Models
         public bool IsContributor { get; set; }
         public bool IsManager { get; set; }
         public bool IsMember { get; set; }
-
     }
 }

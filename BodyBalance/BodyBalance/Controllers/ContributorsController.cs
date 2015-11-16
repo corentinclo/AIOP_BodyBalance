@@ -33,6 +33,18 @@ namespace BodyBalance.Controllers
         [Route("Contributors/{contributor_id}")]
         public IHttpActionResult Get(string contributor_id)
         {
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(user)) || !(userServices.IsManager(user)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             var contributor = contributorServices.FindContributorById(contributor_id);
 
             if (contributor == null)
@@ -42,9 +54,21 @@ namespace BodyBalance.Controllers
             return Ok(contributor);
         }
 
-        // POST: api/Contributors
+        // POST: Contributors
         public IHttpActionResult Post([FromBody]ContributorModel model)
         {
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(user)) || !(userServices.IsManager(user)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid contributor supplied");
@@ -62,20 +86,33 @@ namespace BodyBalance.Controllers
             return InternalServerError();
         }
 
-        // PUT: api/Contributors/{contributor_id}
+        // PUT: Contributors/{contributor_id}
         [HttpPut]
         [Route("Contributors/{contributor_id}")]
         public IHttpActionResult Put(string contributor_id, [FromBody]ContributorModel model)
         {
+            var contributor = contributorServices.FindContributorById(model.UserId);
+            if (contributor == null)
+            {
+                return BadRequest("Invalid contributor id supplied");
+            }
+
+
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            if (contributor.UserId != user.UserId)
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid contributor supplied");
-            }
-
-            var contributor = contributorServices.FindContributorById(model.UserId);
-            if(contributor == null)
-            {
-                return BadRequest("Invalid contributor id supplied");
             }
 
             if (userServices.FindUserByIdAndPassword(contributor.UserId, contributor.Password) == null)
@@ -108,6 +145,18 @@ namespace BodyBalance.Controllers
         [Route("Contributors/{contributor_id}")]
         public IHttpActionResult Delete(string contributor_id)
         {
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(user)) || !(userServices.IsManager(user)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             var contributor = contributorServices.FindContributorById(contributor_id);
             if (contributor == null)
             {

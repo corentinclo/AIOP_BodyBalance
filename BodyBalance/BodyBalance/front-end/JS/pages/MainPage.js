@@ -15,4 +15,10 @@ window.app.mappers['#myaccount'] = function () {
 
 
 $('[data-visible="loggedIn"]').show();
+window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, function (data) {
+    //if logged in user is an admin
+    if (data.UserRoles.IsAdmin)
+        $('[data-visible="admin"]').show();
+});
+
 window.app.hrefToFunction('#main');

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BodyBalance.Services
 {
-    interface IManagerServices
+    public interface IManagerServices
     {
         /// <summary>
         /// Create a manager
