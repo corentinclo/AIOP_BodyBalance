@@ -15,16 +15,31 @@ namespace BodyBalance.Controllers
     {
         private IRoomServices roomServices;
         private IAccessoryServices accessoryServices;
+        private IUserServices userServices;
         public RoomsController(IRoomServices roomServices,
-            IAccessoryServices accessoryServices)
+            IAccessoryServices accessoryServices,
+            IUserServices userServices)
         {
             this.roomServices = roomServices;
             this.accessoryServices = accessoryServices;
+            this.userServices = userServices;
         }
         // GET: api/Rooms
         [HttpGet]
         public IHttpActionResult Get()
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(userPermission)) || !(userServices.IsManager(userPermission)) || !(userServices.IsContributor(userPermission)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             var listRooms = roomServices.FindAllRooms();
             return Ok(listRooms);
         }
@@ -34,6 +49,18 @@ namespace BodyBalance.Controllers
         [Route("Rooms/{room_id}")]
         public IHttpActionResult Get(string room_id)
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(userPermission)) || !(userServices.IsManager(userPermission)) || !(userServices.IsContributor(userPermission)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             var room = roomServices.FindRoomById(room_id);
 
             if (room == null)
@@ -47,6 +74,18 @@ namespace BodyBalance.Controllers
         [HttpPost]
         public IHttpActionResult Post([FromBody]RoomModel model)
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(userPermission)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid room supplied");
@@ -69,6 +108,18 @@ namespace BodyBalance.Controllers
         [Route("Rooms/{room_id}")]
         public IHttpActionResult Put(string room_id, [FromBody]RoomModel model)
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(userPermission)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid room supplied");
@@ -103,6 +154,18 @@ namespace BodyBalance.Controllers
         [Route("Rooms/{room_id}")]
         public IHttpActionResult Delete(string room_id)
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(userPermission)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             var room = roomServices.FindRoomById(room_id);
             if (room == null)
             {
@@ -122,6 +185,14 @@ namespace BodyBalance.Controllers
         [HttpGet]
         public IHttpActionResult GetEvents(string room_id)
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            /************************/
+
             var room = roomServices.FindRoomById(room_id);
             if (room == null)
             {
@@ -138,6 +209,18 @@ namespace BodyBalance.Controllers
         [Route("Rooms/{room_id}/Accessories")]
         public IHttpActionResult GetAccessories(string room_id)
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(userPermission)) || !(userServices.IsManager(userPermission)) || !(userServices.IsContributor(userPermission)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             var room = roomServices.FindRoomById(room_id);
             if (room == null)
             {
@@ -154,6 +237,18 @@ namespace BodyBalance.Controllers
         [Route("Rooms/{room_id}/Accessories")]
         public IHttpActionResult AddAccessories(string room_id, [FromBody] AccessoryModel model)
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(userPermission)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             var room = roomServices.FindRoomById(room_id);
             if (room == null)
             {
@@ -185,6 +280,18 @@ namespace BodyBalance.Controllers
         [Route("Rooms/{room_id}/Accessories")]
         public IHttpActionResult DeleteAccessories(string room_id, [FromBody] AccessoryModel model)
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(userPermission)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             var room = roomServices.FindRoomById(room_id);
             if (room == null)
             {
@@ -216,6 +323,18 @@ namespace BodyBalance.Controllers
         [Route("Rooms/{room_id}/Accessories")]
         public IHttpActionResult UpdateAccessories(string room_id, [FromBody] AccessoryModel model)
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(userPermission)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             var room = roomServices.FindRoomById(room_id);
             if (room == null)
             {

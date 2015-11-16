@@ -13,16 +13,27 @@ namespace BodyBalance.Controllers
     public class CategoriesController : ApiController
     {
         private ICategoryServices categoryServices;
+        private IUserServices userServices;
 
-        public CategoriesController(ICategoryServices categoryServices)
+        public CategoriesController(ICategoryServices categoryServices,
+            IUserServices userServices)
         {
             this.categoryServices = categoryServices;
+            this.userServices = userServices;
         }
 
         // GET: Categories
         [HttpGet]
         public IHttpActionResult Get()
         {
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            /************************/
+
             var listCategories = categoryServices.FindAllCategories();
             return Ok(listCategories);
         }
@@ -33,6 +44,14 @@ namespace BodyBalance.Controllers
         [Route("Categories/{category_id}")]
         public IHttpActionResult Get(string category_id)
         {
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            /************************/
+
             var category = categoryServices.FindCategoryWithId(category_id);
 
             if (category == null)
@@ -46,6 +65,18 @@ namespace BodyBalance.Controllers
         [HttpPost]
         public IHttpActionResult Post([FromBody]CategoryModel model)
         {
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(user)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid category supplied");
@@ -68,6 +99,18 @@ namespace BodyBalance.Controllers
         [Route("Categories/{category_id}")]
         public IHttpActionResult Put(string category_id, [FromBody]CategoryModel model)
         {
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(user)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid category supplied");
@@ -103,6 +146,18 @@ namespace BodyBalance.Controllers
         [Route("Categories/{category_id}")]
         public IHttpActionResult Delete(string category_id)
         {
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(user)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             var category = categoryServices.FindCategoryWithId(category_id);
             if (category == null)
             {
@@ -122,6 +177,14 @@ namespace BodyBalance.Controllers
         [Route("Categories/{category_id}/Products")]
         public IHttpActionResult GetProducts(string category_id)
         {
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            /************************/
+
             var category = categoryServices.FindCategoryWithId(category_id);
             if (category == null)
             {

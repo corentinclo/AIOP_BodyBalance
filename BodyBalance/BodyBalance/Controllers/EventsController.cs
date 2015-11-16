@@ -27,6 +27,13 @@ namespace BodyBalance.Controllers
         [HttpGet]
         public IHttpActionResult Get()
         {
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            /************************/
             var listEvents = eventServices.FindAllEvents();
             return Ok(listEvents);
         }
@@ -35,6 +42,18 @@ namespace BodyBalance.Controllers
         [HttpPost]
         public IHttpActionResult Post([FromBody]EventModel model)
         {
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(user)) || !(userServices.IsManager(user)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid event supplied");
@@ -57,6 +76,14 @@ namespace BodyBalance.Controllers
         [Route("Events/{event_id}")]
         public IHttpActionResult Get(string event_id)
         {
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            /************************/
+
             var myEvent = eventServices.FindEventById(event_id);
 
             if (myEvent == null)
@@ -71,6 +98,18 @@ namespace BodyBalance.Controllers
         [Route("Events/{event_id}")]
         public IHttpActionResult Put(string event_id, [FromBody]EventModel model)
         {
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(user)) || !(userServices.IsManager(user)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid event supplied");
@@ -111,6 +150,18 @@ namespace BodyBalance.Controllers
         [Route("Events/{event_id}")]
         public IHttpActionResult Delete(string event_id)
         {
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(user)) || !(userServices.IsManager(user)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             var myEvent = eventServices.FindEventById(event_id);
             if (myEvent == null)
             {
@@ -136,6 +187,20 @@ namespace BodyBalance.Controllers
                 return NotFound();
             }
 
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(user)) || myEvent.ManagerId != user.UserId || myEvent.ContributorId != user.UserId )
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
+            
+
             var listUsers = eventServices.FindUsersOfEvent(event_id);
 
             return Ok(listUsers);
@@ -152,6 +217,18 @@ namespace BodyBalance.Controllers
                 return NotFound();
             }
 
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(user)) || myEvent.ManagerId != user.UserId )
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             var contributor = eventServices.FindContributorOfEvent(event_id);
 
             return Ok(contributor);
@@ -162,6 +239,18 @@ namespace BodyBalance.Controllers
         [HttpGet]
         public IHttpActionResult GetManager(string event_id)
         {
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(user)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             var myEvent = eventServices.FindEventById(event_id);
             if (myEvent == null)
             {
@@ -179,10 +268,24 @@ namespace BodyBalance.Controllers
         public IHttpActionResult RegisterUserToEvent(string event_id, string user_id )
         {
             var user = userServices.FindUserById(user_id);
-            if(user == null)
+            if (user == null)
             {
-               return BadRequest("Bad user id");
+                return BadRequest("Bad user id");
             }
+
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(userPermission)) || userPermission.UserId != user_id)
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
+            
             var myEvent = eventServices.FindEventById(event_id);
             if (myEvent == null)
             {
@@ -206,6 +309,18 @@ namespace BodyBalance.Controllers
         [Route("Events/{event_id}/RemoveUser")]
         public IHttpActionResult RemoveUserToEvent(string event_id, string user_id)
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(userPermission)) || userPermission.UserId != user_id)
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             var user = userServices.FindUserById(user_id);
             if (user == null)
             {
