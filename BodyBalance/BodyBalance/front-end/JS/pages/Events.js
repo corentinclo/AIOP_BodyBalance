@@ -1,5 +1,4 @@
-﻿
-var typeList = new Array();
+﻿var typeList = new Array();
 var actList = new Array();
 var isManager = undefined;
 window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, function (data) {
