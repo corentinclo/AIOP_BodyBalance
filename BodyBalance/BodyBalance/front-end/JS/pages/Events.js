@@ -177,8 +177,9 @@ window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, functio
 
         // filter with selects and checkboxes
         var $selects = $('#selects select');
+        var $filters = $('#selects select, #myOnly');
 
-        $selects.change(function () {
+        $filters.change(function () {
             // map input values to an array
             var filters = [];
             var filterValue = '';
@@ -191,27 +192,12 @@ window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, functio
                     }
                 }
             });
-            iso.arrange({ filter: filterValue });
-        });
-
-        $('#myOnly').change(function () {
-            var filters = [];
-            var filterValue = '';
-            // filters from selects
-            $selects.each(function (i, elem) {
-                if (elem.value) {
-                    if (elem.value != ".*") {
-                        filters.push(elem.value);
-                        filterValue += elem.value;
-                    }
-                }
-            });
-            if ($(this).is(':checked')) {
+            if ($("#myOnly").is(':checked')) {
                 filters.push('.minetrue');
                 filterValue += ".minetrue";
             }
             iso.arrange({ filter: filterValue });
-        })
+        });
 
         $("#selActivity").html('');
         $("#edit_selActivity").html('');
