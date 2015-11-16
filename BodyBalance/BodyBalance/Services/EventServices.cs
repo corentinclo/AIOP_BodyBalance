@@ -220,6 +220,15 @@ namespace BodyBalance.Services
             return usersList;
         }
 
+        public UserModel FindOneUserOfEvent(string EventId, string UserId)
+        {
+            List<UserModel> usersList = new List<UserModel>();
+            USER1 u = db.Set<USER1>().Where(USER1 => USER1.USER_ID == UserId && USER1.EVENT.Any(EVENT => EVENT.EVENT_ID == EventId)).FirstOrDefault();
+
+            UserModel um = cu.ConvertUserToUserModel(u);
+            return um;
+        }
+
         public ContributorModel FindContributorOfEvent(string EventId)
         {
             EVENT ev = db.EVENT.Find(EventId);

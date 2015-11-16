@@ -168,5 +168,7 @@ namespace BodyBalance.Services
         /// <param name="um"></param>
         /// <returns></returns>
         int RemoveUserOfEvent(string EventId, UserModel um);
+
+        UserModel FindOneUserOfEvent(string EventId, string UserId);
     }
 }

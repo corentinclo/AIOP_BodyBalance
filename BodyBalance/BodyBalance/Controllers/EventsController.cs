@@ -59,6 +59,8 @@ namespace BodyBalance.Controllers
                 return BadRequest("Invalid event supplied");
             }
 
+            model.EventId = Guid.NewGuid().ToString();
+
             var createResult = eventServices.CreateEvent(model);
             if (createResult == DaoUtilities.SAVE_SUCCESSFUL)
             {
@@ -338,6 +340,41 @@ namespace BodyBalance.Controllers
                 return Ok("User removed sucessfully");
             }
             return InternalServerError();
+        }
+
+        // POST: Events/{event_id}/IsRegisteredUser/{user_id}
+        [HttpGet]
+        [Route("Events/{event_id}/IsRegisteredUser/{user_id}")]
+        public IHttpActionResult IsRegisteredUser(string event_id, string user_id)
+        {
+            var user = userServices.FindUserById(user_id);
+            if (user == null)
+            {
+                return BadRequest("Bad user id");
+            }
+
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(userPermission)) && userPermission.UserId != user_id)
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
+
+            var myEvent = eventServices.FindEventById(event_id);
+            if (myEvent == null)
+            {
+                return BadRequest("Bad event id");
+            }
+
+            var userRegistered = eventServices.FindOneUserOfEvent(event_id, user_id);
+            
+            return Ok(userRegistered != null);
         }
     }
 }
