@@ -14,10 +14,13 @@ namespace BodyBalance.Controllers
     public class BasketsController : ApiController
     {
         private IBasketServices basketServices;
+        private IUserServices userServices;
 
-        public BasketsController(IBasketServices basketServices)
+        public BasketsController(IBasketServices basketServices,
+            IUserServices userServices)
         {
             this.basketServices = basketServices;
+            this.userServices = userServices;
         }
 
         // GET: /Baskets/{userid}/{productid}
@@ -25,6 +28,18 @@ namespace BodyBalance.Controllers
         [Route("Baskets/{userid}/{productid}")]
         public IHttpActionResult Get(string userid, string productid)
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (userPermission.UserId != userid)
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             var basketLine = this.basketServices.FindBasketLineWithIds(userid, productid);
 
             if (basketLine == null)
@@ -39,6 +54,18 @@ namespace BodyBalance.Controllers
         [Route("Baskets")]
         public IHttpActionResult Post([FromBody]BasketModel basket)
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (userPermission.UserId != basket.UserId)
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid basket line supplied");
@@ -61,6 +88,18 @@ namespace BodyBalance.Controllers
         [Route("Baskets/{userid}/{productid}")]
         public IHttpActionResult Put(string userid, string productid, [FromBody]BasketModel basket)
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (userPermission.UserId != userid)
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid basket line supplied");
@@ -105,6 +144,18 @@ namespace BodyBalance.Controllers
         [Route("Baskets/{userid}/{productid}")]
         public IHttpActionResult Delete(string userid, string productid)
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (userPermission.UserId != userid)
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             var basketLine = basketServices.FindBasketLineWithIds(userid, productid);
             if (basketLine == null)
             {

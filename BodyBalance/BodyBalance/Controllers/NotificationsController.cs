@@ -14,10 +14,13 @@ namespace BodyBalance.Controllers
     public class NotificationsController : ApiController
     {
         private INotificationServices notificationServices;
+        private IUserServices userServices;
 
-        public NotificationsController(INotificationServices notificationServices)
+        public NotificationsController(INotificationServices notificationServices,
+            IUserServices userServices)
         {
             this.notificationServices = notificationServices;
+            this.userServices = userServices;
         }
 
         // GET: /Notifications
@@ -25,6 +28,18 @@ namespace BodyBalance.Controllers
         [Route("Notifications")]
         public IHttpActionResult Get()
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(userPermission)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             var listNotifications = notificationServices.FindAllNotifications();
             return Ok(listNotifications);
         }
@@ -34,6 +49,14 @@ namespace BodyBalance.Controllers
         [Route("Notifications/{notification_id}")]
         public IHttpActionResult Get(string notification_id)
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            /************************/
+
             var notification = notificationServices.FindNotificationWithId(notification_id);
 
             if (notification == null)
@@ -48,6 +71,14 @@ namespace BodyBalance.Controllers
         [Route("Notifications")]
         public IHttpActionResult Post([FromBody]NotificationModel model)
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            /************************/
+
             if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid notification supplied");
@@ -70,6 +101,14 @@ namespace BodyBalance.Controllers
         [Route("Notifications/{notification_id}")]
         public IHttpActionResult Put(string notification_id, [FromBody]NotificationModel model)
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            /************************/
+
             if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid notification supplied");
@@ -110,6 +149,14 @@ namespace BodyBalance.Controllers
         [Route("Notifications/{notification_id}")]
         public IHttpActionResult Delete(string notification_id)
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            /************************/
+
             var notification = notificationServices.FindNotificationWithId(notification_id);
             if (notification == null)
             {
