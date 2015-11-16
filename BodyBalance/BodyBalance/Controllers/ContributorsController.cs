@@ -1,4 +1,6 @@
-﻿using BodyBalance.Services;
+﻿using BodyBalance.Models;
+using BodyBalance.Services;
+using BodyBalance.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +13,12 @@ namespace BodyBalance.Controllers
     public class ContributorsController : ApiController
     {
         private IContributorServices contributorServices;
-        public ContributorsController(IContributorServices contributorServices)
+        private IUserServices userServices;
+        public ContributorsController(IContributorServices contributorServices,
+            IUserServices user)
         {
             this.contributorServices = contributorServices;
+            this.userServices = user;
         }
         // GET: Contributors
         [HttpGet]
@@ -23,25 +28,99 @@ namespace BodyBalance.Controllers
             return Ok(contributors);
         }
 
-        // GET: api/Contributors/5
-        public string Get(int id)
+        // GET: api/Contributors/{contributor_id}
+        [HttpGet]
+        [Route("Contributors/{contributor_id}")]
+        public IHttpActionResult Get(string contributor_id)
         {
-            return "value";
+            var contributor = contributorServices.FindContributorById(contributor_id);
+
+            if (contributor == null)
+            {
+                return NotFound();
+            }
+            return Ok(contributor);
         }
 
         // POST: api/Contributors
-        public void Post([FromBody]string value)
+        public IHttpActionResult Post([FromBody]ContributorModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid contributor supplied");
+            }
+
+            var createResult = contributorServices.CreateContributor(model);
+            if (createResult == DaoUtilities.SAVE_SUCCESSFUL)
+            {
+                return Ok("Contributor created sucessfully");
+            }
+            if (createResult == DaoUtilities.UPDATE_EXCEPTION)
+            {
+                return BadRequest("The contributor already exists");
+            }
+            return InternalServerError();
         }
 
-        // PUT: api/Contributors/5
-        public void Put(int id, [FromBody]string value)
+        // PUT: api/Contributors/{contributor_id}
+        [HttpPut]
+        [Route("Contributors/{contributor_id}")]
+        public IHttpActionResult Put(string contributor_id, [FromBody]ContributorModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid contributor supplied");
+            }
+
+            var contributor = contributorServices.FindContributorById(model.UserId);
+            if(contributor == null)
+            {
+                return BadRequest("Invalid contributor id supplied");
+            }
+
+            if (userServices.FindUserByIdAndPassword(contributor.UserId, contributor.Password) == null)
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+
+            var updateResult = contributorServices.UpdateContributor(model);
+
+            if (updateResult == DaoUtilities.SAVE_SUCCESSFUL)
+            {
+                return Ok();
+            }
+            if (updateResult == DaoUtilities.DISPOSED_EXCEPTION)
+            {
+                var ex = new Exception("Connection have been disposed");
+                return InternalServerError(ex);
+            }
+            if (updateResult == DaoUtilities.UPDATE_EXCEPTION)
+            {
+                var ex = new Exception("Make Sure that your contributor id exists");
+                return InternalServerError(ex);
+            }
+
+            return InternalServerError();
         }
 
-        // DELETE: api/Contributors/5
-        public void Delete(int id)
+        // DELETE: api/Contributors/{contributor_id}
+        [HttpDelete]
+        [Route("Contributors/{contributor_id}")]
+        public IHttpActionResult Delete(string contributor_id)
         {
+            var contributor = contributorServices.FindContributorById(contributor_id);
+            if (contributor == null)
+            {
+                return NotFound();
+            }
+
+            var deleteResult = contributorServices.DeleteContributor(contributor);
+            if (deleteResult == DaoUtilities.SAVE_SUCCESSFUL)
+            {
+                return Ok();
+            }
+
+            return InternalServerError();
         }
     }
 }
