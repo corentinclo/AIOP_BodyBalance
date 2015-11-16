@@ -24,17 +24,17 @@ namespace BodyBalance.Controllers
         }
 
         // GET: /Users
-        [Route("Users")]
         [HttpGet]
+        [Route("Users")]
         public IHttpActionResult Get()
         {
             var users = this.userServices.FindAllUsers();
             return Ok(users);
         }
 
+        // GET: /Users/{user-id}
         [HttpGet]
         [Route("Users/{userid}")]
-        // GET: api/Users/{user-id}
         public IHttpActionResult Get(string userid)
         {
             var user = this.userServices.FindUserById(userid);
@@ -46,8 +46,9 @@ namespace BodyBalance.Controllers
             return Ok(user);
         }
 
+        // POST: /Users
         [HttpPost]
-        // POST: api/Users
+        [Route("Users")]
         public IHttpActionResult Post([FromBody]UserModel user)
         {
             if (!ModelState.IsValid)
@@ -67,7 +68,7 @@ namespace BodyBalance.Controllers
             return InternalServerError();
         }
 
-        // PUT: api/Users/{user-id}
+        // PUT: /Users/{userid}
         [HttpPut]
         [Route("Users/{userid}")]
         public IHttpActionResult Put(string userid, [FromBody]UserModel user)
@@ -100,12 +101,11 @@ namespace BodyBalance.Controllers
             }
 
             return InternalServerError();
-
-
         }
 
-        // DELETE: api/Users/{user-id}
+        // DELETE: /Users/{user-id}
         [HttpDelete]
+        [Route("Users/{userid}")]
         public IHttpActionResult Delete(string userid)
         {
             var user = userServices.FindUserById(userid);
@@ -152,6 +152,21 @@ namespace BodyBalance.Controllers
             var listNotifications = userServices.FindAllNotificationssOfUser(userid);
 
             return Ok(listNotifications);
+        }
+
+        // GET: /Users/{user-id}/Baskets
+        [HttpGet]
+        [Route("Users/{userid}/Baskets")]
+        public IHttpActionResult GetBaskets(string userid)
+        {
+            var user = userServices.FindUserById(userid);
+            if (user == null)
+            {
+                return BadRequest("Bad user id supplied");
+            }
+            var listBaskets = userServices.FindBasketOfUser(userid);
+
+            return Ok(listBaskets);
         }
     }
 }

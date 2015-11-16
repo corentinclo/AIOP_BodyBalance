@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BodyBalance.Models;
+using BodyBalance.Services;
+using BodyBalance.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,31 +12,110 @@ namespace BodyBalance.Controllers
 {
     public class BasketsController : ApiController
     {
-        // GET: Baskets
-        public IEnumerable<string> Get()
+        private IBasketServices basketServices;
+
+        public BasketsController(IBasketServices basketServices)
         {
-            return new string[] { "value1", "value2" };
+            this.basketServices = basketServices;
         }
 
-        // GET: Baskets/5
-        public string Get(int id)
+        // GET: /Baskets/{userid}/{productid}
+        [HttpGet]
+        [Route("Baskets/{userid}/{productid}")]
+        public IHttpActionResult Get(string userid, string productid)
         {
-            return "value";
+            var basketLine = this.basketServices.FindBasketLineWithIds(userid, productid);
+
+            if (basketLine == null)
+            {
+                return NotFound();
+            }
+            return Ok(basketLine);
         }
 
-        // POST: Baskets
-        public void Post([FromBody]string value)
+        // POST: /Baskets
+        [HttpPost]
+        [Route("Baskets")]
+        public IHttpActionResult Post([FromBody]BasketModel basket)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid basket line supplied");
+            }
+
+            var createResult = basketServices.CreateBasketLine(basket);
+            if (createResult == DaoUtilities.SAVE_SUCCESSFUL)
+            {
+                return Ok("Basket line created sucessfully");
+            }
+            if (createResult == DaoUtilities.UPDATE_EXCEPTION)
+            {
+                return BadRequest("The basket line already exists");
+            }
+            return InternalServerError();
         }
 
-        // PUT: Baskets/5
-        public void Put(int id, [FromBody]string value)
+        // PUT: /Baskets/{userid}/{productid}
+        [HttpPut]
+        [Route("Baskets/{userid}/{productid}")]
+        public IHttpActionResult Put(string userid, string productid, [FromBody]BasketModel basket)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid basket line supplied");
+            }
+
+            var basektLine = basketServices.FindBasketLineWithIds(userid, productid);
+
+            if (basektLine == null)
+            {
+                return NotFound();
+            }
+            if (basektLine.UserId != basket.UserId)
+            {
+                return BadRequest("Invalid user id supplied");
+            }
+            if (basektLine.ProductId != basket.ProductId)
+            {
+                return BadRequest("Invalid product id supplied");
+            }
+
+            var updateResult = basketServices.UpdateBasketLine(basket);
+            if (updateResult == DaoUtilities.SAVE_SUCCESSFUL)
+            {
+                return Ok("Notification updated successfully");
+            }
+            if (updateResult == DaoUtilities.DISPOSED_EXCEPTION)
+            {
+                var ex = new Exception("Connection have been disposed");
+                return InternalServerError(ex);
+            }
+            if (updateResult == DaoUtilities.UPDATE_EXCEPTION)
+            {
+                var ex = new Exception("Make Sure that your user id and product id exist");
+                return InternalServerError(ex);
+            }
+
+            return InternalServerError();
         }
 
-        // DELETE: Baskets/5
-        public void Delete(int id)
+        // DELETE: /Baskets/{userid}/{productid}
+        [HttpDelete]
+        [Route("Baskets/{userid}/{productid}")]
+        public IHttpActionResult Delete(string userid, string productid)
         {
+            var basketLine = basketServices.FindBasketLineWithIds(userid, productid);
+            if (basketLine == null)
+            {
+                return BadRequest("Bad user id and/or product id supplied");
+            }
+
+            var deleteResult = basketServices.DeleteBasketLine(basketLine);
+            if (deleteResult == DaoUtilities.SAVE_SUCCESSFUL)
+            {
+                return Ok("Basket line deleted successfully");
+            }
+            return InternalServerError();
         }
     }
 }
