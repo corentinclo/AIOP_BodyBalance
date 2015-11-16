@@ -34,10 +34,6 @@ namespace BodyBalance.Controllers
             {
                 return Unauthorized();
             }
-            if (!(userServices.IsAdmin(userPermission)) || !(userServices.IsManager(userPermission)) || !(userServices.IsContributor(userPermission)))
-            {
-                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
-            }
             /************************/
 
             var listRooms = roomServices.FindAllRooms();
@@ -54,10 +50,6 @@ namespace BodyBalance.Controllers
             if (userPermission == null)
             {
                 return Unauthorized();
-            }
-            if (!(userServices.IsAdmin(userPermission)) || !(userServices.IsManager(userPermission)) || !(userServices.IsContributor(userPermission)))
-            {
-                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
             }
             /************************/
 
@@ -215,7 +207,7 @@ namespace BodyBalance.Controllers
             {
                 return Unauthorized();
             }
-            if (!(userServices.IsAdmin(userPermission)) || !(userServices.IsManager(userPermission)) || !(userServices.IsContributor(userPermission)))
+            if (!(userServices.IsAdmin(userPermission)) && !(userServices.IsManager(userPermission)) && !(userServices.IsContributor(userPermission)))
             {
                 return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
             }

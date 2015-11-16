@@ -48,7 +48,7 @@ namespace BodyBalance.Controllers
             {
                 return Unauthorized();
             }
-            if (!(userServices.IsAdmin(user)) || !(userServices.IsManager(user)))
+            if (!(userServices.IsAdmin(user)) && !(userServices.IsManager(user)))
             {
                 return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
             }
@@ -104,7 +104,7 @@ namespace BodyBalance.Controllers
             {
                 return Unauthorized();
             }
-            if (!(userServices.IsAdmin(user)) || !(userServices.IsManager(user)))
+            if (!(userServices.IsAdmin(user)) && !(userServices.IsManager(user)))
             {
                 return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
             }
@@ -156,7 +156,7 @@ namespace BodyBalance.Controllers
             {
                 return Unauthorized();
             }
-            if (!(userServices.IsAdmin(user)) || !(userServices.IsManager(user)))
+            if (!(userServices.IsAdmin(user)) && !(userServices.IsManager(user)))
             {
                 return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
             }
@@ -193,7 +193,7 @@ namespace BodyBalance.Controllers
             {
                 return Unauthorized();
             }
-            if (!(userServices.IsAdmin(user)) || myEvent.ManagerId != user.UserId || myEvent.ContributorId != user.UserId )
+            if (!(userServices.IsAdmin(user)) && myEvent.ManagerId != user.UserId && myEvent.ContributorId != user.UserId )
             {
                 return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
             }
@@ -223,7 +223,7 @@ namespace BodyBalance.Controllers
             {
                 return Unauthorized();
             }
-            if (!(userServices.IsAdmin(user)) || myEvent.ManagerId != user.UserId )
+            if (!(userServices.IsAdmin(user)) && myEvent.ManagerId != user.UserId )
             {
                 return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
             }
@@ -279,7 +279,7 @@ namespace BodyBalance.Controllers
             {
                 return Unauthorized();
             }
-            if (!(userServices.IsAdmin(userPermission)) || userPermission.UserId != user_id)
+            if (!(userServices.IsAdmin(userPermission)) && userPermission.UserId != user_id)
             {
                 return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
             }
@@ -315,7 +315,7 @@ namespace BodyBalance.Controllers
             {
                 return Unauthorized();
             }
-            if (!(userServices.IsAdmin(userPermission)) || userPermission.UserId != user_id)
+            if (!(userServices.IsAdmin(userPermission)) && userPermission.UserId != user_id)
             {
                 return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
             }
