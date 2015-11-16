@@ -85,12 +85,17 @@ window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, functio
             window.app.sendRestRequest("/Events/" + val.EventId + "/IsRegisteredUser/" + window.app.username, "GET", null, function (data) {
                 if (data === true) {
                     $reg.off('click').html('Registered <i class="fa fa-check-circle"></i>').addClass('disabled');
+                    if (!$item.hasClass('minetrue')) {
+                        $item.addClass('minetrue');
+                    }
                 }
             })
            
             if (val.ManagerId == window.app.username || val.ContributorId == window.app.username) {
                 //Hidden Boolean for filtering
-                $item.addClass('minetrue');
+                if (!$item.hasClass('minetrue')) {
+                    $item.addClass('minetrue');
+                }
                 /* SEE THE REGISTERED USERS */
                 $users.click(function () {
                     window.app.sendRestRequest('/Events/' + val.EventId + '/users', 'GET', null, function (data) {
