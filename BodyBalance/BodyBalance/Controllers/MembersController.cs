@@ -10,18 +10,18 @@ using System.Web.Http;
 
 namespace BodyBalance.Controllers
 {
-    public class ManagersController : ApiController
+    public class MembersController : ApiController
     {
-        private IManagerServices managerServices;
+        private IMemberServices memberServices;
         private IUserServices userServices;
-        public ManagersController(IManagerServices managerServices,
+        public MembersController(IMemberServices memberServices,
             IUserServices user)
         {
-            this.managerServices = managerServices;
+            this.memberServices = memberServices;
             this.userServices = user;
         }
 
-        // GET: Managers
+        // GET: /Members
         [HttpGet]
         public IHttpActionResult Get()
         {
@@ -37,14 +37,14 @@ namespace BodyBalance.Controllers
             }
             /************************/
 
-            var managers = managerServices.FindAllManagers();
-            return Ok(managers);
+            var members = memberServices.FindAllMembers();
+            return Ok(members);
         }
 
-        // GET: Managers/{manager_id}
+        // GET: /Members/{member_id}
         [HttpGet]
-        [Route("Managers/{manager_id}")]
-        public IHttpActionResult Get(string manager_id)
+        [Route("Members/{member_id}")]
+        public IHttpActionResult Get(string member_id)
         {
             /** Check Permissions **/
             var user = userServices.FindUserById(User.Identity.Name);
@@ -58,18 +58,18 @@ namespace BodyBalance.Controllers
             }
             /************************/
 
-            var manager = managerServices.FindManagerById(manager_id);
+            var member = memberServices.FindMemberById(member_id);
 
-            if (manager == null)
+            if (member == null)
             {
                 return NotFound();
             }
-            return Ok(manager);
+            return Ok(member);
         }
 
-        // POST: /Managers
+        // POST: Members
         [HttpPost]
-        public IHttpActionResult Post([FromBody] ManagerModel model)
+        public IHttpActionResult Post([FromBody] MemberModel model)
         {
             /** Check Permissions **/
             var user = userServices.FindUserById(User.Identity.Name);
@@ -88,22 +88,71 @@ namespace BodyBalance.Controllers
                 return BadRequest("Invalid manager supplied");
             }
 
-            var createResult = managerServices.CreateManager(model);
+            var createResult = memberServices.CreateMember(model);
             if (createResult == DaoUtilities.SAVE_SUCCESSFUL)
             {
-                return Ok("Manager created sucessfully");
+                return Ok("Member created sucessfully");
             }
             if (createResult == DaoUtilities.UPDATE_EXCEPTION)
             {
-                return BadRequest("The manager already exists");
+                return BadRequest("The member already exists");
             }
             return InternalServerError();
         }
 
-        // DELETE: Managers/{manager_id}
+        // PUT: Members/{member_id}
+        [HttpPut]
+        [Route("Members/{member_id}")]
+        public IHttpActionResult Put(string member_id, [FromBody]MemberModel model)
+        {
+            var member = memberServices.FindMemberById(model.UserId);
+            if (member == null)
+            {
+                return BadRequest("Invalid contributor id supplied");
+            }
+
+
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(user)) && member.UserId != user.UserId)
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid member supplied");
+            }
+
+            var updateResult = memberServices.UpdateMember(model);
+
+            if (updateResult == DaoUtilities.SAVE_SUCCESSFUL)
+            {
+                return Ok();
+            }
+            if (updateResult == DaoUtilities.DISPOSED_EXCEPTION)
+            {
+                var ex = new Exception("Connection have been disposed");
+                return InternalServerError(ex);
+            }
+            if (updateResult == DaoUtilities.UPDATE_EXCEPTION)
+            {
+                var ex = new Exception("Make Sure that your member id exists");
+                return InternalServerError(ex);
+            }
+
+            return InternalServerError();
+        }
+
+        // DELETE: Members/{member_id}
         [HttpDelete]
-        [Route("Managers/{manager_id}")]
-        public IHttpActionResult Delete(string manager_id)
+        [Route("Members/{member_id}")]
+        public IHttpActionResult Delete(string member_id)
         {
             /** Check Permissions **/
             var user = userServices.FindUserById(User.Identity.Name);
@@ -117,13 +166,13 @@ namespace BodyBalance.Controllers
             }
             /************************/
 
-            var manager = managerServices.FindManagerById(manager_id);
-            if (manager == null)
+            var member = memberServices.FindMemberById(member_id);
+            if (member == null)
             {
                 return NotFound();
             }
 
-            var deleteResult = managerServices.DeleteManager(manager);
+            var deleteResult = memberServices.DeleteMember(member);
             if (deleteResult == DaoUtilities.SAVE_SUCCESSFUL)
             {
                 return Ok();
