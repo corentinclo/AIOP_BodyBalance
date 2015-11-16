@@ -38,9 +38,11 @@ window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, functio
             $panelBody.append("<p>With <b>" + val.ContributorId + "</b></p>");
             var $reg = $("<div class='register'><button class='btn btn-primarystyle'>Register</button></div>").appendTo($panelBody).find('button');
             var $del = null;
-            if (isManager && val.ManagerId == window.app.username)
-                $del = $("<div class='delete'><button class='btn btn-primarystyle'>Delete</button></div>").appendTo($panelBody).find('button');
-
+            var $edit = null;
+            if (isManager && val.ManagerId == window.app.username) {
+                $edit = $('<div class="pull-left"><button class="btn btn-default"><i class="fa fa-edit"></i></button></div>').prependTo($panelHeading).find('button').tooltip({ title: "Edit", placement: "top", trigger: "hover" });
+                $del = $("<div class='pull-right'><button class='btn btn-danger'><i class='fa fa-times'></i></button></div>").prependTo($panelHeading).find('button').tooltip({ title: "Delete", placement: "top", trigger: "hover" });
+            }
             // The date is in ISO8601 format
             var date = dateFromISO8601(val.EventDate);
             var timestamp = Date.parse(date);
@@ -65,8 +67,9 @@ window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, functio
                     callback: function (result) {
                         if (result) {
                             window.app.sendRestRequest('/Events/' + val.EventId + '/RegisterUser', 'POST', null, function (data) {
-                                bootbox.alert('You are now register to ' + val.name);
-                                //reloadEventsPage();
+                                bootbox.alert('You are now registered to ' + val.name, function () {
+                                    reloadEventsPage();
+                                });
                             }, function () {
                                 bootbox.alert('An error occured, try again later.');
                             });
@@ -91,6 +94,25 @@ window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, functio
                         }
                     });
                 });
+                /* EDIT AN EVENT */
+                $edit.click(function () {
+                    var url = $('#edit_event_form').attr('action');
+                    $('#edit_event_form').attr('action', url + '/' + val.EventId);
+                    var tempObj = val;
+                    tempObj.EventDate = dateFromISO8601(val.EventDate).toISOString().substring(0,10);
+                    window.app.FillFormWithObject('#edit_event_form', tempObj);
+                    $('#editEventModal').modal('show');
+                    window.app.ajaxifyFormJson('#edit_event_form', function () {
+                        $('#editEventModal').on('hide.bs.modal', function () {
+                            bootbox.alert('The event has been updated', function () {
+                                reloadEventsPage();
+                            });
+                        }).modal('hide');
+                    }, function () {
+                        bootbox.alert('An error occured');
+                    },
+                    'application/json', undefined, true);
+                })
             }
         });
 
@@ -121,28 +143,42 @@ window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, functio
             });
             iso.arrange({ filter: filterValue });
         });
+
+        $("#selActivity").html('');
+        $("#edit_selActivity").html('');
+        $("#selType").html('');
+        $("#edit_selType").html('');
+        $("#selRoom").html('');
+        $("#edit_selRoom").html('');
+        $("#selContrib").html('');
+        $("#edit_selContrib").html('');
+        $.each(actList, function (key, val) {
+            $("#selActivity").append("<option value=" + val + "> " + val + "</a>");
+            $("#edit_selActivity").append("<option value=" + val + "> " + val + "</a>");
+        });
+
+        $.each(typeList, function (key, val) {
+            $("#selTyp").append("<option value=" + val + "> " + val + "</a>");
+            $("#edit_selTyp").append("<option value=" + val + "> " + val + "</a>");
+        });
+
+        window.app.sendRestRequest('/Rooms', 'GET', null, function (data) {
+            $.each(data, function (key, val) {
+                $("#selRoom").append("<option value=" + val.RoomId + "> N°" + val.RoomId + " - " + val.Name + "</a>");
+                $("#edit_selRoom").append("<option value=" + val.RoomId + "> N°" + val.RoomId + " - " + val.Name + "</a>");
+            });
+        });
+
+        window.app.sendRestRequest('/Contributors', 'GET', null, function (data) {
+            $.each(data, function (key, val) {
+                $("#selContrib").append("<option value=" + val.UserId + ">" + val.UserId + "</a>");
+                $("#edit_selContrib").append("<option value=" + val.UserId + ">" + val.UserId + "</a>");
+            });
+        });
     });
 
 
     /* CREATE AN EVENT */
-    $('#createEventModal').on('shown.bs.modal', function (e) {
-        $.each(actList, function (key, val) {
-            $("#selActivity").append("<option value=" + val + "> " + val + "</a>");
-        });
-        $.each(typeList, function (key, val) {
-            $("#selTyp").append("<option value=" + val + "> " + val + "</a>");
-        });
-        window.app.sendRestRequest('/Rooms', 'GET', null, function (data) {
-            $.each(data, function (key, val) {
-                $("#selRoom").append("<option value=" + val.RoomId + "> N°" + val.RoomId + " - " + val.Name + "</a>");
-            });
-        });
-        window.app.sendRestRequest('/Contributors', 'GET', null, function (data) {
-            $.each(data, function (key, val) {
-                $("#selContrib").append("<option value=" + val.UserId + ">" + val.UserId + "</a>");
-            });
-        });
-    });
     $('#submitCreateButton').click(function () {
         $('#eventId_input').val($('#name_input').val());
         $('#managerId_input').val(window.app.username);
@@ -164,6 +200,7 @@ window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, functio
 
         $('#create_event_form').submit();
     });
+
 
 });
 // function to convert date in ISO8601 format to a date for all browsers
