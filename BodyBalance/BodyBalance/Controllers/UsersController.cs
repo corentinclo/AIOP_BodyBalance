@@ -32,17 +32,35 @@ namespace BodyBalance.Controllers
             return Ok(users);
         }
 
-        // GET: /Users/{user-id}
+        // GET: /Users/{userid}
         [HttpGet]
         [Route("Users/{userid}")]
         public IHttpActionResult Get(string userid)
         {
-            var user = this.userServices.FindUserById(userid);
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(userPermission)) || userPermission.UserId != userid)
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
+            var user = userServices.FindUserById(userid);
 
             if (user == null)
             {
                 return NotFound();
             }
+
+            user.UserRoles.IsAdmin = userServices.IsAdmin(user);
+            user.UserRoles.IsContributor = userServices.IsContributor(user);
+            user.UserRoles.IsManager = userServices.IsManager(user);
+            user.UserRoles.IsMember = userServices.IsMember(user);
+
             return Ok(user);
         }
 
