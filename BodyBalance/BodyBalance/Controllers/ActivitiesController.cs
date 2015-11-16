@@ -15,15 +15,26 @@ namespace BodyBalance.Controllers
     public class ActivitiesController : ApiController
     {
         private IActivityServices activityServices;
-        public ActivitiesController(IActivityServices activityServices)
+        private IUserServices userServices;
+        public ActivitiesController(IActivityServices activityServices,
+            IUserServices userServices)
         {
             this.activityServices = activityServices;
+            this.userServices = userServices;
         }
 
         // GET: Activities
         [HttpGet]
         public IHttpActionResult Get()
         {
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            /************************/
+
             var listActivities = activityServices.FindAllActivities();
             return Ok(listActivities);
         }
@@ -33,6 +44,14 @@ namespace BodyBalance.Controllers
         [Route("Activities/{activity_id}")]
         public IHttpActionResult Get(string activity_id)
         {
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            /************************/
+
             var activity = activityServices.FindActivityById(activity_id);
 
             if(activity == null)
@@ -46,6 +65,18 @@ namespace BodyBalance.Controllers
         [HttpPost]
         public IHttpActionResult Post([FromBody]ActivityModel model)
         {
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(user)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid activity supplied");
@@ -68,6 +99,18 @@ namespace BodyBalance.Controllers
         [Route("Activities/{activity_id}")]
         public IHttpActionResult Put(string activity_id, [FromBody]ActivityModel model)
         {
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(user)) || !(userServices.IsManager(user)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid activity supplied");
@@ -108,6 +151,18 @@ namespace BodyBalance.Controllers
         [Route("Activities/{activity_id}")]
         public IHttpActionResult Delete(string activity_id)
         {
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(user)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             var activity = activityServices.FindActivityById(activity_id);
             if(activity == null)
             {
@@ -128,6 +183,14 @@ namespace BodyBalance.Controllers
         [Route("Activities/{activity_id}/Events")]
         public IHttpActionResult GetEvents(string activity_id)
         {
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            /************************/
+
             var activity = activityServices.FindActivityById(activity_id);
             if (activity == null)
             {

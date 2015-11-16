@@ -15,15 +15,29 @@ namespace BodyBalance.Controllers
     {
 
         private IAccessoryServices accessoryServices;
-        public AccessoriesController(IAccessoryServices accessoryServices)
+        private IUserServices userServices;
+        public AccessoriesController(IAccessoryServices accessoryServices,
+            IUserServices userServices)
         {
             this.accessoryServices = accessoryServices;
+            this.userServices = userServices;
         }
 
         // GET: api/Accessories
         [HttpGet]
         public IHttpActionResult Get()
         {
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(user)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
             var listAccessories = accessoryServices.FindAllAccessories();
             return Ok(listAccessories);
         }
@@ -33,6 +47,18 @@ namespace BodyBalance.Controllers
         [Route("Accessories/{accessory_id}")]
         public IHttpActionResult Get(string accessory_id)
         {
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(user)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             var accessory = accessoryServices.FindAccessoryById(accessory_id);
 
             if (accessory == null)
@@ -46,6 +72,18 @@ namespace BodyBalance.Controllers
         [HttpPost]
         public IHttpActionResult Post([FromBody]AccessoryModel model)
         {
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(user)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid accessory supplied");
@@ -68,6 +106,18 @@ namespace BodyBalance.Controllers
         [Route("Accessories/{accessory_id}")]
         public IHttpActionResult Put(string accessory_id, [FromBody]AccessoryModel model)
         {
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(user)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid accessory supplied");
@@ -102,6 +152,18 @@ namespace BodyBalance.Controllers
         [Route("Accessories/{accessory_id}")]
         public IHttpActionResult Delete(string accessory_id)
         {
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(user)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             var accessory = accessoryServices.FindAccessoryById(accessory_id);
             if (accessory == null)
             {
