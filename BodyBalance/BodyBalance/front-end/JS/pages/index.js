@@ -64,9 +64,11 @@ window.app.mappers['#adminPanel'] = function () {
 
 window.app.ajaxifyForm('#login_form', function (result) {
     window.app.storeLoginParameters(result.userName, result.access_token, $('#cookie_input').is(':checked'));
-    $.get('pages/MainPage.html', null, function (data) {
-        $('#main').html(data);
-    });
+    window.app.mappers['#'] = function () {
+        $.get('pages/MainPage.html', null, function (data) {
+            $('#main').html(data);
+        });
+    }
 }, function (result) {
     $('#login_form input[type=submit]').attr('disabled', false);
     bootbox.alert('Bad username or password');
