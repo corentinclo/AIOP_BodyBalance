@@ -28,6 +28,18 @@ namespace BodyBalance.Controllers
         [Route("Users")]
         public IHttpActionResult Get()
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(userPermission)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             var users = this.userServices.FindAllUsers();
             return Ok(users);
         }
@@ -56,11 +68,6 @@ namespace BodyBalance.Controllers
                 return NotFound();
             }
 
-            user.UserRoles.IsAdmin = userServices.IsAdmin(user);
-            user.UserRoles.IsContributor = userServices.IsContributor(user);
-            user.UserRoles.IsManager = userServices.IsManager(user);
-            user.UserRoles.IsMember = userServices.IsMember(user);
-
             return Ok(user);
         }
 
@@ -69,6 +76,18 @@ namespace BodyBalance.Controllers
         [Route("Users")]
         public IHttpActionResult Post([FromBody]UserModel user)
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(userPermission)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid user supplied");
@@ -91,6 +110,18 @@ namespace BodyBalance.Controllers
         [Route("Users/{userid}")]
         public IHttpActionResult Put(string userid, [FromBody]UserModel user)
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(userPermission)) || userPermission.UserId != userid)
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid user supplied");
@@ -126,6 +157,18 @@ namespace BodyBalance.Controllers
         [Route("Users/{userid}")]
         public IHttpActionResult Delete(string userid)
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(userPermission)))
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             var user = userServices.FindUserById(userid);
             if (user == null)
             {
@@ -146,6 +189,18 @@ namespace BodyBalance.Controllers
         [Route("Users/{userid}/Products")]
         public IHttpActionResult GetProducts(string userid)
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (userPermission.UserId != userid)
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             var user = userServices.FindUserById(userid);
             if (user == null)
             {
@@ -161,6 +216,18 @@ namespace BodyBalance.Controllers
         [Route("Users/{userid}/Notifications")]
         public IHttpActionResult GetNotifications(string userid)
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (userPermission.UserId != userid)
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             var user = userServices.FindUserById(userid);
             if (user == null)
             {
@@ -176,6 +243,18 @@ namespace BodyBalance.Controllers
         [Route("Users/{userid}/Baskets")]
         public IHttpActionResult GetBaskets(string userid)
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (userPermission.UserId != userid)
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             var user = userServices.FindUserById(userid);
             if (user == null)
             {
@@ -191,6 +270,18 @@ namespace BodyBalance.Controllers
         [Route("Users/{userid}/Baskets")]
         public IHttpActionResult DeleteBaskets(string userid)
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (userPermission.UserId != userid)
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             var user = userServices.FindUserById(userid);
             if (user == null)
             {
@@ -211,6 +302,18 @@ namespace BodyBalance.Controllers
         [Route("Users/{userid}/Purchases")]
         public IHttpActionResult GetPurchases(string userid)
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (!(userServices.IsAdmin(userPermission)) || userPermission.UserId != userid)
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             var user = userServices.FindUserById(userid);
             if (user == null)
             {
