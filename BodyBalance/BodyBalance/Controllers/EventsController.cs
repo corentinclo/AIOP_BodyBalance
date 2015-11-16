@@ -54,6 +54,7 @@ namespace BodyBalance.Controllers
 
         // GET: /Events/{event_id}
         [HttpGet]
+        [Route("Events/{event_id}")]
         public IHttpActionResult Get(string event_id)
         {
             var myEvent = eventServices.FindEventById(event_id);
@@ -67,6 +68,7 @@ namespace BodyBalance.Controllers
 
         // PUT: api/Events/{event_id}
         [HttpPut]
+        [Route("Events/{event_id}")]
         public IHttpActionResult Put(string event_id, [FromBody]EventModel model)
         {
             if (!ModelState.IsValid)
@@ -106,6 +108,7 @@ namespace BodyBalance.Controllers
 
         // DELETE: api/Events/{event_id}
         [HttpDelete]
+        [Route("Events/{event_id}")]
         public IHttpActionResult Delete(string event_id)
         {
             var myEvent = eventServices.FindEventById(event_id);
