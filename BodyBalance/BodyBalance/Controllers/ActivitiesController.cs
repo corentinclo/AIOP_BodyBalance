@@ -11,6 +11,9 @@ using System.Web.Http;
 
 namespace BodyBalance.Controllers
 {
+    /// <summary>
+    /// Manage activities 
+    /// </summary>
     [Authorize]
     public class ActivitiesController : ApiController
     {
@@ -24,6 +27,10 @@ namespace BodyBalance.Controllers
         }
 
         // GET: Activities
+        /// <summary>
+        /// Retrieves all activities
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IHttpActionResult Get()
         {
@@ -40,6 +47,11 @@ namespace BodyBalance.Controllers
         }
 
         // GET: Activities/{activity_id}
+        /// <summary>
+        /// Retrieves informations of an activity
+        /// </summary>
+        /// <param name="activity_id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Activities/{activity_id}")]
         public IHttpActionResult Get(string activity_id)
@@ -62,6 +74,11 @@ namespace BodyBalance.Controllers
         }
 
         // POST: /Activities
+        /// <summary>
+        /// Create an activity
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public IHttpActionResult Post([FromBody]ActivityModel model)
         {
@@ -95,6 +112,12 @@ namespace BodyBalance.Controllers
         }
 
         // PUT: /Activities/{activity_id}
+        /// <summary>
+        /// Update an activity
+        /// </summary>
+        /// <param name="activity_id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("Activities/{activity_id}")]
         public IHttpActionResult Put(string activity_id, [FromBody]ActivityModel model)
@@ -147,6 +170,11 @@ namespace BodyBalance.Controllers
         }
 
         // DELETE: /Activities/{activity_id}
+        /// <summary>
+        /// Delete an activity
+        /// </summary>
+        /// <param name="activity_id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("Activities/{activity_id}")]
         public IHttpActionResult Delete(string activity_id)
@@ -179,6 +207,11 @@ namespace BodyBalance.Controllers
         }
 
         // GET: Activities/{activity_id}/Events
+        /// <summary>
+        /// Get the events of an activity
+        /// </summary>
+        /// <param name="activity_id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Activities/{activity_id}/Events")]
         public IHttpActionResult GetEvents(string activity_id)

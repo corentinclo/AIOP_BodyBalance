@@ -10,6 +10,10 @@ using System.Web.Http;
 
 namespace BodyBalance.Controllers
 {
+    /// <summary>
+    /// Manage Contributors
+    /// </summary>
+    [Authorize]
     public class ContributorsController : ApiController
     {
         private IContributorServices contributorServices;
@@ -21,6 +25,10 @@ namespace BodyBalance.Controllers
             this.userServices = user;
         }
         // GET: Contributors
+        /// <summary>
+        /// Get all contributors
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IHttpActionResult Get()
         {
@@ -29,6 +37,11 @@ namespace BodyBalance.Controllers
         }
 
         // GET: api/Contributors/{contributor_id}
+        /// <summary>
+        /// Retrieves information about a contributor
+        /// </summary>
+        /// <param name="contributor_id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Contributors/{contributor_id}")]
         public IHttpActionResult Get(string contributor_id)
@@ -55,6 +68,11 @@ namespace BodyBalance.Controllers
         }
 
         // POST: Contributors
+        /// <summary>
+        /// Create a contributor
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public IHttpActionResult Post([FromBody]ContributorModel model)
         {
@@ -88,6 +106,12 @@ namespace BodyBalance.Controllers
         }
 
         // PUT: Contributors/{contributor_id}
+        /// <summary>
+        /// Update contributor descriptions
+        /// </summary>
+        /// <param name="contributor_id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("Contributors/{contributor_id}")]
         public IHttpActionResult Put(string contributor_id, [FromBody]ContributorModel model)
@@ -142,6 +166,11 @@ namespace BodyBalance.Controllers
         }
 
         // DELETE: api/Contributors/{contributor_id}
+        /// <summary>
+        /// Delete a contributor
+        /// </summary>
+        /// <param name="contributor_id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("Contributors/{contributor_id}")]
         public IHttpActionResult Delete(string contributor_id)

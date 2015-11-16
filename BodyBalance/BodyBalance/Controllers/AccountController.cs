@@ -21,6 +21,9 @@ using BodyBalance.Utilities;
 
 namespace BodyBalance.Controllers
 {
+    /// <summary>
+    /// Manage Accounts
+    /// </summary>
     [Authorize]
     [RoutePrefix("Account")]
     public class AccountController : ApiController
@@ -42,6 +45,11 @@ namespace BodyBalance.Controllers
         }
 
         // POST Account/Register
+        /// <summary>
+        /// Register an user
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [Route("Register")]
         [HttpPost]
@@ -66,6 +74,10 @@ namespace BodyBalance.Controllers
         }
 
         // POST Account/Logout
+        /// <summary>
+        /// Logout to the application
+        /// </summary>
+        /// <returns></returns>
         [Route("Logout")]
         [HttpPost]
         public IHttpActionResult Logout()
@@ -75,6 +87,10 @@ namespace BodyBalance.Controllers
         }
 
         // GET Account/IsValidToken
+        /// <summary>
+        /// Check if your token is valid
+        /// </summary>
+        /// <returns></returns>
         [Route("IsValidToken")]
         [HttpGet]
         public IHttpActionResult IsValidToken()
@@ -92,6 +108,11 @@ namespace BodyBalance.Controllers
 
 
         // POST Account/ChangePassword
+        /// <summary>
+        /// Change your password
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [Route("ChangePassword")]
         [HttpPut]
         public IHttpActionResult ChangePassword(ChangePasswordBindingModel model)

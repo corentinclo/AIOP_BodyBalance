@@ -10,6 +10,9 @@ using System.Web.Http;
 
 namespace BodyBalance.Controllers
 {
+    /// <summary>
+    /// Manage Purchases
+    /// </summary>
     [Authorize]
     public class PurchasesController : ApiController
     {
@@ -23,6 +26,10 @@ namespace BodyBalance.Controllers
         }
 
         // GET: /Purchases
+        /// <summary>
+        /// Get all purchases
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("Purchases")]
         public IHttpActionResult Get()
@@ -32,6 +39,11 @@ namespace BodyBalance.Controllers
         }
 
         // GET: /Purchases/{purchaseid}
+        /// <summary>
+        /// Get information about a purchase
+        /// </summary>
+        /// <param name="purchaseid"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Purchases/{purchaseid}")]
         public IHttpActionResult Get(string purchaseid)
@@ -48,6 +60,13 @@ namespace BodyBalance.Controllers
         }
 
         // PUT: /Purchases/{purchaseid}/{productid}
+        /// <summary>
+        /// Update a purchase line
+        /// </summary>
+        /// <param name="purchaseid"></param>
+        /// <param name="productid"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("Purchases/{purchaseid}/{productid}")]
         public IHttpActionResult Put(string purchaseid, string productid, [FromBody]PurchaseLineModel model)
@@ -92,6 +111,11 @@ namespace BodyBalance.Controllers
         }
 
         // DELETE: /Purchases/{purchaseid}
+        /// <summary>
+        /// Delete a purchase
+        /// </summary>
+        /// <param name="purchaseid"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("Purchases/{purchaseid}")]
         public IHttpActionResult Delete(string purchaseid)
@@ -111,6 +135,12 @@ namespace BodyBalance.Controllers
         }
 
         // DELETE: /Purchases/{purchaseid}/{productid}
+        /// <summary>
+        /// Delete a purchase line
+        /// </summary>
+        /// <param name="purchaseid"></param>
+        /// <param name="productid"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("Purchases/{purchaseid}/{productid}")]
         public IHttpActionResult DeleteLine(string purchaseid, string productid)

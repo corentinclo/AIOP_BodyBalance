@@ -121,6 +121,11 @@ namespace BodyBalance.Services
         /// <returns></returns>
         int CreateUserPurchase(string UserId);
 
+        /// <summary>
+        /// Find All Events of an user
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
         List<EventModel> FindAllEventsOfUser(string UserId);
     }
 }

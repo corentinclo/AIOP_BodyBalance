@@ -10,6 +10,9 @@ using System.Web.Http;
 
 namespace BodyBalance.Controllers
 {
+    /// <summary>
+    /// Manage Room
+    /// </summary>
     [Authorize]
     public class RoomsController : ApiController
     {
@@ -24,7 +27,12 @@ namespace BodyBalance.Controllers
             this.accessoryServices = accessoryServices;
             this.userServices = userServices;
         }
-        // GET: api/Rooms
+
+        // GET: Rooms
+        /// <summary>
+        /// Get all rooms
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IHttpActionResult Get()
         {
@@ -40,7 +48,12 @@ namespace BodyBalance.Controllers
             return Ok(listRooms);
         }
 
-        // GET: api/Rooms/{room_id}
+        // GET: Rooms/{room_id}
+        /// <summary>
+        /// Retrieves information about a room
+        /// </summary>
+        /// <param name="room_id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Rooms/{room_id}")]
         public IHttpActionResult Get(string room_id)
@@ -62,7 +75,12 @@ namespace BodyBalance.Controllers
             return Ok(room);
         }
 
-        // POST: api/Rooms
+        // POST: Rooms
+        /// <summary>
+        /// Create a room
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public IHttpActionResult Post([FromBody]RoomModel model)
         {
@@ -95,7 +113,13 @@ namespace BodyBalance.Controllers
             return InternalServerError();
         }
 
-        // PUT: api/Rooms/{room_id}
+        // PUT: Rooms/{room_id}
+        /// <summary>
+        /// Update information about a room
+        /// </summary>
+        /// <param name="room_id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("Rooms/{room_id}")]
         public IHttpActionResult Put(string room_id, [FromBody]RoomModel model)
@@ -141,7 +165,12 @@ namespace BodyBalance.Controllers
             return InternalServerError();
         }
 
-        // DELETE: api/Rooms/{room_id}
+        // DELETE: Rooms/{room_id}
+        /// <summary>
+        /// Delete a room
+        /// </summary>
+        /// <param name="room_id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("Rooms/{room_id}")]
         public IHttpActionResult Delete(string room_id)
@@ -172,7 +201,12 @@ namespace BodyBalance.Controllers
             return InternalServerError();
         }
 
-        // GET: api/Rooms/{room_id}/Events
+        // GET: Rooms/{room_id}/Events
+        /// <summary>
+        /// Get all the events that will take place in a room
+        /// </summary>
+        /// <param name="room_id"></param>
+        /// <returns></returns>
         [Route("Rooms/{room_id}/Events")]
         [HttpGet]
         public IHttpActionResult GetEvents(string room_id)
@@ -196,7 +230,12 @@ namespace BodyBalance.Controllers
             return Ok(listEvents);
         }
 
-        // GET: api/Rooms/{room_id}/Accessories
+        // GET: Rooms/{room_id}/Accessories
+        /// <summary>
+        /// Get all accessories that are in a room
+        /// </summary>
+        /// <param name="room_id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Rooms/{room_id}/Accessories")]
         public IHttpActionResult GetAccessories(string room_id)
@@ -225,6 +264,12 @@ namespace BodyBalance.Controllers
         }
 
         // POST: Rooms/{room_id}/Accessories
+        /// <summary>
+        /// Add accessories in a room
+        /// </summary>
+        /// <param name="room_id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("Rooms/{room_id}/Accessories")]
         public IHttpActionResult AddAccessories(string room_id, [FromBody] AccessoryModel model)
@@ -268,6 +313,12 @@ namespace BodyBalance.Controllers
         }
 
         // DELETE: Rooms/{room_id}/Accessories
+        /// <summary>
+        /// Remove accessories to a room
+        /// </summary>
+        /// <param name="room_id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("Rooms/{room_id}/Accessories")]
         public IHttpActionResult DeleteAccessories(string room_id, [FromBody] AccessoryModel model)
@@ -311,6 +362,12 @@ namespace BodyBalance.Controllers
         }
 
         // PUT: Rooms/{room_id}/Accessories
+        /// <summary>
+        /// Update number of an accessory in a room
+        /// </summary>
+        /// <param name="room_id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("Rooms/{room_id}/Accessories")]
         public IHttpActionResult UpdateAccessories(string room_id, [FromBody] AccessoryModel model)

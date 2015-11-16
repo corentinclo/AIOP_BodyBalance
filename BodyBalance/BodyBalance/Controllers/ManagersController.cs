@@ -10,6 +10,10 @@ using System.Web.Http;
 
 namespace BodyBalance.Controllers
 {
+    /// <summary>
+    /// Manage managers
+    /// </summary>
+    [Authorize]
     public class ManagersController : ApiController
     {
         private IManagerServices managerServices;
@@ -22,6 +26,10 @@ namespace BodyBalance.Controllers
         }
 
         // GET: Managers
+        /// <summary>
+        /// Get all managers
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IHttpActionResult Get()
         {
@@ -42,6 +50,11 @@ namespace BodyBalance.Controllers
         }
 
         // GET: Managers/{manager_id}
+        /// <summary>
+        /// Retrieves information about a manager
+        /// </summary>
+        /// <param name="manager_id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Managers/{manager_id}")]
         public IHttpActionResult Get(string manager_id)
@@ -68,6 +81,11 @@ namespace BodyBalance.Controllers
         }
 
         // POST: /Managers
+        /// <summary>
+        /// Create a manager
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public IHttpActionResult Post([FromBody] ManagerModel model)
         {
@@ -101,6 +119,11 @@ namespace BodyBalance.Controllers
         }
 
         // DELETE: Managers/{manager_id}
+        /// <summary>
+        /// Delete a manager
+        /// </summary>
+        /// <param name="manager_id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("Managers/{manager_id}")]
         public IHttpActionResult Delete(string manager_id)
