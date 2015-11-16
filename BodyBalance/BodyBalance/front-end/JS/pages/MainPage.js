@@ -36,12 +36,12 @@ window.app.sendRestRequest("/Users/" + window.app.username + "/Events", "GET", n
     });
     $('#fullcalendar').html('').fullCalendar({
         header: {
-            left: 'prev,next today',
+            left: 'prev,next',
             center: 'title',
-            right: 'month'
+            right: 'today'
         },
         buttonText: {
-            today: "Today"
+            today: "Current month"
         },
         defaultView: 'month',
         lang: 'en',
