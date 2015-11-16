@@ -68,6 +68,7 @@ window.app.ajaxifyForm('#login_form', function (result) {
         $.get('pages/MainPage.html', null, function (data) {
             $('#main').html(data);
         });
+        return false;
     }
 }, function (result) {
     $('#login_form input[type=submit]').attr('disabled', false);
@@ -86,6 +87,12 @@ $(function () {
             $.get('pages/MainPage.html', null, function (data) {
                 $('#main').html(data);
             });
+            window.app.mappers['#'] = function () {
+                $.get('pages/MainPage.html', null, function (data) {
+                    $('#main').html(data);
+                });
+                return false;
+            }
         }, function () {
             //Bad credentials
             window.app.clearLoginParameters();
