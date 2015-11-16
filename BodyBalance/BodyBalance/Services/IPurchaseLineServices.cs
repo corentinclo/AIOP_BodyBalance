@@ -36,6 +36,6 @@ namespace BodyBalance.Services
         /// </summary>
         /// <param name="pm"></param>
         /// <returns></returns>
-        int DeletePurchase(PurchaseLineModel plm);
+        int DeletePurchaseLine(PurchaseLineModel plm);
     }
 }

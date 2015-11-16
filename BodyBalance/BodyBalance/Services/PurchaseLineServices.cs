@@ -126,7 +126,7 @@ namespace BodyBalance.Services
             return result;
         }
 
-        public int DeletePurchase(PurchaseLineModel plm)
+        public int DeletePurchaseLine(PurchaseLineModel plm)
         {
             int result = DaoUtilities.NO_CHANGES;
 

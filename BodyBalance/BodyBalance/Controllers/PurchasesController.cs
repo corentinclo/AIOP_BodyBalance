@@ -109,5 +109,24 @@ namespace BodyBalance.Controllers
             }
             return InternalServerError();
         }
+
+        // DELETE: /Purchases/{purchaseid}/{productid}
+        [HttpDelete]
+        [Route("Purchases/{purchaseid}/{productid}")]
+        public IHttpActionResult DeleteLine(string purchaseid, string productid)
+        {
+            var purchaseLine = purchaseLineServices.FindPurchaseLineWithIds(purchaseid, productid);
+            if (purchaseLine == null)
+            {
+                return BadRequest("Bad purchase id and/or product id supplied");
+            }
+
+            var deleteResult = purchaseLineServices.DeletePurchaseLine(purchaseLine);
+            if (deleteResult == DaoUtilities.SAVE_SUCCESSFUL)
+            {
+                return Ok("Purchase line deleted successfully");
+            }
+            return InternalServerError();
+        }
     }
 }

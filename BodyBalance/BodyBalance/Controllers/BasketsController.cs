@@ -123,7 +123,7 @@ namespace BodyBalance.Controllers
             var updateResult = basketServices.UpdateBasketLine(basket);
             if (updateResult == DaoUtilities.SAVE_SUCCESSFUL)
             {
-                return Ok("Notification updated successfully");
+                return Ok("Basket line updated successfully");
             }
             if (updateResult == DaoUtilities.DISPOSED_EXCEPTION)
             {
