@@ -41,7 +41,9 @@ window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, functio
             if (isManager && val.ManagerId == window.app.username) {
                 $edit = $('<div class="pull-left"><button class="btn btn-default"><i class="fa fa-edit"></i></button></div>').prependTo($panelHeading).find('button').tooltip({ title: "Edit", placement: "top", trigger: "hover" });
                 $del = $("<div class='pull-right'><button class='btn btn-danger'><i class='fa fa-times'></i></button></div>").prependTo($panelHeading).find('button').tooltip({ title: "Delete", placement: "top", trigger: "hover" });
-                $users = $('<div class="pull-right"><button class="btn btn-primary"><i class="fa fa-users"></i></button></div>').appendTo($panelBody).find('button');
+            }
+            if (val.ManagerId == window.app.username || val.ContributorId == window.app.username) {
+                $users = $('<div class="pull-right"><button class="btn btn-primary"><i class="fa fa-users"></i></button></div>').appendTo($panelBody).find('button').tooltip({ title: "See the registered users", placement: "top", trigger: "hover" });
             }
             // The date is in ISO8601 format
             var date = dateFromISO8601(val.EventDate);
@@ -78,16 +80,44 @@ window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, functio
                     }
                 });
             });
-            if (isManager && val.ManagerId == window.app.username) {
+            if (val.ManagerId == window.app.username || val.ContributorId == window.app.username) {
                 /* SEE THE REGISTERED USERS */
                 $users.click(function () {
                     window.app.sendRestRequest('/Events/' + val.EventId + '/users', 'GET', null, function (data) {
-                        console.log(data);
+                        var $table = $('<table class="table table-stripped"></table>');
+                        var $thead = $('<thead></thead>').appendTo($table);
+                        var $tbody = $('<tbody></tbody>').appendTo($table);
+                        $thead.html('<tr>' +
+                            '<th>Username</th>' +
+                            '<th>First Name</th>' +
+                            '<th>Last Name</th></tr>'
+                        );
+                        $.each(data, function (i, e) {
+                            var $tr = $('<tr></tr>').appendTo($tbody);
+                            $tr.append('<th>' + e.UserId + '</th>');
+                            $tr.append('<td>' + e.FirstName + '</td>');
+                            $tr.append('<td>' + e.LastName + '</td>');
+                        });
+                        bootbox.dialog({
+                            title: 'Members in "' + val.EventId + '"',
+                            message: "<div id='bootboxList'></div>",
+                            buttons: {
+                                success: {
+                                    label: "OK",
+                                    className: "btn-primary"
+                                }
+                            }
+                        });
+                        if ($tbody.html() == "") {
+                            $table = "<p class='text-info'>There is no registered users yet.</p>"
+                        }
+                        $('#bootboxList').append($table);
                     }, function () {
                         bootbox.alert("An error has occured");
                     }, 'application/json');
-                })
-
+                });
+            }
+            if (isManager && val.ManagerId == window.app.username) {
                 /* DELETE AN EVENT */
                 $del.click(function () {
                     bootbox.confirm({
@@ -190,7 +220,7 @@ window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, functio
 
     /* CREATE AN EVENT */
     $('#submitCreateButton').click(function () {
-        $('#eventId_input').val($('#name_input').val());
+        $('#eventId_input').val($('#name_input').val().replace(" ",""));
         $('#managerId_input').val(window.app.username);
         $('#duration_input').val(1);
         window.app.ajaxifyFormJson('#create_event_form', function () {
