@@ -414,13 +414,17 @@
     <Content Include="front-end\CSS\bootstrap.min.css" />
     <Content Include="front-end\CSS\font-awesome.css" />
     <Content Include="front-end\CSS\font-awesome.min.css" />
+    <Content Include="front-end\CSS\fullcalendar.min.css" />
     <Content Include="front-end\fonts\fontawesome-webfont.svg" />
     <Content Include="front-end\JS\application.js" />
     <Content Include="front-end\JS\bootbox.min.js" />
     <Content Include="front-end\JS\bootstrap.min.js" />
     <Content Include="front-end\index.html" />
+    <Content Include="front-end\JS\fullcalendar.min.js" />
+    <Content Include="front-end\JS\isotope.pkgd.js" />
     <Content Include="front-end\JS\jquery-2.1.4.min.js" />
     <Content Include="front-end\JS\jquery.cookie.min.js" />
+    <Content Include="front-end\JS\moment.min.js" />
     <Content Include="front-end\JS\pages\ActivityEvents.js" />
     <Content Include="front-end\JS\pages\AdminPanel.js" />
     <Content Include="front-end\JS\pages\Events.js" />
