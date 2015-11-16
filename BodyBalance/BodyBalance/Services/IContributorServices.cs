@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BodyBalance.Services
 {
-    interface IContributorServices
+    public interface IContributorServices
     {
         /// <summary>
         /// Create a contributor
