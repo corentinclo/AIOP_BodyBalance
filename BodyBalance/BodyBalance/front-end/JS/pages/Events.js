@@ -65,6 +65,7 @@ window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, functio
                         if (result) {
                             window.app.sendRestRequest('/Events/' + val.EventId + '/RegisterUser', 'POST', null, function (data) {
                                 bootbox.alert('You are now register to ' + val.name);
+                                //reloadEventsPage();
                             }, function () {
                                 bootbox.alert('An error occured, try again later.');
                             });
@@ -81,6 +82,7 @@ window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, functio
                             if (result) {
                                 window.app.sendRestRequest('/Events/' + val.EventId, 'DELETE', null, function (data) {
                                     bootbox.alert('This event doesn\'t exist anymore...');
+                                    reloadEventsPage();
                                 }, function () {
                                     bootbox.alert('An error occured. Try again later.');
                                 });
@@ -147,6 +149,7 @@ window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, functio
         $('#duration_input').val(1);
         window.app.ajaxifyFormJson('#create_event_form', function () {
             bootbox.alert('Your event has been created');
+            reloadEventsPage();
             return false;
         }, function () {
             bootbox.alert('A problem occured');
@@ -166,4 +169,8 @@ function dateFromISO8601(iso8601Date) {
     var isoTime = Date.UTC(parts[0], parts[1] - 1, parts[2], parts[3], parts[4], parts[5]);
     var isoDate = new Date(isoTime);
     return isoDate;
+}
+
+function reloadEventsPage() {
+    window.app.mappers['#events']();
 }
