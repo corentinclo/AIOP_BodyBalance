@@ -36,12 +36,13 @@ window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, functio
             $panelBody.append("<p><b>" + val.MaxNb + "</b> places available</p>");
             $panelBody.append("<p>Room <b>n°" + val.RoomId + "</b></p>");
             $panelBody.append("<p>With <b>" + val.ContributorId + "</b></p>");
-            var $reg = $("<div class='register'><button class='btn btn-primarystyle'>Register</button></div>").appendTo($panelBody).find('button');
             var $del = null;
             var $edit = null;
+            var $users = null;
             if (isManager && val.ManagerId == window.app.username) {
                 $edit = $('<div class="pull-left"><button class="btn btn-default"><i class="fa fa-edit"></i></button></div>').prependTo($panelHeading).find('button').tooltip({ title: "Edit", placement: "top", trigger: "hover" });
                 $del = $("<div class='pull-right'><button class='btn btn-danger'><i class='fa fa-times'></i></button></div>").prependTo($panelHeading).find('button').tooltip({ title: "Delete", placement: "top", trigger: "hover" });
+                $users = $('<div class="pull-right"><button class="btn btn-primary"><i class="fa fa-users"></i></button></div>').appendTo($panelBody).find('button');
             }
             // The date is in ISO8601 format
             var date = dateFromISO8601(val.EventDate);
@@ -61,6 +62,7 @@ window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, functio
             $item.append("<div class='timestamp'>" + timestamp + "</div>");
 
             /* REGISTER TO AN EVENT */
+            var $reg = $("<div class='register'><button class='btn btn-primarystyle'>Register</button></div>").appendTo($panelBody).find('button');
             $reg.click(function () {
                 bootbox.confirm({
                     message: "Do you want to register to this event ?",
@@ -78,6 +80,15 @@ window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, functio
                 });
             });
             if (isManager && val.ManagerId == window.app.username) {
+                /* SEE THE REGISTERED USERS */
+                $users.click(function () {
+                    window.app.sendRestRequest('/Events/' + val.EventId + '/users', 'GET', null, function (data) {
+                        console.log(data);
+                    }, function () {
+                        bootbox.alert("An error has occured");
+                    }, 'application/json');
+                })
+
                 /* DELETE AN EVENT */
                 $del.click(function () {
                     bootbox.confirm({
