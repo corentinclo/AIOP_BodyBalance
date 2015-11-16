@@ -37,7 +37,6 @@ namespace BodyBalance.Persistence
         public virtual DbSet<MANAGER> MANAGER { get; set; }
         public virtual DbSet<MEMBER> MEMBER { get; set; }
         public virtual DbSet<NOTIFICATION> NOTIFICATION { get; set; }
-        public virtual DbSet<PRICE> PRICE { get; set; }
         public virtual DbSet<PRODUCT> PRODUCT { get; set; }
         public virtual DbSet<PUNCTUAL_EVENT> PUNCTUAL_EVENT { get; set; }
         public virtual DbSet<PURCHASE> PURCHASE { get; set; }

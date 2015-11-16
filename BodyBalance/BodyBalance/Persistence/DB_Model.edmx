@@ -70,7 +70,7 @@
           <Property Name="EVENT_CONTRIBUTOR" Type="varchar2" MaxLength="20" Nullable="false" />
           <Property Name="EVENT_MANAGER" Type="varchar2" MaxLength="50" Nullable="false" />
           <Property Name="EVENT_TYPE" Type="varchar2" MaxLength="20" Nullable="false" />
-          <Property Name="EVENT_DATE" Type="date" Nullable="false" />
+          <Property Name="EVENT_DATE" Type="timestamp" Nullable="false" />
         </EntityType>
         <EntityType Name="EVENTTYPE">
           <Key>
@@ -119,15 +119,6 @@
           <Property Name="NOTIF_USERID" Type="varchar2" MaxLength="20" />
           <Property Name="NOTIF_NAME" Type="varchar2" MaxLength="25" />
         </EntityType>
-        <EntityType Name="PRICE">
-          <Key>
-            <PropertyRef Name="PRODUCT_ID" />
-            <PropertyRef Name="DATE_PRICE" />
-          </Key>
-          <Property Name="PRODUCT_ID" Type="varchar2" MaxLength="20" Nullable="false" />
-          <Property Name="DATE_PRICE" Type="date" Nullable="false" />
-          <Property Name="PRODUCT_PRICE" Type="number" Precision="38" Scale="0" Nullable="false" />
-        </EntityType>
         <EntityType Name="PRODUCT">
           <Key>
             <PropertyRef Name="PRODUCT_ID" />
@@ -139,6 +130,7 @@
           <Property Name="PRODUCT_MEMBERREDUCTION" Type="number" Precision="4" Scale="2" Nullable="false" />
           <Property Name="PRODUCT_CAT" Type="varchar2" MaxLength="20" Nullable="false" />
           <Property Name="PRODUCT_USERID" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="PRODUCT_PRICE" Type="number" Precision="38" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="PUNCTUAL_EVENT">
           <Key>
@@ -460,20 +452,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="PRICE_FK1">
-          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="PRICE" Type="Self.PRICE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PRODUCT">
-              <PropertyRef Name="PRODUCT_ID" />
-            </Principal>
-            <Dependent Role="PRICE">
-              <PropertyRef Name="PRODUCT_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="PRODUCT_FK1">
           <End Role="USER1" Type="Self.USER1" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -585,8 +563,7 @@
           <EntitySet Name="ISREGISTERED" EntityType="Self.ISREGISTERED" Schema="LUCAS.PISA" store:Type="Tables" />
           <EntitySet Name="MANAGER" EntityType="Self.MANAGER" Schema="LUCAS.PISA" store:Type="Tables" />
           <EntitySet Name="MEMBER" EntityType="Self.MEMBER" Schema="LUCAS.PISA" store:Type="Tables" />
-          <EntitySet Name="NOTIFICATION" EntityType="Self.NOTIFICATION" Schema="LUCAS.PISA" store:Type="Tables" />
-          <EntitySet Name="PRICE" EntityType="Self.PRICE" Schema="LUCAS.PISA" store:Type="Tables" />
+          <EntitySet Name="NOTIFICATION" EntityType="Self.NOTIFICATION" Schema="LUCAS.PISA" store:Type="Tables" />          
           <EntitySet Name="PRODUCT" EntityType="Self.PRODUCT" Schema="LUCAS.PISA" store:Type="Tables" />
           <EntitySet Name="PUNCTUAL_EVENT" EntityType="Self.PUNCTUAL_EVENT" Schema="LUCAS.PISA" store:Type="Tables" />
           <EntitySet Name="PURCHASE" EntityType="Self.PURCHASE" Schema="LUCAS.PISA" store:Type="Tables" />
@@ -666,10 +643,6 @@
           <AssociationSet Name="PE_EVENT_FK" Association="Self.PE_EVENT_FK">
             <End Role="EVENT" EntitySet="EVENT" />
             <End Role="PUNCTUAL_EVENT" EntitySet="PUNCTUAL_EVENT" />
-          </AssociationSet>
-          <AssociationSet Name="PRICE_FK1" Association="Self.PRICE_FK1">
-            <End Role="PRODUCT" EntitySet="PRODUCT" />
-            <End Role="PRICE" EntitySet="PRICE" />
           </AssociationSet>
           <AssociationSet Name="PRODUCT_FK1" Association="Self.PRODUCT_FK1">
             <End Role="USER1" EntitySet="USER1" />
@@ -836,16 +809,6 @@
           <Property Name="NOTIF_NAME" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="USER1" Relationship="Self.NOTIFICATION_USER1_FK1" FromRole="NOTIFICATION" ToRole="USER1" />
         </EntityType>
-        <EntityType Name="PRICE">
-          <Key>
-            <PropertyRef Name="PRODUCT_ID" />
-            <PropertyRef Name="DATE_PRICE" />
-          </Key>
-          <Property Name="PRODUCT_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DATE_PRICE" Type="DateTime" Nullable="false" />
-          <Property Name="PRODUCT_PRICE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <NavigationProperty Name="PRODUCT" Relationship="Self.PRICE_FK1" FromRole="PRICE" ToRole="PRODUCT" />
-        </EntityType>
         <EntityType Name="PRODUCT">
           <Key>
             <PropertyRef Name="PRODUCT_ID" />
@@ -857,9 +820,9 @@
           <Property Name="PRODUCT_MEMBERREDUCTION" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
           <Property Name="PRODUCT_CAT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PRODUCT_USERID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRODUCT_PRICE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <NavigationProperty Name="CATEGORY" Relationship="Self.PRODUCT_FK2" FromRole="PRODUCT" ToRole="CATEGORY" />
           <NavigationProperty Name="HASINBASKET" Relationship="Self.HASINBASKET_PRODUCT_FK1" FromRole="PRODUCT" ToRole="HASINBASKET" />
-          <NavigationProperty Name="PRICE" Relationship="Self.PRICE_FK1" FromRole="PRODUCT" ToRole="PRICE" />
           <NavigationProperty Name="USER1" Relationship="Self.PRODUCT_FK1" FromRole="PRODUCT" ToRole="USER1" />
           <NavigationProperty Name="PURCHASECONTAINS" Relationship="Self.PURCHASECONTAINS_PRODUCT_FK1" FromRole="PRODUCT" ToRole="PURCHASECONTAINS" />
         </EntityType>
@@ -1202,20 +1165,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="PRICE_FK1">
-          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="PRICE" Type="Self.PRICE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PRODUCT">
-              <PropertyRef Name="PRODUCT_ID" />
-            </Principal>
-            <Dependent Role="PRICE">
-              <PropertyRef Name="PRODUCT_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="PRODUCT_FK1">
           <End Role="USER1" Type="Self.USER1" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1303,7 +1252,6 @@
           <EntitySet Name="MANAGER" EntityType="Self.MANAGER" />
           <EntitySet Name="MEMBER" EntityType="Self.MEMBER" />
           <EntitySet Name="NOTIFICATION" EntityType="Self.NOTIFICATION" />
-          <EntitySet Name="PRICE" EntityType="Self.PRICE" />
           <EntitySet Name="PRODUCT" EntityType="Self.PRODUCT" />
           <EntitySet Name="PUNCTUAL_EVENT" EntityType="Self.PUNCTUAL_EVENT" />
           <EntitySet Name="PURCHASE" EntityType="Self.PURCHASE" />
@@ -1383,10 +1331,6 @@
           <AssociationSet Name="NOTIFICATION_USER1_FK1" Association="Self.NOTIFICATION_USER1_FK1">
             <End Role="USER1" EntitySet="USER1" />
             <End Role="NOTIFICATION" EntitySet="NOTIFICATION" />
-          </AssociationSet>
-          <AssociationSet Name="PRICE_FK1" Association="Self.PRICE_FK1">
-            <End Role="PRODUCT" EntitySet="PRODUCT" />
-            <End Role="PRICE" EntitySet="PRICE" />
           </AssociationSet>
           <AssociationSet Name="PRODUCT_FK1" Association="Self.PRODUCT_FK1">
             <End Role="USER1" EntitySet="USER1" />
@@ -1535,15 +1479,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PRICE">
-            <EntityTypeMapping TypeName="Model.PRICE">
-              <MappingFragment StoreEntitySet="PRICE">
-                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
-                <ScalarProperty Name="DATE_PRICE" ColumnName="DATE_PRICE" />
-                <ScalarProperty Name="PRODUCT_PRICE" ColumnName="PRODUCT_PRICE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PRODUCT">
             <EntityTypeMapping TypeName="Model.PRODUCT">
               <MappingFragment StoreEntitySet="PRODUCT">
@@ -1554,6 +1489,7 @@
                 <ScalarProperty Name="PRODUCT_MEMBERREDUCTION" ColumnName="PRODUCT_MEMBERREDUCTION" />
                 <ScalarProperty Name="PRODUCT_CAT" ColumnName="PRODUCT_CAT" />
                 <ScalarProperty Name="PRODUCT_USERID" ColumnName="PRODUCT_USERID" />
+                <ScalarProperty Name="PRODUCT_PRICE" ColumnName="PRODUCT_PRICE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

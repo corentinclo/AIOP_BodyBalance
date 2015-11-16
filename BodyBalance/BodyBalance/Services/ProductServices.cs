@@ -28,6 +28,7 @@ namespace BodyBalance.Services
             p.PRODUCT_MEMBERREDUCTION = pm.MemberReduction;
             p.PRODUCT_CAT = pm.CategoryId;
             p.PRODUCT_USERID = pm.UserId;
+            p.PRODUCT_PRICE = pm.Price;
 
             db.PRODUCT.Add(p);
             try
@@ -92,6 +93,7 @@ namespace BodyBalance.Services
                 p.PRODUCT_MEMBERREDUCTION = pm.MemberReduction;
                 p.PRODUCT_CAT = pm.CategoryId;
                 p.PRODUCT_USERID = pm.UserId;
+                p.PRODUCT_PRICE = pm.Price;
 
                 try
                 {

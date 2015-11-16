@@ -309,6 +309,7 @@ namespace BodyBalance.Utilities
                 pm.MemberReduction = p.PRODUCT_MEMBERREDUCTION;
                 pm.CategoryId = p.PRODUCT_CAT;
                 pm.UserId = p.PRODUCT_USERID;
+                pm.Price = p.PRODUCT_PRICE;
             }
             else
                 pm = null;
@@ -337,27 +338,6 @@ namespace BodyBalance.Utilities
                 cm = null;
 
             return cm;
-        }
-
-        /// <summary>
-        /// Convert a price from the database to a PriceModel
-        /// </summary>
-        /// <param name="p"></param>
-        /// <returns></returns>
-        public PriceModel ConvertPriceToPriceModel(PRICE p)
-        {
-            PriceModel pm = new PriceModel();
-
-            if (p != null)
-            {
-                pm.ProductId = p.PRODUCT_ID;
-                pm.DatePrice = p.DATE_PRICE;
-                pm.ProductPrice = p.PRODUCT_PRICE;
-            }
-            else
-               pm = null;
-
-            return pm;
         }
 
         /// <summary>

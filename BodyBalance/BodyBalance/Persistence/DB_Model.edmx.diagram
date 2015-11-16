@@ -17,7 +17,6 @@
         <EntityTypeShape EntityType="Model.MANAGER" Width="1.5" PointX="10.5" PointY="20.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.MEMBER" Width="1.5" PointX="10.5" PointY="23.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.NOTIFICATION" Width="1.5" PointX="10.5" PointY="25.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.PRICE" Width="1.5" PointX="15.75" PointY="16.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.PRODUCT" Width="1.5" PointX="13.5" PointY="16.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.PUNCTUAL_EVENT" Width="1.5" PointX="8.25" PointY="8" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.PURCHASE" Width="1.5" PointX="10.5" PointY="32.75" IsExpanded="true" />
@@ -44,7 +43,6 @@
         <AssociationConnector Association="Model.MANAGER_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Model.MEMBER_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Model.NOTIFICATION_USER1_FK1" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.PRICE_FK1" ManuallyRouted="false" />
         <AssociationConnector Association="Model.PRODUCT_FK1" ManuallyRouted="false" />
         <AssociationConnector Association="Model.PURCHASECONTAINS_PRODUCT_FK1" ManuallyRouted="false" />
         <AssociationConnector Association="Model.PURCHASE_USER1_FK1" ManuallyRouted="false" />

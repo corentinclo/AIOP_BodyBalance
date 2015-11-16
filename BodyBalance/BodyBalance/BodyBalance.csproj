@@ -275,7 +275,6 @@
     <Compile Include="Models\ManagerModel.cs" />
     <Compile Include="Models\MemberModel.cs" />
     <Compile Include="Models\NotificationModel.cs" />
-    <Compile Include="Models\PriceModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\PunctualEventModel.cs" />
     <Compile Include="Models\PurchaseLineModel.cs" />
@@ -383,7 +382,6 @@
     <Compile Include="Services\IManagerServices.cs" />
     <Compile Include="Services\IMemberServices.cs" />
     <Compile Include="Services\INotificationServices.cs" />
-    <Compile Include="Services\IPriceServices.cs" />
     <Compile Include="Services\IProductServices.cs" />
     <Compile Include="Services\IPunctualEventServices.cs" />
     <Compile Include="Services\IPurchaseLineServices.cs" />
@@ -395,7 +393,6 @@
     <Compile Include="Services\ManagerServices.cs" />
     <Compile Include="Services\MemberServices.cs" />
     <Compile Include="Services\NotificationServices.cs" />
-    <Compile Include="Services\PriceServices.cs" />
     <Compile Include="Services\ProductServices.cs" />
     <Compile Include="Services\PunctualEventServices.cs" />
     <Compile Include="Services\PurchaseLineServices.cs" />
