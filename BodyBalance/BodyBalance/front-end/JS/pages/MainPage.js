@@ -13,6 +13,13 @@ window.app.mappers['#myaccount'] = function () {
     return false;
 }
 
+window.app.mappers['#products'] = function () {
+    $.get('pages/Products.html', null, function (result) {
+        $('#main').html(result);
+    });
+    return false;
+}
+
 
 $('[data-visible="loggedIn"]').show();
 window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, function (data) {
@@ -55,6 +62,17 @@ window.app.sendRestRequest("/Users/" + window.app.username + "/Events", "GET", n
 }, function () {
     bootbox.alert("An error occurred while loading your events.");
 });
+
+window.app.sendRestRequest("/Users/" + window.app.username + "/Baskets", "GET", null, function (data) {
+    window.app.basket = data;
+    console.log(data.length);
+    if (data.length == 0) {
+        $('.basket .badge').html('');
+    }
+    else {
+        $('.basket .badge').html(data.length);
+    }
+})
 
 // function to convert date in ISO8601 format to a date for all browsers
 function dateFromISO8601(iso8601Date) {

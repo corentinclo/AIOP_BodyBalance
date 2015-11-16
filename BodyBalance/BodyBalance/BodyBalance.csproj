@@ -431,6 +431,7 @@
     <Content Include="front-end\JS\pages\Activities.js" />
     <Content Include="front-end\JS\pages\index.js" />
     <Content Include="front-end\JS\pages\MyAccount.js" />
+    <Content Include="front-end\JS\pages\Products.js" />
     <Content Include="front-end\JS\pages\Register.js" />
     <Content Include="front-end\pages\ActivityEvents.html" />
     <Content Include="front-end\pages\AdminPanel.html" />
@@ -439,6 +440,7 @@
     <Content Include="front-end\pages\MainPage.html" />
     <Content Include="front-end\JS\pages\MainPage.js" />
     <Content Include="front-end\pages\MyAccount.html" />
+    <Content Include="front-end\pages\Products.html" />
     <Content Include="front-end\pages\Register.html" />
     <Content Include="Global.asax" />
     <Content Include="Areas\HelpPage\Views\Web.config" />

@@ -7,7 +7,10 @@
         this.mappers = [];
         this.token = "";
         this.username = "";
+        this.basket = [];
     }
+
+
 
     /**
      * Transforme tous les liens en fonctions dans un containeur
