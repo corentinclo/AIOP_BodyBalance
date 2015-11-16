@@ -65,7 +65,6 @@ window.app.sendRestRequest("/Users/" + window.app.username + "/Events", "GET", n
 
 window.app.sendRestRequest("/Users/" + window.app.username + "/Baskets", "GET", null, function (data) {
     window.app.basket = data;
-    console.log(data.length);
     if (data.length == 0) {
         $('.basket .badge').html('');
     }
