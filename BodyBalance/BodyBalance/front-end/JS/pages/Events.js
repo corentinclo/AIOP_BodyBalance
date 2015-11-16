@@ -149,7 +149,9 @@ window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, functio
         $('#duration_input').val(1);
         window.app.ajaxifyFormJson('#create_event_form', function () {
             bootbox.alert('Your event has been created', function () {
-                reloadEventsPage();
+                $('#createEventModal').on('hidden.bs.modal', function () {
+                    reloadEventsPage();
+                }).modal('hide');
             });
             return false;
         }, function () {
