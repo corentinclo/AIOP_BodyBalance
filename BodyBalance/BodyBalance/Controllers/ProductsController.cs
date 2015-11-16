@@ -14,15 +14,26 @@ namespace BodyBalance.Controllers
     public class ProductsController : ApiController
     {
         private IProductServices productServices;
+        private IUserServices userServices;
 
-        public ProductsController(IProductServices productServices)
+        public ProductsController(IProductServices productServices,
+            IUserServices userServices)
         {
             this.productServices = productServices;
+            this.userServices = userServices;
         }
         // GET: Products
         [HttpGet]
         public IHttpActionResult Get()
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            /************************/
+
             var listProducts = productServices.FindAllProducts();
             return Ok(listProducts);
         }
@@ -32,6 +43,14 @@ namespace BodyBalance.Controllers
         [Route("Products/{product_id}")]
         public IHttpActionResult Get(string product_id)
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            /************************/
+
             var product = productServices.FindProductWithId(product_id);
 
             if (product == null)
@@ -45,6 +64,18 @@ namespace BodyBalance.Controllers
         [HttpPost]
         public IHttpActionResult Post([FromBody]ProductModel model)
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (model.UserId != User.Identity.Name)
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid product supplied");
@@ -67,6 +98,18 @@ namespace BodyBalance.Controllers
         [Route("Products/{product_id}")]
         public IHttpActionResult Put(string product_id, [FromBody]ProductModel model)
         {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (model.UserId != User.Identity.Name)
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
             if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid product supplied");
@@ -113,6 +156,18 @@ namespace BodyBalance.Controllers
                 return BadRequest("Bad product id supplied");
             }
 
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (product.UserId != User.Identity.Name)
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+            
             var deleteResult = productServices.DeleteProduct(product);
             if (deleteResult == DaoUtilities.SAVE_SUCCESSFUL)
             {
