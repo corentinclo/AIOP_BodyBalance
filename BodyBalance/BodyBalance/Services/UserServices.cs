@@ -357,6 +357,49 @@ namespace BodyBalance.Services
             return result;
         }
 
+        public int CreateUserPurchase(string UserId)
+        {
+            int result = DaoUtilities.NO_CHANGES;
+
+            IProductServices prs = new ProductServices();
+            IPurchaseServices pus = new PurchaseServices();
+            IPurchaseLineServices pls = new PurchaseLineServices();
+
+            List<BasketModel> bm = FindBasketOfUser(UserId);
+
+            PurchaseModel pm = new PurchaseModel();
+            pm.PurchaseId = Guid.NewGuid().ToString();
+            pm.PurchaseDate = DateTime.Today;
+            pm.UserId = UserId;
+            pm.TotalPrice = 0;
+
+            List<PurchaseLineModel> purchaseLines = new List<PurchaseLineModel>();
+
+            foreach (BasketModel bl in bm)
+            {
+                ProductModel prm = prs.FindProductWithId(bl.ProductId);
+                pm.TotalPrice += prm.Price;
+                PurchaseLineModel plm = new PurchaseLineModel();
+                plm.PurchaseId = pm.PurchaseId;
+                plm.ProductId = bl.ProductId;
+                plm.Quantity = bl.Quantity;
+                purchaseLines.Add(plm);
+            }
+
+            result = pus.CreatePurchase(pm);
+            if(result == DaoUtilities.SAVE_SUCCESSFUL)
+            {
+                foreach(PurchaseLineModel plm in purchaseLines)
+                {
+                    result = pls.CreatePurchaseLine(plm);
+                    if (result != DaoUtilities.SAVE_SUCCESSFUL)
+                        break;
+                }
+            }
+
+            return result;
+        }
+
         private string hashSHA512(string unhashedValue)
         {
             SHA512 shaM = new SHA512Managed();

@@ -15,12 +15,13 @@ namespace BodyBalance.Controllers
     {
         private IUserServices userServices;
         private ITokenServices tokenServices;
+        private IBasketServices basketServices;
 
-        
-        public UsersController(IUserServices user,ITokenServices token)
+        public UsersController(IUserServices user,ITokenServices token, IBasketServices basket)
         {
             this.userServices = user;
             this.tokenServices = token;
+            this.basketServices = basket;
         }
 
         // GET: /Users
@@ -152,7 +153,7 @@ namespace BodyBalance.Controllers
             return InternalServerError();
         }
 
-        // DELETE: /Users/{user-id}
+        // DELETE: /Users/{userid}
         [HttpDelete]
         [Route("Users/{userid}")]
         public IHttpActionResult Delete(string userid)
@@ -184,7 +185,7 @@ namespace BodyBalance.Controllers
             return InternalServerError();
         }
 
-        // GET: /Users/{user-id}/Products
+        // GET: /Users/{userid}/Products
         [HttpGet]
         [Route("Users/{userid}/Products")]
         public IHttpActionResult GetProducts(string userid)
@@ -211,7 +212,7 @@ namespace BodyBalance.Controllers
             return Ok(listProducts);
         }
 
-        // GET: /Users/{user-id}/Notifications
+        // GET: /Users/{userid}/Notifications
         [HttpGet]
         [Route("Users/{userid}/Notifications")]
         public IHttpActionResult GetNotifications(string userid)
@@ -238,7 +239,7 @@ namespace BodyBalance.Controllers
             return Ok(listNotifications);
         }
 
-        // GET: /Users/{user-id}/Baskets
+        // GET: /Users/{userid}/Baskets
         [HttpGet]
         [Route("Users/{userid}/Baskets")]
         public IHttpActionResult GetBaskets(string userid)
@@ -263,6 +264,177 @@ namespace BodyBalance.Controllers
             var listBaskets = userServices.FindBasketOfUser(userid);
 
             return Ok(listBaskets);
+        }
+
+        // POST: /Users/{userid}/Baskets
+        [HttpPost]
+        [Route("Users/{userid}/Baskets")]
+        public IHttpActionResult PostBasketLine(string userid, [FromBody]BasketModel basket)
+        {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (userPermission.UserId != basket.UserId)
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid basket line supplied");
+            }
+
+            var createResult = basketServices.CreateBasketLine(basket);
+            if (createResult == DaoUtilities.SAVE_SUCCESSFUL)
+            {
+                return Ok("Basket line created sucessfully");
+            }
+            if (createResult == DaoUtilities.UPDATE_EXCEPTION)
+            {
+                return BadRequest("The basket line already exists");
+            }
+            return InternalServerError();
+        }
+
+        // POST: /Users/{userid}/Baskets/Validate
+        [HttpPost]
+        [Route("Users/{userid}/Baskets/Validate")]
+        public IHttpActionResult PostPurchase(string userid)
+        {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+
+            var createResult = userServices.CreateUserPurchase(userid);
+            if (createResult == DaoUtilities.SAVE_SUCCESSFUL)
+            {
+                return Ok("Basket created sucessfully");
+            }
+            if (createResult == DaoUtilities.UPDATE_EXCEPTION)
+            {
+                return BadRequest("The purchase already exists");
+            }
+            return InternalServerError();
+        }
+
+        // GET: /Users/{userid}/Baskets/{productid}
+        [HttpGet]
+        [Route("Users/{userid}/Baskets/{productid}")]
+        public IHttpActionResult GetBasketLine(string userid, string productid)
+        {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (userPermission.UserId != userid)
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
+            var basketLine = this.basketServices.FindBasketLineWithIds(userid, productid);
+
+            if (basketLine == null)
+            {
+                return NotFound();
+            }
+            return Ok(basketLine);
+        }
+
+        // PUT: /Users/{userid}/Baskets/{productid}
+        [HttpPut]
+        [Route("Users/{userid}/Baskets/{productid}")]
+        public IHttpActionResult PutBasketLine(string userid, string productid, [FromBody]BasketModel basket)
+        {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (userPermission.UserId != userid)
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid basket line supplied");
+            }
+
+            var basektLine = basketServices.FindBasketLineWithIds(userid, productid);
+
+            if (basektLine == null)
+            {
+                return NotFound();
+            }
+            if (basektLine.UserId != basket.UserId)
+            {
+                return BadRequest("Invalid user id supplied");
+            }
+            if (basektLine.ProductId != basket.ProductId)
+            {
+                return BadRequest("Invalid product id supplied");
+            }
+
+            var updateResult = basketServices.UpdateBasketLine(basket);
+            if (updateResult == DaoUtilities.SAVE_SUCCESSFUL)
+            {
+                return Ok("Basket line updated successfully");
+            }
+            if (updateResult == DaoUtilities.DISPOSED_EXCEPTION)
+            {
+                var ex = new Exception("Connection have been disposed");
+                return InternalServerError(ex);
+            }
+            if (updateResult == DaoUtilities.UPDATE_EXCEPTION)
+            {
+                var ex = new Exception("Make Sure that your user id and product id exist");
+                return InternalServerError(ex);
+            }
+
+            return InternalServerError();
+        }
+
+        // DELETE: /Users/{userid}/Baskets/{productid}
+        [HttpDelete]
+        [Route("Users/{userid}/Baskets/{productid}")]
+        public IHttpActionResult DeleteBasketLine(string userid, string productid)
+        {
+            /** Check Permissions **/
+            var userPermission = userServices.FindUserById(User.Identity.Name);
+            if (userPermission == null)
+            {
+                return Unauthorized();
+            }
+            if (userPermission.UserId != userid)
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            /************************/
+
+            var basketLine = basketServices.FindBasketLineWithIds(userid, productid);
+            if (basketLine == null)
+            {
+                return BadRequest("Bad user id and/or product id supplied");
+            }
+
+            var deleteResult = basketServices.DeleteBasketLine(basketLine);
+            if (deleteResult == DaoUtilities.SAVE_SUCCESSFUL)
+            {
+                return Ok("Basket line deleted successfully");
+            }
+            return InternalServerError();
         }
 
         // DELETE: /Users/{user-id}/Baskets
@@ -297,7 +469,7 @@ namespace BodyBalance.Controllers
             return InternalServerError();
         }
 
-        // GET: /Users/{user-id}/Purchases
+        // GET: /Users/{userid}/Purchases
         [HttpGet]
         [Route("Users/{userid}/Purchases")]
         public IHttpActionResult GetPurchases(string userid)

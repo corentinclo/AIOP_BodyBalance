@@ -113,5 +113,12 @@ namespace BodyBalance.Services
         /// <param name="UserId"></param>
         /// <returns></returns>
         int DeleteUserBasket(string UserId);
+
+        /// <summary>
+        /// Create the purchase of a user with all the lines of his basket and delete his basket
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
+        int CreateUserPurchase(string UserId);
     }
 }
