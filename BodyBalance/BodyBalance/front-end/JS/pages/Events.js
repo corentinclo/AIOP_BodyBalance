@@ -68,13 +68,13 @@ window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, functio
                     message: "Do you want to register to this event ?",
                     callback: function (result) {
                         if (result) {
-                            window.app.sendRestRequest('/Events/' + val.EventId + '/RegisterUser', 'POST', null, function (data) {
+                            window.app.sendRestRequest('/Events/' + val.EventId + '/RegisterUser', 'POST', window.app.username, function (data) {
                                 bootbox.alert('You are now registered to ' + val.name, function () {
                                     reloadEventsPage();
                                 });
                             }, function () {
                                 bootbox.alert('An error occured, try again later.');
-                            });
+                            },'application/json',true);
                         }
                     }
                 });
