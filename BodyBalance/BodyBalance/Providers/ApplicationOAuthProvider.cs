@@ -41,8 +41,6 @@ namespace BodyBalance.Providers
             }
 
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
-            identity.AddClaim(new Claim("userId", context.UserName));
-            identity.AddClaim(new Claim("role", "user"));
             identity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
 
             AuthenticationProperties properties = CreateProperties(user.UserId);

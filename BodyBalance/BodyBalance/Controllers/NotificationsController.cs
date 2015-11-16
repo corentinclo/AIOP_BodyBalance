@@ -19,16 +19,18 @@ namespace BodyBalance.Controllers
             this.notificationServices = notificationServices;
         }
 
-        // GET: Notifications
+        // GET: /Notifications
         [HttpGet]
+        [Route("Notifications")]
         public IHttpActionResult Get()
         {
             var listNotifications = notificationServices.FindAllNotifications();
             return Ok(listNotifications);
         }
 
-        // GET: api/Notifications/{notification_id}
+        // GET: /Notifications/{notification_id}
         [HttpGet]
+        [Route("Notifications/{notification_id}")]
         public IHttpActionResult Get(string notification_id)
         {
             var notification = notificationServices.FindNotificationWithId(notification_id);
@@ -40,8 +42,9 @@ namespace BodyBalance.Controllers
             return Ok(notification);
         }
 
-        // POST: api/Notifications
+        // POST: /Notifications
         [HttpPost]
+        [Route("Notifications")]
         public IHttpActionResult Post([FromBody]NotificationModel model)
         {
             if (!ModelState.IsValid)
@@ -61,8 +64,9 @@ namespace BodyBalance.Controllers
             return InternalServerError();
         }
 
-        // PUT: api/Notifications/{notification_id}
+        // PUT: /Notifications/{notification_id}
         [HttpPut]
+        [Route("Notifications/{notification_id}")]
         public IHttpActionResult Put(string notification_id, [FromBody]NotificationModel model)
         {
             if (!ModelState.IsValid)
@@ -100,8 +104,9 @@ namespace BodyBalance.Controllers
             return InternalServerError();
         }
 
-        // DELETE: api/Notifications/{notification_id}
+        // DELETE: /Notifications/{notification_id}
         [HttpDelete]
+        [Route("Notifications/{notification_id}")]
         public IHttpActionResult Delete(string notification_id)
         {
             var notification = notificationServices.FindNotificationWithId(notification_id);

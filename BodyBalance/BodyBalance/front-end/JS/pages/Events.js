@@ -38,7 +38,7 @@ window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, functio
             $panelBody.append("<p>With <b>" + val.ContributorId + "</b></p>");
             var $reg = $("<div class='register'><button class='btn btn-primarystyle'>Register</button></div>").appendTo($panelBody).find('button');
             var $del = null;
-            if (isManager)
+            if (isManager && val.ManagerId == window.app.username)
                 $del = $("<div class='delete'><button class='btn btn-primarystyle'>Delete</button></div>").appendTo($panelBody).find('button');
 
             // The date is in ISO8601 format
