@@ -1,5 +1,6 @@
 ﻿using BodyBalance.Models;
 using BodyBalance.Persistence;
+using BodyBalance.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,13 @@ namespace BodyBalance.Utilities
                 um.Town = u.USER_TOWN;
                 um.Phone = u.USER_PHONE;
                 um.Mail = u.USER_MAIL;
+
+                var userServices = new UserServices();
+                um.UserRoles = new RolesModel();
+                um.UserRoles.IsAdmin = userServices.IsAdmin(um);
+                um.UserRoles.IsContributor = userServices.IsContributor(um);
+                um.UserRoles.IsManager = userServices.IsManager(um);
+                um.UserRoles.IsMember = userServices.IsMember(um);
             }
             else
                 um = null;
