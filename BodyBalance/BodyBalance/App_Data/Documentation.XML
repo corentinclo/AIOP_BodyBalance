@@ -1,0 +1,2112 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BodyBalance</name>
+    </assembly>
+    <members>
+        <member name="T:BodyBalance.App_Start.UnityConfig">
+            <summary>
+            Specifies the Unity configuration for the main container.
+            </summary>
+        </member>
+        <member name="M:BodyBalance.App_Start.UnityConfig.GetConfiguredContainer">
+            <summary>
+            Gets the configured Unity container.
+            </summary>
+        </member>
+        <member name="M:BodyBalance.App_Start.UnityConfig.RegisterTypes(Microsoft.Practices.Unity.IUnityContainer)">
+            <summary>Registers the type mappings with the Unity container.</summary>
+            <param name="container">The unity container to configure.</param>
+            <remarks>There is no need to register concrete types such as controllers or API controllers (unless you want to 
+            change the defaults), as Unity allows resolving a concrete type even if it was not previously registered.</remarks>
+        </member>
+        <member name="T:BodyBalance.App_Start.UnityWebApiActivator">
+            <summary>Provides the bootstrapping for integrating Unity with WebApi when it is hosted in ASP.NET</summary>
+        </member>
+        <member name="M:BodyBalance.App_Start.UnityWebApiActivator.Start">
+            <summary>Integrates Unity when the application starts.</summary>
+        </member>
+        <member name="M:BodyBalance.App_Start.UnityWebApiActivator.Shutdown">
+            <summary>Disposes the Unity container when the application is shut down.</summary>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
+            </summary>
+            <param name="description">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The ID as a string.</returns>
+        </member>
+        <member name="T:BodyBalance.Areas.HelpPage.HelpPageConfig">
+            <summary>
+            Use this class to customize the Help Page.
+            For example you can set a custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> to supply the documentation
+            or you can provide the samples for the requests/responses.
+            </summary>
+        </member>
+        <member name="T:BodyBalance.Areas.HelpPage.Controllers.HelpController">
+            <summary>
+            The controller that will handle requests for the help page.
+            </summary>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.HelpPageConfigurationExtensions.SetDocumentationProvider(System.Web.Http.HttpConfiguration,System.Web.Http.Description.IDocumentationProvider)">
+            <summary>
+            Sets the documentation provider for help page.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="documentationProvider">The documentation provider.</param>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleObjects(System.Web.Http.HttpConfiguration,System.Collections.Generic.IDictionary{System.Type,System.Object})">
+            <summary>
+            Sets the objects that will be used by the formatters to produce sample requests/responses.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleObjects">The sample objects.</param>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type and action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample request directly for the specified media type and action with parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type of the action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample response directly for the specified media type of the action with specific parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForMediaType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Sets the sample directly for all actions with the specified media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Sets the sample directly for all actions with the specified type and media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The parameter type or return type of an action.</param>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <returns>The help page sample generator.</returns>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.HelpPageConfigurationExtensions.SetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration,BodyBalance.Areas.HelpPage.HelpPageSampleGenerator)">
+            <summary>
+            Sets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleGenerator">The help page sample generator.</param>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.HelpPageConfigurationExtensions.GetModelDescriptionGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the model description generator.
+            </summary>
+            <param name="config">The configuration.</param>
+            <returns>The <see cref="T:BodyBalance.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator"/></returns>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageApiModel(System.Web.Http.HttpConfiguration,System.String)">
+            <summary>
+            Gets the model that represents an API displayed on the help page. The model is initialized on the first call and cached for subsequent calls.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="apiDescriptionId">The <see cref="T:System.Web.Http.Description.ApiDescription"/> ID.</param>
+            <returns>
+            An <see cref="T:BodyBalance.Areas.HelpPage.Models.HelpPageApiModel"/>
+            </returns>
+        </member>
+        <member name="T:BodyBalance.Areas.HelpPage.ModelDescriptions.ModelDescription">
+            <summary>
+            Describes a type model.
+            </summary>
+        </member>
+        <member name="T:BodyBalance.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator">
+            <summary>
+            Generates model descriptions for given types.
+            </summary>
+        </member>
+        <member name="T:BodyBalance.Areas.HelpPage.ModelDescriptions.ModelNameAttribute">
+            <summary>
+            Use this attribute to change the name of the <see cref="T:BodyBalance.Areas.HelpPage.ModelDescriptions.ModelDescription"/> generated for a type.
+            </summary>
+        </member>
+        <member name="T:BodyBalance.Areas.HelpPage.Models.HelpPageApiModel">
+            <summary>
+            The model that represents an API displayed on the help page.
+            </summary>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.Models.HelpPageApiModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BodyBalance.Areas.HelpPage.Models.HelpPageApiModel"/> class.
+            </summary>
+        </member>
+        <member name="P:BodyBalance.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription">
+            <summary>
+            Gets or sets the <see cref="P:BodyBalance.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription"/> that describes the API.
+            </summary>
+        </member>
+        <member name="P:BodyBalance.Areas.HelpPage.Models.HelpPageApiModel.UriParameters">
+            <summary>
+            Gets or sets the <see cref="T:BodyBalance.Areas.HelpPage.ModelDescriptions.ParameterDescription"/> collection that describes the URI parameters for the API.
+            </summary>
+        </member>
+        <member name="P:BodyBalance.Areas.HelpPage.Models.HelpPageApiModel.RequestDocumentation">
+            <summary>
+            Gets or sets the documentation for the request.
+            </summary>
+        </member>
+        <member name="P:BodyBalance.Areas.HelpPage.Models.HelpPageApiModel.RequestModelDescription">
+            <summary>
+            Gets or sets the <see cref="T:BodyBalance.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the request body.
+            </summary>
+        </member>
+        <member name="P:BodyBalance.Areas.HelpPage.Models.HelpPageApiModel.RequestBodyParameters">
+            <summary>
+            Gets the request body parameter descriptions.
+            </summary>
+        </member>
+        <member name="P:BodyBalance.Areas.HelpPage.Models.HelpPageApiModel.ResourceDescription">
+            <summary>
+            Gets or sets the <see cref="T:BodyBalance.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the resource.
+            </summary>
+        </member>
+        <member name="P:BodyBalance.Areas.HelpPage.Models.HelpPageApiModel.ResourceProperties">
+            <summary>
+            Gets the resource property descriptions.
+            </summary>
+        </member>
+        <member name="P:BodyBalance.Areas.HelpPage.Models.HelpPageApiModel.SampleRequests">
+            <summary>
+            Gets the sample requests associated with the API.
+            </summary>
+        </member>
+        <member name="P:BodyBalance.Areas.HelpPage.Models.HelpPageApiModel.SampleResponses">
+            <summary>
+            Gets the sample responses associated with the API.
+            </summary>
+        </member>
+        <member name="P:BodyBalance.Areas.HelpPage.Models.HelpPageApiModel.ErrorMessages">
+            <summary>
+            Gets the error messages associated with this model.
+            </summary>
+        </member>
+        <member name="T:BodyBalance.Areas.HelpPage.HelpPageSampleGenerator">
+            <summary>
+            This class will generate the samples for the help page.
+            </summary>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.HelpPageSampleGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BodyBalance.Areas.HelpPage.HelpPageSampleGenerator"/> class.
+            </summary>
+        </member>
+        <member name="P:BodyBalance.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
+            <summary>
+            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="P:BodyBalance.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
+            <summary>
+            Gets the objects that are used directly as samples for certain actions.
+            </summary>
+        </member>
+        <member name="P:BodyBalance.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
+            <summary>
+            Gets the objects that are serialized as samples by the supported formatters.
+            </summary>
+        </member>
+        <member name="P:BodyBalance.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories">
+            <summary>
+            Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
+            stopping when the factory successfully returns a non-<see langref="null"/> object.
+            </summary>
+            <remarks>
+            Collection includes just <see cref="M:BodyBalance.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)"/> initially. Use
+            <code>SampleObjectFactories.Insert(0, func)</code> to provide an override and
+            <code>SampleObjectFactories.Add(func)</code> to provide a fallback.</remarks>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.HelpPageSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.HelpPageSampleGenerator.GetSampleResponses(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the response body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.HelpPageSampleGenerator.GetSample(System.Web.Http.Description.ApiDescription,BodyBalance.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Gets the request or response body samples.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.HelpPageSampleGenerator.GetActionSample(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Type,System.Net.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue,BodyBalance.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Search for samples that are provided directly through <see cref="P:BodyBalance.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples"/>.
+            </summary>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="type">The CLR type.</param>
+            <param name="formatter">The formatter.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The sample that matches the parameters.</returns>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.HelpPageSampleGenerator.GetSampleObject(System.Type)">
+            <summary>
+            Gets the sample object that will be serialized by the formatters. 
+            First, it will look at the <see cref="P:BodyBalance.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects"/>. If no sample object is found, it will try to create
+            one using <see cref="M:BodyBalance.Areas.HelpPage.HelpPageSampleGenerator.DefaultSampleObjectFactory(BodyBalance.Areas.HelpPage.HelpPageSampleGenerator,System.Type)"/> (which wraps an <see cref="T:BodyBalance.Areas.HelpPage.ObjectGenerator"/>) and other
+            factories in <see cref="P:BodyBalance.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The sample object.</returns>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.HelpPageSampleGenerator.ResolveHttpRequestMessageType(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Resolves the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The type.</returns>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.HelpPageSampleGenerator.ResolveType(System.Web.Http.Description.ApiDescription,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},BodyBalance.Areas.HelpPage.SampleDirection,System.Collections.ObjectModel.Collection{System.Net.Http.Formatting.MediaTypeFormatter}@)">
+            <summary>
+            Resolves the type of the action parameter or return value when <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/> is used.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or a response.</param>
+            <param name="formatters">The formatters.</param>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.HelpPageSampleGenerator.WriteSampleObjectUsingFormatter(System.Net.Http.Formatting.MediaTypeFormatter,System.Object,System.Type,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Writes the sample object using formatter.
+            </summary>
+            <param name="formatter">The formatter.</param>
+            <param name="value">The value.</param>
+            <param name="type">The type.</param>
+            <param name="mediaType">Type of the media.</param>
+            <returns></returns>
+        </member>
+        <member name="T:BodyBalance.Areas.HelpPage.HelpPageSampleKey">
+            <summary>
+            This is used to identify the place where the sample should be applied.
+            </summary>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Creates a new <see cref="T:BodyBalance.Areas.HelpPage.HelpPageSampleKey"/> based on media type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Creates a new <see cref="T:BodyBalance.Areas.HelpPage.HelpPageSampleKey"/> based on media type and CLR type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The CLR type.</param>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.HelpPageSampleKey.#ctor(BodyBalance.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:BodyBalance.Areas.HelpPage.HelpPageSampleKey"/> based on <see cref="P:BodyBalance.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="sampleDirection">The <see cref="P:BodyBalance.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,BodyBalance.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:BodyBalance.Areas.HelpPage.HelpPageSampleKey"/> based on media type, <see cref="P:BodyBalance.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The <see cref="P:BodyBalance.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="P:BodyBalance.Areas.HelpPage.HelpPageSampleKey.ControllerName">
+            <summary>
+            Gets the name of the controller.
+            </summary>
+            <value>
+            The name of the controller.
+            </value>
+        </member>
+        <member name="P:BodyBalance.Areas.HelpPage.HelpPageSampleKey.ActionName">
+            <summary>
+            Gets the name of the action.
+            </summary>
+            <value>
+            The name of the action.
+            </value>
+        </member>
+        <member name="P:BodyBalance.Areas.HelpPage.HelpPageSampleKey.MediaType">
+            <summary>
+            Gets the media type.
+            </summary>
+            <value>
+            The media type.
+            </value>
+        </member>
+        <member name="P:BodyBalance.Areas.HelpPage.HelpPageSampleKey.ParameterNames">
+            <summary>
+            Gets the parameter names.
+            </summary>
+        </member>
+        <member name="P:BodyBalance.Areas.HelpPage.HelpPageSampleKey.SampleDirection">
+            <summary>
+            Gets the <see cref="P:BodyBalance.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.
+            </summary>
+        </member>
+        <member name="T:BodyBalance.Areas.HelpPage.ImageSample">
+            <summary>
+            This represents an image sample on the help page. There's a display template named ImageSample associated with this class.
+            </summary>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.ImageSample.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BodyBalance.Areas.HelpPage.ImageSample"/> class.
+            </summary>
+            <param name="src">The URL of an image.</param>
+        </member>
+        <member name="T:BodyBalance.Areas.HelpPage.InvalidSample">
+            <summary>
+            This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:BodyBalance.Areas.HelpPage.ObjectGenerator">
+            <summary>
+            This class will create an object of a given type and populate it with sample data.
+            </summary>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)">
+            <summary>
+            Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following types:
+            Simple types: <see cref="T:System.Int32"/>, <see cref="T:System.String"/>, <see cref="T:System.Enum"/>, <see cref="T:System.DateTime"/>, <see cref="T:System.Uri"/>, etc.
+            Complex types: POCO types.
+            Nullables: <see cref="T:System.Nullable`1"/>.
+            Arrays: arrays of simple types or complex types.
+            Key value pairs: <see cref="T:System.Collections.Generic.KeyValuePair`2"/>
+            Tuples: <see cref="T:System.Tuple`1"/>, <see cref="T:System.Tuple`2"/>, etc
+            Dictionaries: <see cref="T:System.Collections.Generic.IDictionary`2"/> or anything deriving from <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            Collections: <see cref="T:System.Collections.Generic.IList`1"/>, <see cref="T:System.Collections.Generic.IEnumerable`1"/>, <see cref="T:System.Collections.Generic.ICollection`1"/>, <see cref="T:System.Collections.IList"/>, <see cref="T:System.Collections.IEnumerable"/>, <see cref="T:System.Collections.ICollection"/> or anything deriving from <see cref="T:System.Collections.Generic.ICollection`1"/> or <see cref="T:System.Collections.IList"/>.
+            Queryables: <see cref="T:System.Linq.IQueryable"/>, <see cref="T:System.Linq.IQueryable`1"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>An object of the given type.</returns>
+        </member>
+        <member name="T:BodyBalance.Areas.HelpPage.SampleDirection">
+            <summary>
+            Indicates whether the sample is used for request or response
+            </summary>
+        </member>
+        <member name="T:BodyBalance.Areas.HelpPage.TextSample">
+            <summary>
+            This represents a preformatted text sample on the help page. There's a display template named TextSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:BodyBalance.Areas.HelpPage.XmlDocumentationProvider">
+            <summary>
+            A custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
+            </summary>
+        </member>
+        <member name="M:BodyBalance.Areas.HelpPage.XmlDocumentationProvider.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BodyBalance.Areas.HelpPage.XmlDocumentationProvider"/> class.
+            </summary>
+            <param name="documentPath">The physical path to XML document.</param>
+        </member>
+        <member name="T:BodyBalance.Controllers.AccessoriesController">
+            <summary>
+            Manage Accessories
+            </summary>
+        </member>
+        <member name="M:BodyBalance.Controllers.AccessoriesController.Get">
+            <summary>
+            Retrieves all accessories
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.AccessoriesController.Get(System.String)">
+            <summary>
+            Retrieves an accessory
+            </summary>
+            <param name="accessory_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.AccessoriesController.Post(BodyBalance.Models.AccessoryModel)">
+            <summary>
+            Create an accessory
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.AccessoriesController.Put(System.String,BodyBalance.Models.AccessoryModel)">
+            <summary>
+            Update an accessory
+            </summary>
+            <param name="accessory_id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.AccessoriesController.Delete(System.String)">
+            <summary>
+            Delete an accessory
+            </summary>
+            <param name="accessory_id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BodyBalance.Controllers.AccountController">
+            <summary>
+            Manage Accounts
+            </summary>
+        </member>
+        <member name="M:BodyBalance.Controllers.AccountController.Register(BodyBalance.Models.UserModel)">
+            <summary>
+            Register an user
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.AccountController.Logout">
+            <summary>
+            Logout to the application
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.AccountController.IsValidToken">
+            <summary>
+            Check if your token is valid
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.AccountController.ChangePassword(BodyBalance.Models.ChangePasswordBindingModel)">
+            <summary>
+            Change your password
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BodyBalance.Controllers.ActivitiesController">
+            <summary>
+            Manage activities 
+            </summary>
+        </member>
+        <member name="M:BodyBalance.Controllers.ActivitiesController.Get">
+            <summary>
+            Retrieves all activities
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.ActivitiesController.Get(System.String)">
+            <summary>
+            Retrieves informations of an activity
+            </summary>
+            <param name="activity_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.ActivitiesController.Post(BodyBalance.Models.ActivityModel)">
+            <summary>
+            Create an activity
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.ActivitiesController.Put(System.String,BodyBalance.Models.ActivityModel)">
+            <summary>
+            Update an activity
+            </summary>
+            <param name="activity_id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.ActivitiesController.Delete(System.String)">
+            <summary>
+            Delete an activity
+            </summary>
+            <param name="activity_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.ActivitiesController.GetEvents(System.String)">
+            <summary>
+            Get the events of an activity
+            </summary>
+            <param name="activity_id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BodyBalance.Controllers.CategoriesController">
+            <summary>
+            Manage categories
+            </summary>
+        </member>
+        <member name="M:BodyBalance.Controllers.CategoriesController.Get">
+            <summary>
+            Get all categories
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.CategoriesController.Get(System.String)">
+            <summary>
+            Retrieves information about a category
+            </summary>
+            <param name="category_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.CategoriesController.Post(BodyBalance.Models.CategoryModel)">
+            <summary>
+            Create a category
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.CategoriesController.Put(System.String,BodyBalance.Models.CategoryModel)">
+            <summary>
+            Update a category
+            </summary>
+            <param name="category_id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.CategoriesController.Delete(System.String)">
+            <summary>
+            Delete a category
+            </summary>
+            <param name="category_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.CategoriesController.GetProducts(System.String)">
+            <summary>
+            Get all products of a category
+            </summary>
+            <param name="category_id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BodyBalance.Controllers.ContributorsController">
+            <summary>
+            Manage Contributors
+            </summary>
+        </member>
+        <member name="M:BodyBalance.Controllers.ContributorsController.Get">
+            <summary>
+            Get all contributors
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.ContributorsController.Get(System.String)">
+            <summary>
+            Retrieves information about a contributor
+            </summary>
+            <param name="contributor_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.ContributorsController.Post(BodyBalance.Models.ContributorModel)">
+            <summary>
+            Create a contributor
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.ContributorsController.Put(System.String,BodyBalance.Models.ContributorModel)">
+            <summary>
+            Update contributor descriptions
+            </summary>
+            <param name="contributor_id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.ContributorsController.Delete(System.String)">
+            <summary>
+            Delete a contributor
+            </summary>
+            <param name="contributor_id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BodyBalance.Controllers.EventsController">
+            <summary>
+            Manage events
+            </summary>
+        </member>
+        <member name="M:BodyBalance.Controllers.EventsController.Get">
+            <summary>
+            Get all events
+            </summary>
+            <returns> List of events</returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.EventsController.Post(BodyBalance.Models.EventModel)">
+            <summary>
+            Create an event
+            </summary>
+            <param name="model"> event model </param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.EventsController.Get(System.String)">
+            <summary>
+            Retrieves information about an event
+            </summary>
+            <param name="event_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.EventsController.Put(System.String,BodyBalance.Models.EventModel)">
+            <summary>
+            Update an event
+            </summary>
+            <param name="event_id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.EventsController.Delete(System.String)">
+            <summary>
+            Delete an event
+            </summary>
+            <param name="event_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.EventsController.GetUsers(System.String)">
+            <summary>
+            Retrieves all users of an event
+            </summary>
+            <param name="event_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.EventsController.GetContributor(System.String)">
+            <summary>
+            Retrieves the contributor of an event
+            </summary>
+            <param name="event_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.EventsController.GetManager(System.String)">
+            <summary>
+            Retrieves the manager of an event
+            </summary>
+            <param name="event_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.EventsController.RegisterUserToEvent(System.String,System.String)">
+            <summary>
+            Register a user to an event
+            </summary>
+            <param name="event_id"></param>
+            <param name="user_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.EventsController.RemoveUserToEvent(System.String,System.String)">
+            <summary>
+            Delete a user from an event
+            </summary>
+            <param name="event_id"></param>
+            <param name="user_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.EventsController.IsRegisteredUser(System.String,System.String)">
+            <summary>
+            To know if a user is register to an event
+            </summary>
+            <param name="event_id"></param>
+            <param name="user_id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BodyBalance.Controllers.ManagersController">
+            <summary>
+            Manage managers
+            </summary>
+        </member>
+        <member name="M:BodyBalance.Controllers.ManagersController.Get">
+            <summary>
+            Get all managers
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.ManagersController.Get(System.String)">
+            <summary>
+            Retrieves information about a manager
+            </summary>
+            <param name="manager_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.ManagersController.Post(BodyBalance.Models.ManagerModel)">
+            <summary>
+            Create a manager
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.ManagersController.Delete(System.String)">
+            <summary>
+            Delete a manager
+            </summary>
+            <param name="manager_id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BodyBalance.Controllers.MembersController">
+            <summary>
+            Manage members
+            </summary>
+        </member>
+        <member name="M:BodyBalance.Controllers.MembersController.Get">
+            <summary>
+            Get all members
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.MembersController.Get(System.String)">
+            <summary>
+            Retrieves information about a member
+            </summary>
+            <param name="member_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.MembersController.Post(BodyBalance.Models.MemberModel)">
+            <summary>
+            Create a member
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.MembersController.Put(System.String,BodyBalance.Models.MemberModel)">
+            <summary>
+            Update member information
+            </summary>
+            <param name="member_id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.MembersController.Delete(System.String)">
+            <summary>
+            Delete a member
+            </summary>
+            <param name="member_id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BodyBalance.Controllers.NotificationsController">
+            <summary>
+            Manage Notifications
+            </summary>
+        </member>
+        <member name="M:BodyBalance.Controllers.NotificationsController.Get">
+            <summary>
+            Get all notifications
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.NotificationsController.Get(System.String)">
+            <summary>
+            Get a specific notification
+            </summary>
+            <param name="notification_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.NotificationsController.Post(BodyBalance.Models.NotificationModel)">
+            <summary>
+            Create a notification
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.NotificationsController.Put(System.String,BodyBalance.Models.NotificationModel)">
+            <summary>
+            Update a notification
+            </summary>
+            <param name="notification_id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.NotificationsController.Delete(System.String)">
+            <summary>
+            Delete a notification
+            </summary>
+            <param name="notification_id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BodyBalance.Controllers.ProductsController">
+            <summary>
+            Manage Products
+            </summary>
+        </member>
+        <member name="M:BodyBalance.Controllers.ProductsController.Get">
+            <summary>
+            Get all products
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.ProductsController.Get(System.String)">
+            <summary>
+            Get information about a product
+            </summary>
+            <param name="product_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.ProductsController.Post(BodyBalance.Models.ProductModel)">
+            <summary>
+            Create a product
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.ProductsController.Put(System.String,BodyBalance.Models.ProductModel)">
+            <summary>
+            Update information of a product
+            </summary>
+            <param name="product_id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.ProductsController.Delete(System.String)">
+            <summary>
+            Delete a product
+            </summary>
+            <param name="product_id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BodyBalance.Controllers.PurchasesController">
+            <summary>
+            Manage Purchases
+            </summary>
+        </member>
+        <member name="M:BodyBalance.Controllers.PurchasesController.Get">
+            <summary>
+            Get all purchases
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.PurchasesController.Get(System.String)">
+            <summary>
+            Get information about a purchase
+            </summary>
+            <param name="purchaseid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.PurchasesController.Put(System.String,System.String,BodyBalance.Models.PurchaseLineModel)">
+            <summary>
+            Update a purchase line
+            </summary>
+            <param name="purchaseid"></param>
+            <param name="productid"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.PurchasesController.Delete(System.String)">
+            <summary>
+            Delete a purchase
+            </summary>
+            <param name="purchaseid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.PurchasesController.DeleteLine(System.String,System.String)">
+            <summary>
+            Delete a purchase line
+            </summary>
+            <param name="purchaseid"></param>
+            <param name="productid"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BodyBalance.Controllers.RoomsController">
+            <summary>
+            Manage Room
+            </summary>
+        </member>
+        <member name="M:BodyBalance.Controllers.RoomsController.Get">
+            <summary>
+            Get all rooms
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.RoomsController.Get(System.String)">
+            <summary>
+            Retrieves information about a room
+            </summary>
+            <param name="room_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.RoomsController.Post(BodyBalance.Models.RoomModel)">
+            <summary>
+            Create a room
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.RoomsController.Put(System.String,BodyBalance.Models.RoomModel)">
+            <summary>
+            Update information about a room
+            </summary>
+            <param name="room_id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.RoomsController.Delete(System.String)">
+            <summary>
+            Delete a room
+            </summary>
+            <param name="room_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.RoomsController.GetEvents(System.String)">
+            <summary>
+            Get all the events that will take place in a room
+            </summary>
+            <param name="room_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.RoomsController.GetAccessories(System.String)">
+            <summary>
+            Get all accessories that are in a room
+            </summary>
+            <param name="room_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.RoomsController.AddAccessories(System.String,BodyBalance.Models.AccessoryModel)">
+            <summary>
+            Add accessories in a room
+            </summary>
+            <param name="room_id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.RoomsController.DeleteAccessories(System.String,BodyBalance.Models.AccessoryModel)">
+            <summary>
+            Remove accessories to a room
+            </summary>
+            <param name="room_id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.RoomsController.UpdateAccessories(System.String,BodyBalance.Models.AccessoryModel)">
+            <summary>
+            Update number of an accessory in a room
+            </summary>
+            <param name="room_id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BodyBalance.Controllers.UsersController">
+            <summary>
+            Manage the users
+            </summary>
+        </member>
+        <member name="M:BodyBalance.Controllers.UsersController.Get">
+            <summary>
+            Retrives all users
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.UsersController.Get(System.String)">
+            <summary>
+            Retrives information about an user
+            </summary>
+            <param name="userid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.UsersController.Post(BodyBalance.Models.UserModel)">
+            <summary>
+            Create an user
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.UsersController.Put(System.String,BodyBalance.Models.UserModel)">
+            <summary>
+            Update information about an user
+            </summary>
+            <param name="userid"></param>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.UsersController.Delete(System.String)">
+            <summary>
+            Delete an user
+            </summary>
+            <param name="userid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.UsersController.GetProducts(System.String)">
+            <summary>
+            Retrieves all the products of a user
+            </summary>
+            <param name="userid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.UsersController.GetNotifications(System.String)">
+            <summary>
+            Retrieves all the notifications of an user
+            </summary>
+            <param name="userid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.UsersController.GetBaskets(System.String)">
+            <summary>
+            Retrieves the basket of an user
+            </summary>
+            <param name="userid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.UsersController.PostBasketLine(System.String,BodyBalance.Models.BasketModel)">
+            <summary>
+            Create the basket of a user
+            </summary>
+            <param name="userid"></param>
+            <param name="basket"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.UsersController.PostPurchase(System.String)">
+            <summary>
+            Validate the basket of a user
+            </summary>
+            <param name="userid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.UsersController.GetBasketLine(System.String,System.String)">
+            <summary>
+            Get a product from the basket of an user
+            </summary>
+            <param name="userid"></param>
+            <param name="productid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.UsersController.PutBasketLine(System.String,System.String,BodyBalance.Models.BasketModel)">
+            <summary>
+            Update a line of the basket 
+            </summary>
+            <param name="userid"></param>
+            <param name="productid"></param>
+            <param name="basket"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.UsersController.DeleteBasketLine(System.String,System.String)">
+            <summary>
+            Delete a product from the basket
+            </summary>
+            <param name="userid"></param>
+            <param name="productid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.UsersController.DeleteBaskets(System.String)">
+            <summary>
+            Delete the basket of an user
+            </summary>
+            <param name="userid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.UsersController.GetPurchases(System.String)">
+            <summary>
+            Get all purchases of the user
+            </summary>
+            <param name="userid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Controllers.UsersController.GetEvents(System.String)">
+            <summary>
+            Get all the events where the user is registered
+            </summary>
+            <param name="userid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IAccessoryServices.CreateAccessory(BodyBalance.Models.AccessoryModel)">
+            <summary>
+            Create an accessory
+            </summary>
+            <param name="am"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IAccessoryServices.FindAccessoryById(System.String)">
+            <summary>
+            Find an accessory with its id
+            </summary>
+            <param name="AccessoryId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IAccessoryServices.UpdateAccessory(BodyBalance.Models.AccessoryModel)">
+            <summary>
+            Update an accessory
+            </summary>
+            <param name="am"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IAccessoryServices.DeleteAccessory(BodyBalance.Models.AccessoryModel)">
+            <summary>
+            Delete an accessory
+            </summary>
+            <param name="am"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IAccessoryServices.FindAllAccessories">
+            <summary>
+            Retrieve all the accessories
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IActivityServices.CreateActivity(BodyBalance.Models.ActivityModel)">
+            <summary>
+            Create an activity
+            </summary>
+            <param name="am"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IActivityServices.FindActivityById(System.String)">
+            <summary>
+            Find an activity with its id
+            </summary>
+            <param name="ActivityId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IActivityServices.UpdateActivity(BodyBalance.Models.ActivityModel)">
+            <summary>
+            Update an activity
+            </summary>
+            <param name="am"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IActivityServices.DeleteActivity(BodyBalance.Models.ActivityModel)">
+            <summary>
+            Delete an activity
+            </summary>
+            <param name="am"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IActivityServices.FindAllActivities">
+            <summary>
+            Retrieve all the activities
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IActivityServices.FindAllEventsOfActivity(System.String)">
+            <summary>
+            Retrieve all event of the activity with the id in parameter
+            </summary>
+            <param name="ActivityId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IActivityServices.FindManagerOfActivity(System.String)">
+            <summary>
+            Find the manager of the activity with the id in parameter
+            </summary>
+            <param name="ActivityId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IAdminServices.CreateAdmin(BodyBalance.Models.AdminModel)">
+            <summary>
+            Create an admin
+            </summary>
+            <param name="am"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IAdminServices.FindAdminById(System.String)">
+            <summary>
+            Find an admin with his id
+            </summary>
+            <param name="AdminId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IAdminServices.DeleteAdmin(BodyBalance.Models.AdminModel)">
+            <summary>
+            Delete an admin
+            </summary>
+            <param name="am"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IAdminServices.FindAllAdmins">
+            <summary>
+            Retrieve all the admins
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IBasketServices.CreateBasketLine(BodyBalance.Models.BasketModel)">
+            <summary>
+            Create a line in the basket of a user
+            </summary>
+            <param name="bm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IBasketServices.FindBasketLineWithIds(System.String,System.String)">
+            <summary>
+            Find a basket line with the user and the product
+            </summary>
+            <param name="um"></param>
+            <param name="pm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IBasketServices.UpdateBasketLine(BodyBalance.Models.BasketModel)">
+            <summary>
+            Update a line in the basket of a user
+            </summary>
+            <param name="bm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IBasketServices.DeleteBasketLine(BodyBalance.Models.BasketModel)">
+            <summary>
+            Delete a line in the basket of a user
+            </summary>
+            <param name="bm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.ICategoryServices.CreateCategory(BodyBalance.Models.CategoryModel)">
+            <summary>
+            Create a category
+            </summary>
+            <param name="cm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.ICategoryServices.FindCategoryWithId(System.String)">
+            <summary>
+            Find a category with its id
+            </summary>
+            <param name="CategoryId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.ICategoryServices.UpdateCategory(BodyBalance.Models.CategoryModel)">
+            <summary>
+            Update a category
+            </summary>
+            <param name="cm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.ICategoryServices.DeleteCategory(BodyBalance.Models.CategoryModel)">
+            <summary>
+            Delete a category
+            </summary>
+            <param name="cm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.ICategoryServices.FindAllCategories">
+            <summary>
+            Retrieve all the categories
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.ICategoryServices.FindAllProductsOfCategory(System.String)">
+            <summary>
+            Find all the products of the category with the id in parameter
+            </summary>
+            <param name="CategoryId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IContributorServices.CreateContributor(BodyBalance.Models.ContributorModel)">
+            <summary>
+            Create a contributor
+            </summary>
+            <param name="cm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IContributorServices.FindContributorById(System.String)">
+            <summary>
+            Find a contributor with his id
+            </summary>
+            <param name="ContributorId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IContributorServices.UpdateContributor(BodyBalance.Models.ContributorModel)">
+            <summary>
+            Update a contributor
+            </summary>
+            <param name="cm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IContributorServices.DeleteContributor(BodyBalance.Models.ContributorModel)">
+            <summary>
+            Delete a contributor
+            </summary>
+            <param name="cm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IContributorServices.FindAllContributors">
+            <summary>
+            Retrieve all the contributors
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IContributorServices.FindAllEventsOfContributor(System.String)">
+            <summary>
+            Find all the events of a contributor with the id in parameter
+            </summary>
+            <param name="ContributorId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IEventServices.CreateEvent(BodyBalance.Models.EventModel)">
+            <summary>
+            Create an event
+            </summary>
+            <param name="em"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IEventServices.CreatePunctualEvent(BodyBalance.Models.PunctualEventModel)">
+            <summary>
+            Create a PunctualEvent
+            </summary>
+            <param name="em"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IEventServices.CreateRepetitiveEvent(BodyBalance.Models.RepetitiveEventModel)">
+            <summary>
+            Create a ReptitiveEvent
+            </summary>
+            <param name="em"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IEventServices.AddRepetitiveEventOccurrence(BodyBalance.Models.RepetitiveEventModel)">
+            <summary>
+            Add an occurence of an Event to ReptitiveEvent
+            </summary>
+            <param name="em"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IEventServices.FindEventById(System.String)">
+            <summary>
+            Find an Event with its id
+            </summary>
+            <param name="EventId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IEventServices.FindPunctualEventById(System.String)">
+            <summary>
+            Find a PunctualEvent with its id
+            </summary>
+            <param name="EventId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IEventServices.FindRepetitiveEventsById(System.String)">
+            <summary>
+            Find a RepetitiveEventList with its id 
+            </summary>
+            <param name="EventId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IEventServices.FindRepetitiveEventByIdAndDate(System.String,System.DateTime)">
+            <summary>
+            Find a RepetitiveEvent with its id and date
+            </summary>
+            <param name="EventId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IEventServices.UpdateEvent(BodyBalance.Models.EventModel)">
+            <summary>
+            Update an event
+            </summary>
+            <param name="em"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IEventServices.UpdatePunctualEvent(BodyBalance.Models.PunctualEventModel)">
+            <summary>
+            Update a Punctualevent
+            </summary>
+            <param name="em"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IEventServices.UpdateRepetitiveEvent(BodyBalance.Models.RepetitiveEventModel)">
+            <summary>
+            Update a Repetitiveevent
+            </summary>
+            <param name="em"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IEventServices.DeleteEvent(BodyBalance.Models.EventModel)">
+            <summary>
+            Delete an event
+            </summary>
+            <param name="em"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IEventServices.DeletePunctualEvent(BodyBalance.Models.PunctualEventModel)">
+            <summary>
+            Delete a punctualevent
+            </summary>
+            <param name="em"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IEventServices.DeleteRepetitiveEvent(BodyBalance.Models.RepetitiveEventModel)">
+            <summary>
+            Delete a repetitiveevent
+            </summary>
+            <param name="em"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IEventServices.DeleteRepetitiveEvents(BodyBalance.Models.EventModel)">
+            <summary>
+            Delete totaly a RepetitveEvent i.e. all of its occurence
+            </summary>r
+            <param name="em"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IEventServices.FindAllEvents">
+            <summary>
+            Retrieve all events
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IEventServices.FindAllPunctualEvents">
+            <summary>
+            Retrieve all the punctual events
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IEventServices.FindAllRepetitiveEvents">
+            <summary>
+            Retrieve all the repetitive events
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IEventServices.FindUsersOfEvent(System.String)">
+            <summary>
+            Retrieve all the users who subscribe to the event with the id in parameter
+            </summary>
+            <param name="EventId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IEventServices.FindContributorOfEvent(System.String)">
+            <summary>
+            Find the contributor of an event
+            </summary>
+            <param name="EventId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IEventServices.FindManagerOfEvent(System.String)">
+            <summary>
+            Find the manager of an event
+            </summary>
+            <param name="EventId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IEventServices.RegisterUserToEvent(System.String,BodyBalance.Models.UserModel)">
+            <summary>
+            Register the user in parameter to the event with the id in parameter
+            </summary>
+            <param name="EventId"></param>
+            <param name="um"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IEventServices.RemoveUserOfEvent(System.String,BodyBalance.Models.UserModel)">
+            <summary>
+            Remove the user in parameter of the event with the id in parameter
+            </summary>
+            <param name="EventId"></param>
+            <param name="um"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IManagerServices.CreateManager(BodyBalance.Models.ManagerModel)">
+            <summary>
+            Create a manager
+            </summary>
+            <param name="mm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IManagerServices.FindManagerById(System.String)">
+            <summary>
+            Find a manager with his id
+            </summary>
+            <param name="ManagerId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IManagerServices.DeleteManager(BodyBalance.Models.ManagerModel)">
+            <summary>
+            Delete a manager
+            </summary>
+            <param name="mm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IManagerServices.FindAllManagers">
+            <summary>
+            Retrieve all the managers
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IManagerServices.FindAllActivitiesOfManager(System.String)">
+            <summary>
+            Find all the activities of a manager with the id in parameter
+            </summary>
+            <param name="ManagerId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IManagerServices.FindAllEventsOfManager(System.String)">
+            <summary>
+            Find all the events of a manager with the id in parameter
+            </summary>
+            <param name="ManagerId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IMemberServices.CreateMember(BodyBalance.Models.MemberModel)">
+            <summary>
+            Create a member
+            </summary>
+            <param name="mm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IMemberServices.FindMemberById(System.String)">
+            <summary>
+            Find a member with his id
+            </summary>
+            <param name="MemberId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IMemberServices.UpdateMember(BodyBalance.Models.MemberModel)">
+            <summary>
+            Update a member
+            </summary>
+            <param name="mm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IMemberServices.DeleteMember(BodyBalance.Models.MemberModel)">
+            <summary>
+            Delete a member
+            </summary>
+            <param name="mm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IMemberServices.FindAllMembers">
+            <summary>
+            Retrieve all the members
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.INotificationServices.CreateNotification(BodyBalance.Models.NotificationModel)">
+            <summary>
+            Create a notification
+            </summary>
+            <param name="nm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.INotificationServices.FindNotificationWithId(System.String)">
+            <summary>
+            Find a notification with its id
+            </summary>
+            <param name="NotificationId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.INotificationServices.UpdateNotification(BodyBalance.Models.NotificationModel)">
+            <summary>
+            Update a notification
+            </summary>
+            <param name="nm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.INotificationServices.DeleteNotification(BodyBalance.Models.NotificationModel)">
+            <summary>
+            Delete a notification
+            </summary>
+            <param name="cm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.INotificationServices.FindAllNotifications">
+            <summary>
+            Retrieve all the notifications
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IProductServices.CreateProduct(BodyBalance.Models.ProductModel)">
+            <summary>
+            Create a product
+            </summary>
+            <param name="pm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IProductServices.FindProductWithId(System.String)">
+            <summary>
+            Find a product with its id
+            </summary>
+            <param name="ProductId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IProductServices.UpdateProduct(BodyBalance.Models.ProductModel)">
+            <summary>
+            Update a product
+            </summary>
+            <param name="pm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IProductServices.DeleteProduct(BodyBalance.Models.ProductModel)">
+            <summary>
+            Delete a product
+            </summary>
+            <param name="pm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IProductServices.FindAllProducts">
+            <summary>
+            Retrieve all the products
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IPurchaseLineServices.CreatePurchaseLine(BodyBalance.Models.PurchaseLineModel)">
+            <summary>
+            Create a purchaseLine
+            </summary>
+            <param name="plm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IPurchaseLineServices.FindPurchaseLineWithIds(System.String,System.String)">
+            <summary>
+            Find a purchaseLine with its PurchaseId and ProductId
+            </summary>
+            <param name="PurchaseId"></param>
+            /// <param name="ProductId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IPurchaseLineServices.UpdatePurchaseLine(BodyBalance.Models.PurchaseLineModel)">
+            <summary>
+            Update a purchase line
+            </summary>
+            <param name="plm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IPurchaseLineServices.DeletePurchaseLine(BodyBalance.Models.PurchaseLineModel)">
+            <summary>
+            Delete a purchaseLine
+            </summary>
+            <param name="pm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IPurchaseServices.CreatePurchase(BodyBalance.Models.PurchaseModel)">
+            <summary>
+            Create a purchase
+            </summary>
+            <param name="pm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IPurchaseServices.FindPurchaseWithId(System.String)">
+            <summary>
+            Find a purchase with its id
+            </summary>
+            <param name="PurchaseId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IPurchaseServices.UpdatePurchase(BodyBalance.Models.PurchaseModel)">
+            <summary>
+            Update a purchase
+            </summary>
+            <param name="pm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IPurchaseServices.DeletePurchase(BodyBalance.Models.PurchaseModel)">
+            <summary>
+            Delete a purchase
+            </summary>
+            <param name="pm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IPurchaseServices.FindAllPurchases">
+            <summary>
+            Retrieve all the purchases
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IPurchaseServices.FindAllLinesOfPurchase(System.String)">
+            <summary>
+            Find all the lines of the purchase with the id in parameter
+            </summary>
+            <param name="PurchaseId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IRoomServices.CreateRoom(BodyBalance.Models.RoomModel)">
+            <summary>
+            Create a room
+            </summary>
+            <param name="rm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IRoomServices.FindRoomById(System.String)">
+            <summary>
+            Find a room with its id
+            </summary>
+            <param name="RoomId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IRoomServices.UpdateRoom(BodyBalance.Models.RoomModel)">
+            <summary>
+            Update a room
+            </summary>
+            <param name="rm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IRoomServices.DeleteRoom(BodyBalance.Models.RoomModel)">
+            <summary>
+            Delete a room
+            </summary>
+            <param name="rm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IRoomServices.FindAllRooms">
+            <summary>
+            Retrieve all the rooms
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IRoomServices.FindAllAccessoriesOfRoom(System.String)">
+            <summary>
+            Find all the accessories of the room with the id in parameter
+            </summary>
+            <param name="RoomId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IRoomServices.FindAllEventsOfRoom(System.String)">
+            <summary>
+            Retrieve all the events which occured in the room with the id in parameter
+            </summary>
+            <param name="RoomId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IRoomServices.AddAccessoryToRoom(System.String,BodyBalance.Models.AccessoryModel,System.Nullable{System.Decimal})">
+            <summary>
+            Add an accessory to the room with the id in parameter and set its quantity
+            </summary>
+            <param name="RoomId"></param>
+            <param name="am"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IRoomServices.UpdateAccessoryInRoom(System.String,BodyBalance.Models.AccessoryModel,System.Nullable{System.Decimal})">
+            <summary>
+            Update the quantity of an accessory to the room with the id in parameter and its quantity
+            </summary>
+            <param name="RoomId"></param>
+            <param name="am"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IRoomServices.RemoveAccessoryOfRoom(System.String,BodyBalance.Models.AccessoryModel)">
+            <summary>
+            Remove an accessory to the room with the id in parameter
+            </summary>
+            <param name="RoomId"></param>
+            <param name="am"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.ITokenServices.CreateToken(BodyBalance.Models.TokenModel)">
+            <summary>
+            Create a token
+            </summary>
+            <param name="tm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.ITokenServices.FindToken(System.String,System.String)">
+            <summary>
+            Find a token with its id and its token string
+            </summary>
+            <param name="TokenId"></param>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.ITokenServices.UpdateToken(BodyBalance.Models.TokenModel)">
+            <summary>
+            Update a token
+            </summary>
+            <param name="tm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.ITokenServices.DeleteToken(BodyBalance.Models.TokenModel)">
+            <summary>
+            Delete a token
+            </summary>
+            <param name="tm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IUserServices.CreateUser(BodyBalance.Models.UserModel)">
+            <summary>
+            Create a user
+            </summary>
+            <param name="um"> A user model which contains all the information about the user</param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IUserServices.FindUserById(System.String)">
+            <summary>
+            Find a user with his id
+            </summary>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IUserServices.FindUserByIdAndPassword(System.String,System.String)">
+            <summary>
+            Find user by id and password
+            </summary>
+            <param name="UserId"></param>
+            <param name="pwd"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IUserServices.UpdateUser(BodyBalance.Models.UserModel)">
+            <summary>
+            Update a user
+            </summary>
+            <param name="um"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IUserServices.DeleteUser(BodyBalance.Models.UserModel)">
+            <summary>
+            Delete a user
+            </summary>
+            <param name="um"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IUserServices.FindAllUsers">
+            <summary>
+            Retrieves all the users
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IUserServices.IsAdmin(BodyBalance.Models.UserModel)">
+            <summary>
+            Return true if this user is an admin
+            </summary>
+            <param name="um"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IUserServices.IsContributor(BodyBalance.Models.UserModel)">
+            <summary>
+            Return true if this user is a contributor
+            </summary>
+            <param name="um"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IUserServices.IsManager(BodyBalance.Models.UserModel)">
+            <summary>
+            Return true if this user is a manager
+            </summary>
+            <param name="um"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IUserServices.IsMember(BodyBalance.Models.UserModel)">
+            <summary>
+            Return true if this user is a member
+            </summary>
+            <param name="um"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IUserServices.FindAllProductsOfUser(System.String)">
+            <summary>
+            Find all the products of the user with the id in parameter
+            </summary>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IUserServices.FindAllNotificationssOfUser(System.String)">
+            <summary>
+            Find all the notifications of the user with the id in parameter
+            </summary>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IUserServices.FindBasketOfUser(System.String)">
+            <summary>
+            Retrieve all the lines of the user's basket
+            </summary>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IUserServices.FindAllPurchasesOfUser(System.String)">
+            <summary>
+            Find all the purchases of the user with the id in parameter
+            </summary>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IUserServices.DeleteUserBasket(System.String)">
+            <summary>
+            Delete the entire basket of a user
+            </summary>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IUserServices.CreateUserPurchase(System.String)">
+            <summary>
+            Create the purchase of a user with all the lines of his basket and delete his basket
+            </summary>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Services.IUserServices.FindAllEventsOfUser(System.String)">
+            <summary>
+            Find All Events of an user
+            </summary>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Utilities.ConverterUtilities.ConvertUserToUserModel(BodyBalance.Persistence.USER1)">
+            <summary>
+            Convert a user from the database to a UserModel
+            </summary>
+            <param name="u"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Utilities.ConverterUtilities.ConvertAdminToAdminModel(BodyBalance.Persistence.ADMIN)">
+            <summary>
+            Convert an admin from the database to an AdminModel
+            </summary>
+            <param name="a"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Utilities.ConverterUtilities.ConvertContributorToContributorModel(BodyBalance.Persistence.CONTRIBUTOR)">
+            <summary>
+            Convert a contributor from the database to a ContributorModel
+            </summary>
+            <param name="c"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Utilities.ConverterUtilities.ConvertManagerToManagerModel(BodyBalance.Persistence.MANAGER)">
+            <summary>
+            Convert a manager from the database to a ManagerModel
+            </summary>
+            <param name="m"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Utilities.ConverterUtilities.ConvertMemberToMemberModel(BodyBalance.Persistence.MEMBER)">
+            <summary>
+            Convert a member from the database to a MemberModel
+            </summary>
+            <param name="m"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Utilities.ConverterUtilities.ConvertActivityToActivityModel(BodyBalance.Persistence.ACTIVITY)">
+            <summary>
+            Convert an activity from the database to an ActivityModel
+            </summary>
+            <param name="a"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Utilities.ConverterUtilities.ConvertEventToEventModel(BodyBalance.Persistence.EVENT)">
+            <summary>
+            Convert a event from the database to a EventModel
+            </summary>
+            <param name="e"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Utilities.ConverterUtilities.ConvertRoomToRoomModel(BodyBalance.Persistence.ROOM)">
+            <summary>
+            Convert a room from the database to a RoomModel
+            </summary>
+            <param name="r"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Utilities.ConverterUtilities.ConvertAccesoryToAccessoryModel(BodyBalance.Persistence.ACCESSORY)">
+            <summary>
+            Convert an accessory from the database to an AccessoryModel
+            </summary>
+            <param name="a"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Utilities.ConverterUtilities.ConvertNotificationToNotificatiobModel(BodyBalance.Persistence.NOTIFICATION)">
+            <summary>
+            Convert a notification from the database to a NotificatiobModel
+            </summary>
+            <param name="n"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Utilities.ConverterUtilities.ConvertProductToProductModel(BodyBalance.Persistence.PRODUCT)">
+            <summary>
+            Convert a product from the database to a ProductModel
+            </summary>
+            <param name="p"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Utilities.ConverterUtilities.ConvertCategoryToCategoryModel(BodyBalance.Persistence.CATEGORY)">
+            <summary>
+            Convert a category from the database to a CategoryModel
+            </summary>
+            <param name="c"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Utilities.ConverterUtilities.ConvertPurchaseToPurchaseModel(BodyBalance.Persistence.PURCHASE)">
+            <summary>
+            Convert a purchase from the database to a PurchaseModel
+            </summary>
+            <param name="p"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Utilities.ConverterUtilities.ConvertPurchaseContainsToPurchaseLineModel(BodyBalance.Persistence.PURCHASECONTAINS)">
+            <summary>
+            Convert a purchaseContains from the database to a PurchaseLineModel
+            </summary>
+            <param name="pc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BodyBalance.Utilities.ConverterUtilities.ConvertBasketToBasketModel(BodyBalance.Persistence.HASINBASKET)">
+            <summary>
+            Convert a basket from the database to a BasketModel
+            </summary>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

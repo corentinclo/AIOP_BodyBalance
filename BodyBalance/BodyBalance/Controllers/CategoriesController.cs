@@ -10,6 +10,9 @@ using System.Web.Http;
 
 namespace BodyBalance.Controllers
 {
+    /// <summary>
+    /// Manage categories
+    /// </summary>
     public class CategoriesController : ApiController
     {
         private ICategoryServices categoryServices;
@@ -23,6 +26,10 @@ namespace BodyBalance.Controllers
         }
 
         // GET: Categories
+        /// <summary>
+        /// Get all categories
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IHttpActionResult Get()
         {
@@ -40,6 +47,11 @@ namespace BodyBalance.Controllers
 
 
         // GET: Categories/{category_id}
+        /// <summary>
+        /// Retrieves information about a category
+        /// </summary>
+        /// <param name="category_id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Categories/{category_id}")]
         public IHttpActionResult Get(string category_id)
@@ -62,6 +74,11 @@ namespace BodyBalance.Controllers
         }
 
         // POST: Categories
+        /// <summary>
+        /// Create a category
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public IHttpActionResult Post([FromBody]CategoryModel model)
         {
@@ -95,6 +112,12 @@ namespace BodyBalance.Controllers
         }
 
         // PUT: Categories/{category_id}
+        /// <summary>
+        /// Update a category
+        /// </summary>
+        /// <param name="category_id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("Categories/{category_id}")]
         public IHttpActionResult Put(string category_id, [FromBody]CategoryModel model)
@@ -142,6 +165,11 @@ namespace BodyBalance.Controllers
         }
 
         // DELETE: Categories/{category_id}
+        /// <summary>
+        /// Delete a category
+        /// </summary>
+        /// <param name="category_id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("Categories/{category_id}")]
         public IHttpActionResult Delete(string category_id)
@@ -173,6 +201,11 @@ namespace BodyBalance.Controllers
         }
 
         // GET: Categories/{category_id}/Products
+        /// <summary>
+        /// Get all products of a category
+        /// </summary>
+        /// <param name="category_id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Categories/{category_id}/Products")]
         public IHttpActionResult GetProducts(string category_id)

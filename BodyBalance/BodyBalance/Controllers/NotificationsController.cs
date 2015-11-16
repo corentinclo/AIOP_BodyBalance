@@ -10,6 +10,9 @@ using System.Web.Http;
 
 namespace BodyBalance.Controllers
 {
+    /// <summary>
+    /// Manage Notifications
+    /// </summary>
     [Authorize]
     public class NotificationsController : ApiController
     {
@@ -24,6 +27,10 @@ namespace BodyBalance.Controllers
         }
 
         // GET: /Notifications
+        /// <summary>
+        /// Get all notifications
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("Notifications")]
         public IHttpActionResult Get()
@@ -45,6 +52,11 @@ namespace BodyBalance.Controllers
         }
 
         // GET: /Notifications/{notification_id}
+        /// <summary>
+        /// Get a specific notification
+        /// </summary>
+        /// <param name="notification_id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Notifications/{notification_id}")]
         public IHttpActionResult Get(string notification_id)
@@ -67,6 +79,11 @@ namespace BodyBalance.Controllers
         }
 
         // POST: /Notifications
+        /// <summary>
+        /// Create a notification
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("Notifications")]
         public IHttpActionResult Post([FromBody]NotificationModel model)
@@ -97,6 +114,12 @@ namespace BodyBalance.Controllers
         }
 
         // PUT: /Notifications/{notification_id}
+        /// <summary>
+        /// Update a notification
+        /// </summary>
+        /// <param name="notification_id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("Notifications/{notification_id}")]
         public IHttpActionResult Put(string notification_id, [FromBody]NotificationModel model)
@@ -145,6 +168,11 @@ namespace BodyBalance.Controllers
         }
 
         // DELETE: /Notifications/{notification_id}
+        /// <summary>
+        /// Delete a notification
+        /// </summary>
+        /// <param name="notification_id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("Notifications/{notification_id}")]
         public IHttpActionResult Delete(string notification_id)

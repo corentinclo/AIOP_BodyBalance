@@ -10,6 +10,9 @@ using System.Web.Http;
 
 namespace BodyBalance.Controllers
 {
+    /// <summary>
+    /// Manage the users
+    /// </summary>
     [Authorize]
     public class UsersController : ApiController
     {
@@ -25,6 +28,10 @@ namespace BodyBalance.Controllers
         }
 
         // GET: /Users
+        /// <summary>
+        /// Retrives all users
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("Users")]
         public IHttpActionResult Get()
@@ -46,6 +53,11 @@ namespace BodyBalance.Controllers
         }
 
         // GET: /Users/{userid}
+        /// <summary>
+        /// Retrives information about an user
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Users/{userid}")]
         public IHttpActionResult Get(string userid)
@@ -73,6 +85,11 @@ namespace BodyBalance.Controllers
         }
 
         // POST: /Users
+        /// <summary>
+        /// Create an user
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("Users")]
         public IHttpActionResult Post([FromBody]UserModel user)
@@ -107,6 +124,12 @@ namespace BodyBalance.Controllers
         }
 
         // PUT: /Users/{userid}
+        /// <summary>
+        /// Update information about an user
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="user"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("Users/{userid}")]
         public IHttpActionResult Put(string userid, [FromBody]UserModel user)
@@ -154,6 +177,11 @@ namespace BodyBalance.Controllers
         }
 
         // DELETE: /Users/{userid}
+        /// <summary>
+        /// Delete an user
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("Users/{userid}")]
         public IHttpActionResult Delete(string userid)
@@ -186,6 +214,11 @@ namespace BodyBalance.Controllers
         }
 
         // GET: /Users/{userid}/Products
+        /// <summary>
+        /// Retrieves all the products of a user
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Users/{userid}/Products")]
         public IHttpActionResult GetProducts(string userid)
@@ -213,6 +246,11 @@ namespace BodyBalance.Controllers
         }
 
         // GET: /Users/{userid}/Notifications
+        /// <summary>
+        /// Retrieves all the notifications of an user
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Users/{userid}/Notifications")]
         public IHttpActionResult GetNotifications(string userid)
@@ -240,6 +278,11 @@ namespace BodyBalance.Controllers
         }
 
         // GET: /Users/{userid}/Baskets
+        /// <summary>
+        /// Retrieves the basket of an user
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Users/{userid}/Baskets")]
         public IHttpActionResult GetBaskets(string userid)
@@ -267,6 +310,12 @@ namespace BodyBalance.Controllers
         }
 
         // POST: /Users/{userid}/Baskets
+        /// <summary>
+        /// Create the basket of a user
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="basket"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("Users/{userid}/Baskets")]
         public IHttpActionResult PostBasketLine(string userid, [FromBody]BasketModel basket)
@@ -301,6 +350,11 @@ namespace BodyBalance.Controllers
         }
 
         // POST: /Users/{userid}/Baskets/Validate
+        /// <summary>
+        /// Validate the basket of a user
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("Users/{userid}/Baskets/Validate")]
         public IHttpActionResult PostPurchase(string userid)
@@ -325,6 +379,12 @@ namespace BodyBalance.Controllers
         }
 
         // GET: /Users/{userid}/Baskets/{productid}
+        /// <summary>
+        /// Get a product from the basket of an user
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="productid"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Users/{userid}/Baskets/{productid}")]
         public IHttpActionResult GetBasketLine(string userid, string productid)
@@ -351,6 +411,13 @@ namespace BodyBalance.Controllers
         }
 
         // PUT: /Users/{userid}/Baskets/{productid}
+        /// <summary>
+        /// Update a line of the basket 
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="productid"></param>
+        /// <param name="basket"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("Users/{userid}/Baskets/{productid}")]
         public IHttpActionResult PutBasketLine(string userid, string productid, [FromBody]BasketModel basket)
@@ -407,6 +474,12 @@ namespace BodyBalance.Controllers
         }
 
         // DELETE: /Users/{userid}/Baskets/{productid}
+        /// <summary>
+        /// Delete a product from the basket
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="productid"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("Users/{userid}/Baskets/{productid}")]
         public IHttpActionResult DeleteBasketLine(string userid, string productid)
@@ -438,6 +511,11 @@ namespace BodyBalance.Controllers
         }
 
         // DELETE: /Users/{user-id}/Baskets
+        /// <summary>
+        /// Delete the basket of an user
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("Users/{userid}/Baskets")]
         public IHttpActionResult DeleteBaskets(string userid)
@@ -470,6 +548,11 @@ namespace BodyBalance.Controllers
         }
 
         // GET: /Users/{userid}/Purchases
+        /// <summary>
+        /// Get all purchases of the user
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Users/{userid}/Purchases")]
         public IHttpActionResult GetPurchases(string userid)
@@ -497,6 +580,11 @@ namespace BodyBalance.Controllers
         }
 
         // GET: /Users/{userid}/Events
+        /// <summary>
+        /// Get all the events where the user is registered
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Users/{userid}/Events")]
         public IHttpActionResult GetEvents(string userid)

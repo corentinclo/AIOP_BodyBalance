@@ -10,6 +10,9 @@ using System.Web.Http;
 
 namespace BodyBalance.Controllers
 {
+    /// <summary>
+    /// Manage Accessories
+    /// </summary>
     [Authorize]
     public class AccessoriesController : ApiController
     {
@@ -23,7 +26,11 @@ namespace BodyBalance.Controllers
             this.userServices = userServices;
         }
 
-        // GET: api/Accessories
+        // GET: Accessories
+        /// <summary>
+        /// Retrieves all accessories
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IHttpActionResult Get()
         {
@@ -42,7 +49,12 @@ namespace BodyBalance.Controllers
             return Ok(listAccessories);
         }
 
-        // GET: api/Accessories/{accessory_id}
+        // GET: Accessories/{accessory_id}
+        /// <summary>
+        /// Retrieves an accessory
+        /// </summary>
+        /// <param name="accessory_id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Accessories/{accessory_id}")]
         public IHttpActionResult Get(string accessory_id)
@@ -68,7 +80,12 @@ namespace BodyBalance.Controllers
             return Ok(accessory);
         }
 
-        // POST: api/Accessories
+        // POST: Accessories
+        /// <summary>
+        /// Create an accessory
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public IHttpActionResult Post([FromBody]AccessoryModel model)
         {
@@ -101,7 +118,13 @@ namespace BodyBalance.Controllers
             return InternalServerError();
         }
 
-        // PUT: api/Accessories/{accessory_id}
+        // PUT: Accessories/{accessory_id}
+        /// <summary>
+        /// Update an accessory
+        /// </summary>
+        /// <param name="accessory_id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("Accessories/{accessory_id}")]
         public IHttpActionResult Put(string accessory_id, [FromBody]AccessoryModel model)
@@ -147,7 +170,12 @@ namespace BodyBalance.Controllers
             return InternalServerError();
         }
 
-        // DELETE: api/Accessories/{accessory_id}
+        // DELETE: Accessories/{accessory_id}
+        /// <summary>
+        /// Delete an accessory
+        /// </summary>
+        /// <param name="accessory_id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("Accessories/{accessory_id}")]
         public IHttpActionResult Delete(string accessory_id)
