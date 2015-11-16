@@ -74,7 +74,7 @@ window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, functio
                     }
                 });
             });
-            if (isManager) {
+            if (isManager && val.ManagerId == window.app.username) {
                 /* DELETE AN EVENT */
                 $del.click(function () {
                     bootbox.confirm({
@@ -137,20 +137,20 @@ window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, functio
                 $("#selRoom").append("<option value=" + val.RoomId + "> N°" + val.RoomId + " - " + val.Name + "</a>");
             });
         });
-        /* TEMPORARY
         window.app.sendRestRequest('/Contributors', 'GET', null, function (data) {
             $.each(data, function (key, val) {
-                $("#selContrib").append("<option value=" + val.ContributorId + ">" + val.ContributorId + "</a>");
+                $("#selContrib").append("<option value=" + val.UserId + ">" + val.UserId + "</a>");
             });
-        });*/
+        });
     });
     $('#submitCreateButton').click(function () {
         $('#eventId_input').val($('#name_input').val());
         $('#managerId_input').val(window.app.username);
         $('#duration_input').val(1);
         window.app.ajaxifyFormJson('#create_event_form', function () {
-            bootbox.alert('Your event has been created');
-            reloadEventsPage();
+            bootbox.alert('Your event has been created', function () {
+                reloadEventsPage();
+            });
             return false;
         }, function () {
             bootbox.alert('A problem occured');
