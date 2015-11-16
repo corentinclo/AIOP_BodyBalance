@@ -369,7 +369,7 @@ namespace BodyBalance.Controllers
             var createResult = userServices.CreateUserPurchase(userid);
             if (createResult == DaoUtilities.SAVE_SUCCESSFUL)
             {
-                return Ok("Basket created sucessfully");
+                return Ok("Purchase created sucessfully");
             }
             if (createResult == DaoUtilities.UPDATE_EXCEPTION)
             {
