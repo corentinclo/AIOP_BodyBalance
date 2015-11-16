@@ -6,6 +6,7 @@ window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, functio
     //if logged in user is a manager, with get role
     if (data.UserRoles.IsManager) {
         isManager = true;
+        $('[data-visible="manager"]').show();
     }
     else {
         isManager = false
