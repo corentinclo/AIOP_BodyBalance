@@ -335,9 +335,6 @@
     <Compile Include="Persistence\NOTIFICATION.cs">
       <DependentUpon>DB_Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Persistence\PRICE.cs">
-      <DependentUpon>DB_Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Persistence\PRODUCT.cs">
       <DependentUpon>DB_Model.tt</DependentUpon>
     </Compile>

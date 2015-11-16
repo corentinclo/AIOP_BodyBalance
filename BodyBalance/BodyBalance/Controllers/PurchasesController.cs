@@ -1,5 +1,6 @@
 ﻿using BodyBalance.Models;
 using BodyBalance.Services;
+using BodyBalance.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,12 @@ namespace BodyBalance.Controllers
     public class PurchasesController : ApiController
     {
         private IPurchaseServices purchaseServices;
+        private IPurchaseLineServices purchaseLineServices;
 
-        public PurchasesController(IPurchaseServices purchaseServices)
+        public PurchasesController(IPurchaseServices purchaseServices, IPurchaseLineServices purchaseLineServices)
         {
             this.purchaseServices = purchaseServices;
+            this.purchaseLineServices = purchaseLineServices;
         }
 
         // GET: /Purchases
@@ -44,19 +47,67 @@ namespace BodyBalance.Controllers
             return Ok(purchase);
         }
 
-        // POST api/<controller>
-        public void Post([FromBody]string value)
+        // PUT: /Purchases/{purchaseid}/{productid}
+        [HttpPut]
+        [Route("Purchases/{purchaseid}/{productid}")]
+        public IHttpActionResult Put(string purchaseid, string productid, [FromBody]PurchaseLineModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid purchase line supplied");
+            }
+
+            var purchaseLine = purchaseLineServices.FindPurchaseLineWithIds(purchaseid, productid);
+
+            if (purchaseLine == null)
+            {
+                return NotFound();
+            }
+            if (purchaseLine.PurchaseId != model.PurchaseId)
+            {
+                return BadRequest("Invalid purchase id supplied");
+            }
+            if (purchaseLine.ProductId != model.ProductId)
+            {
+                return BadRequest("Invalid product id supplied");
+            }
+
+            var updateResult = purchaseLineServices.UpdatePurchaseLine(model);
+            if (updateResult == DaoUtilities.SAVE_SUCCESSFUL)
+            {
+                return Ok("Purchase line updated successfully");
+            }
+            if (updateResult == DaoUtilities.DISPOSED_EXCEPTION)
+            {
+                var ex = new Exception("Connection have been disposed");
+                return InternalServerError(ex);
+            }
+            if (updateResult == DaoUtilities.UPDATE_EXCEPTION)
+            {
+                var ex = new Exception("Make Sure that your purchase id and product id exist");
+                return InternalServerError(ex);
+            }
+
+            return InternalServerError();
         }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        // DELETE: /Purchases/{purchaseid}
+        [HttpDelete]
+        [Route("Purchases/{purchaseid}")]
+        public IHttpActionResult Delete(string purchaseid)
         {
-        }
+            var purchase = purchaseServices.FindPurchaseWithId(purchaseid);
+            if (purchase == null)
+            {
+                return BadRequest("Bad purchase id supplied");
+            }
 
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
+            var deleteResult = purchaseServices.DeletePurchase(purchase);
+            if (deleteResult == DaoUtilities.SAVE_SUCCESSFUL)
+            {
+                return Ok("Purchase deleted successfully");
+            }
+            return InternalServerError();
         }
     }
 }

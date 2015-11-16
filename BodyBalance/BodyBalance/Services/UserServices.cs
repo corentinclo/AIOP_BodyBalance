@@ -78,17 +78,7 @@ namespace BodyBalance.Services
         {
             USER1 u = db.USER1.Find(UserId);
 
-            UserModel um = cu.ConvertUserToUserModel(u);
-
-            if ( um != null)
-            {
-                um.UserRoles = new RolesModel();
-                um.UserRoles.IsAdmin = IsAdmin(um);
-                um.UserRoles.IsContributor = IsContributor(um);
-                um.UserRoles.IsManager = IsManager(um);
-                um.UserRoles.IsMember = IsMember(um);
-            }
-            return um;
+            return cu.ConvertUserToUserModel(u);
         }
 
         public UserModel FindUserByIdAndPassword(string id, string pwd)
