@@ -85,7 +85,7 @@ namespace BodyBalance.Controllers
 
             if (!ModelState.IsValid)
             {
-                return BadRequest("Invalid manager supplied");
+                return BadRequest("Invalid member supplied");
             }
 
             var createResult = memberServices.CreateMember(model);
