@@ -29,6 +29,7 @@ namespace BodyBalance.Controllers
 
         // GET: Products/{product_id}
         [HttpGet]
+        [Route("Products/{product_id}")]
         public IHttpActionResult Get(string product_id)
         {
             var product = productServices.FindProductWithId(product_id);
@@ -63,6 +64,7 @@ namespace BodyBalance.Controllers
 
         // PUT: api/Products/{product_id}
         [HttpPut]
+        [Route("Products/{product_id}")]
         public IHttpActionResult Put(string product_id, [FromBody]ProductModel model)
         {
             if (!ModelState.IsValid)
@@ -102,6 +104,7 @@ namespace BodyBalance.Controllers
 
         // DELETE: api/Products/{product_id}
         [HttpDelete]
+        [Route("Products/{product_id}")]
         public IHttpActionResult Delete(string product_id)
         {
             var product = productServices.FindProductWithId(product_id);

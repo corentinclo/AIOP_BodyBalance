@@ -30,6 +30,7 @@ namespace BodyBalance.Controllers
 
         // GET: Categories/{category_id}
         [HttpGet]
+        [Route("Categories/{category_id}")]
         public IHttpActionResult Get(string category_id)
         {
             var category = categoryServices.FindCategoryWithId(category_id);
@@ -64,6 +65,7 @@ namespace BodyBalance.Controllers
 
         // PUT: Categories/{category_id}
         [HttpPut]
+        [Route("Categories/{category_id}")]
         public IHttpActionResult Put(string category_id, [FromBody]CategoryModel model)
         {
             if (!ModelState.IsValid)
@@ -98,6 +100,7 @@ namespace BodyBalance.Controllers
 
         // DELETE: Categories/{category_id}
         [HttpDelete]
+        [Route("Categories/{category_id}")]
         public IHttpActionResult Delete(string category_id)
         {
             var category = categoryServices.FindCategoryWithId(category_id);

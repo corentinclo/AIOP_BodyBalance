@@ -31,6 +31,7 @@ namespace BodyBalance.Controllers
 
         // GET: api/Rooms/{room_id}
         [HttpGet]
+        [Route("Rooms/{room_id}")]
         public IHttpActionResult Get(string room_id)
         {
             var room = roomServices.FindRoomById(room_id);
@@ -65,6 +66,7 @@ namespace BodyBalance.Controllers
 
         // PUT: api/Rooms/{room_id}
         [HttpPut]
+        [Route("Rooms/{room_id}")]
         public IHttpActionResult Put(string room_id, [FromBody]RoomModel model)
         {
             if (!ModelState.IsValid)
@@ -98,6 +100,7 @@ namespace BodyBalance.Controllers
 
         // DELETE: api/Rooms/{room_id}
         [HttpDelete]
+        [Route("Rooms/{room_id}")]
         public IHttpActionResult Delete(string room_id)
         {
             var room = roomServices.FindRoomById(room_id);

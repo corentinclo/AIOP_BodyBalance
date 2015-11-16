@@ -30,6 +30,7 @@ namespace BodyBalance.Controllers
 
         // GET: api/Accessories/{accessory_id}
         [HttpGet]
+        [Route("Accessories/{accessory_id}")]
         public IHttpActionResult Get(string accessory_id)
         {
             var accessory = accessoryServices.FindAccessoryById(accessory_id);
@@ -64,6 +65,7 @@ namespace BodyBalance.Controllers
 
         // PUT: api/Accessories/{accessory_id}
         [HttpPut]
+        [Route("Accessories/{accessory_id}")]
         public IHttpActionResult Put(string accessory_id, [FromBody]AccessoryModel model)
         {
             if (!ModelState.IsValid)
@@ -97,6 +99,7 @@ namespace BodyBalance.Controllers
 
         // DELETE: api/Accessories/{accessory_id}
         [HttpDelete]
+        [Route("Accessories/{accessory_id}")]
         public IHttpActionResult Delete(string accessory_id)
         {
             var accessory = accessoryServices.FindAccessoryById(accessory_id);
