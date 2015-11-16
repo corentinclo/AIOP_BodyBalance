@@ -14,5 +14,6 @@ namespace BodyBalance.Models
         public decimal MemberReduction { get; set; }
         public string CategoryId { get; set; }
         public string UserId { get; set; }
+        public decimal Price { get; set; }
     }
 }
