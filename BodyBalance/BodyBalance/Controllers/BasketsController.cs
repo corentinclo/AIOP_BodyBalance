@@ -10,6 +10,7 @@ using System.Web.Http;
 
 namespace BodyBalance.Controllers
 {
+    [Authorize]
     public class BasketsController : ApiController
     {
         private IBasketServices basketServices;

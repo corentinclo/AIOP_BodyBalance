@@ -10,7 +10,7 @@ using System.Web.Http;
 
 namespace BodyBalance.Controllers
 {
-    
+    [Authorize]
     public class UsersController : ApiController
     {
         private IUserServices userServices;
@@ -123,7 +123,6 @@ namespace BodyBalance.Controllers
             return InternalServerError();
         }
 
-
         // GET: /Users/{user-id}/Products
         [HttpGet]
         [Route("Users/{userid}/Products")]
@@ -167,6 +166,41 @@ namespace BodyBalance.Controllers
             var listBaskets = userServices.FindBasketOfUser(userid);
 
             return Ok(listBaskets);
+        }
+
+        // DELETE: /Users/{user-id}/Baskets
+        [HttpDelete]
+        [Route("Users/{userid}/Baskets")]
+        public IHttpActionResult DeleteBaskets(string userid)
+        {
+            var user = userServices.FindUserById(userid);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var deleteResult = userServices.DeleteUserBasket(userid);
+            if (deleteResult == DaoUtilities.SAVE_SUCCESSFUL)
+            {
+                return Ok();
+            }
+
+            return InternalServerError();
+        }
+
+        // GET: /Users/{user-id}/Purchases
+        [HttpGet]
+        [Route("Users/{userid}/Purchases")]
+        public IHttpActionResult GetPurchases(string userid)
+        {
+            var user = userServices.FindUserById(userid);
+            if (user == null)
+            {
+                return BadRequest("Bad user id supplied");
+            }
+            var listPurchases = userServices.FindAllPurchasesOfUser(userid);
+
+            return Ok(listPurchases);
         }
     }
 }
