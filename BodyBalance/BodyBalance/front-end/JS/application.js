@@ -146,11 +146,81 @@
     Application.prototype.processCookies = function () {
         var t = this;
         if (document.cookie.indexOf('access_token') >= 0 && document.cookie.indexOf('uid') >= 0) {
-            window.app.token = $.cookie('access_token');
-            window.app.username = $.cookie('uid');
+            t.token = $.cookie('access_token');
+            t.username = $.cookie('uid');
             return true;
         }
         return false;
+    }
+
+    Application.prototype.reloadBasket = function () {
+        var t = this;
+        t.sendRestRequest("/Users/" + t.username + "/Baskets", "GET", null, function (data) {
+            t.basket = data;
+            if (data.length == 0) {
+                $('.basket .badge').html('');
+            }
+            else {
+                $('.basket .badge').html(data.length);
+            }
+        })
+    }
+
+    Application.prototype.setProductInBasket = function (product_id, quantity) {
+        var t = this;
+        if (t.basket.length == 0) {
+            var data = { UserId: t.username, ProductId: product_id, Quantity: quantity };
+            t.sendRestRequest('/Users/' + t.username + '/Baskets', 'POST', data, function () {
+                t.reloadBasket();
+            }, function () {
+                bootbox.alert("An error occured while adding the product to your cart", function () { location.reload(); })
+            }, 'application/json', true);
+        }
+        else {
+            var found = false;
+            $.each(t.basket, function (_, e) {
+                if (e.ProductId == product_id) {
+                    if (e.Quantity != quantity && quantity != 0) {
+                        e.Quantity = quantity;
+                        t.sendRestRequest('/Users/' + t.username + '/Baskets/' + product_id, 'PUT', e, $.noop, function () {
+                            bootbox.alert("An error occured while adding the product to your cart", function () { location.reload(); })
+                        }, 'application/json', true);
+                    }
+                    else if (quantity == 0) {
+                        t.sendRestRequest('/Users/' + t.username + '/Baskets/' + product_id, 'DELETE', null, function () {
+                            t.reloadBasket();
+                        }, function () {
+                            bootbox.alert("An error occured while adding the product to your cart", function () { location.reload(); })
+                        });
+                    }
+                    found = true;
+                    return false; //Sort du foreach
+                }
+            });
+            if (!found) {
+                var data = { UserId: t.username, ProductId: product_id, Quantity: quantity };
+                t.sendRestRequest('/Users/' + t.username + '/Baskets', 'POST', data, function () {
+                    t.reloadBasket();
+                }, function () {
+                    bootbox.alert("An error occured while adding the product to your cart", function () { location.reload(); })
+                }, 'application/json', true);
+            }
+        }
+    }
+
+    Application.prototype.getProductInBasket = function (id) {
+        var t = this;
+        if (t.basket.length == 0) {
+            return undefined;
+        }
+        var res = undefined;
+        $.each(t.basket, function (_, e) {
+            if (e.ProductId == id) {
+                res = e;
+                return false;
+            }
+        });
+        return res;
     }
 
     window.app = new Application();
