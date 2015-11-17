@@ -56,6 +56,7 @@
             $('#collapseTwo').html('<p class="text-info text-center">There isn\'t any purchase yet.</p>');
         }
         else {
+            var i = data.length;
             $.each(data, function (_, e) {
                 $('#purchaseTable tbody').append($('<tr style="cursor: pointer"><td>' + dateFromISO8601(e.PurchaseDate).toLocaleDateString() + '</td><td>' + e.TotalPrice + '€</td></tr>').click(function () {
                     window.app.sendRestRequest('/Purchases/' + e.PurchaseId, "GET", null, function (dt) {
@@ -74,13 +75,13 @@
                                         '</td>' +
                                         '<td>' +
                                             product.Price +
-                                        '</td>' +
+                                        '€</td>' +
                                         '<td>' +
                                             line.Quantity +
                                         '</td>' +
                                         '<td><b>' +
                                             product.Price * line.Quantity +
-                                        '</b></td>' +
+                                        '€</b></td>' +
                                     '</tr>')
                                 );
                             }, $.noop);
@@ -89,11 +90,15 @@
                             title: "Purchase details",
                             message: '<div id="purchaseDetails"></div>'
                         });
-                        $('#purchaseDetails').append($table).append('<p class="text-info">Total : ' + e.TotalPrice +'€</p>');
+                        $('#purchaseDetails').append($table).append('<p class="text-info text-right">Total : ' + e.TotalPrice +'€</p>');
                     }, function () {
                         bootbox.alert('An error occured');
                     })
                 }));
+                i--;
+                if (i == 0) {
+                    $('#purchaseTable').dataTable();
+                }
             });
         }
     }, function () {
