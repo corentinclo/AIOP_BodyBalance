@@ -21,6 +21,9 @@ window.app.mappers['#products'] = function () {
 }
 
 window.app.mappers['#cart'] = function () {
+    $.get('pages/Basket.html', null, function (result) {
+        $('#main').html(result);
+    });
     return false;
 }
 

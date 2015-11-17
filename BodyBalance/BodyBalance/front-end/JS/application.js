@@ -8,6 +8,7 @@
         this.token = "";
         this.username = "";
         this.basket = [];
+        this.onBasket = false;
     }
 
 
@@ -163,7 +164,11 @@
             else {
                 $('.basket .badge').html(data.length);
             }
-        })
+
+            if (t.onBasket) {
+                t.mappers['#cart']();
+            }
+        });
     }
 
     Application.prototype.setProductInBasket = function (product_id, quantity) {

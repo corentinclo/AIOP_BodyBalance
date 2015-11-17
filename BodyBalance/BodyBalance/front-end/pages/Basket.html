@@ -1,0 +1,56 @@
+﻿<div class="col-xs-12 col-md-10 col-md-offset-1">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        My Basket
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body table-responsive">
+                    <table class="table table-striped" id="basketTable">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th class="no-sort">Description</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th class="no-sort">Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+                <button class="btn btn-primary" id="confirmBasketBtn" style="margin:5px;">Validate your purchase</button><p class="pull-right" style="display:inline-block">Total : <span data-bind="total"></span></p>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Previous purchases
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="panel-body table-responsive">
+                    <table class="table table-striped" id="purchaseTable">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Prix total</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+
+<script src="JS/pages/Basket.js"></script>

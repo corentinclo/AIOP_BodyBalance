@@ -55,8 +55,8 @@ window.app.sendRestRequest('/Categories', 'GET', null, function (cat) {
     },
     'application/json');
 }, function () {
-
-})
+    bootbox.alert('An error occured. Please try again later');
+});
 function addProductToCart(id, fct) {
     var was = parseInt($('tr[data-pid="' + id + '"] .counter span').text());
     var available = parseInt($('tr[data-pid="' + id + '"] .available-qty').text()) - was;
