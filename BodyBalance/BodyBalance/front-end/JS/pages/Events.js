@@ -39,8 +39,9 @@ window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, functio
             var $edit = null;
             var $users = null;
             if (isManager && val.ManagerId == window.app.username) {
-                $edit = $('<div class="pull-left"><button class="btn btn-default"><i class="fa fa-edit"></i></button></div>').prependTo($panelHeading).find('button').tooltip({ title: "Edit", placement: "top", trigger: "hover" });
-                $del = $("<div class='pull-right'><button class='btn btn-danger'><i class='fa fa-times'></i></button></div>").prependTo($panelHeading).find('button').tooltip({ title: "Delete", placement: "top", trigger: "hover" });
+                $edit = $('<button type="button" class="btn btn-primary btn-xs"><i class="fa fa-edit fa-fw"></i></button>').tooltip({ container: "body", title: "Edit", placement: "top", trigger: "hover" });
+                $del = $("<button type='button' class='btn btn-danger btn-xs'><i class='fa fa-times fa-fw'></i></button>").tooltip({ container: "body", title: "Delete", placement: "top", trigger: "hover" }).css('margin-left', '-6px');
+                $panelHeading.prepend('<div style="position:absolute; left:5px; top:0;"><div class="btn-group" role="group"></div></div>').find('.btn-group').append($edit).append($del);
             }
             if (val.ManagerId == window.app.username || val.ContributorId == window.app.username) {
                 $users = $('<div class="pull-right"><button class="btn btn-primary"><i class="fa fa-users"></i></button></div>').appendTo($panelBody).find('button').tooltip({ title: "See the registered users", placement: "top", trigger: "hover" });
@@ -84,7 +85,16 @@ window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, functio
 
             window.app.sendRestRequest("/Events/" + val.EventId + "/IsRegisteredUser/" + window.app.username, "GET", null, function (data) {
                 if (data === true) {
-                    $reg.off('click').html('Registered <i class="fa fa-check-circle"></i>').addClass('disabled');
+                    $panelHeading.prepend('<div class="text-success event-registered">Registered <i class="fa fa-check-circle"></i></div>')
+                    $reg.off('click').html('Unsubscribe <i class="fa fa-times"></i>').removeClass('btn-primarystyle').addClass('btn-danger').click(function () {
+                        window.app.sendRestRequest('/Events/' + val.EventId + '/Users/' + window.app.username, "DELETE", null, function () {
+                            bootbox.alert('You are not on this event anymore', function () {
+                                reloadEventsPage();
+                            });
+                        }, function () {
+                            bootbox.alert('An error occured, please try again later');
+                        })
+                    });
                     if (!$item.hasClass('minetrue')) {
                         $item.addClass('minetrue');
                     }

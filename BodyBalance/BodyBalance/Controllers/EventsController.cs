@@ -363,7 +363,7 @@ namespace BodyBalance.Controllers
         /// <param name="user_id"></param>
         /// <returns></returns>
         [HttpDelete]
-        [Route("Events/{event_id}/RemoveUser")]
+        [Route("Events/{event_id}/Users/{user_id}")]
         public IHttpActionResult RemoveUserToEvent(string event_id, string user_id)
         {
             /** Check Permissions **/

@@ -90,6 +90,7 @@ footer {
     overflow: hidden;
     background-color: #ccc !important;
     color:#444444!important;
+    position:relative;
 }
 .panel-footer {
     overflow: hidden;
@@ -176,3 +177,23 @@ input[type=checkbox].checkbox-toggle + label:before { letter-spacing: 5px; } /* 
 
 input[type=checkbox].checkbox-toggle:checked + label:before { content: "\f205"; width: 1.28571429em; } /* Checked */
 input[type=checkbox].checkbox-toggle:checked + label:before { letter-spacing: 5px; } /* Espace avant le label */
+
+.event-registered {
+    font-style: italic;
+    font-size: 0.75em;
+    position: absolute;
+    right: 0px;
+    top: 0;
+    padding: 3px;
+    border-left: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    border-bottom-left-radius: 3px;
+}
+
+
+/* Fix for Datatables */
+.no-sort::after { display: none!important; }
+.no-sort { pointer-events: none!important; cursor: default!important; }
+#cur-task-container {
+    position:absolute;
+}

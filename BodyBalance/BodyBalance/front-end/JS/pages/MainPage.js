@@ -20,6 +20,10 @@ window.app.mappers['#products'] = function () {
     return false;
 }
 
+window.app.mappers['#cart'] = function () {
+    return false;
+}
+
 
 $('[data-visible="loggedIn"]').show();
 window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, function (data) {
@@ -63,15 +67,7 @@ window.app.sendRestRequest("/Users/" + window.app.username + "/Events", "GET", n
     bootbox.alert("An error occurred while loading your events.");
 });
 
-window.app.sendRestRequest("/Users/" + window.app.username + "/Baskets", "GET", null, function (data) {
-    window.app.basket = data;
-    if (data.length == 0) {
-        $('.basket .badge').html('');
-    }
-    else {
-        $('.basket .badge').html(data.length);
-    }
-})
+window.app.reloadBasket();
 
 // function to convert date in ISO8601 format to a date for all browsers
 function dateFromISO8601(iso8601Date) {
