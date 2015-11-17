@@ -364,6 +364,7 @@ namespace BodyBalance.Services
             IProductServices prs = new ProductServices();
             IPurchaseServices pus = new PurchaseServices();
             IPurchaseLineServices pls = new PurchaseLineServices();
+            IBasketServices bs = new BasketServices();
 
             List<BasketModel> bm = FindBasketOfUser(UserId);
 
@@ -374,11 +375,14 @@ namespace BodyBalance.Services
             pm.TotalPrice = 0;
 
             List<PurchaseLineModel> purchaseLines = new List<PurchaseLineModel>();
+            List<ProductModel> products = new List<ProductModel>();
 
             foreach (BasketModel bl in bm)
             {
                 ProductModel prm = prs.FindProductWithId(bl.ProductId);
-                pm.TotalPrice += prm.Price;
+                prm.AvailableQuantity -= ((int)bl.Quantity);
+                products.Add(prm);
+                pm.TotalPrice += prm.Price * bl.Quantity;
 
                 PurchaseLineModel plm = new PurchaseLineModel();
                 plm.ProductId = bl.ProductId;
@@ -399,7 +403,34 @@ namespace BodyBalance.Services
                 }
                 if (result == DaoUtilities.SAVE_SUCCESSFUL)
                 {
-                    result =  DeleteUserBasket(UserId);
+                    foreach (ProductModel prm in products)
+                    {
+                        result = prs.UpdateProduct(prm);
+                        if (result != DaoUtilities.SAVE_SUCCESSFUL)
+                            break;
+                    }
+                    if (result == DaoUtilities.SAVE_SUCCESSFUL)
+                    {
+                        result = DeleteUserBasket(UserId);
+                    }
+                    else
+                    {
+                        foreach (ProductModel prm in products)
+                        {
+                            ProductModel prm2 = prs.FindProductWithId(prm.ProductId);
+                            if(prm == prm2)
+                            {
+                                BasketModel bm2 = bs.FindBasketLineWithIds(UserId, prm.ProductId);
+                                prm.AvailableQuantity += ((int)bm2.Quantity);
+                                prs.UpdateProduct(prm);
+                            } 
+                        }
+                        db.PURCHASE.Remove(p);
+                    }                    
+                }
+                else
+                {
+                    db.PURCHASE.Remove(p);
                 }
             }
 
