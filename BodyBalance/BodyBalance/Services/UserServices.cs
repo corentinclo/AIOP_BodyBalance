@@ -378,7 +378,7 @@ namespace BodyBalance.Services
             foreach (BasketModel bl in bm)
             {
                 ProductModel prm = prs.FindProductWithId(bl.ProductId);
-                pm.TotalPrice += prm.Price;
+                pm.TotalPrice += prm.Price*bl.Quantity;
 
                 PurchaseLineModel plm = new PurchaseLineModel();
                 plm.ProductId = bl.ProductId;
