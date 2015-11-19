@@ -44,6 +44,7 @@
     
     // CREATE
         $('#submitCreateButton').click(function () {
+            $('#submitCreateButton').prop("disable",true);
             window.app.ajaxifyFormJson('#create_room_form', function () {
                 bootbox.alert('Your room has been created', function () {
                     $('#createRoomModal').on('hidden.bs.modal', function () {

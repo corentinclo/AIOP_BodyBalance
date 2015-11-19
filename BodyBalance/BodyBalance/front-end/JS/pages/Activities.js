@@ -19,6 +19,7 @@
             addOneActivity(val);
          
         });
+        $('#activitiesTable').dataTable({ lengthChange: false });
     });
 
     $('.myActButton').click(function () {

@@ -443,6 +443,7 @@
     <Content Include="front-end\JS\pages\ActivityEvents.js" />
     <Content Include="front-end\JS\pages\AdminPanelCategory.js" />
     <Content Include="front-end\JS\pages\AdminPanelRoom.js" />
+    <Content Include="front-end\JS\pages\AdminPanelPurchase.js" />
     <Content Include="front-end\JS\pages\AdminPanelUser.js" />
     <Content Include="front-end\JS\pages\Basket.js" />
     <Content Include="front-end\JS\pages\Events.js" />
@@ -454,6 +455,7 @@
     <Content Include="front-end\pages\ActivityEvents.html" />
     <Content Include="front-end\pages\AdminPanelCategory.html" />
     <Content Include="front-end\pages\AdminPanelRoom.html" />
+    <Content Include="front-end\pages\AdminPanelPurchase.html" />
     <Content Include="front-end\pages\AdminPanelUser.html" />
     <Content Include="front-end\pages\Basket.html" />
     <Content Include="front-end\pages\Events.html" />

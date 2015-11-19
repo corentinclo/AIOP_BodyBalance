@@ -21,7 +21,7 @@
                     $tr.find(".admin").prop("checked", true);
 
                 $("#userInfoModal").modal({ show: false });
-                $(".infoBtn").click(function () {
+                $tr.find(".infoBtn").click(function () {
                     var $modal = $("#userInfoModal");
                     $modal.find(".modal-body").empty();
                     $("#modalLabel").empty();

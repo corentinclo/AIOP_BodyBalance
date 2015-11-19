@@ -10,6 +10,8 @@ window.app.mappers['#myaccount'] = function () {
     $.get('pages/MyAccount.html', null, function (result) {
         $('body').append(result);
     });
+    $("li.active").removeClass("active");
+    $("#myaccount").toggleClass("active");
     return false;
 }
 
@@ -35,18 +37,32 @@ window.app.mappers['#adminPanelUser'] = function () {
     $.get('pages/AdminPanelUser.html', null, function (result) {
         $('#main').html(result);
     });
+    $("li.active").removeClass("active");
+    $("#adminPanel").toggleClass("active");
     return false;
 }
 window.app.mappers['#adminPanelRoom'] = function () {
     $.get('pages/AdminPanelRoom.html', null, function (result) {
         $('#main').html(result);
     });
+    $("li.active").removeClass("active");
+    $("#adminPanel").toggleClass("active");
     return false;
 }
 window.app.mappers['#adminPanelCategory'] = function () {
     $.get('pages/AdminPanelCategory.html', null, function (result) {
         $('#main').html(result);
     });
+    $("li.active").removeClass("active");
+    $("#adminPanel").toggleClass("active");
+    return false;
+}
+window.app.mappers['#adminPanelPurchase'] = function () {
+    $.get('pages/AdminPanelPurchase.html', null, function (result) {
+        $('#main').html(result);
+    });    
+    $("li.active").removeClass("active");
+    $("#adminPanel").toggleClass("active");
     return false;
 }
 
