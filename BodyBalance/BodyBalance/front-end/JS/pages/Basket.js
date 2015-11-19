@@ -14,7 +14,7 @@
     /** BASKET **/
     var i = window.app.basket.length;
     if (i == 0) {
-        $('#collapseOne').html('<p class="text-info text-center">Your basket is empty</p>');
+        $('#collapseOne').html('<p class="text-info text-center">Your cart is empty</p>');
     }
     else {
         $.each(window.app.basket, function (_, e) {

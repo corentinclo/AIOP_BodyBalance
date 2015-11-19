@@ -17,6 +17,8 @@ window.app.mappers['#products'] = function () {
     $.get('pages/Products.html', null, function (result) {
         $('#main').html(result);
     });
+    $("li.active").removeClass("active");
+    $("#products").toggleClass("active");
     return false;
 }
 
@@ -24,6 +26,8 @@ window.app.mappers['#cart'] = function () {
     $.get('pages/Basket.html', null, function (result) {
         $('#main').html(result);
     });
+    $("li.active").removeClass("active");
+    $("#cart").toggleClass("active");
     return false;
 }
 
