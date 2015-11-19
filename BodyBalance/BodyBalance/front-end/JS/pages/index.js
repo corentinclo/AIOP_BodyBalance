@@ -70,6 +70,7 @@ window.app.ajaxifyForm('#login_form', function (result) {
         });
         return false;
     }
+    window.app.mappers['#']();
 }, function (result) {
     $('#login_form input[type=submit]').attr('disabled', false);
     bootbox.alert('Bad username or password');
