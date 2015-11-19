@@ -94,6 +94,8 @@ $(function () {
                 $.get('pages/MainPage.html', null, function (data) {
                     $('#main').html(data);
                 });
+                $("li.active").removeClass("active");
+                $("#home").toggleClass("active");
                 return false;
             }
         }, function () {
