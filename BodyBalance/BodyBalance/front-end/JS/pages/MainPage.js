@@ -17,6 +17,8 @@ window.app.mappers['#products'] = function () {
     $.get('pages/Products.html', null, function (result) {
         $('#main').html(result);
     });
+    $("li.active").removeClass("active");
+    $("#products").toggleClass("active");
     return false;
 }
 

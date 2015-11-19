@@ -56,7 +56,7 @@ window.app.mappers['#events'] = function () {
 window.app.mappers['#adminPanel'] = function () {
     $.get('pages/AdminPanel.html', null, function (data) {
         $("li.active").removeClass("active");
-        $("#adminPanel").toggleClass("active"),
+        $("#adminPanel").toggleClass("active");
         $('#main').html(data);
     });
     return false;
@@ -68,6 +68,8 @@ window.app.ajaxifyForm('#login_form', function (result) {
         $.get('pages/MainPage.html', null, function (data) {
             $('#main').html(data);
         });
+        $("li.active").removeClass("active");
+        $("#home").toggleClass("active");
         return false;
     }
     window.app.mappers['#']();
