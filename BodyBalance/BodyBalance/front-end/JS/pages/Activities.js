@@ -44,11 +44,13 @@
         $('#activityId_input').val($('#name_input').val());
         $('#managerId_input').val(myId);
         window.app.ajaxifyFormJson('#create_act_form', function () {
-            bootbox.alert('Your activity has been created');
-            return false;
+            $('#createActModal').on('hidden.bs.modal', function () {
+                bootbox.alert('Your activity has been created', function () {
+                    reloadActivitiesPage();
+                });
+            }).modal('hide');
         }, function () {
             bootbox.alert('A problem occured');
-            return false;
         },
         'application/json', function () {
             $('#create_act_form button').attr('disabled', true);
@@ -114,6 +116,15 @@ function showActivityEvents(activityId) {
                 sortBy: ['timestamp']
             });
         }
+    }, function () {
+        if ($(".grid").length) {
+            $(".grid").empty();
+            var $grid = $(".grid");
+        } else {
+            $(document.createElement("hr")).appendTo("#main");
+            var $grid = $(document.createElement("div")).addClass("grid").appendTo("#main");
+        }
+        $grid.append("<p>No event for this activity.</p>");
     });
 };
 
@@ -147,36 +158,32 @@ function addOneActivity(val) {
                     label: "Update",
                     className: "btn-warning",
                     callback: function () {
-                        $('#updateActModal').modal('toggle');
-                        //On remplit le formulaire avec le compte utilisateur
-                        window.app.sendRestRequest('/Activities/' + val.ActivityId, 'GET', null, function (data) {
-                            window.app.FillFormWithObject('#update_act_form', data);
-                        },
-                        function () {
-                            bootbox.alert('An error has occured, we were unable to get this activity informations');
-                        });
+                        var url = $('#update_act_form').attr('action');
+                        $('#update_act_form').attr('action', url + '/' + val.ActivityId);
+                        var tempObj = val;
+                        tempObj.ManagerId = window.app.username;
+                        window.app.FillFormWithObject('#update_act_form', tempObj);
+                        $('#updateActModal').modal('show');
                         window.app.ajaxifyFormJson('#update_act_form', function () {
-                            $('#updateActModal button').attr('disabled', false);
-                            bootbox.alert('Your informations have been updated');
-                            return false;
+                            $('#updateActModal').on('hidden.bs.modal', function () {
+                                bootbox.alert('The activity has been updated', function () {
+                                    reloadActivitiesPage();
+                                });
+                            }).modal('hide');
                         }, function () {
-                            $('#updateActModal button').attr('disabled', false);
-                            bootbox.alert('Wrong password');
-                            return false;
+                            bootbox.alert('An error occured');
                         },
-                        'application/json', function () {
-                            $('#updateActModal button').attr('disabled', true);
-                        }, true);
-                        $('#update_act_form').attr('action', '/Activities/' + val.ActivityId);
+                        'application/json', undefined, true);
                     }
                 },
                 del: {
                     label: "Delete",
                     className: "btn-danger",
                     callback: function () {
-                        var activityId = val.Name;
+                        var activityId = val.ActivityId;
                         window.app.sendRestRequest("/Activities/" + activityId, "DELETE", null, function () {
-                            bootbox.alert( activityId+" has been deleted");
+                            bootbox.alert(val.Name + " has been deleted");
+                            reloadActivitiesPage();
                         },
                         function () {
                             bootbox.alert("An error has occured and the activity couldn't be deleted.");
@@ -187,7 +194,7 @@ function addOneActivity(val) {
                     label: "This activity events",
                     className: "btn-success",
                     callback: function () {
-                        var activityId = val.Name;
+                        var activityId = val.ActivityId;
                         showActivityEvents(activityId);
                     }
                 },
@@ -220,3 +227,6 @@ function addOneActivity(val) {
     }
 }
 
+function reloadActivitiesPage() {
+    window.app.mappers['#activities']();
+}

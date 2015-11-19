@@ -222,9 +222,11 @@ window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, functio
         $("#edit_selRoom").html('');
         $("#selContrib").html('');
         $("#edit_selContrib").html('');
-        $.each(actList, function (key, val) {
-            $("#selActivity").append("<option value=" + val + "> " + val + "</a>");
-            $("#edit_selActivity").append("<option value=" + val + "> " + val + "</a>");
+        window.app.sendRestRequest('/Activities', 'GET', null, function (data) {
+            $.each(data, function (key, val) {
+                $("#selActivity").append("<option value=" + val.ActivityId + "> " + val.ActivityId + "</a>");
+                $("#edit_selActivity").append("<option value=" + val.ActivityId + "> " + val.ActivityId + "</a>");
+            });
         });
 
         $.each(typeList, function (key, val) {
