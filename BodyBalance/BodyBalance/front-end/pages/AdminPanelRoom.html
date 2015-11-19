@@ -1,0 +1,104 @@
+﻿<div id="adminPanelRoom">
+    <button class="btn btn-primarystyle createRoomButton center-block" data-toggle="modal" data-target="#createRoomModal">Add a room</button>
+    <div id="roomList">
+        <table class="table table-hover" id="roomTable">
+            <thead>
+                <tr>
+                    <th>N°</th>
+                    <th>Name</th>
+                    <th>Capacity</th>
+                    <th>Superficy</th>
+                    <th>Delete</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+        </table>
+    </div>
+</div>
+<div id="createRoomModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Create a room</h4>
+            </div>
+            <div class="modal-body">
+                <form action="/Rooms/" method="POST" id="create_room_form" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-6 col-md-4" for="n_input">N°</label>
+                        <div class="col-sm-6 col-md-8">
+                            <input class="form-control" type="text" name="RoomId" placeholder="Name" id="n_input" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 col-md-4" for="name_input">Name</label>
+                        <div class="col-sm-6 col-md-8">
+                            <input class="form-control" type="text" name="Name" placeholder="Name" id="name_input" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 col-md-4" for="maxnb_input">Capacity</label>
+                        <div class="col-sm-6 col-md-8">
+                            <input class="form-control" type="text" name="MaxNb" placeholder="Max number" id="maxnb_input" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 col-md-4" for="superficy_input">Superficy</label>
+                        <div class="col-sm-6 col-md-8">
+                            <input class="form-control" type="text" name="Superficy" placeholder="Superficy" id="superficy_input" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="submitCreateButton">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="updateRoomModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Update a room</h4>
+            </div>
+            <div class="modal-body">
+                <form action="/Rooms" method="PUT" id="update_room_form" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-6 col-md-4" for="n_input">N°</label>
+                        <div class="col-sm-6 col-md-8">
+                            <input class="form-control" type="text" name="RoomId" placeholder="Name" id="n_input" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 col-md-4" for="name_input">Name</label>
+                        <div class="col-sm-6 col-md-8">
+                            <input class="form-control" type="text" name="Name" placeholder="Name" id="name_input" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 col-md-4" for="maxnb_input">Capacity</label>
+                        <div class="col-sm-6 col-md-8">
+                            <input class="form-control" type="text" name="MaxNb" placeholder="Max number" id="maxnb_input" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 col-md-4" for="superficy_input">Superficy</label>
+                        <div class="col-sm-6 col-md-8">
+                            <input class="form-control" type="text" name="Superficy" placeholder="Superficy" id="superficy_input" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="submitCreateButton" onclick="$('#update_room_form').submit();">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Javascript files -->
+<script src="JS/pages/AdminPanelRoom.js"></script>
