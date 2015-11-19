@@ -76,13 +76,13 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>11/04/2015 13:38:11</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>11/19/2015 12:47:26</publishTime>
+      <publishTime>11/19/2015 13:11:08</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>11/19/2015 12:47:26</publishTime>
+      <publishTime>11/19/2015 13:11:07</publishTime>
     </File>
     <File Include="bin/BodyBalance.dll">
-      <publishTime>11/19/2015 12:12:25</publishTime>
+      <publishTime>11/19/2015 13:10:52</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>11/04/2015 13:38:13</publishTime>
@@ -349,7 +349,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>11/17/2015 09:33:50</publishTime>
     </File>
     <File Include="front-end/CSS/bootstrap.min.css">
-      <publishTime>11/06/2015 12:48:05</publishTime>
+      <publishTime>11/19/2015 12:52:39</publishTime>
     </File>
     <File Include="front-end/CSS/datatables.min.css">
       <publishTime>11/17/2015 09:20:04</publishTime>
@@ -397,7 +397,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>11/17/2015 09:36:46</publishTime>
     </File>
     <File Include="front-end/index.html">
-      <publishTime>11/17/2015 09:34:56</publishTime>
+      <publishTime>11/19/2015 13:05:18</publishTime>
     </File>
     <File Include="front-end/JS/application.js">
       <publishTime>11/17/2015 11:57:11</publishTime>
@@ -406,7 +406,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>11/09/2015 16:26:55</publishTime>
     </File>
     <File Include="front-end/JS/bootstrap.min.js">
-      <publishTime>11/06/2015 12:48:36</publishTime>
+      <publishTime>11/19/2015 12:52:39</publishTime>
     </File>
     <File Include="front-end/JS/datatables.min.js">
       <publishTime>11/17/2015 09:19:53</publishTime>
@@ -427,7 +427,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>11/16/2015 15:49:53</publishTime>
     </File>
     <File Include="front-end/JS/pages/Activities.js">
-      <publishTime>11/16/2015 08:23:01</publishTime>
+      <publishTime>11/19/2015 12:52:40</publishTime>
     </File>
     <File Include="front-end/JS/pages/ActivityEvents.js">
       <publishTime>11/13/2015 13:27:57</publishTime>
@@ -435,17 +435,20 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
     <File Include="front-end/JS/pages/AdminPanel.js">
       <publishTime>11/17/2015 11:34:54</publishTime>
     </File>
+    <File Include="front-end/JS/pages/AdminPanelUser.js">
+      <publishTime>11/19/2015 12:52:40</publishTime>
+    </File>
     <File Include="front-end/JS/pages/Basket.js">
       <publishTime>11/17/2015 13:44:00</publishTime>
     </File>
     <File Include="front-end/JS/pages/Events.js">
-      <publishTime>11/17/2015 09:10:02</publishTime>
+      <publishTime>11/19/2015 12:52:40</publishTime>
     </File>
     <File Include="front-end/JS/pages/index.js">
-      <publishTime>11/19/2015 12:45:45</publishTime>
+      <publishTime>11/19/2015 13:05:27</publishTime>
     </File>
     <File Include="front-end/JS/pages/MainPage.js">
-      <publishTime>11/17/2015 11:59:44</publishTime>
+      <publishTime>11/19/2015 13:06:24</publishTime>
     </File>
     <File Include="front-end/JS/pages/MyAccount.js">
       <publishTime>11/16/2015 08:23:01</publishTime>
@@ -457,13 +460,16 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>11/09/2015 16:20:05</publishTime>
     </File>
     <File Include="front-end/pages/Activities.html">
-      <publishTime>11/16/2015 08:23:01</publishTime>
+      <publishTime>11/19/2015 12:52:40</publishTime>
     </File>
     <File Include="front-end/pages/ActivityEvents.html">
       <publishTime>11/13/2015 13:27:57</publishTime>
     </File>
     <File Include="front-end/pages/AdminPanel.html">
       <publishTime>11/17/2015 11:34:54</publishTime>
+    </File>
+    <File Include="front-end/pages/AdminPanelUser.html">
+      <publishTime>11/19/2015 12:52:40</publishTime>
     </File>
     <File Include="front-end/pages/Basket.html">
       <publishTime>11/17/2015 13:15:51</publishTime>
@@ -493,7 +499,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>11/16/2015 10:51:08</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>11/19/2015 12:47:20</publishTime>
+      <publishTime>11/19/2015 13:10:54</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>11/04/2015 13:38:10</publishTime>
@@ -532,7 +538,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>11/04/2015 13:38:11</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>11/17/2015 11:39:57</publishTime>
+      <publishTime>11/19/2015 12:52:39</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>11/04/2015 14:13:37</publishTime>
