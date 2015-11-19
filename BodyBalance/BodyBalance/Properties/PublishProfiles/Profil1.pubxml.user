@@ -6,7 +6,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\Users\Lpisa\Desktop</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\Users\Lpisa\Desktop\AIOP</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="Areas/HelpPage/HelpPage.css">
@@ -76,10 +76,10 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>11/04/2015 13:38:11</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>11/19/2015 13:11:08</publishTime>
+      <publishTime>11/19/2015 13:19:25</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>11/19/2015 13:11:07</publishTime>
+      <publishTime>11/19/2015 13:19:25</publishTime>
     </File>
     <File Include="bin/BodyBalance.dll">
       <publishTime>11/19/2015 13:10:52</publishTime>
@@ -397,7 +397,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>11/17/2015 09:36:46</publishTime>
     </File>
     <File Include="front-end/index.html">
-      <publishTime>11/19/2015 13:05:18</publishTime>
+      <publishTime>11/19/2015 13:18:21</publishTime>
     </File>
     <File Include="front-end/JS/application.js">
       <publishTime>11/17/2015 11:57:11</publishTime>
@@ -445,10 +445,10 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>11/19/2015 12:52:40</publishTime>
     </File>
     <File Include="front-end/JS/pages/index.js">
-      <publishTime>11/19/2015 13:05:27</publishTime>
+      <publishTime>11/19/2015 13:16:49</publishTime>
     </File>
     <File Include="front-end/JS/pages/MainPage.js">
-      <publishTime>11/19/2015 13:06:24</publishTime>
+      <publishTime>11/19/2015 13:18:04</publishTime>
     </File>
     <File Include="front-end/JS/pages/MyAccount.js">
       <publishTime>11/16/2015 08:23:01</publishTime>
@@ -499,7 +499,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>11/16/2015 10:51:08</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>11/19/2015 13:10:54</publishTime>
+      <publishTime>11/19/2015 13:19:18</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>11/04/2015 13:38:10</publishTime>
