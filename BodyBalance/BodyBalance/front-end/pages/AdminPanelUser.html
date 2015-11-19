@@ -1,36 +1,17 @@
-﻿<div id="users">
-    <button class="btn btn-primary" id="userBtn">Users</button>
-    <div id="userList" style="display: none">
+﻿<div id="adminPanelUser">
+    <div id="userList">
         <table class="table table-hover" id="userTable">
             <thead>
                 <tr>
-                    <th>Info</th>
+                    <th class="no-sort">Info</th>
                     <th>Name</th>
                     <th>First Name</th>
                     <th>Last Name</th>
-                    <th>Upgrade/Dowgrade</th>
-                    <th>Delete</th>
+                    <th class="no-sort">Upgrade/Dowgrade</th>
+                    <th class="no-sort">Delete</th>
                 </tr>
             </thead>
             <tbody style="cursor:pointer" id="tbody"></tbody>
-        </table>
-    </div>
-</div>
-<hr/>
-<div id="rooms">
-    <button class="btn btn-primary" id="roomBtn">Rooms</button>
-    <div id="roomList" style="display: none">
-        <table class="table table-hover" id="roomTable">
-            <thead>
-                <tr>
-                    <th>N°</th>
-                    <th>Name</th>
-                    <th>Capacity</th>
-                    <th>Superficy</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody id="tbody"></tbody>
         </table>
     </div>
 </div>
@@ -50,5 +31,6 @@
         </div>
     </div>
 </div>
+
 <!-- Javascript files -->
-<script src="JS/pages/AdminPanel.js"></script>
+<script src="JS/pages/AdminPanelUser.js"></script>

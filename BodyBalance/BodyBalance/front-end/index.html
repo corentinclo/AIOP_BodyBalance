@@ -30,7 +30,14 @@
                     <li style="display:none" data-visible="loggedIn" id="products"><a href="#products">Products</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li style="display:none" data-visible="admin" id="adminPanel"><a href="#adminPanel">Admin Panel</a></li>
+                    <li style="display:none" data-visible="admin" class="dropdown" id="adminPanel">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin Panel<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#adminPanelUser">Users</a></li>
+                            <li><a href="#adminPanelRoom">Rooms</a></li>
+                            <li><a href="#adminPanelCategory">Categories</a></li>
+                        </ul>
+                    </li>
                     <li style="display:none" class="basket" data-visible="loggedIn"><a href="#cart"><i class="fa fa-shopping-cart"></i> <span class="badge"></span></a></li>
                     <li style="display:none" data-visible="loggedIn" class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>

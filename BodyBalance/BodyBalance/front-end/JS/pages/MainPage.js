@@ -27,6 +27,25 @@ window.app.mappers['#cart'] = function () {
     return false;
 }
 
+window.app.mappers['#adminPanelUser'] = function () {
+    $.get('pages/AdminPanelUser.html', null, function (result) {
+        $('#main').html(result);
+    });
+    return false;
+}
+window.app.mappers['#adminPanelRoom'] = function () {
+    $.get('pages/AdminPanelRoom.html', null, function (result) {
+        $('#main').html(result);
+    });
+    return false;
+}
+window.app.mappers['#adminPanelCategory'] = function () {
+    $.get('pages/AdminPanelCategory.html', null, function (result) {
+        $('#main').html(result);
+    });
+    return false;
+}
+
 
 $('[data-visible="loggedIn"]').show();
 window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, function (data) {
