@@ -34,11 +34,11 @@ window.app.sendRestRequest('/Activities', 'GET', null, function (data) {
 
         window.app.sendRestRequest('/events', 'GET', null, function (data) {
             $.each(data, function (key, val) {
-                if (typeof $('#selType option[value="' + val.Type + '"]')[0] == 'undefined') {
-                    $("#selType").append("<option value='." + val.Type + "'> " + val.Type + "</a>");
+                if (typeof $('#selType option[data-id="' + val.Type + '"]')[0] == 'undefined') {
+                    $("#selType").append("<option data-id='" + val.Type + "' value='." + val.Type + "'> " + val.Type + "</a>");
                 }
-                if (typeof $('#selType option[value="' + val.ActivityId + '"]')[0] == 'undefined') {
-                    $("#selAct").append("<option value='." + val.ActivityId + "'> " + actList[val.ActivityId] + "</a>");
+                if (typeof $('#selAct option[data-id="' + val.ActivityId + '"]')[0] == 'undefined') {
+                    $("#selAct").append("<option data-id='" + val.ActivityId + "' value='" + val.ActivityId + "'> " + actList[val.ActivityId] + "</a>");
                 }
 
                 var $item = $(document.createElement("div")).addClass("grid-item " + val.ActivityId + " " + val.Type).appendTo(".grid");
@@ -115,6 +115,11 @@ window.app.sendRestRequest('/Activities', 'GET', null, function (data) {
                         });
                         if (!$item.hasClass('minetrue')) {
                             $item.addClass('minetrue');
+                        }
+                    }
+                    else {
+                        if (parseInt(val.MaxNb) <= 0) {
+                            $reg.parent().remove();
                         }
                     }
                 })

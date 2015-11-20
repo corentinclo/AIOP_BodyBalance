@@ -260,11 +260,12 @@ namespace BodyBalance.Services
                 {
                     u.EVENT.Add(ev);
                     ev.USER1.Add(u);
+                    ev.EVENT_MAXNBR = ev.EVENT_MAXNBR - 1;
                     try
                     {
                         int saveResult = db.SaveChanges();
 
-                        if (saveResult == 1)
+                        if (saveResult >= 1)
                             result = DaoUtilities.SAVE_SUCCESSFUL;
                     }
                     catch (DbUpdateConcurrencyException e)
@@ -315,11 +316,12 @@ namespace BodyBalance.Services
                 {
                     u.EVENT.Remove(ev);
                     ev.USER1.Remove(u);
+                    ev.EVENT_MAXNBR = ev.EVENT_MAXNBR + 1;
                     try
                     {
                         int saveResult = db.SaveChanges();
 
-                        if (saveResult == 1)
+                        if (saveResult >= 1)
                             result = DaoUtilities.SAVE_SUCCESSFUL;
                     }
                     catch (DbUpdateConcurrencyException e)
