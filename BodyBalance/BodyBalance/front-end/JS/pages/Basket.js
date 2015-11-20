@@ -90,10 +90,10 @@
                             title: "Purchase details",
                             message: '<div id="purchaseDetails"></div>'
                         });
-                        $('#purchaseDetails').append($table).append('<p class="text-info text-right">Total : ' + e.TotalPrice +'€</p>');
+                        $('#purchaseDetails').append($table).append('<p class="text-info text-right">Total : ' + e.TotalPrice + '€</p>');
                     }, function () {
                         bootbox.alert('An error occured');
-                    })
+                    });
                 }));
                 i--;
                 if (i == 0) {

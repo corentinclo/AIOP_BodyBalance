@@ -23,21 +23,41 @@
                 $("#userInfoModal").modal({ show: false });
 
                 $tr.find(".infoBtn").click(function () {
-                    var $modal = $("#userInfoModal");
-                    $modal.find(".modal-body").empty();
-                    $("#modalLabel").empty();
-                    $("#modalLabel").text("Purchase n°" + val.PurchaseId);
-                    window.app.sendRestRequest('/purchases/' + val.PurchaseId, 'GET', null, function (data2) {
-                        $.each(data2.PurchaseLine, function (key3, val3) {
-                            var $tr = $("<tr></tr>").appendTo($('#basketTable tbody'));
-                            window.app.sendRestRequest('/Products/' + val3.ProductId, 'GET', null, function (data3) {
-                                $.each(data3, function (_, e) {
-                                    $tr.html('<td>' + data.Name + '</td><td>' + data.Description + '</td><td>' + e.Quantity + '</td><td><span class="Price" data-qte="' + e.Quantity + '">' + data.Price + '</span>€</td><td></td>');
-                                });
-                            });
+                    window.app.sendRestRequest('/Purchases/' + val.PurchaseId, "GET", null, function (dt) {
+                        var lines = dt.PurchaseLine;
+                        var $table = $('<table class="table table-striped"><thead><tr><th>Product</th><th>Description</th><th>Price</th><th>Quantity</th><th>Total</th></tr></thead></table>');
+                        var $tbody = $('<tbody></tbody>').appendTo($table);
+                        $.each(lines, function (__, line) {
+                            window.app.sendRestRequest('/Products/' + line.ProductId, "GET", null, function (product) {
+                                $tbody.append(
+                                    $('<tr>' +
+                                        '<td>' +
+                                            product.Name +
+                                        '</td>' +
+                                        '<td>' +
+                                            product.Description +
+                                        '</td>' +
+                                        '<td>' +
+                                            product.Price +
+                                        '€</td>' +
+                                        '<td>' +
+                                            line.Quantity +
+                                        '</td>' +
+                                        '<td><b>' +
+                                            product.Price * line.Quantity +
+                                        '€</b></td>' +
+                                    '</tr>')
+                                );
+                            }, $.noop);
                         });
+                        bootbox.dialog({
+                            title: "Purchase details (purchase from " + val.UserId + ")",
+                            message: '<div id="purchaseDetails"></div>'
+                        });
+                        $('#purchaseDetails').append($table).append('<p class="text-info text-right">Total : ' + val.TotalPrice + '€</p>');
+                    }, function () {
+                        bootbox.alert('An error occured');
                     });
-                    $modal.modal('show');
                 });
             });
             $('#userTable').dataTable({ lengthChange: false });

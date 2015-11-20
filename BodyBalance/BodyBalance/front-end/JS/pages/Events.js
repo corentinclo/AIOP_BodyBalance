@@ -19,7 +19,7 @@ window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, functio
 
             }
             if (jQuery.inArray(val.ActivityId, actList) == -1) {
-                $("#selAct").append("<option value='." + val.ActivityId + "'> " + val.ActivityId + "</a>");
+                $("#selAct").append("<option value='." + val.ActivityId + "'> " + val.Name + "</a>");
                 actList.push(val.ActivityId);
             }
 
