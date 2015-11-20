@@ -77,7 +77,6 @@
             <PropertyRef Name="EVENTTYPE_ID" />
           </Key>
           <Property Name="EVENTTYPE_ID" Type="varchar2" MaxLength="20" Nullable="false" />
-          <Property Name="EVENTTYPE_NAME" Type="varchar2" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="HASINBASKET">
           <Key>
@@ -767,7 +766,6 @@
             <PropertyRef Name="EVENTTYPE_ID" />
           </Key>
           <Property Name="EVENTTYPE_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="EVENTTYPE_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="EVENT" Relationship="Self.EVENT_TYPE_FK" FromRole="EVENTTYPE" ToRole="EVENT" />
         </EntityType>
         <EntityType Name="HASINBASKET">
@@ -1440,7 +1438,6 @@
             <EntityTypeMapping TypeName="Model.EVENTTYPE">
               <MappingFragment StoreEntitySet="EVENTTYPE">
                 <ScalarProperty Name="EVENTTYPE_ID" ColumnName="EVENTTYPE_ID" />
-                <ScalarProperty Name="EVENTTYPE_NAME" ColumnName="EVENTTYPE_NAME" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

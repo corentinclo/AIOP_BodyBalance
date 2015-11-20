@@ -170,5 +170,7 @@ namespace BodyBalance.Services
         int RemoveUserOfEvent(string EventId, UserModel um);
 
         UserModel FindOneUserOfEvent(string EventId, string UserId);
+
+        List<string> FindAllTypes();
     }
 }

@@ -722,6 +722,12 @@
             </summary>
             <returns> List of events</returns>
         </member>
+        <member name="M:BodyBalance.Controllers.EventsController.GetTypes">
+            <summary>
+            Get all event types
+            </summary>
+            <returns> List of event types</returns>
+        </member>
         <member name="M:BodyBalance.Controllers.EventsController.Post(BodyBalance.Models.EventModel)">
             <summary>
             Create an event

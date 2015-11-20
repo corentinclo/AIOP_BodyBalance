@@ -45,6 +45,26 @@ namespace BodyBalance.Controllers
             return Ok(listEvents);
         }
 
+        // GET: /EventTypes
+        /// <summary>
+        /// Get all event types
+        /// </summary>
+        /// <returns> List of event types</returns>
+        [HttpGet]
+        [Route("EventTypes")]
+        public IHttpActionResult GetTypes()
+        {
+            /** Check Permissions **/
+            var user = userServices.FindUserById(User.Identity.Name);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            /************************/
+            var listTypes = eventServices.FindAllTypes();
+            return Ok(listTypes);
+        }
+
         // POST: /Events
         /// <summary>
         /// Create an event

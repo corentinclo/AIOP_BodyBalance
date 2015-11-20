@@ -855,5 +855,16 @@ namespace BodyBalance.Services
 
             return repetitiveEventsList;
         }
+
+        public List<string> FindAllTypes()
+        {
+            List<string> result = new List<string>();
+            IQueryable<EVENTTYPE> query = db.Set<EVENTTYPE>();
+
+            foreach (EVENTTYPE t in query)
+                result.Add(t.EVENTTYPE_ID);
+
+            return result;
+        }
     }
 }
