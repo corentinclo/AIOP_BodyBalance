@@ -70,9 +70,7 @@ namespace BodyBalance.Controllers
             {
                 return BadRequest("Invalid event supplied");
             }
-
-            model.EventId = Guid.NewGuid().ToString();
-
+            
             var createResult = eventServices.CreateEvent(model);
             if (createResult == DaoUtilities.SAVE_SUCCESSFUL)
             {

@@ -70,7 +70,7 @@
           <Property Name="EVENT_CONTRIBUTOR" Type="varchar2" MaxLength="20" Nullable="false" />
           <Property Name="EVENT_MANAGER" Type="varchar2" MaxLength="50" Nullable="false" />
           <Property Name="EVENT_TYPE" Type="varchar2" MaxLength="20" Nullable="false" />
-          <Property Name="EVENT_DATE" Type="timestamp" Nullable="false" />
+          <Property Name="EVENT_DATE" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="EVENTTYPE">
           <Key>

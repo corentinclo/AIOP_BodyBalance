@@ -163,17 +163,20 @@ window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, functio
                 $edit.click(function () {
                     var url = $('#edit_event_form').attr('action');
                     $('#edit_event_form').attr('action', url + '/' + val.EventId);
-                    var tempObj = val;
+                    var tempObj = $.extend(true, {}, val);;
                     tempObj.EventDate = dateFromISO8601(val.EventDate).toISOString().substring(0,10);
                     window.app.FillFormWithObject('#edit_event_form', tempObj);
                     $('#editEventModal').modal('show');
                     window.app.ajaxifyFormJson('#edit_event_form', function () {
+                        $('#edit_event_form').attr('action', url);
                         $('#editEventModal').on('hide.bs.modal', function () {
                             bootbox.alert('The event has been updated', function () {
                                 reloadEventsPage();
                             });
                         }).modal('hide');
                     }, function () {
+                        $('#edit_event_form').attr('action', url);
+                        $('#edit_event_form').off('submit');
                         bootbox.alert('An error occured');
                     },
                     'application/json', undefined, true);
@@ -264,6 +267,7 @@ window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, functio
             return false;
         }, function () {
             bootbox.alert('A problem occured');
+            $('#create_event_form').off('submit');
             return false;
         },
         'application/json', function () {
