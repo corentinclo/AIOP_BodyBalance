@@ -22,6 +22,7 @@ window.app.sendRestRequest('/Activities', 'GET', null, function (data) {
     });
 
     var isManager = undefined;
+    var isMember = undefined;
     window.app.sendRestRequest('/Users/' + window.app.username, 'GET', null, function (data) {
         //if logged in user is a manager, with get role
         if (data.UserRoles.IsManager) {
@@ -30,6 +31,12 @@ window.app.sendRestRequest('/Activities', 'GET', null, function (data) {
         }
         else {
             isManager = false
+        }
+        if (data.UserRoles.IsMember) {
+            isMember = true;
+        }
+        else {
+            isMember = false
         }
 
         window.app.sendRestRequest('/events', 'GET', null, function (data) {
@@ -83,47 +90,48 @@ window.app.sendRestRequest('/Activities', 'GET', null, function (data) {
 
 
                 /* REGISTER TO AN EVENT */
-                var $reg = $("<div class='register'><button class='btn btn-primarystyle'>Register</button></div>").appendTo($panelBody).find('button');
-                $reg.click(function () {
-                    bootbox.confirm({
-                        message: "Do you want to register to this event ?",
-                        callback: function (result) {
-                            if (result) {
-                                window.app.sendRestRequest('/Events/' + val.EventId + '/RegisterUser', 'POST', window.app.username, function (data) {
-                                    bootbox.alert('You are now registered to ' + val.name, function () {
+                if (isMember) {
+                    var $reg = $("<div class='register'><button class='btn btn-primarystyle'>Register</button></div>").appendTo($panelBody).find('button');
+                    $reg.click(function () {
+                        bootbox.confirm({
+                            message: "Do you want to register to this event ?",
+                            callback: function (result) {
+                                if (result) {
+                                    window.app.sendRestRequest('/Events/' + val.EventId + '/RegisterUser', 'POST', window.app.username, function (data) {
+                                        bootbox.alert('You are now registered to ' + val.name, function () {
+                                            reloadEventsPage();
+                                        });
+                                    }, function () {
+                                        bootbox.alert('An error occured, try again later.');
+                                    }, 'application/json', true);
+                                }
+                            }
+                        });
+                    });
+
+                    window.app.sendRestRequest("/Events/" + val.EventId + "/IsRegisteredUser/" + window.app.username, "GET", null, function (data) {
+                        if (data === true) {
+                            $panelHeading.prepend('<div class="text-success event-registered">Registered <i class="fa fa-check-circle"></i></div>')
+                            $reg.off('click').html('Unsubscribe <i class="fa fa-times"></i>').removeClass('btn-primarystyle').addClass('btn-danger').click(function () {
+                                window.app.sendRestRequest('/Events/' + val.EventId + '/Users/' + window.app.username, "DELETE", null, function () {
+                                    bootbox.alert('You are not on this event anymore', function () {
                                         reloadEventsPage();
                                     });
                                 }, function () {
-                                    bootbox.alert('An error occured, try again later.');
-                                }, 'application/json', true);
+                                    bootbox.alert('An error occured, please try again later');
+                                })
+                            });
+                            if (!$item.hasClass('minetrue')) {
+                                $item.addClass('minetrue');
                             }
                         }
-                    });
-                });
-
-                window.app.sendRestRequest("/Events/" + val.EventId + "/IsRegisteredUser/" + window.app.username, "GET", null, function (data) {
-                    if (data === true) {
-                        $panelHeading.prepend('<div class="text-success event-registered">Registered <i class="fa fa-check-circle"></i></div>')
-                        $reg.off('click').html('Unsubscribe <i class="fa fa-times"></i>').removeClass('btn-primarystyle').addClass('btn-danger').click(function () {
-                            window.app.sendRestRequest('/Events/' + val.EventId + '/Users/' + window.app.username, "DELETE", null, function () {
-                                bootbox.alert('You are not on this event anymore', function () {
-                                    reloadEventsPage();
-                                });
-                            }, function () {
-                                bootbox.alert('An error occured, please try again later');
-                            })
-                        });
-                        if (!$item.hasClass('minetrue')) {
-                            $item.addClass('minetrue');
+                        else {
+                            if (parseInt(val.MaxNb) <= 0) {
+                                $reg.parent().remove();
+                            }
                         }
-                    }
-                    else {
-                        if (parseInt(val.MaxNb) <= 0) {
-                            $reg.parent().remove();
-                        }
-                    }
-                })
-
+                    })
+                }
                 if (val.ManagerId == window.app.username || val.ContributorId == window.app.username) {
                     //Hidden Boolean for filtering
                     if (!$item.hasClass('minetrue')) {
