@@ -348,7 +348,7 @@ namespace BodyBalance.Controllers
             {
                 return Unauthorized();
             }
-            if (!(userServices.IsAdmin(userPermission)) && userPermission.UserId != user_id)
+            if (!(userServices.IsAdmin(userPermission)) && (userPermission.UserId != user_id || !(userServices.IsMember(user))))
             {
                 return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
             }

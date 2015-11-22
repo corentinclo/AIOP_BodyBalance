@@ -32,7 +32,7 @@ namespace BodyBalance.Providers
         {
             var userManager = new UserServices();
 
-            UserModel user = userManager.FindUserByIdAndPassword(context.UserName,context.Password); 
+            UserModel user = userManager.FindUserByIdAndPassword(context.UserName, context.Password);
 
             if (user == null)
             {
