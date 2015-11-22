@@ -227,6 +227,5 @@
         });
         return res;
     }
-
     window.app = new Application();
 })(jQuery);
