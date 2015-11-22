@@ -143,7 +143,7 @@ $(function () {
     appId      : '1630074017281291',
     cookie     : true,  // enable cookies to allow the server to access the session
     xfbml      : true,  // parse social plugins on this page
-    version    : 'v2.5' // use version 2.2
+    version    : 'v2.5' // use version 2.5
   });
   };
 
@@ -159,15 +159,10 @@ $(function () {
   // Here we run a very simple test of the Graph API after login is
   // successful.  See statusChangeCallback() for when this call is made.
   function testAPI(userID) {
-      console.log('Welcome!  Fetching your information.... ');
       FB.api("/me/", { fields: 'name ,first_name ,last_name, email' }, function (response) {
           $("#email_input").val(response.email);
           $("#first_name_input").val(response.first_name);
           $("#last_name_input").val(response.last_name);
-
-          console.log('Successful login for: ' + response.name);
-          document.getElementById('status').innerHTML =
-            'Thanks for logging in, ' + response.email + '!';
       });
   }
 

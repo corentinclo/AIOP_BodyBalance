@@ -430,6 +430,7 @@
     <Content Include="front-end\CSS\fullcalendar.min.css" />
     <Content Include="front-end\fonts\fontawesome-webfont.svg" />
     <Content Include="front-end\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="front-end\img\FB-Logo.png" />
     <Content Include="front-end\JS\application.js" />
     <Content Include="front-end\JS\bootbox.min.js" />
     <Content Include="front-end\JS\bootstrap.min.js" />

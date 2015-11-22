@@ -44,11 +44,10 @@ window.app.sendRestRequest('/Activities', 'GET', null, function (data) {
                 if (typeof $('#selType option[data-id="' + val.Type + '"]')[0] == 'undefined') {
                     $("#selType").append("<option data-id='" + val.Type + "' value='." + val.Type + "'> " + val.Type + "</a>");
                 }
-                if (typeof $('#selAct option[data-id="' + val.ActivityId + '"]')[0] == 'undefined') {
-                    $("#selAct").append("<option data-id='" + val.ActivityId + "' value='" + val.ActivityId + "'> " + actList[val.ActivityId] + "</a>");
+                if (typeof $('#selAct option[data-id="' + actList[val.ActivityId] + '"]')[0] == 'undefined') {
+                    $("#selAct").append("<option data-id='" + actList[val.ActivityId] + "' value='." + actList[val.ActivityId] + "'> " + actList[val.ActivityId] + "</a>");
                 }
-
-                var $item = $(document.createElement("div")).addClass("grid-item " + val.ActivityId + " " + val.Type).appendTo(".grid");
+                var $item = $(document.createElement("div")).addClass("grid-item " + actList[val.ActivityId] + " " + val.Type).appendTo(".grid");
 
                 var $panel = $(document.createElement("div")).addClass("panel panel-default").appendTo($item);
 
@@ -192,14 +191,13 @@ window.app.sendRestRequest('/Activities', 'GET', null, function (data) {
                     });
                     /* EDIT AN EVENT */
                     $edit.click(function () {
-                        var url = $('#edit_event_form').attr('action');
-                        $('#edit_event_form').attr('action', url + '/' + val.EventId);
+                        $('#edit_event_form').attr('action', '/Events/' + val.EventId);
                         var tempObj = $.extend(true, {}, val);;
                         tempObj.EventDate = dateFromISO8601(val.EventDate).toISOString().substring(0, 10);
                         window.app.FillFormWithObject('#edit_event_form', tempObj);
                         $('#editEventModal').modal('show');
                         window.app.ajaxifyFormJson('#edit_event_form', function () {
-                            $('#edit_event_form').attr('action', url);
+                            $('#edit_event_form').attr('action', '');
                             $('#editEventModal').on('hide.bs.modal', function () {
                                 bootbox.alert('The event has been updated', function () {
                                     reloadEventsPage();
