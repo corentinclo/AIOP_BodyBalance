@@ -88,7 +88,7 @@ namespace BodyBalance.Controllers
             {
                 return Unauthorized();
             }
-            if (!(userServices.IsAdmin(user)))
+            if (!(userServices.IsAdmin(user)) && !(userServices.IsManager(user)))
             {
                 return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
             }
@@ -185,7 +185,7 @@ namespace BodyBalance.Controllers
             {
                 return Unauthorized();
             }
-            if (!(userServices.IsAdmin(user)))
+            if (!(userServices.IsAdmin(user)) && !(userServices.IsManager(user)))
             {
                 return ResponseMessage(new HttpResponseMessage(HttpStatusCode.Forbidden));
             }
