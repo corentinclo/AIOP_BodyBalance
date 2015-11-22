@@ -32,7 +32,11 @@ namespace BodyBalance.Providers
         {
             var userManager = new UserServices();
 
+<<<<<<< HEAD
             UserModel user = userManager.FindUserByIdAndPassword(context.UserName, context.Password);
+=======
+            UserModel user = userManager.FindUserByIdAndPassword(context.UserName,context.Password); 
+>>>>>>> fb_registration
 
             if (user == null)
             {
